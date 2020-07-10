@@ -1,1 +1,69 @@
-<h1>Travellum</h1>
+{% load static %}
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <!-- CSS only -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="{% static 'bootstrap-css/bootstrap.css' %}">
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <div class="navbar">
+        <h2>Navbar goes here</h2>
+    </div>
+    <section>
+        <div class="rt-container">
+            <div class="col-rt-12">
+
+                <div class="video-wrapper">
+                    <video autoplay loop muted>
+                        <source src="{% static 'video/intro-video.mp4' %}" type="video/mp4">
+                    </video> <br>
+                    <div class="header-content">
+                        <h1>TRAVELLUM</h1>
+                        <h3>Travel !! Before you run out of time</h3>
+                    </div>
+                    <div class="header-overlay"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+        <h2 class="text-center">Popular destinations</h2>
+        <div class="row">
+            <div class="column xs-6">
+                Place 1
+            </div>
+            <div class="column xs-6">
+                Place 2
+            </div>
+        </div>
+        <div class="row" style="align: center;">
+            <div class="column xs-6">
+                Place 4
+            </div>
+            <div class="column xs-6">
+                Place 4
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+    <script src="bootstrap-js/bootstrap.js"></script>
+</body>
+
+</html>

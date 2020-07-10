@@ -77,11 +77,11 @@ WSGI_APPLICATION = 'travellum.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'travellum_db',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost'
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': 'travellum_db',
+        # 'USER': 'postgres',
+        # 'PASSWORD': 'postgres',
+        # 'HOST': 'localhost'
     }
 }
 
@@ -124,6 +124,6 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-STATIC_FILES_DIRS = [
-    os.path.join(BASE_DIR, 'travellum/static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'travellum/tbc_static')
 ]
