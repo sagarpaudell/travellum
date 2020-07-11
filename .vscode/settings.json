@@ -1,5 +1,7 @@
 {
-    "python.pythonPath": "/home/saga/Documents/travellum/venv/bin/python3"
+    "python.pythonPath": "/home/saga/Documents/travellum/venv/bin/python3",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true
 }
 
 // "python.pythonPath": "C:\\Users\\bimal\\.virtualenvs\\travellum-sfv8Iz43\\Scripts\\python.exe"
