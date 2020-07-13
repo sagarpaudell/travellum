@@ -1,69 +1,372 @@
 {% load static %}
 <!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title> Homepage</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'css/style.css'%}">
-    <!-- CSS only -->
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="{% static 'bootstrap-css/bootstrap.css' %}">
-    <!--Fonts-->
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
-
-
+	<title>Travellum-Home</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i"
+		rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/animate.css' %}">
+	<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+	<link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+	<link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/custom_style.css' %}">
 </head>
 
-<body>
-    <div class="navbar">
-        <h2>Navbar goes here</h2>
-    </div>
-    <section>
-        <div class="rt-container">
-            <div class="col-rt-12">
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="200">
+	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target"
+		id="ftco-navbar">
+		<div class="container">
+			<a class="navbar-brand" href="#">Travellum</a>
+			<button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse"
+				data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="oi oi-menu"></span> Menu
+			</button>
 
-                <div class="video-wrapper">
-                    <video autoplay loop muted>
-                        <source src="{% static 'video/intro-video.mp4' %}" type="video/mp4">
-                    </video> <br>
-                    <div class="header-content">
-                        <h1>TRAVELLUM</h1>
-                        <h3>Travel !! Before you run out of time</h3>
-                    </div>
-                    <div class="header-overlay"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <div class="container">
-        <h2 class="text-center">Popular destinations</h2>
-        <div class="row">
-            <div class="column xs-6">
-                Place 1
-            </div>
-            <div class="column xs-6">
-                Place 2
-            </div>
-        </div>
-        <div class="row" style="align: center;">
-            <div class="column xs-6">
-                Place 4
-            </div>
-            <div class="column xs-6">
-                Place 4
-            </div>
-        </div>
+			<div class="collapse navbar-collapse" id="ftco-nav">
+				<ul class="navbar-nav nav ml-auto">
+					<li class="nav-item"><a href="#home-section" class="nav-link"><span>Home</span></a></li>
+					<li class="nav-item"><a href="#about-section" class="nav-link"><span>About</span></a></li>
+					<li class="nav-item"><a href="#destination-section" class="nav-link"><span>Destinations</span></a>
+					</li>
+					<li class="nav-item"><a href="#top-guides" class="nav-link"><span>Our Top Guides</span></a>
+					</li>
+					<li class="nav-item"><a href="#contact-section" class="nav-link"><span>Log In</span></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- First view section -->
+	<section>
+		<div class="col-rt-12">
+
+			<div class="image-wrapper">
+				<img src="{% static 'images/background1.jpg' %}" class="image" alt="background-image">
+
+				<div class="header-content">
+					<h1>TRAVELLUM</h1>
+					<h3>Travel !! Before you run out of time</h3>
+					<h1><a href="#" class="btn btn-primary py-3 px-4"
+							style="background-color:#e66b58; font-size:1.4rem; ">Join now</a>
+					</h1>
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<!-- About us section -->
+	<section class="ftco-section" id="about-section">
+		<div class="container">
+
+			<div class="col-md-6 col-lg-12 bg-lighten">
+				<div class="py-md-12">
+					<div class="row justify-content-start pb-3">
+						<div class="col-md-12 heading-section ftco-animate p-5 p-lg-0">
+							<span class="subheading">about travellum</span>
+							<h2 class="mb-4">How it works?</h2>
+							<p><strong>Travellum </strong>provides a platform to connect travelers. It helps you find
+								the perfect person
+								to travel with. Maybe you want a guide who knows everything about the history of the
+								place or maybe you are just searching for a companion to travel with. We’ve got you
+								covered. We have a ton of travel guides you can choose from based on their rating. But
+								instead, if you are thinking of employing yourself as a travel guide, you can do that
+								from travellum. It is as easy as opening a facebook account.</p>
+							<p>We are trying our best to introduce freelancing to the travel industry. If you really
+								think you are capable of being a guide, we don’t ask you for your travel degree, you can
+								simply register to our site. We will help you find the travellers who are looking for
+								guides exactly like you. You can earn a decent amount of money without sacrificing your
+								time in 9-5 job. Work whenever you want and earn the amount you deserve.</p>
+							<p>We know traveling in a new place can be scary and as a human we need someone to
+								accompany us when we are going someplace new. We can help you find the perfect person
+								who can be your best bud while traveling. We know that you love meeting new people and
+								going to new places. So why not choose who you want to travel with? Who knows, your
+								perfect travel buddy could be the one you’ve been searching your whole life for.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+	<!-- Best Places section -->
+	<section class="ftco-section" id="destination-section">
+		<div class="container">
+			<div class="row justify-content-center pb-5">
+				<div class="col-md-12 heading-section text-center ftco-animate">
+					<span class="subheading">Explore local places</span>
+					<h2 class="mb-4">Best Places to Travel in the Country.</h2>
+					<p>“You don’t have to be rich to travel well.”</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-lg-4 ftco-animate">
+					<div class="project">
+						<div class="img">
+							<a href="#"><img src="{% static 'images/kathmandu.jpg' %}" class="img-fluid"
+									alt="Image"></a>
+						</div>
+						<div class="text">
+
+							<h3><a href="#">Kathmandu</a></h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-4 ftco-animate">
+					<div class="project">
+						<div class="img">
+							<a href="#"><img src="{% static 'images/ilam.jpg' %}" class="img-fluid" alt="Image"></a>
+						</div>
+						<div class="text">
+
+							<h3><a href="#">Ilam</a></h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-4 ftco-animate">
+					<div class="project">
+						<div class="img">
+							<a href="#"><img src="{% static 'images/janakpur.jpg' %}" class="img-fluid" alt="Image"></a>
+						</div>
+						<div class="text">
+
+							<h3><a href="#">Janakpur</a></h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-4 ftco-animate">
+					<div class="project">
+						<div class="img">
+							<a href="#"><img src="{% static 'images/patan.jpg' %}" class="img-fluid" alt="Image"></a>
+						</div>
+						<div class="text">
+
+							<h3><a href="#">Patan</a></h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-4 ftco-animate">
+					<div class="project">
+						<div class="img">
+							<a href="#"><img src="{% static 'images/chitwan.jpg' %}" class="img-fluid" alt="Image"></a>
+						</div>
+						<div class="text">
+
+							<h3><a href="#">Chitwan</a></h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-4 ftco-animate">
+					<div class="project">
+						<div class="img">
+							<a href="#"><img src="{% static 'images/pokhara.jpg' %}" class="img-fluid" alt="Image"></a>
+						</div>
+						<div class="text">
+
+							<h3><a href="#">Pokhara</a></h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-4 ftco-animate">
+					<div class="project">
+						<div class="img">
+							<a href="#"><img src="{% static 'images/lumbini.jpg' %}" class="img-fluid" alt="Image"></a>
+						</div>
+						<div class="text">
+
+							<h3><a href="#">Lumbini</a></h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Search Guides section -->
+	<section class="ftco-section ftco-no-pb ftco-no-pt">
+		<div class="container">
+			<div class="row justify-content-center pb-0 pb-mb-5 pt-5 pt-md-0">
+				<div class="col-md-12 heading-section ftco-animate">
+					<h2 class="mb-4">Are you in need of a guide?</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-8">
+					<div class="search-wrap-1 ftco-animate p-4">
+						<form action="#" class="search-property-1">
+							<div class="row">
+								<div class="col-lg align-items-end">
+									<div class="form-group">
+										<label for="#">Check out the available guides:</label>
+										<div class="form-field">
+											<div class="icon"><span class="ion-ios-search"></span></div>
+											<input type="text" class="form-control"
+												placeholder="Enter your destination">
+										</div>
+									</div>
+								</div>
+								<div class="col-lg align-self-end">
+									<div class="form-group">
+										<div class="form-field">
+											<input type="submit" value="Search" class="form-control btn btn-primary">
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Top Guides Section -->
+	<section class="ftco-section" id="top-guides">
+		<div class="container">
+			<div class="row justify-content-center pb-5">
+				<div class="col-md-12 heading-section text-center ftco-animate">
+					<span class="subheading">Populars</span>
+					<h2 class="mb-4">Our highly rated guides:</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-lg-4 ftco-animate">
+					<div class="project">
+						<div class="img" style="border-radius: 50%; width:70%; margin-left:15%;
+						justify-content: center;">
+							<a href="#"><img src="{% static 'images/samesh.jpg' %}" class="img-fluid" alt="Image"></a>
+						</div>
+						<div class="text">
+							<h3><a href="#">Samesh Man Bajracharya</a></h3>
+							<div class="star d-flex clearfix" style=" margin-left:15%;">
+								<div class="mr-auto float-left">
+									<span class="ion-ios-star"></span>
+									<span class="ion-ios-star"></span>
+									<span class="ion-ios-star"></span>
+									<span class="ion-ios-star"></span>
+									<span class="ion-ios-star"></span>
+								</div>
+							</div>
+							<p style=" margin-left:15%;">Address: Sankhamul, Bajre's Colony</p>
+						</div>
+					</div>
+
+				</div>
+				<div class="col-md-6 col-lg-4 ftco-animate">
+					<div class="project">
+						<div class="img" style="border-radius: 50%; width:70%; margin-left:15%;
+						justify-content: center;">
+							<a href="#"><img src="{% static 'images/deependra.jpg' %}" class="img-fluid"
+									alt="Image"></a>
+						</div>
+						<div class="text">
+							<h3><a href="#">Deependra Gupta</a></h3>
+							<div class="star d-flex clearfix" style=" margin-left:15%;">
+								<div class="mr-auto float-left">
+									<span class="ion-ios-star"></span>
+									<span class="ion-ios-star"></span>
+									<span class="ion-ios-star"></span>
+								</div>
+							</div>
+							<p style=" margin-left:15%;">Address: Behthanchowk, Naranthan</p>
+						</div>
+					</div>
+
+				</div>
+				<div class="col-md-6 col-lg-4 ftco-animate">
+					<div class="project">
+						<div class="img" style="border-radius: 50%; width:70%; margin-left:15%;
+						justify-content: center;">
+							<a href="#"><img src="{% static 'images/buddha.jpg' %}" class="img-fluid" alt="Image"></a>
+						</div>
+						<div class="text">
+							<h3><a href="#">Buddha Yadav</a></h3>
+							<div class="star d-flex clearfix" style=" margin-left:15%;">
+								<div class="mr-auto float-left">
+									<span class="ion-ios-star"></span>
+									<span class="ion-ios-star"></span>
+									<span class="ion-ios-star"></span>
+									<span class="ion-ios-star"></span>
+									<span class="ion-ios-star"></span>
+								</div>
+							</div>
+							<p style=" margin-left:15%;">Address: Malebu, Dhulikhel</p>
+						</div>
+					</div>
+
+				</div>
+				<div class="col-md-6 col-lg-4 ftco-animate">
+					<div class="project">
+						<div class="img" style="border-radius: 50%; width:70%; margin-left:15%;
+						justify-content: center;">
+							<a href="#"><img src="{% static 'images/samesh.jpg' %}" class="img-fluid" alt="Image"></a>
+						</div>
+						<div class="text">
+							<h3><a href="#">Samesh Man Bajracharya</a></h3>
+							<div class="star d-flex clearfix" style=" margin-left:15%;">
+								<div class="mr-auto float-left">
+									<span class="ion-ios-star"></span>
+									<span class="ion-ios-star"></span>
+									<span class="ion-ios-star"></span>
+									<span class="ion-ios-star"></span>
+									<span class="ion-ios-star"></span>
+								</div>
+							</div>
+							<p style=" margin-left:15%;">Address: Bhandina mug.bhak..thees</p>
+						</div>
+					</div>
+
+				</div>
 
 
+			</div>
+	</section>
 
-    </div>
+	<footer class="ftco-footer ftco-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<div class="ftco-footer-widget mb-12" style="line-height:2rem;">
+						<h2 class="ftco-heading-2">Have Questions? Contact us:</h2>
 
+						<span class="icon icon-map-marker"></span><span class="text"> &nbsp;Dhulikhel, Kavre,
+							Nepal</span><br>
+						<span class="icon icon-phone"></span><span class="text">&nbsp;+977-9865727861</span><br>
 
-    <script src="bootstrap-js/bootstrap.js"></script>
+						<span class="icon icon-envelope"></span><span class="text">&nbsp;travellum@gmail.com</span>
+
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<img src="{% static 'images/expo_creations.png' %}" style="margin-top: 5%;">
+					<p style="margin-top: 2%;">
+						Travellum &copy; 2020 All Rights Reserved </p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+	<script src="{% static 'js/popper.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+	<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+	<script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+	<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+	<script src="{% static 'js/aos.js' %}"></script>
+	<script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+	<script src="{% static 'js/scrollax.min.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+
 </body>
 
 </html>
