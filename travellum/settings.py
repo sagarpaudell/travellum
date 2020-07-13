@@ -31,7 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'traveller.apps.TravellerConfig',
+    'guides.apps.GuidesConfig',
+    'travellers.apps.TravellersConfig',
     'pages.apps.PagesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -77,11 +78,11 @@ WSGI_APPLICATION = 'travellum.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'travellum_db',
-        # 'USER': 'postgres',
-        # 'PASSWORD': 'postgres',
-        # 'HOST': 'localhost'
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'travellum_db',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost'
     }
 }
 
