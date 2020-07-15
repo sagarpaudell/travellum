@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'guides.apps.GuidesConfig',
     'travellers.apps.TravellersConfig',
     'pages.apps.PagesConfig',
+    'crispy_forms',
+    'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -128,3 +130,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'travellum/tbc_static')
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+LOGIN_REDIRECT_URL = 'index'

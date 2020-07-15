@@ -2,9 +2,9 @@
 <<<<<<< HEAD
     "python.pythonPath": "C:\\Users\\bimal\\.virtualenvs\\travellum-sfv8Iz43\\Scripts\\python.exe"
 ||||||| d02f4c0
-    "python.pythonPath": "/home/saga/Documents/travellum/venv/bin/python3"
+    "python.pythonPath": "/home/buddha/Environments/web_app/bin/python3"
 =======
-    "python.pythonPath": "/home/saga/Documents/travellum/venv/bin/python3",
+    "python.pythonPath": "/home/buddha/Environments/web_app/bin/python3",
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true
 >>>>>>> f287832ea4e5592f7fce4845ea531c91ff50f8db
