@@ -11,4 +11,4 @@ urlpatterns = [
     path('logout/', auth_views.LoginView.as_view(template_name='pages/index.html') ,name='logout'),
     path('profile/', account_views.profile, name='profile')
 ]
-adsfadsf
+asdf
