@@ -73,7 +73,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'travellum.wsgi.application'
-
+AUTH_USER_MODEL = 'accounts.User'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -133,3 +133,11 @@ STATICFILES_DIRS = [
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'index'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'buddhagautam231@gmail.com'
+EMAIL_HOST_PASSWORD = 'mljnelvuzgdvijur'
+EMAIL_USE_TLS = True
+
+
