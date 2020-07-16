@@ -16,6 +16,6 @@ class Traveller(models.Model):
     photo_3 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     reg_date = models.DateTimeField(default=datetime.now, blank=True)
     is_published = models.BooleanField(default=True)
-    tours_count = models.IntegerField(default=0)
+    tours_count = models. IntegerField(default=0)
     def __str__(self):
         return self.email
