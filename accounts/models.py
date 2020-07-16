@@ -4,7 +4,7 @@ from django.contrib.auth.models import (
 )
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, password=None, is_active=True, is_staff=False, is_admin=False, is_sponser=False, is_organizer=False):
+    def create_user(self, email, first_name, last_name, password=None, is_active=True, is_staff=False, is_admin=False,  ):
         # """
         # Creates and saves a User with the given email and password.
         # """
@@ -12,6 +12,11 @@ class UserManager(BaseUserManager):
             raise ValueError('Users must have an email address')
         if not password:
             raise ValueError('Users must have password')
+        if not first_name:
+            raise ValueError('Users must have first name')
+        if not last_name:
+            raise ValueError('Users must have las name')
+        
         # if not name:
         #     raise ValueError('Users must have a name')
         user_obj = self.model(
@@ -69,6 +74,9 @@ class User(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
+    first_name = models.CharField(max_length=30, blank=True, null=True)
+    last_name = models.CharField(max_length=30, blank=True, null=True)
+    
     # name = models.CharField(max_length=255,
     #     )
 
@@ -129,17 +137,6 @@ class User(AbstractBaseUser):
         return self.active
 
   
-
-# class user_type(models.Model):
-#     is_sponser = models.BooleanField(default=False)
-#     is_organizer = models.BooleanField(default=False)
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-#     def __str__(self):
-#         if self.is_sponser == True:
-#             return User.get_email(self.user) + " - is_sponser"
-#         else:
-#             return User.get_email(self.user) + " - is_organizer"
 
 
     
