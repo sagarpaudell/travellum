@@ -1,0 +1,181 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&display=swap');
+
+body {
+  background: url('../images/bg.jpg');
+  margin: 0;
+  padding: 0;
+  font-family: Poppins;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/*  Utility Classes */
+.account-input-border {
+  border-bottom: 1px solid #ccc;
+}
+
+.cursorpointer {
+  cursor:pointer;
+}
+
+.bg-theme {
+  background: #e66b58 !important;
+}
+
+.btn-theme {
+  background: #e66b58;
+}
+
+.btn-theme-outline {
+  border: #e66b58 1px solid;
+}
+
+.text-lightgray {
+  color: #999; 
+}
+
+.text-black {
+  color: rgb(236, 225, 225);
+}
+
+.bg-white {
+  background: rgba(255,255,255,0.9);
+  color: #333;
+}
+
+/* Navbar */
+
+.navbar-brand {
+  font-weight: 900;
+  font-size: 24px;
+}
+
+#search {
+  cursor: not-allowed;
+}
+
+input[type=text]:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  color: #f8f9fa !important;
+}
+
+#searchDesInput {
+  font-weight: 200;
+}
+
+::placeholder {
+  color: #f8f9fa !important;
+}
+
+.navbar-brand, .navbar-nav, nav .container .row div:nth-child(2) form {
+  padding-top: .7rem;
+  padding-bottom: .7rem;
+}
+
+.navbar-scroll {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.5) !important;
+  width: 100%;
+  transition: 0.3s;
+  animation: scroll 0.3s 1;
+  z-index: 2;
+}
+
+@keyframes scroll {
+  0%{transform: translateY(-100%);}
+  100%{transform: translateY(0%);}
+}
+
+.navbar-brand-sm {
+  font-size: 32px;
+  display: none !important;
+}
+
+#social-logins {
+  width: 25% !important;
+}
+
+
+@media screen and (max-width: 992px) {
+  #social-logins {
+    width: 35% !important;
+  }
+
+  #accordion-login {
+    width: 36% !important;
+    margin-left: 32% !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-brand-sm {
+    display: inline !important;
+  }
+  .navbar-brand{
+    display: none;
+  }
+  #searchDesInput {
+    display: none !important;
+  }
+  
+  nav .container .row div:nth-child(2) form {
+    justify-content: center;
+  }
+  .navbar-nav {
+    padding-top: .3rem;
+    padding-bottom: 0;
+  }
+  #search {
+    cursor: pointer;
+  }
+
+  #social-logins {
+    width: 75% !important;
+  }
+
+  #accordion-login, #accordion-register {
+    width: 75% !important;
+    margin-left: 13% !important;
+  }
+
+  .reduce-on-phones-1 {
+    font-size: 20px !important;
+  }
+  .reduce-on-phones-2 {
+    font-size: 30px !important;
+    margin-bottom: 20px !important;
+  }
+  .reduce-on-phones-3 {
+    font-size: 14px !important;
+  }
+}
+
+.pad-0 {
+  padding: 0rem !important;
+}
+.pad-1 {
+  padding: .3rem !important;
+}
+
+.mar-0 {
+  margin: 0 !important;
+}
+
+.account-input {
+  outline: none !important;
+  box-shadow: none !important;
+  color: #fff;
+}
+
+
+
+
+

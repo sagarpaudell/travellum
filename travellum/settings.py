@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'dashboard.apps.DashboardConfig'
     'accounts.apps.AccountsConfig',
     'guides.apps.GuidesConfig',
     'travellers.apps.TravellersConfig',
@@ -84,6 +85,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': 'localhost'
+
     }
 }
 
