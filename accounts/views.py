@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib import messages
+from django.contrib import messages,auth
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
 from .email_authenticate import send_email,check_token
@@ -23,11 +23,11 @@ def register(request):
             
         else:
             #messages.warning(request, 'fuck you enter valid info ')
-            return render(request, 'accounts/register.html', {'form':form})
+            return render(request, 'accounts/register.html', )
     else:
         form = UserRegisterForm()
         print(request.user.pk)
-        return render(request, 'accounts/register.html', {'form':form})
+        return render(request, 'accounts/register.html') #{'form':form} )
         
 
 @login_required
@@ -58,6 +58,8 @@ def profile(request):
     return render(request, 'users/profile.html',context) """
 
 
+def login_view():
+    pass
 def check_confirmation(request, slug):
     if check_token(slug):
         return redirect("profile")
