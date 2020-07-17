@@ -25,7 +25,7 @@ SECRET_KEY = 'qi3^m_agsbz45g$nysz6-4d0@=q5&g$ik&xy&ax^tmf#$o$k&7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','89cb2e215718.ngrok.io']
+ALLOWED_HOSTS = ['127.0.0.1','54a0cdd6f38b.ngrok.io']
 
 
 # Application definition
@@ -138,8 +138,8 @@ LOGIN_REDIRECT_URL = 'index'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'buddhagautam231@gmail.com'
-EMAIL_HOST_PASSWORD = 'mljnelvuzgdvijur'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
 
 
