@@ -15,12 +15,13 @@ class UserManager(BaseUserManager):
         if not first_name:
             raise ValueError('Users must have first name')
         if not last_name:
-            raise ValueError('Users must have las name')
+            raise ValueError('Users must have last name')
         
         # if not name:
         #     raise ValueError('Users must have a name')
         user_obj = self.model(
-            email = self.normalize_email(email)
+            email = self.normalize_email(email),
+            
         )
         # user = self.model(
         #     email=self.normalize_email(email),
@@ -30,16 +31,21 @@ class UserManager(BaseUserManager):
         user_obj.staff = is_staff
         user_obj.admin = is_admin
         user_obj.active = is_active
+        user_obj.first_name =first_name
+        user_obj.last_name =last_name
+           
        
         user_obj.save(using=self._db)
         return user_obj
 
-    def create_staffuser(self, email, password=None):
+    def create_staffuser(self, first_name, last_name, email, password=None):
         # """
         # Creates and saves a staff user with the given email and password.
         # """
         user = self.create_user(
             email,
+            first_name,
+            last_name,
             password=password,
             is_staff =True
 
@@ -50,12 +56,14 @@ class UserManager(BaseUserManager):
 
   
 
-    def create_superuser(self, email, password=None):
+    def create_superuser(self,first_name, last_name, email, password=None):
         # """
         # Creates and saves a superuser with the given email and password.
         # """
         user = self.create_user(
             email,
+            first_name,
+            last_name,
             password=password,
             is_staff = True,
             is_admin = True
@@ -87,7 +95,7 @@ class User(AbstractBaseUser):
     # notice the absence of a "Password field", that is built in.
     timestamp = models.DateTimeField(auto_now_add=True)
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = [] # Email & Password are required by default.
+    REQUIRED_FIELDS = ['first_name','last_name'] # Email & Password are required by default.
 
     objects = UserManager()
 

@@ -1,13 +1,16 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashField
+from django.contrib.auth.forms import  ReadOnlyPasswordHashField
 from .models import User
-class UserRegisterForm(UserCreationForm):
-    email = forms.EmailField()
-    
+
+
+class UserRegisterForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirm password', widget=forms.PasswordInput)
+
     class Meta:
         model = User
-        fields = ['first_name','last_name','email',]
+        fields = ('email',)
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -62,7 +65,7 @@ class UserAdminChangeForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('email', 'password', 'active', 'admin','first_name','last_name')
+        fields = ('email','active', 'admin','first_name','last_name', 'password' )
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.

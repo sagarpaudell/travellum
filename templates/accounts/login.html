@@ -23,6 +23,7 @@
 
           <div class="col-lg-8 col-md-5 col-3 pl-3">
             <form action="" class="form-inline ml-n3">
+              {% csrf_token %}
               <a href="#" id="search"><i class="fa fa-search text-light"></i></a>
               <input type="text" class="form-control bg-transparent border-0 pl-1 w-75" id="searchDesInput" placeholder="Search for Destinations...">
             </form>
@@ -74,15 +75,23 @@
               <div class="card bg-theme">
                 <div class="card-header pad-1 border-0">
                   <p class="mar-0"><span href="#collapse1" class="text-light cursorpointer" data-toggle="collapse" data-parent="#accordion-login">Show other options</span></p>
+                  </small>
+                  {% if messages %}
+                    {%for message in messages%}
+                      {{message}}
+                    {% endfor %}
+                  {% endif %}
+                  </small>
                 </div>
                 <div id="collapse1" class="collapse">
                   <div class="card-body bg-theme">
-                    <form method='post' action = '{% url "login" %}'>
+                    <form method='post' action = "{% url 'login' %}">
                       {% csrf_token %}
-                      <input class="account-input bg-theme border-0 w-100" type="email" placeholder="Email" required>
-                      <input class="account-input bg-theme border-0 w-100" type="password" placeholder="Password" required>
+                      <input class="account-input bg-theme border-0 w-100" type="email" placeholder="Email" name="email" required>
+                      <input class="account-input bg-theme border-0 w-100" type="password" placeholder="Password" name="password" required>
                       <input type="submit" value="Login" class="d-block mt-3 mb-2 btn btn-success">
                     </form>
+                    
                     <sm style="font-size: 12px;" class="text-black">Dont have an account? <a href="#" class="text-black"> Register Now</a></sm>
                     
                   </div>
