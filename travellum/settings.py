@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'dashboard.apps.DashboardConfig',
+    'accounts.apps.AccountsConfig',
     'guides.apps.GuidesConfig',
     'travellers.apps.TravellersConfig',
     'pages.apps.PagesConfig',
@@ -141,3 +143,7 @@ EMAIL_HOST_PASSWORD = 'mljnelvuzgdvijur'
 EMAIL_USE_TLS = True
 
 
+#Media Folder Settings
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
