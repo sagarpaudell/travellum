@@ -10,23 +10,7 @@ body {
   font-family: Poppins;
 }
 
-a:hover {
-  text-decoration: none;
-}
-
 /*  Utility Classes */
-.account-input-border {
-  border-bottom: 1px solid #ccc;
-}
-
-.cursorpointer {
-  cursor:pointer;
-}
-
-.bg-theme {
-  background: #e66b58 !important;
-}
-
 .btn-theme {
   background: #e66b58;
 }
@@ -39,8 +23,18 @@ a:hover {
   color: #999; 
 }
 
-.text-black {
-  color: rgb(236, 225, 225);
+.offset {
+  padding-top: 10rem;
+}
+
+.bg-custom {
+  background: rgba(255,255,255,0.9);
+  color: #333;
+  height: 220px;
+}
+
+.bg-custom .container .row{
+  padding: 3.5rem 2rem;
 }
 
 .bg-white {
@@ -59,14 +53,15 @@ a:hover {
   cursor: not-allowed;
 }
 
+input[type=text] {
+  font-weight: 200;
+}
+
 input[type=text]:focus {
   outline: none !important;
   box-shadow: none !important;
   color: #f8f9fa !important;
-}
 
-#searchDesInput {
-  font-weight: 200;
 }
 
 ::placeholder {
@@ -99,20 +94,41 @@ input[type=text]:focus {
   display: none !important;
 }
 
-#social-logins {
-  width: 25% !important;
+
+
+/********* Section-1 ************/
+.section-1 {
+  font-family: Raleway;
+}
+.section-1 img {
+  width: 100% !important;
+  height: 100% !important;
 }
 
+.section-1 .port-item {
+  width: 30%;
+}
 
-@media screen and (max-width: 992px) {
-  #social-logins {
-    width: 35% !important;
-  }
+.section-1 .port-item:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
 
-  #accordion-login {
-    width: 36% !important;
-    margin-left: 32% !important;
-  }
+.bg-black {
+  color: #fff;
+  background: #000;
+}
+
+.bg-custom .row {
+  font-weight: 800;
+}
+
+.bg-custom .row h1{
+  font-weight: 100;
+}
+
+#custom-menu i {
+  color: #e66b58;
 }
 
 @media screen and (max-width: 768px) {
@@ -122,7 +138,7 @@ input[type=text]:focus {
   .navbar-brand{
     display: none;
   }
-  #searchDesInput {
+  input[type=text] {
     display: none !important;
   }
   
@@ -137,45 +153,23 @@ input[type=text]:focus {
     cursor: pointer;
   }
 
-  #social-logins {
-    width: 75% !important;
+  .bg-custom .row h1{
+    font-size: 2rem;
   }
 
-  #accordion-login, #accordion-register {
-    width: 75% !important;
-    margin-left: 13% !important;
-  }
 
-  .reduce-on-phones-1 {
-    font-size: 20px !important;
-  }
-  .reduce-on-phones-2 {
-    font-size: 30px !important;
-    margin-bottom: 20px !important;
-  }
-  .reduce-on-phones-3 {
-    font-size: 14px !important;
+
+}
+
+@media screen and (max-width: 1200px) { /* larger desktops/laptops and smaller */
+  .bg-custom .container .row{
+    padding: 2rem;
   }
 }
 
-.pad-0 {
-  padding: 0rem !important;
+@media screen and (max-width: 991px) {
+  .bg-custom .container .row{
+    padding: 1rem;
+  }
 }
-.pad-1 {
-  padding: .3rem !important;
-}
-
-.mar-0 {
-  margin: 0 !important;
-}
-
-.account-input {
-  outline: none !important;
-  box-shadow: none !important;
-  color: #fff;
-}
-
-
-
-
 

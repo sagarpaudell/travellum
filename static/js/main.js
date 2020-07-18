@@ -139,7 +139,7 @@ AOS.init({
 		console.log('show');
 	});
 
-	// scroll
+	// Navbar scroll fade and popup part
 	var scrollWindow = function () {
 		$(window).scroll(function () {
 			var $w = $(this),
@@ -157,7 +157,7 @@ AOS.init({
 					navbar.removeClass('scrolled sleep');
 				}
 			}
-			if (st > 350) {
+			if (st > 550) {
 				if (!navbar.hasClass('awake')) {
 					navbar.addClass('awake');
 				}
@@ -166,7 +166,7 @@ AOS.init({
 					sd.addClass('sleep');
 				}
 			}
-			if (st < 350) {
+			if (st < 550) {
 				if (navbar.hasClass('awake')) {
 					navbar.removeClass('awake');
 					navbar.addClass('sleep');
