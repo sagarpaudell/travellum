@@ -58,17 +58,25 @@
               <div class="card bg-theme">
                 <div class="card-header pad-5 border-0">
                   <p class="mar-0"><span href="#collapse1" class="text-light cursorpointer" data-toggle="collapse" data-parent="#accordion-register">Register Now!</span></p>
+                  {% if messages %}
+                  {%for message in messages%}
+                    {{message}}
+                  {% endfor %}
+                  {% endif %}
                 </div>
                 <div id="collapse1" class="collapse">
                   <div class="card-body bg-theme">
-                    <form action="">
-                      <input class="bg-theme border-0 w-100 account-input" type="text" placeholder="First Name" required>
+                    <form action="{% url 'register' %}" method="post">
+                      {% csrf_token %}
+                      <input class="bg-theme border-0 w-100 account-input" type="text" name="first_name" placeholder="First Name" required>
                       <div class="account-input-border"></div>
-                      <input class="bg-theme border-0 w-100 account-input" type="text" placeholder="Last Name" required>
+                      <input class="bg-theme border-0 w-100 account-input" type="text" name="last_name" placeholder="Last Name" required>
                       <div class="account-input-border"></div>
-                      <input class="bg-theme border-0 w-100 account-input" type="email" placeholder="Email" required>
+                      <input class="bg-theme border-0 w-100 account-input" type="email" name="email" placeholder="Email" required>
                       <div class="account-input-border"></div>
-                      <input class="bg-theme border-0 w-100 account-input" type="password" placeholder="Password" required>
+                      <input class="bg-theme border-0 w-100 account-input" type="password" name="password1" placeholder="Password" required>
+                      <div class="account-input-border"></div>
+                      <input class="bg-theme border-0 w-100 account-input" type="password" name="password2" placeholder="Confirm Password" required>
                       <div class="account-input-border"></div>
                       <input type="submit" value="Register" class="d-block mt-3 mb-2 btn btn-success">
                     </form>

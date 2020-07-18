@@ -30,11 +30,16 @@
 				<ul class="navbar-nav nav ml-auto">
 					<li class="nav-item"><a href="#home-section" class="nav-link"><span>Home</span></a></li>
 					<li class="nav-item"><a href="#about-section" class="nav-link"><span>About</span></a></li>
-					<li class="nav-item"><a href="#destination-section" class="nav-link"><span>Destinations</span></a>
-					</li>
-					<li class="nav-item"><a href="#top-guides" class="nav-link"><span>Our Top Guides</span></a>
-					</li>
-					<li class="nav-item"><a href="{%url 'login'%}" class="nav-link"><span>Log In</span></a></li>
+					<li class="nav-item"><a href="#destination-section" class="nav-link"><span>Destinations</span></a></li>
+
+					<li class="nav-item"><a href="#top-guides" class="nav-link"><span>Our Top Guides</span></a></li>
+					
+					{% if  user.is_authenticated%}
+					<li class="nav-item"><a href="{% url 'dashboard' %}" class="nav-link"><span>dashboard</span></a></li>
+					<li class="nav-item"><a href="{% url 'logout' %}" class="nav-link"><span>Log out</span></a></li>
+					{% else %}
+					<li class="nav-item"><a href="{% url 'login' %}" class="nav-link"><span>Log In</span></a></li>
+					{% endif %}
 				</ul>
 			</div>
 		</div>
@@ -49,9 +54,12 @@
 				<div class="header-content">
 					<h1>TRAVELLUM</h1>
 					<h3>Travel !! Before you run out of time</h3>
-					<h1><a href="#" class="btn btn-primary py-3 px-4"
+					{% if  user.is_authenticated%}
+					{% else %}
+					<h1><a href="{% url 'register' %}" class="btn btn-primary py-3 px-4"
 							style="background-color:#e66b58; font-size:1.4rem; ">Join now</a>
 					</h1>
+					{% endif %}
 				</div>
 
 			</div>
