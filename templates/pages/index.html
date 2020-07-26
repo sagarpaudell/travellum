@@ -10,48 +10,61 @@
 	<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i"
 		rel="stylesheet">
-	<link rel="stylesheet" href="{% static 'css/animate.css' %}">
+
 	<link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
-	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+	<link rel="stylesheet" href="{% static 'css/aos.css' %}">
 	<link rel="stylesheet" href="{% static 'css/custom_style.css' %}">
 </head>
 
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="200">
-	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target"
-		id="ftco-navbar">
-		<div class="container">
-			<a class="navbar-brand" href="#">Travellum</a>
-			<button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse"
-				data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="oi oi-menu"></span> Menu
-			</button>
+<body>
+	<header>
+		<nav class="navbar navbar-expand-lg custom-navbar-light" id="custom-navbar">
+			<div class="container">
+				<a class="navbar-brand" href="#">Travellum</a>
+				</a>
+				<button class="navbar-toggler" data-toggle="collapse" data-target="#navbarHome">
+					<div style="color: black;">Menu</div>
 
-			<div class="collapse navbar-collapse" id="ftco-nav">
-				<ul class="navbar-nav nav ml-auto">
-					<li class="nav-item"><a href="#home-section" class="nav-link"><span>Home</span></a></li>
-					<li class="nav-item"><a href="#about-section" class="nav-link"><span>About</span></a></li>
-					<li class="nav-item"><a href="#destination-section" class="nav-link"><span>Destinations</span></a></li>
+				</button>
 
-					<li class="nav-item"><a href="#top-guides" class="nav-link"><span>Our Top Guides</span></a></li>
-					
-					{% if  user.is_authenticated%}
-					<li class="nav-item"><a href="{% url 'dashboard' %}" class="nav-link"><span>dashboard</span></a></li>
-					<li class="nav-item"><a href="{% url 'logout' %}" class="nav-link"><span>Log out</span></a></li>
-					{% else %}
-					<li class="nav-item"><a href="{% url 'login' %}" class="nav-link"><span>Log In</span></a></li>
-					{% endif %}
-				</ul>
+				<div class="collapse navbar-collapse" id="navbarHome">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item mr-2"><a href="#home-section" class="nav-link"><span>Home</span></a></li>
+						<li class="nav-item mr-2"><a href="#about-section" class="nav-link"><span>About</span></a></li>
+						<li class="nav-item mr-2"><a href="#destination-section"
+								class="nav-link"><span>Destinations</span></a>
+						</li>
+
+						<li class="nav-item mr-2"><a href="#top-guides" class="nav-link"><span>Our Top Guides</span></a>
+						</li>
+
+						{% if  user.is_authenticated%}
+						<li class="nav-item mr-2"><a href="{% url 'dashboard' %}"
+								class="nav-link"><span>dashboard</span></a>
+						</li>
+						<li class="nav-item mr-2"><a href="{% url 'logout' %}" class="nav-link"><span>Log out</span></a>
+						</li>
+						{% else %}
+						<li class="nav-item mr-2"><a href="{% url 'login' %}" class="nav-link"><span>Log In</span></a>
+						</li>
+						{% endif %}
+
+						</li>
+					</ul>
+				</div>
 			</div>
-		</div>
-	</nav>
+		</nav>
+	</header>
+
 	<!-- First view section -->
-	<section>
+	<section id="home-section">
 		<div class="col-rt-12">
 
 			<div class="image-wrapper">
 				<img src="{% static 'images/background1.jpg' %}" class="image" alt="background-image">
 
-				<div class="header-content">
+				<div class="header-content" data-aos="zoom-in" data-aos-duration="1300">
 					<h1>TRAVELLUM</h1>
 					<h3>Travel !! Before you run out of time</h3>
 					{% if  user.is_authenticated%}
@@ -66,30 +79,38 @@
 		</div>
 	</section>
 	<!-- About us section -->
-	<section class="ftco-section" id="about-section">
-		<div class="container">
+	<section class="section" id="about-section">
+		<div class="container" data-aos="fade-up" data-aos-duration="1300">
 
 			<div class="col-md-6 col-lg-12 bg-lighten">
 				<div class="py-md-12">
 					<div class="row justify-content-start pb-3">
-						<div class="col-md-12 heading-section ftco-animate p-5 p-lg-0">
+						<div class="col-md-12 heading-section text-center  p-5 p-lg-0">
 							<span class="subheading">about travellum</span>
 							<h2 class="mb-4">How it works?</h2>
-							<p><strong>Travellum </strong>provides a platform to connect travelers. It helps you find
+							<p><strong>Travellum </strong>provides a platform to connect travelers. It helps you
+								find
 								the perfect person
 								to travel with. Maybe you want a guide who knows everything about the history of the
 								place or maybe you are just searching for a companion to travel with. We’ve got you
-								covered. We have a ton of travel guides you can choose from based on their rating. But
-								instead, if you are thinking of employing yourself as a travel guide, you can do that
+								covered. We have a ton of travel guides you can choose from based on their rating.
+								But
+								instead, if you are thinking of employing yourself as a travel guide, you can do
+								that
 								from travellum. It is as easy as opening a facebook account.</p>
 							<p>We are trying our best to introduce freelancing to the travel industry. If you really
-								think you are capable of being a guide, we don’t ask you for your travel degree, you can
-								simply register to our site. We will help you find the travellers who are looking for
-								guides exactly like you. You can earn a decent amount of money without sacrificing your
+								think you are capable of being a guide, we don’t ask you for your travel degree, you
+								can
+								simply register to our site. We will help you find the travellers who are looking
+								for
+								guides exactly like you. You can earn a decent amount of money without sacrificing
+								your
 								time in 9-5 job. Work whenever you want and earn the amount you deserve.</p>
 							<p>We know traveling in a new place can be scary and as a human we need someone to
-								accompany us when we are going someplace new. We can help you find the perfect person
-								who can be your best bud while traveling. We know that you love meeting new people and
+								accompany us when we are going someplace new. We can help you find the perfect
+								person
+								who can be your best bud while traveling. We know that you love meeting new people
+								and
 								going to new places. So why not choose who you want to travel with? Who knows, your
 								perfect travel buddy could be the one you’ve been searching your whole life for.
 							</p>
@@ -101,17 +122,17 @@
 		</div>
 	</section>
 	<!-- Best Places section -->
-	<section class="ftco-section" id="destination-section">
+	<section class="section" id="destination-section">
 		<div class="container">
-			<div class="row justify-content-center pb-5">
-				<div class="col-md-12 heading-section text-center ftco-animate">
+			<div class="row justify-content-center pb-5" data-aos="fade-up" data-aos-duration="800">
+				<div class="col-md-12 heading-section text-center ">
 					<span class="subheading">Explore local places</span>
 					<h2 class="mb-4">Best Places to Travel in the Country.</h2>
 					<p>“You don’t have to be rich to travel well.”</p>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-6 col-lg-4 ftco-animate">
+				<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
 					<div class="project">
 						<div class="img">
 							<a href="#"><img src="{% static 'images/kathmandu.jpg' %}" class="img-fluid"
@@ -123,7 +144,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6 col-lg-4 ftco-animate">
+				<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
 					<div class="project">
 						<div class="img">
 							<a href="#"><img src="{% static 'images/ilam.jpg' %}" class="img-fluid" alt="Image"></a>
@@ -134,7 +155,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6 col-lg-4 ftco-animate">
+				<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
 					<div class="project">
 						<div class="img">
 							<a href="#"><img src="{% static 'images/janakpur.jpg' %}" class="img-fluid" alt="Image"></a>
@@ -145,7 +166,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6 col-lg-4 ftco-animate">
+				<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
 					<div class="project">
 						<div class="img">
 							<a href="#"><img src="{% static 'images/patan.jpg' %}" class="img-fluid" alt="Image"></a>
@@ -156,7 +177,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6 col-lg-4 ftco-animate">
+				<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
 					<div class="project">
 						<div class="img">
 							<a href="#"><img src="{% static 'images/chitwan.jpg' %}" class="img-fluid" alt="Image"></a>
@@ -167,7 +188,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6 col-lg-4 ftco-animate">
+				<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
 					<div class="project">
 						<div class="img">
 							<a href="#"><img src="{% static 'images/pokhara.jpg' %}" class="img-fluid" alt="Image"></a>
@@ -178,7 +199,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6 col-lg-4 ftco-animate">
+				<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
 					<div class="project">
 						<div class="img">
 							<a href="#"><img src="{% static 'images/lumbini.jpg' %}" class="img-fluid" alt="Image"></a>
@@ -193,16 +214,16 @@
 		</div>
 	</section>
 	<!-- Search Guides section -->
-	<section class="ftco-section ftco-no-pb ftco-no-pt">
+	<section class="section no-pb no-pt" data-aos="fade-up" data-aos-duration="800">
 		<div class="container">
 			<div class="row justify-content-center pb-0 pb-mb-5 pt-5 pt-md-0">
-				<div class="col-md-12 heading-section ftco-animate">
-					<h2 class="mb-4">Are you in need of a guide?</h2>
+				<div class="col-md-12 heading-section ">
+					<h2 class="mb-4" style="text-align: center;">Are you in need of a guide?</h2>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-8">
-					<div class="search-wrap-1 ftco-animate p-4">
+					<div class="search-wrap-1  p-4">
 						<form action="#" class="search-property-1">
 							<div class="row">
 								<div class="col-lg align-items-end">
@@ -230,16 +251,20 @@
 		</div>
 	</section>
 	<!-- Top Guides Section -->
-	<section class="ftco-section" id="top-guides">
+	<section class="section" id="top-guides">
 		<div class="container">
-			<div class="row justify-content-center pb-5">
-				<div class="col-md-12 heading-section text-center ftco-animate">
+			<div class="row justify-content-center pb-5" data-aos="fade-up" data-aos-duration="800">
+				<div class="col-md-12 heading-section text-center ">
 					<span class="subheading">Populars</span>
 					<h2 class="mb-4">Our highly rated guides:</h2>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-4 col-lg-3 ftco-animate">
+				<div class="col-md-4 col-lg-3" data-aos="flip-right" data-aos-duration="800" style="background-color: rgb(248, 248, 248);
+					margin-bottom: 1%;
+					padding: 20px;
+					box-shadow: 5px 5px 8px #a2a2a8;
+					border-radius:3%;">
 					<div class="project">
 						<div class="img" style="width:90%; height:90%; margin:auto; border-radius:50%; ">
 							<a href="#"><img src="{% static 'images/person1.jpg' %}" class="img-fluid"
@@ -261,14 +286,20 @@
 					</div>
 
 				</div>
-				<div class="col-md-4 col-lg-3 ftco-animate">
+
+
+				<div class="col-md-4 col-lg-3" data-aos="flip-right" data-aos-duration="2000" style="background-color: rgb(248, 248, 248);
+				margin-bottom: 1%;
+				padding: 20px;
+				box-shadow: 5px 5px 8px #a2a2a8;
+				border-radius:3%;">
 					<div class="project">
 						<div class="img" style="width:90%; height:90%; margin:auto; border-radius:50%;">
 							<a href="#"><img src="{% static 'images/deependra.jpg' %}" class="img-fluid"
 									style="border-radius: 50%;" alt="Image"></a>
 						</div>
 						<div class="text">
-							<h3><a href="#">Deependra Gupta</a></h3>
+							<h3><a href="#">Deependra Kumar Gupta</a></h3>
 							<div class="star d-flex clearfix">Rating: &nbsp;
 								<div class="mr-auto float-left">
 									<span class="ion-ios-star"></span>
@@ -281,7 +312,10 @@
 					</div>
 
 				</div>
-				<div class="col-md-4 col-lg-3 ftco-animate">
+				<div class="col-md-4 col-lg-3" data-aos="flip-right" data-aos-duration="2000" style="background-color: rgb(248, 248, 248);
+				margin-bottom: 1%;
+				padding: 20px;
+				box-shadow: 5px 5px 8px #a2a2a8; border-radius:3%; ">
 					<div class="project">
 						<div class="img" style="width:90%; height:90%; margin:auto; border-radius:50%;">
 							<a href="#"><img src="{% static 'images/buddha.jpg' %}" class="img-fluid"
@@ -303,7 +337,10 @@
 					</div>
 
 				</div>
-				<div class="col-md-4 col-lg-3 ftco-animate">
+				<div class="col-md-4 col-lg-3" data-aos="flip-right" data-aos-duration="2000" style="background-color: rgb(248, 248, 248);
+				margin-bottom: 1%;
+				padding: 20px;
+				box-shadow: 5px 5px 8px #a2a2a8; border-radius:3%;">
 					<div class="project">
 						<div class="img" style="width:90%; height:90%; margin:auto; border-radius:50%;">
 							<a href="#"><img src="{% static 'images/samesh.jpg' %}" class="img-fluid"
@@ -325,7 +362,10 @@
 					</div>
 
 				</div>
-				<div class="col-md-4 col-lg-3 ftco-animate">
+				<div class="col-md-4 col-lg-3" data-aos="flip-right" data-aos-duration="2000" style="background-color: rgb(248, 248, 248);
+				margin-bottom: 1%;
+				padding: 20px;
+				box-shadow: 5px 5px 8px #a2a2a8; border-radius:3%;">
 					<div class="project">
 						<div class="img" style="width:90%; height:90%; margin:auto; border-radius:50%;">
 							<a href="#"><img src="{% static 'images/samesh.jpg' %}" class="img-fluid"
@@ -342,7 +382,7 @@
 									<span class="ion-ios-star"></span>
 								</div>
 							</div>
-							<p><strong>Address:</strong> Bhandina mug.</p>
+							<p><strong>Address:</strong> Bhandina bhak.</p>
 						</div>
 					</div>
 
@@ -353,12 +393,12 @@
 			</div>
 	</section>
 
-	<footer class="ftco-footer ftco-section">
+	<footer class="footer section">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 text-center">
-					<div class="ftco-footer-widget mb-12" style="line-height:2rem;">
-						<h2 class="ftco-heading-2">Have Questions? Contact us:</h2>
+					<div class="footer-widget mb-12" style="line-height:2rem;">
+						<h2 class="heading-2">Have Questions? Contact us:</h2>
 
 						<span class="icon icon-map-marker"></span><span class="text"> &nbsp;Dhulikhel, Kavre,
 							Nepal</span><br>
@@ -378,17 +418,47 @@
 			</div>
 		</div>
 	</footer>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$(window).scroll(function () {
+				if ($(window).scrollTop() > 50) {
+					$('#custom-navbar').addClass('navbar-scroll');
+				} else {
+					$('#custom-navbar').removeClass('navbar-scroll');
+				}
+			});
+		});
 
-	<script src="{% static 'js/jquery.min.js' %}"></script>
-	<script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
-	<script src="{% static 'js/popper.min.js' %}"></script>
-	<script src="{% static 'js/bootstrap.min.js' %}"></script>
-	<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
-	<script src="{% static 'js/jquery.stellar.min.js' %}"></script>
-	<script src="{% static 'js/owl.carousel.min.js' %}"></script>
-	<script src="{% static 'js/aos.js' %}"></script>
-	<script src="{% static 'js/scrollax.min.js' %}"></script>
-	<script src="{% static 'js/main.js' %}"></script>
+		$('body').scrollspy({ target: '#custom-navbar' }); //Navbar active focus
+		$('#custom-navbar a').on('click', function (e) {
+			//check for hash value
+			if (this.hash !== '') {
+				e.preventDefault();
+				const hash = this.hash;
+
+				//animate smooth scroll
+				$('html, body').animate({
+					scrollTop: $(hash).offset().top
+				}, 900, function () {
+					//add hash to url after scroll
+					window.location.hash = hash;
+				});
+			}
+		});
+
+		//collapse navbar on clicked in mobile view
+		$('.navbar-nav>li>a').on('click', function () {
+			$('.navbar-collapse').collapse('hide');
+		});
+	</script>
+	<script src="{% static 'js/aos.js' %}">
+	</script>
+	<script>
+		AOS.init();
+	</script>
 </body>
 
 </html>
