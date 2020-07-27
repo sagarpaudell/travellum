@@ -4,7 +4,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&display=swap');
 
 body {
-  background: url('../images/bg.jpg');
+  background: url('../images/bgDarken.jpg') !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  background-size: cover !important;
+  width: 100%;
   margin: 0;
   padding: 0;
   font-family: Poppins;
@@ -16,7 +21,7 @@ a:hover {
 
 /*  Utility Classes */
 .account-input-border {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px dotted #ddd;
 }
 
 .cursorpointer {

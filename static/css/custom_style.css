@@ -57,7 +57,7 @@ body {
       margin: 0 auto;
       padding: 0; }
     .custom-navbar-light .navbar-brand {
-      color: #000000;
+      color: #fff;
       padding-top: .7rem;
       padding-bottom: .7rem; }
       
@@ -71,7 +71,7 @@ body {
       padding-bottom: .7rem;
       padding-left: 20px;
       padding-right: 20px;
-      color: #000000;
+      color: #fff;
       font-weight: 400;
       opacity: 1 !important; }
       .custom-navbar-light .navbar-nav > .nav-item > .nav-link span {
@@ -133,7 +133,7 @@ body {
         position: fixed;
         top: 0;
         left: 0;
-        background:#f4f4f5 !important;
+        background:rgba(0, 0, 0, 0.5) !important;
         width: 100%;
         transition: 0.3s;
         animation: scroll 0.3s 1;
