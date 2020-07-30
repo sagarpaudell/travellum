@@ -259,138 +259,40 @@
 					<h2 class="mb-4">Our highly rated guides:</h2>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-4 col-lg-3" data-aos="flip-right" data-aos-duration="800" style="background-color: rgb(248, 248, 248);
-					margin-bottom: 1%;
-					padding: 20px;
-					box-shadow: 5px 5px 8px #a2a2a8;
-					border-radius:3%;">
-					<div class="project">
-						<div class="img" style="width:90%; height:90%; margin:auto; border-radius:50%; ">
-							<a href="#"><img src="{% static 'images/person1.jpg' %}" class="img-fluid"
-									style="border-radius: 50%;" alt="Image"></a>
-						</div>
-						<div class="text">
-							<h3><a href="#">Samesh Man Bajracharya</a></h3>
-							<div class="star d-flex clearfix">Rating: &nbsp;
-								<div class="mr-auto float-left">
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
+				
+				<div class="row">
+					{% if guides %}
+						{% for guide in guides %}	
+							<div class="col-md-4 col-lg-3" data-aos="flip-right" data-aos-duration="800" style="background-color: rgb(248, 248, 248);
+								margin-bottom: 1%;
+								padding: 20px;
+								box-shadow: 5px 5px 8px #a2a2a8;
+								border-radius:3%;">
+								<div class="project">
+									<div class="img" style="width:90%; height:90%; margin:auto; border-radius:50%; ">
+										<a href="#"><img src="{{ guide.photo_main.url }}" class="img-fluid"
+												style="border-radius: 50%;" alt="Image"></a>
+									</div>
+									<div class="text">
+										<h3><a href="#">{{ guide.name }}</a></h3>
+										<div class="star d-flex clearfix">Rating: &nbsp;
+											<div class="mr-auto float-left">
+												<span class="ion-ios-star"></span>
+												<span class="ion-ios-star"></span>
+												<span class="ion-ios-star"></span>
+												<span class="ion-ios-star"></span>
+												<span class="ion-ios-star"></span>
+											</div>
+										</div>
+										<p><strong>Address:</strong> {{ guide.address }}</p>
+									</div>
 								</div>
+
 							</div>
-							<p><strong>Address:</strong> Sankhamul, Bajre's Colony</p>
-						</div>
-					</div>
+						{% endfor %}
+					{% endif %}
 
 				</div>
-
-
-				<div class="col-md-4 col-lg-3" data-aos="flip-right" data-aos-duration="2000" style="background-color: rgb(248, 248, 248);
-				margin-bottom: 1%;
-				padding: 20px;
-				box-shadow: 5px 5px 8px #a2a2a8;
-				border-radius:3%;">
-					<div class="project">
-						<div class="img" style="width:90%; height:90%; margin:auto; border-radius:50%;">
-							<a href="#"><img src="{% static 'images/deependra.jpg' %}" class="img-fluid"
-									style="border-radius: 50%;" alt="Image"></a>
-						</div>
-						<div class="text">
-							<h3><a href="#">Deependra Kumar Gupta</a></h3>
-							<div class="star d-flex clearfix">Rating: &nbsp;
-								<div class="mr-auto float-left">
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-								</div>
-							</div>
-							<p><strong>Address:</strong> Behthanchowk, Naranthan</p>
-						</div>
-					</div>
-
-				</div>
-				<div class="col-md-4 col-lg-3" data-aos="flip-right" data-aos-duration="2000" style="background-color: rgb(248, 248, 248);
-				margin-bottom: 1%;
-				padding: 20px;
-				box-shadow: 5px 5px 8px #a2a2a8; border-radius:3%; ">
-					<div class="project">
-						<div class="img" style="width:90%; height:90%; margin:auto; border-radius:50%;">
-							<a href="#"><img src="{% static 'images/buddha.jpg' %}" class="img-fluid"
-									style="border-radius: 50%;" alt="Image"></a>
-						</div>
-						<div class="text">
-							<h3><a href="#">Buddha Yadav</a></h3>
-							<div class="star d-flex clearfix">Rating: &nbsp;
-								<div class="mr-auto float-left">
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-								</div>
-							</div>
-							<p><strong>Address:</strong> Malebu, Dhulikhel</p>
-						</div>
-					</div>
-
-				</div>
-				<div class="col-md-4 col-lg-3" data-aos="flip-right" data-aos-duration="2000" style="background-color: rgb(248, 248, 248);
-				margin-bottom: 1%;
-				padding: 20px;
-				box-shadow: 5px 5px 8px #a2a2a8; border-radius:3%;">
-					<div class="project">
-						<div class="img" style="width:90%; height:90%; margin:auto; border-radius:50%;">
-							<a href="#"><img src="{% static 'images/samesh.jpg' %}" class="img-fluid"
-									style="border-radius: 50%;" alt="Image"></a>
-						</div>
-						<div class="text">
-							<h3><a href="#">Samesh Man Bajracharya</a></h3>
-							<div class="star d-flex clearfix">Rating: &nbsp;
-								<div class="mr-auto float-left">
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-								</div>
-							</div>
-							<p><strong>Address:</strong> Bhak..thees</p>
-						</div>
-					</div>
-
-				</div>
-				<div class="col-md-4 col-lg-3" data-aos="flip-right" data-aos-duration="2000" style="background-color: rgb(248, 248, 248);
-				margin-bottom: 1%;
-				padding: 20px;
-				box-shadow: 5px 5px 8px #a2a2a8; border-radius:3%;">
-					<div class="project">
-						<div class="img" style="width:90%; height:90%; margin:auto; border-radius:50%;">
-							<a href="#"><img src="{% static 'images/samesh.jpg' %}" class="img-fluid"
-									style="border-radius: 50%;" alt="Image"></a>
-						</div>
-						<div class="text">
-							<h3><a href="#">Samesh Man Bajracharya</a></h3>
-							<div class="star d-flex clearfix">Rating: &nbsp;
-								<div class="mr-auto float-left">
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-								</div>
-							</div>
-							<p><strong>Address:</strong> Bhandina bhak.</p>
-						</div>
-					</div>
-
-				</div>
-
-
-
-			</div>
 	</section>
 
 	<footer class="footer section">
