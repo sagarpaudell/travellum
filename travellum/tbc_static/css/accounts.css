@@ -30,10 +30,12 @@ a:hover {
 
 .bg-theme {
   background: #e66b58 !important;
+  color: #fff !important;
 }
 
 .btn-theme {
   background: #e66b58;
+  color: #fff !important;
 }
 
 .btn-theme-outline {

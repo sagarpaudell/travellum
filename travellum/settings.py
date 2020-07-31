@@ -81,11 +81,7 @@ AUTH_USER_MODEL = 'accounts.User'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-<<<<<<< HEAD
-  'default': {
-=======
     'default': {
->>>>>>> 7ab38025e9d929761f9c0773feef9c0f5628d131
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'travellum_db',
         'USER': 'postgres',
