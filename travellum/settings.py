@@ -25,7 +25,7 @@ SECRET_KEY = 'qi3^m_agsbz45g$nysz6-4d0@=q5&g$ik&xy&ax^tmf#$o$k&7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','54a0cdd6f38b.ngrok.io']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -81,7 +81,11 @@ AUTH_USER_MODEL = 'accounts.User'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
+<<<<<<< HEAD
   'default': {
+=======
+    'default': {
+>>>>>>> 7ab38025e9d929761f9c0773feef9c0f5628d131
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'travellum_db',
         'USER': 'postgres',
