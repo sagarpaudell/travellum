@@ -57,11 +57,11 @@ body {
   cursor: not-allowed;
 }
 
-input[type=text] {
+#searchDesInput {
   font-weight: 200;
 }
 
-input[type=text]:focus {
+#searchDesInput:focus {
   outline: none !important;
   box-shadow: none !important;
   color: #f8f9fa !important;
@@ -135,6 +135,41 @@ input[type=text]:focus {
   color: #e66b58;
 }
 
+/* Edit Profile */
+.profile-pic {
+  height: 150px !important;
+  width: 150px !important;
+  background-image: url('../images/person1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+  vertical-align: middle;
+  text-align: center;
+  color: transparent;
+  transition: all .3s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.profile-pic:hover {
+  background-color: rgba(0,0,0,.5);
+  z-index: 10000;
+  color: #fff;
+  transition: all .3s ease;
+  text-decoration: none;
+}
+
+.profile-pic span {
+  display: inline-block;
+  padding-top: 4.5em;
+  padding-bottom: 4.5em;
+}
+
+#profile_pic {
+        display: none;
+        cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
   .navbar-brand-sm {
     display: inline !important;
@@ -142,7 +177,7 @@ input[type=text]:focus {
   .navbar-brand{
     display: none;
   }
-  input[type=text] {
+  #searchDesInput {
     display: none !important;
   }
   
@@ -160,8 +195,6 @@ input[type=text]:focus {
   .bg-custom .row h1{
     font-size: 2rem;
   }
-
-
 
 }
 

@@ -13,6 +13,7 @@
 </head>
 
 <body>
+  <!---------------------------------------------------------------------------------- Navbar ----------------------------------------------------------------------->
   <header>
     <nav class="navbar bg-transparent px-0 my-navbar">
       <div class="container text-center">
@@ -49,11 +50,15 @@
         </div>
       </div>
     </nav>
-  </header>
+    </header>
+    <!--------------------------------------------------------------------------- End of Navbar ----------------------------------------------------------------------->
+
 
   <main>
+    <!-------------------------------------------------------------------------- Main Dashboard ----------------------------------------------------------------------->
     <section class="section-1">
       <div class="container py-5">
+        <!---------------------------------------------------------------- Dashboard Navigation ----------------------------------------------------------------------->
         <div class="row no-gutters">
 
           <div class="col-lg-3 col-md-5">
@@ -88,7 +93,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>        
 
         <div>
           <div class="d-flex flex-row text-white align-items-stretch text-center bg-white" id="custom-menu">
@@ -105,9 +110,60 @@
               <span class="d-none d-md-inline">Traveller</span>
             </div>
         </div>
+        <!-------------------------------------------------------- End of Dashboard Navigation ----------------------------------------------------------------------->
 
+
+
+        <!------------------------------------------------------------------ About Me Collapse ----------------------------------------------------------------------->
         <div id="about_me" class="collapse show">
           <div class="card card-body bg-white px-3 py-5">
+            
+            <!-- Edit Profile Section -->
+            <h4 class="px-3" style="color: #e2c0bb;">Let People know about you</h4>
+            <div>
+              <ul class="d-flex p-3" style="list-style: none;">
+                <div class="mr-3">
+                  <li>
+                    <!-- <i class="text-danger fa fa-times"></i> -->
+                    <i class="text-success fa fa-check"></i>
+                    <small>Add your Location</small>
+                  </li>
+                  <li>
+                    <!-- <i class="text-danger fa fa-times"></i> -->
+                    <i class="text-success fa fa-check"></i>
+                    <small>Add Profile Picture</small>
+                  </li>
+                  <li>
+                    <i class="text-danger fa fa-times"></i>
+                    <!-- <i class="text-success fa fa-check"></i> -->
+                    <small>Add Languages you speak</small>
+                  </li>
+                </div>
+                <div>
+                  <li>
+                    <i class="text-danger fa fa-times"></i>
+                    <!-- <i class="text-success fa fa-check"></i> -->
+                    <small>Add Hobbies</small>
+                  </li>
+                  <li>
+                    <i class="text-danger fa fa-times"></i>
+                    <!-- <i class="text-success fa fa-check"></i> -->
+                    <small>About Yourself</small>
+                  </li>
+                </div>
+              </ul>
+              
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-10"></div>
+                <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="modal" data-target="#edit_profile_modal">Edit Profile</button>
+              </div>
+            </div>
+            <span class="border-bottom"></span><br>
+            <!-- End of Edit Profile Section-->
+
+            <!-- Profile Description Section -->
             <h2 class="px-3" style="color: #e2c0bb;">Hi there! Nice to meet you</h2>
             <p class="p-3 text-justify">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt sint quaerat velit vel, maiores aspernatur soluta fugiat dicta ipsum, accusamus quas voluptatum ad tempora perspiciatis. Veniam incidunt eligendi minima ut ullam rem praesentium doloremque eum commodi nobis consequatur fugiat sequi earum ipsam assumenda eveniet atque animi, fugit aliquid itaque facere voluptates! Non ipsam animi illum. Modi ad reprehenderit corrupti cum similique doloribus mollitia ratione eius, architecto placeat, libero repellendus dolor. 
@@ -121,14 +177,25 @@
               </div>
               <span class="border-bottom"></span>
             </p>
+            <!-- End of Profile Description Section -->
+
+            <!-- Languages Section -->
             <h4 class="px-3" style="color: #e2c0bb;">Languages</h4>
-            <p class="p-3 border-bottom">Hindi, Bhojpuri</p>
-            <h4 class="px-3" style="color: #e2c0bb;">Hobbies</h4>
-            <p class="p-3 border-bottom">Watching Porn</p>
-            
+            <p class="p-3 border-bottom">Nepali</p>
+            <!-- End of Languages Section -->
+
+            <!-- Interests Section -->
+            <h4 class="px-3" style="color: #e2c0bb;">Interests</h4>
+            <p class="p-3 border-bottom">Travelling</p>
+            <!-- End of Interests Section -->
+
           </div>
         </div>
+        <!-------------------------------------------------------------- End of About Me Collapse ----------------------------------------------------------------------->
 
+
+        
+        <!------------------------------------------------------------------------ Guide Collapse ----------------------------------------------------------------------->
         <div class="collapse" id="guide">
           <div class="d-flex">
             <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
@@ -142,7 +209,11 @@
             </div>
           </div>
         </div>
+        <!----------------------------------------------------------------- End of Guide Collapse ----------------------------------------------------------------------->
 
+        
+
+        <!-------------------------------------------------------------------- Traveller Collapse ----------------------------------------------------------------------->
         <div class="collapse" id="traveller">
           <div class="d-flex">
             <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
@@ -156,11 +227,15 @@
             </div>
           </div>
         </div>
+        <!-------------------------------------------------------------- End of Traveller Collapse ----------------------------------------------------------------------->
+
+
 
       </div>
     </section>
   </main>
 
+  <!---------------------------------------------------------------------------------- Footer ----------------------------------------------------------------------->
   <footer class="mt-5" id="main-footer" style="height: 80vh; background: #1b1919; color: white; padding: 112px 0;">
 		<div class="container">
 			<div class="row">
@@ -191,14 +266,123 @@
         
 			</div>
 		</div>
-	</footer>
+  </footer>
+  <!-------------------------------------------------------------------------- End of Footer ----------------------------------------------------------------------->
+
+  
+
+  <!---------------------------------------------------------------------------------- Modals ----------------------------------------------------------------------->
+  <!-- Edit Profile Modal -->
+  <div class="modal" id="edit_profile_modal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Edit Profile
+          </h5>
+          <button class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="">
+
+            <!-- Choose Image Overlay -->
+            <!-- Source: https://codepen.io/JohanDelValle/pen/mZwKrx?editors=1100 -->
+            <div class="d-flex justify-content-around">
+              <span>
+                <label for="profile_pic">
+                  <div class="profile-pic">
+                      <span class="fa fa-camera"></span>
+                      <span>Change Image</span>
+                  </div>
+                  </label>
+                  <input type="File" name="profile_pic" id="profile_pic">
+              </span>
+            </div>
+            <!-- End of Choose Image Overlay -->
+
+            <!-- Edit Profile Inputs -->
+            <div class="form-group">
+              <label for="location">First Name</label>
+              <input type="text" class="form-control" id="f_name">
+            </div>
+            <div class="form-group">
+              <label for="location">Last Name</label>
+              <input type="text" class="form-control" id="l_name">
+            </div>
+
+            <div class="form-group">
+              <label for="location">Location</label>
+              <input type="text" class="form-control" id="location">
+            </div>
+
+            <div class="form-group">
+              <label for="about_me">About Me</label>
+              <textarea class="form-control" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="Languages">Languages</label><br>
+              <input type="text" class="form-control" id="languages">
+            </div>
+
+            <div class="form-group">
+              <label>Interests</label><br>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="English" value="option1">
+                <label class="form-check-label" for="English"> Exploration & Sightseeing</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="English" value="option1">
+                <label class="form-check-label" for="English"> Food & Restaurants</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="English" value="option1">
+                <label class="form-check-label" for="English"> Driving Tours</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="English" value="option1">
+                <label class="form-check-label" for="English"> Sports & Recreation</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="English" value="option1">
+                <label class="form-check-label" for="English"> Art & Museums</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="English" value="option1">
+                <label class="form-check-label" for="English"> History & Culture</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="English" value="option1">
+                <label class="form-check-label" for="English"> Nightlife & Bars</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="English" value="option1">
+                <label class="form-check-label" for="English"> Shopping</label>
+              </div>
+            </div>
+            <!-- End of Edit Profile Inputs -->
+
+          </form>
+          <div class="modal-footer">
+            <input type="submit" value="Save Changes" class="btn btn-success">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End of Edit Profile Modal -->
+  <!----------------------------------------------------------------- End of Modals ----------------------------------------------------------------------->
 
 
 
+<!-- Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
+<!-- Focus Search Input -->
 <script>
   var d = document;
   d.getElementById("btn-search-des").onclick = function() {
@@ -206,6 +390,7 @@
   };
 </script>
 
+<!-- Navbar Animation -->
 <script>
   $(document).ready(function() {
     $(window).scroll(function() {
@@ -218,6 +403,7 @@
   });
 </script>
 
+<!-- Dashboard Collapse JS -->
 <script>
   $('.port-item').click(function () {
     $('.collapse').collapse('hide');
