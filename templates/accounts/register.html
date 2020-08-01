@@ -140,29 +140,35 @@
           <form action="">
             <div class="form-group">
               <label for="f_name">First Name</label>
-              <input class="form-control" type="text">
+              <input id="f_name" class="form-control reginput" type="text">
+              <span class="invalid-feedback">First Name cannot be empty</span>
+              <span class="invalid-feedback">Fist Name cannot have symbols or digits</span>
             </div>
             <div class="form-group">
               <label for="l_name">Last Name</label>
-              <input class="form-control" type="text">
+              <input id='l_name' class="form-control reginput" type="text">
+              <span class="invalid-feedback">Last Name cannot be empty</span>
+              <span class="invalid-feedback">Last Name cannot have symbols or digits</span>
             </div>
             <div class="form-group">
               <label for="Email">Email</label>
-              <input class="form-control" type="email">
+              <input class="form-control reginput" type="email">
             </div>
             <div class="form-group">
               <label for="Password">Password</label>
-              <input class="form-control" type="password">
+              <input id="password" class="form-control reginput" type="password">
+              <span id="length" class="invalid-feedback">Password must contain minimum <b>6 characters</b></span>
+              <div class="text-muted mt-2">
+                <input type="checkbox" onclick="showPassword()"> Show Password
+              </div>
             </div>
-            <div class="form-group">
-              <label for="confirm_password">Confirm Password</label>
-              <input class="form-control" type="password">
-            </div>
+            
           </form>
+          <div class="mt-4"></div>
           <small class="text-muted">Already have an account? <a href="#">Login</a></small>
         </div>
         <div class="modal-footer">
-          <input class="btn btn-success" type="submit" value="Register">
+          <input class="btn btn-success" type="submit" value="Register" onclick="handleValidation()">
         </div>
       </div>
     </div>
@@ -175,10 +181,42 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
   <script>
-    var d = document;
-    d.getElementById("btn-search-des").onclick = function() {
-      d.getElementById("searchDesInput").focus();
-    };
+    var d = document; 
+    function showPassword() {
+      var x = d.getElementById("password");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+
+    var validateString = (value) => {
+        const numberRegex = /^[a-zA-Z]+$/;
+        return numberRegex.test(value);
+    }
+
+    function handleValidation() {
+      console.log('oik', this.value);
+      if (!validateString(this.value)) {
+        console.log(this, 'oi');
+        this.classList.add("is-invalid");
+      } else {
+        this.classList.remove("is-invalid");
+      }
+    }
+    d.getElementById("f_name").onkeyup = handleValidation;
+    d.getElementById("l_name").onkeyup = handleValidation;
+
+    function handlePwValidation() {
+      if (password.value.length >= 6) {
+      this.classList.remove("is-invalid");
+      } else {
+      this.classList.add("is-invalid");
+      }
+    }
+    d.getElementById('password').onkeyup = handlePwValidation;
+  
   </script>
   
   <script>

@@ -63,10 +63,10 @@ a:hover {
 }
 
 #search {
-  cursor: not-allowed;
+  cursor: default;
 }
 
-input[type=text]:focus {
+#searchDesInput:focus {
   outline: none !important;
   box-shadow: none !important;
   color: #f8f9fa !important;
@@ -182,7 +182,24 @@ input[type=text]:focus {
   color: #fff;
 }
 
+.reginput:valid {
+  color: #28a745;
+}
 
+.reginput:invalid {
+  color: orangered;
+}
 
+.valid {
+  color: #28a745 !important;
+}
+
+.invalid {
+  color: orangered !important;
+}
+
+.is-invalid {
+  color: orangered !important;
+}
 
 
