@@ -21,7 +21,7 @@ def register(request):
         if password1 == password2:
             
             if User.objects.filter(email=email).exists():
-                messages.error(request, 'That email is being used')
+                messages.warning(request, 'That email is being used')
                 return redirect('register')
             else:
                 user = User.objects.create_user(
@@ -35,7 +35,7 @@ def register(request):
                 user.save()
                 return redirect('login')
         else:
-            messages.error(request, "Passwords doesn't match")
+            messages.warning(request, "Passwords doesn't match")
             return redirect('register')
     else:
         #print(request.user.email)
@@ -50,7 +50,7 @@ def login_view(request):
             auth.login(request, user)
             return redirect('index')
         else:
-            messages.error(request, 'invalid credentials')
+            messages.warning(request, 'invalid credentials')
             return redirect('login')
 
     else:
