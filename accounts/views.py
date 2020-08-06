@@ -3,6 +3,7 @@ from django.contrib import messages,auth
 from django.shortcuts import render, redirect
 from .models import User
 from .forms import UserRegisterForm
+from travellers.models import Traveller
 
 
 
@@ -33,6 +34,8 @@ def register(request):
                 )
                 user.set_password(password1)
                 user.save()
+                traveller=Traveller(first_name=first_name,last_name=last_name,email=User.objects.get(email = email))
+                traveller.save()
                 return redirect('login')
         else:
             messages.warning(request, "Passwords doesn't match")
@@ -48,7 +51,12 @@ def login_view(request):
         user = auth.authenticate(email=email, password=password)
         if user is not None:
             auth.login(request, user)
-            return redirect('index')
+            if user.is_authenticated:
+                traveller_user = Traveller.objects.all().filter(email=user)
+                context = {
+                                'traveller_user':traveller_user,
+                        }
+                return render(request, 'dashboard/dashboard.html', context)
         else:
             messages.warning(request, 'invalid credentials')
             return redirect('login')

@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
   <link rel="stylesheet" href="">
-  <title>Document</title>
+  <title>Dashboard</title>
 </head>
 
 <body>
@@ -43,7 +43,7 @@
 
           <div class="col-lg-1 col-md-2 col-3">
             <div class="navbar-nav">
-              <li class="nav-item text-center"><a href="#" class="nav-link text-light">Login</a></li>
+              <li class="nav-item text-center"><a href="/accounts/logout/" class="nav-link text-light">Logout</a></li>
             </div>
           </div>
 
@@ -60,10 +60,18 @@
       <div class="container py-5">
         <!---------------------------------------------------------------- Dashboard Navigation ----------------------------------------------------------------------->
         <div class="row no-gutters">
-
           <div class="col-lg-3 col-md-5">
-            <img src="{% static 'images/person1.jpg' %}" alt="">
+              {% if traveller_user %}
+                {% for traveller in traveller_user %}
+                  {% if traveller.photo_main %}
+                    <img src="{{ traveller.photo_main.url }}" alt="">
+                  {% else %}
+                    <img src="{% static 'images/ilam.jpg' %}" alt="">
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
           </div>
+            
 
           <div class="col-lg-9 col-md-7">
 
@@ -77,12 +85,21 @@
               <div class="bg-custom">
                 <div class="container">
                   <div class="row">
-
                     <div class="col-md-6">
-                      Suryabinayak, Bhaktapur<br>
-                      <h1>Buddha Gautam</h1>
-                      Replies within: 84 hours
+                      {% if traveller_user %}
+                        {% for traveller in traveller_user %}
+                          {{traveller.address}}<br>
+                          <h1>{{ traveller.first_name }} {{ traveller.last_name }} </h1>
+                          Replies within: 84 hours
+                        {% endfor %}
+                      {% endif %}
                     </div>
+                    
+                    
+                      
+                  
+                    
+                    
 
                     <div class="col-md-6 text-right">
                       <h3><span class="display-4 d-inline text-success">$</span>0.1/hr</h3>
