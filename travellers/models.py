@@ -20,6 +20,6 @@ class Traveller(models.Model):
     is_published = models.BooleanField(default=True)
     tours_count = models. IntegerField(default=0)
     is_guide = models.BooleanField(default=False)
-    price_per_hour= models.IntegerField(default=0)
+    price_per_hour= models.DecimalField(max_digits=5,default=0,decimal_places = 2)
     def __str__(self):
         return self.first_name
