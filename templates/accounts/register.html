@@ -48,13 +48,14 @@
   <main>
     <section class="text-light" style="height: 100vh;"> 
       <div class="container text-center py-5">
-        <h1 style="font-size: 22px; margin-bottom: 7px; color: #e2c0bb;" class="text-uppercase reduce-on-phones-1">Explore local Places</h1>
-        <h1 class="reduce-on-phones-2"style="font-family: Cormorant Garamond;font-size:48px; margin-bottom:24px;">In the way of the locals</h1>
+        <h1 class="text-uppercase reduce-on-phones-1" style="font-size: 22px; margin-bottom: 7px; color: #e2c0bb;">Explore local Places</h1>
+        <h1 class="reduce-on-phones-2" style="font-family: Cormorant Garamond;font-size:48px; margin-bottom:24px;">In the way of the locals</h1>
         <p class="reduce-on-phones-3" style="margin-bottom: 70px; color: rgb(219, 218, 218);">"You don't have to be rich to travel well"</p>
 
         <div class="row">
           <div class="col-12">
-            <div id="accordion-register" class="w-50" style="margin-left: 25%;">
+            <button class="w-50 bg-theme p-3 border-0" data-toggle="modal" data-target="#register_modal">Register Now</button>
+            <!-- <div id="accordion-register" class="w-50" style="margin-left: 25%;">
               <div class="card bg-theme">
                 <div class="card-header pad-5 border-0">
                   <p class="mar-0"><span href="#collapse1" class="text-light cursorpointer" data-toggle="collapse" data-parent="#accordion-register">Register Now!</span></p>
@@ -84,7 +85,7 @@
                     
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -124,17 +125,110 @@
         
 			</div>
 		</div>
-	</footer>
+  </footer>
+  
+  <!-- Modals -->
+  <!-- Register Modal -->
+  <div class="modal" id="register_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Register Now</h5>
+          <button class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          {% if messages %}
+          {% for message in messages %}
+            <div class = "alert alert-{{ message.tags }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+        
+          <form action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="f_name">First Name</label>
+              <input id="f_name" class="form-control reginput" name="first_name" type="text" pattern="[a-zA-Z]+" title="Must not contain letter or numbers" required>
+              <span class="invalid-feedback">First Name cannot be empty</span>
+              <span class="invalid-feedback">First Name cannot contain symbols or digits</span>
+            </div>
+            <div class="form-group">
+              <label for="l_name">Last Name</label>
+              <input id='l_name' class="form-control reginput" name="last_name" type="text" pattern="[a-zA-Z]+" title="Must not contain letter or numbers" required>
+              <span class="invalid-feedback">First Name cannot be empty</span>
+              <span class="invalid-feedback">Last Name cannot have symbols or digits</span>
+            </div>
+            <div class="form-group">
+              <label for="Email">Email</label>
+              <input class="form-control reginput" name="email" type="email" required>
+            </div>
+            <div class="form-group">
+              <label for="Password">Password</label>
+              <input id="password" class="form-control reginput" name="password1" type="password" pattern=".{6,}" title="Must contain at least 6 characters" required>
+              <span id="length" class="invalid-feedback">Password must contain minimum <b>6 characters</b></span>
+              <label for="Password">Password</label>
+              <input id="password" class="form-control reginput" name="password2" type="password" pattern=".{6,}" title="Must contain at least 6 characters" required>
+              <span id="length" class="invalid-feedback">Password must contain minimum <b>6 characters</b></span>
+              
+              <div class="text-muted mt-2">
+                <input type="checkbox" onclick="showPassword()"> Show Password
+              </div>
+            </div>
+            <input class="btn btn-success" type="submit" value="Register">
+          </form>
+          <div class="mt-4"></div>
+          <small class="text-muted">Already have an account? <a href="#">Login</a></small>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End of Register Modal -->
+  <!-- End of Modals -->
 
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
   <script>
-    var d = document;
-    d.getElementById("btn-search-des").onclick = function() {
-      d.getElementById("searchDesInput").focus();
-    };
+    var d = document; 
+    function showPassword() {
+      var x = d.getElementById("password");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+
+    var validateString = (value) => {
+        const numberRegex = /^[a-zA-Z]+$/;
+        return numberRegex.test(value);
+    }
+
+    function handleValidation() {
+      console.log('oik', this.value);
+      if (!validateString(this.value)) {
+        console.log(this, 'oi');
+        this.classList.add("is-invalid");
+      } else {
+        this.classList.remove("is-invalid");
+      }
+    }
+    d.getElementById("f_name").onkeyup = handleValidation;
+    d.getElementById("l_name").onkeyup = handleValidation;
+
+    function handlePwValidation() {
+      if (password.value.length >= 6) {
+      this.classList.remove("is-invalid");
+      } else {
+      this.classList.add("is-invalid");
+      }
+    }
+    d.getElementById('password').onkeyup = handlePwValidation;
+  
   </script>
   
   <script>

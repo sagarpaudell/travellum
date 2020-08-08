@@ -4,7 +4,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&display=swap');
 
 body {
-  background: url('../images/bg.jpg');
+  background: url('../images/bgDarken.jpg') !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  background-size: cover !important;
+  width: 100%;
   margin: 0;
   padding: 0;
   font-family: Poppins;
@@ -16,7 +21,7 @@ a:hover {
 
 /*  Utility Classes */
 .account-input-border {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px dotted #ddd;
 }
 
 .cursorpointer {
@@ -25,10 +30,12 @@ a:hover {
 
 .bg-theme {
   background: #e66b58 !important;
+  color: #fff !important;
 }
 
 .btn-theme {
   background: #e66b58;
+  color: #fff !important;
 }
 
 .btn-theme-outline {
@@ -56,10 +63,10 @@ a:hover {
 }
 
 #search {
-  cursor: not-allowed;
+  cursor: default;
 }
 
-input[type=text]:focus {
+#searchDesInput:focus {
   outline: none !important;
   box-shadow: none !important;
   color: #f8f9fa !important;
@@ -175,7 +182,24 @@ input[type=text]:focus {
   color: #fff;
 }
 
+.reginput:valid {
+  color: #28a745;
+}
 
+.reginput:invalid {
+  color: orangered;
+}
 
+.valid {
+  color: #28a745 !important;
+}
+
+.invalid {
+  color: orangered !important;
+}
+
+.is-invalid {
+  color: orangered !important;
+}
 
 
