@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 
 class Traveller(models.Model):
+    
     name = models.CharField(max_length=200)
     #email = models.ForeignKey(User, on_delete= models.DO_NOTHING)
     address = models.CharField(max_length=200)
