@@ -9,18 +9,53 @@ body {
   background-repeat: no-repeat !important;
   background-attachment: fixed !important;
   background-size: cover !important;
+  width: 100%;
   margin: 0;
   padding: 0;
   font-family: Poppins;
 }
 
-/*  Utility Classes */
+a:hover {
+  text-decoration: none;
+}
+
+/*========================  Utility Classes ===================*/
+.pad-0 {
+  padding: 0rem !important;
+}
+.pad-1 {
+  padding: .3rem !important;
+}
+
+.mar-0 {
+  margin: 0 !important;
+}
+
+.cursorpointer {
+  cursor:pointer;
+}
+
+.bg-theme {
+  background: #e66b58 !important;
+  color: #fff !important;
+}
+
 .btn-theme {
   background: #e66b58;
+  color: #fff !important;
+}
+
+.bg-white {
+  background: rgba(255,255,255,0.9);
+  color: #333;
 }
 
 .btn-theme-outline {
   border: #e66b58 1px solid;
+}
+
+.text-black {
+  color: rgb(236, 225, 225);
 }
 
 .text-lightgray {
@@ -46,7 +81,7 @@ body {
   color: #333;
 }
 
-/* Navbar */
+/*============================ Navbar =======================*/
 
 .navbar-brand {
   font-weight: 900;
@@ -54,7 +89,11 @@ body {
 }
 
 #search {
-  cursor: not-allowed;
+  cursor: default;
+}
+
+#search-bar-on-nav {
+  text-align: left;
 }
 
 #searchDesInput {
@@ -98,9 +137,68 @@ body {
   display: none !important;
 }
 
+#social-logins {
+  width: 25% !important;
+}
+
+#accordion-login {
+  width: 36% !important;
+  margin-left: 32% !important;
+}
+
+.collapse-on-phones {
+  display: block;
+}
+
+.show-on-phones-and-hide-on-others {
+  display: none !important;
+}
+
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+.hw-bell {
+  height: 22.5px !important;
+  width: 22.5px !important;
+}
+
+.hw-dp {
+  height: 32px !important;
+  width: 32px !important;
+  border-radius: 50%;
+}
+
+/* ======================= Accounts ========================= */
+.account-input {
+  outline: none !important;
+  box-shadow: none !important;
+  color: #fff;
+}
+
+.reginput:valid {
+  color: #28a745;
+}
+
+.reginput:invalid {
+  color: orangered;
+}
+
+.valid {
+  color: #28a745 !important;
+}
+
+.invalid {
+  color: orangered !important;
+}
+
+.is-invalid {
+  color: orangered !important;
+}
 
 
-/********* Section-1 ************/
+
+/*========================== Section-1 =======================*/
 .section-1 {
   font-family: Raleway;
 }
@@ -135,7 +233,7 @@ body {
   color: #e66b58;
 }
 
-/* Edit Profile */
+/*======================== Edit Profile =======================*/
 .profile-pic {
   height: 150px !important;
   width: 150px !important;
@@ -166,11 +264,35 @@ body {
 }
 
 #profile_pic {
-        display: none;
-        cursor: pointer;
+  display: none;
+  cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
+/*================== Media Queries ===========================*/
+
+@media screen and (max-width: 1200px) { /* larger desktops/laptops and smaller */
+  .bg-custom .container .row{
+    padding: 2rem;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .bg-custom .container .row{
+    padding: 1rem;
+  }
+  
+  #social-logins {
+    width: 35% !important;
+  }
+
+  #accordion-login {
+    width: 36% !important;
+    margin-left: 32% !important;
+  }
+
+}
+
+@media screen and (max-width: 767px) {
   .navbar-brand-sm {
     display: inline !important;
   }
@@ -191,22 +313,40 @@ body {
   #search {
     cursor: pointer;
   }
+  #search-bar-on-nav {
+    text-align: center;
+  }
+  #social-logins {
+    width: 75% !important;
+  }
+  .collapse-on-phones {
+    display: none;
+  }
+  .show-on-phones-and-hide-on-others {
+    display: block !important;
+  }
 
   .bg-custom .row h1{
     font-size: 2rem;
   }
 
+  #accordion-login, #accordion-register {
+    width: 75% !important;
+    margin-left: 13% !important;
+  }
+
+  .reduce-on-phones-1 {
+    font-size: 20px !important;
+  }
+  .reduce-on-phones-2 {
+    font-size: 30px !important;
+    margin-bottom: 20px !important;
+  }
+  .reduce-on-phones-3 {
+    font-size: 14px !important;
+  }
+
 }
 
-@media screen and (max-width: 1200px) { /* larger desktops/laptops and smaller */
-  .bg-custom .container .row{
-    padding: 2rem;
-  }
-}
 
-@media screen and (max-width: 991px) {
-  .bg-custom .container .row{
-    padding: 1rem;
-  }
-}
 

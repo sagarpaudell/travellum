@@ -98,7 +98,20 @@ body {
   display: none !important;
 }
 
+.collapse-on-phones {
+  display: block;
+}
 
+.hw-bell {
+  height: 20px !important;
+  width: 20px !important;
+}
+
+.hw-dp {
+  height: 32px !important;
+  width: 32px !important;
+  border-radius: 50%;
+}
 
 /********* Section-1 ************/
 .section-1 {
@@ -191,6 +204,11 @@ body {
   #search {
     cursor: pointer;
   }
+  .collapse-on-phones {
+    display: none;
+  }
+
+
 
   .bg-custom .row h1{
     font-size: 2rem;

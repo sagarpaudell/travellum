@@ -1,0 +1,89 @@
+{% load static %}
+
+<!--================= Navbar ===============================-->
+<header>
+<nav class="navbar bg-transparent px-0 my-navbar">
+  <div class="container">
+    <div class="row w-100 pl-3">
+
+      <div class="col-lg-2 col-md-3 col-3 text-center">
+        <a class="navbar-brand text-light" href="{%url 'index'%}">Travellum</a>
+        <div class="text-center" style="padding-top: 8px;">
+          <a class="navbar-brand text-light navbar-brand-sm " href="{%url 'index'%}" style="font-size: 1.5rem;">T</a>
+        </div>
+        <!-- a -->
+      </div>
+
+      <div class="col-lg-7 col-md-5 col-3" id="search-bar-on-nav">
+        <div class="navbar-nav mt-n1">
+          <form action="" class="">
+            <a href="#" id="search">
+              <i style="font-size: 1.1rem; padding-top: 5px;" class="fa fa-search text-light"></i>
+            </a>
+            <input type="text" class="bg-transparent border-0" id="searchDesInput" placeholder="Search Locations...">
+          </form>
+        </div>
+        <!-- a -->
+      </div>
+      
+      <div class="col-lg-1 col-md-2 collapse-on-phones">
+        <div class="navbar-nav">              
+          <span class="nav-item text-center">
+            <a href="#" class="nav-link text-light"> Places</a>
+          </span>
+        </div>
+        <!-- a -->
+      </div>
+
+      <div class="col-lg-1 col-md-1 col-3 text-center">
+        <div class="navbar-nav">
+          <span class="nav-item text-center">
+            <a href="" class="nav-link"><img class="hw-bell" src="{% static 'svg/bell.svg' %}" alt=""></a>
+          </span>
+        </div>
+        <!-- a -->
+      </div>
+
+      <div class="navbar-collapse col-lg-1 col-md-1 col-3 collapse-on-phones">
+        <div class="navbar-nav">
+          <span class="nav-item text-center dropdown" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown">
+            <a href="" class="nav-link text-light">
+              {% if traveller_user %}
+                {% for traveller in traveller_user %}
+                  {% if traveller.photo_main %}
+                    <img class="hw-dp" src="{{ traveller.photo_main.url }}" alt="">
+                  {% else %}
+                    <img class="hw-dp" src="{% static 'images/default.png' %}" alt="">
+                  {% endif %}
+                {% endfor %}                
+              {% endif %}
+            </a>
+          </span>
+          <div class="dropdown-menu" style="position: absolute; min-width: 80px; background: rgba(255,255,255,0.9);" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Visibility</a>
+            <a class="dropdown-item" href="/accounts/logout">Log Out</a>
+          </div>
+        </div>
+        <!-- a -->
+      </div>
+
+
+      <div class="dropdown col-md-1 col-3 mt-3 show-on-phones-and-hide-on-others text-center">
+        <div role="button" class="pl-3 dropdown-toggle text-center" data-toggle="dropdown">
+          <i class="fas fa-bars" style="color: white; font-size: 1.4rem;"></i>
+        </div>
+        <span class="dropdown-menu" style="min-width: 100px !important;">
+          <a href="#" class="text-dark pl-3">Places</a>
+          <div class="m-2"></div>
+          <a href="#" class="text-dark pl-3">Visibility</a>
+          <div class="m-2"></div>
+          <a href="/accounts/logout" class="text-dark pl-3">Logout</a>
+        </span>
+      </div>
+      
+    </div>
+    <!-- a -->
+  </div>
+</nav>
+</header>
+<!--================ End of Navbar =======================-->

@@ -1,456 +1,322 @@
+{% extends 'base.html' %} 
+
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
-  <link rel="stylesheet" href="">
-  <title>Dashboard</title>
-</head>
 
-<body>
-  <!---------------------------------------------------------------------------------- Navbar ----------------------------------------------------------------------->
-  <header>
-    <nav class="navbar bg-transparent px-0 my-navbar">
-      <div class="container text-center">
-        <div class="row" style="width: 100%;">
+{% block content %}
 
-          <div class="col-lg-2 col-md-3 col-3">
-            <a class="navbar-brand mr-0 text-light" href="{%url 'index'%}">Travellum</a>
-            <a class="navbar-brand mr-0 text-light navbar-brand-sm" href="{%url 'index'%}">T</a>
-          </div>
-
-          <div class="col-lg-8 col-md-5 col-3 pl-3">
-            <form action="" class="form-inline ml-n3">
-              <a href="#" id="search"><i class="fa fa-search text-light"></i></a>
-              <input type="text" class="form-control bg-transparent border-0 pl-1 w-75" id="searchDesInput" placeholder="Search for Destinations...">
-            </form>
-          </div>
-
-          <div class="col-lg-1 col-md-2 col-3">
-            <div class="navbar-nav">
-              <!-- If user is logged in -->
-              <!-- <li class="nav-item text-center"><a href="#" class="nav-link text-light"> Notifs</a></li> -->
-              
-              <!-- If user is not logged in -->
-              <li class="nav-item text-center"><a href="#" class="nav-link text-light"> Places</a></li>
-            </div>
-          </div>
-
-          <div class="col-lg-1 col-md-2 col-3">
-            <div class="navbar-nav">
-              <li class="nav-item text-center"><a href="/accounts/logout/" class="nav-link text-light">Logout</a></li>
-            </div>
-          </div>
-
+<main>
+  <!--=================== Main Dashboard ===================-->
+  <section class="section-1">
+    <div class="container py-5">
+      <!--============ Dashboard Navigation ================-->
+      <div class="row no-gutters">
+        <div class="col-lg-3 col-md-5">
+            {% if traveller_user %}
+              {% for traveller in traveller_user %}
+                {% if traveller.photo_main %}
+                  <img src="{{ traveller.photo_main.url }}" alt="">
+                {% else %}
+                  <img src="{% static 'images/default.png' %}" alt="">
+                {% endif %}
+              {% endfor %}
+            {% endif %}
         </div>
-      </div>
-    </nav>
-    </header>
-    <!--------------------------------------------------------------------------- End of Navbar ----------------------------------------------------------------------->
 
+        <div class="col-lg-9 col-md-7">
 
-  <main>
-    <!-------------------------------------------------------------------------- Main Dashboard ----------------------------------------------------------------------->
-    <section class="section-1">
-      <div class="container py-5">
-        <!---------------------------------------------------------------- Dashboard Navigation ----------------------------------------------------------------------->
-        <div class="row no-gutters">
-          <div class="col-lg-3 col-md-5">
-              {% if traveller_user %}
-                {% for traveller in traveller_user %}
-                  {% if traveller.photo_main %}
-                    <img src="{{ traveller.photo_main.url }}" alt="">
-                  {% else %}
-                    <img src="{% static 'images/default.png' %}" alt="">
-                  {% endif %}
-                {% endfor %}
-              {% endif %}
-          </div>
-            
-
-          <div class="col-lg-9 col-md-7">
-
-            <div class="d-flex flex-column">
-              <div class="px-4 py-2 bg-transparent text-white">
-                <div class="d-flex flex-row justify-content-between align-items-center">
-                  <h4 class="display-5">Ready to show you around my city..</h4>
-                </div>
+          <div class="d-flex flex-column">
+            <div class="px-4 py-2 bg-transparent text-white">
+              <div class="d-flex flex-row justify-content-between align-items-center">
+                <h4 class="display-5">Ready to show you around my city..</h4>
               </div>
-  
-              <div class="bg-custom">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-md-6">
-                      {% if traveller_user %}
-                        {% for traveller in traveller_user %}
-                          {{traveller.address}}<br>
-                          <h1>{{ traveller.first_name }} {{ traveller.last_name }} </h1>
-                          Replies within: 84 hours
-                        {% endfor %}
-                      {% endif %}
-                    </div>
-                    
-                    
-                      
-                  
-                    
-                    
+            </div>
 
-                    <div class="col-md-6 text-right">
-                      <h3><span class="display-4 d-inline text-success">$</span>0.1/hr</h3>
-                    </div>
-
+            <div class="bg-custom">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-6">
+                    {% if traveller_user %}
+                      {% for traveller in traveller_user %}
+                        {{traveller.address}}<br>
+                        <h1>{{ traveller.first_name }} {{ traveller.last_name }} </h1>
+                        Replies within: 84 hours
+                      {% endfor %}
+                    {% endif %}
+                  </div>
+                  <div class="col-md-6 text-right">
+                    <h3><span class="display-4 d-inline text-success">$</span>0.1/hr</h3>
                   </div>
                 </div>
               </div>
             </div>
+
           </div>
-        </div>        
-
-        <div>
-          <div class="d-flex flex-row text-white align-items-stretch text-center bg-white" id="custom-menu">
-            <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#about_me">
-              <i class="fa fa-user fa-2x pr-2"></i>
-              <span class="d-none d-md-inline">About Me</span>
-            </div>
-            <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#guide">
-              <i class="fa fa-id-card fa-2x pr-2"></i>
-              <span class="d-none d-md-inline">Guide</span>
-            </div>
-            <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#traveller">
-              <i class="fa fa-suitcase fa-2x pr-2"></i>
-              <span class="d-none d-md-inline">Traveller</span>
-            </div>
         </div>
-        <!-------------------------------------------------------- End of Dashboard Navigation ----------------------------------------------------------------------->
+      </div>        
+
+      <div>
+        <div class="d-flex flex-row text-white align-items-stretch text-center bg-white" id="custom-menu">
+          <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#about_me">
+            <i class="fa fa-user fa-2x pr-2"></i>
+            <span class="d-none d-md-inline">About Me</span>
+          </div>
+          <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#guide">
+            <i class="fa fa-id-card fa-2x pr-2"></i>
+            <span class="d-none d-md-inline">Guide</span>
+          </div>
+          <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#traveller">
+            <i class="fa fa-suitcase fa-2x pr-2"></i>
+            <span class="d-none d-md-inline">Traveller</span>
+          </div>
+      </div>
+      <!--=========== End of Dashboard Navigation ==========-->
 
 
 
-        <!------------------------------------------------------------------ About Me Collapse ----------------------------------------------------------------------->
-        <div id="about_me" class="collapse show">
-          <div class="card card-body bg-white px-3 py-5">
+      <!--============== About Me Collapse =================-->
+      <div id="about_me" class="collapse show">
+        <div class="card card-body bg-white px-3 py-5">
+          
+          <!--========= Edit Profile Section ===============-->
+          <h4 class="px-3" style="color: #e2c0bb;">Let People know about you</h4>
+          <div>
+            <ul class="d-flex p-3" style="list-style: none;">
+              <div class="mr-3">
+                <li>
+                  <!-- <i class="text-danger fa fa-times"></i> -->
+                  <i class="text-success fa fa-check"></i>
+                  <small>Add your Location</small>
+                </li>
+                <li>
+                  <!-- <i class="text-danger fa fa-times"></i> -->
+                  <i class="text-success fa fa-check"></i>
+                  <small>Add Profile Picture</small>
+                </li>
+                <li>
+                  <i class="text-danger fa fa-times"></i>
+                  <!-- <i class="text-success fa fa-check"></i> -->
+                  <small>Add Languages you speak</small>
+                </li>
+              </div>
+              <div>
+                <li>
+                  <i class="text-danger fa fa-times"></i>
+                  <!-- <i class="text-success fa fa-check"></i> -->
+                  <small>Add Hobbies</small>
+                </li>
+                <li>
+                  <i class="text-danger fa fa-times"></i>
+                  <!-- <i class="text-success fa fa-check"></i> -->
+                  <small>About Yourself</small>
+                </li>
+              </div>
+            </ul>
             
-            <!-- Edit Profile Section -->
-            <h4 class="px-3" style="color: #e2c0bb;">Let People know about you</h4>
-            <div>
-              <ul class="d-flex p-3" style="list-style: none;">
-                <div class="mr-3">
-                  <li>
-                    <!-- <i class="text-danger fa fa-times"></i> -->
-                    <i class="text-success fa fa-check"></i>
-                    <small>Add your Location</small>
-                  </li>
-                  <li>
-                    <!-- <i class="text-danger fa fa-times"></i> -->
-                    <i class="text-success fa fa-check"></i>
-                    <small>Add Profile Picture</small>
-                  </li>
-                  <li>
-                    <i class="text-danger fa fa-times"></i>
-                    <!-- <i class="text-success fa fa-check"></i> -->
-                    <small>Add Languages you speak</small>
-                  </li>
-                </div>
-                <div>
-                  <li>
-                    <i class="text-danger fa fa-times"></i>
-                    <!-- <i class="text-success fa fa-check"></i> -->
-                    <small>Add Hobbies</small>
-                  </li>
-                  <li>
-                    <i class="text-danger fa fa-times"></i>
-                    <!-- <i class="text-success fa fa-check"></i> -->
-                    <small>About Yourself</small>
-                  </li>
-                </div>
-              </ul>
-              
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-10"></div>
+              <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="modal" data-target="#edit_profile_modal">Edit Profile</button>
             </div>
+          </div>
+          <span class="border-bottom"></span><br>
+          <!-- End of Edit Profile Section -->
+
+          <!--======= Profile Description Section ==========-->
+          <h2 class="px-3" style="color: #e2c0bb;">Hi there! Nice to meet you</h2>
+          <p class="p-3 text-justify">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt sint quaerat velit vel, maiores aspernatur soluta fugiat dicta ipsum, accusamus quas voluptatum ad tempora perspiciatis. Veniam incidunt eligendi minima ut ullam rem praesentium doloremque eum commodi nobis consequatur fugiat sequi earum ipsam assumenda eveniet atque animi, fugit aliquid itaque facere voluptates! Non ipsam animi illum. Modi ad reprehenderit corrupti cum similique doloribus mollitia ratione eius, architecto placeat, libero repellendus dolor. 
+            <br>
+            <p class="pr-3 pb-3 pl-3 text-justify collapse" id="collapse-btn-1">More content lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta explicabo ad pariatur nisi nulla vel numquam officiis laboriosam, commodi corrupti nostrum iste voluptatibus quaerat perferendis odit, doloribus amet corporis cumque dolores minus asperiores laudantium ut similique aliquam. Perspiciatis repellat mollitia ex ut! Vero nostrum nihil ea, eveniet blanditiis voluptas expedita enim nam odio. Nemo autem repudiandae voluptate inventore, facilis nihil blanditiis esse nisi, consequatur maxime perspiciatis, deserunt laborum vero est! Deserunt facere ad delectus non?</p>
             <div class="container">
               <div class="row">
                 <div class="col-md-10"></div>
-                <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="modal" data-target="#edit_profile_modal">Edit Profile</button>
+                <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="collapse" data-target="#collapse-btn-1">Read More</button>
               </div>
             </div>
-            <span class="border-bottom"></span><br>
-            <!-- End of Edit Profile Section-->
+            <span class="border-bottom"></span>
+          </p>
+          <!-- End of Profile Description Section -->
 
-            <!-- Profile Description Section -->
-            <h2 class="px-3" style="color: #e2c0bb;">Hi there! Nice to meet you</h2>
-            <p class="p-3 text-justify">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt sint quaerat velit vel, maiores aspernatur soluta fugiat dicta ipsum, accusamus quas voluptatum ad tempora perspiciatis. Veniam incidunt eligendi minima ut ullam rem praesentium doloremque eum commodi nobis consequatur fugiat sequi earum ipsam assumenda eveniet atque animi, fugit aliquid itaque facere voluptates! Non ipsam animi illum. Modi ad reprehenderit corrupti cum similique doloribus mollitia ratione eius, architecto placeat, libero repellendus dolor. 
-              <br>
-              <p class="pr-3 pb-3 pl-3 text-justify collapse" id="collapse-btn-1">More content lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta explicabo ad pariatur nisi nulla vel numquam officiis laboriosam, commodi corrupti nostrum iste voluptatibus quaerat perferendis odit, doloribus amet corporis cumque dolores minus asperiores laudantium ut similique aliquam. Perspiciatis repellat mollitia ex ut! Vero nostrum nihil ea, eveniet blanditiis voluptas expedita enim nam odio. Nemo autem repudiandae voluptate inventore, facilis nihil blanditiis esse nisi, consequatur maxime perspiciatis, deserunt laborum vero est! Deserunt facere ad delectus non?</p>
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-10"></div>
-                  <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="collapse" data-target="#collapse-btn-1">Read More</button>
-                </div>
-              </div>
-              <span class="border-bottom"></span>
-            </p>
-            <!-- End of Profile Description Section -->
+          <!--============= Languages Section ============-->
+          <h4 class="px-3" style="color: #e2c0bb;">Languages</h4>
+          <p class="p-3 border-bottom">Nepali</p>
+          <!-- End of Languages Section -->
 
-            <!-- Languages Section -->
-            <h4 class="px-3" style="color: #e2c0bb;">Languages</h4>
-            <p class="p-3 border-bottom">Nepali</p>
-            <!-- End of Languages Section -->
+          <!--============= Interests Section ==============-->
+          <h4 class="px-3" style="color: #e2c0bb;">Interests</h4>
+          <p class="p-3 border-bottom">Travelling</p>
+          <!-- End of Interests Section -->
 
-            <!-- Interests Section -->
-            <h4 class="px-3" style="color: #e2c0bb;">Interests</h4>
-            <p class="p-3 border-bottom">Travelling</p>
-            <!-- End of Interests Section -->
-
-          </div>
         </div>
-        <!-------------------------------------------------------------- End of About Me Collapse ----------------------------------------------------------------------->
-
-
-        
-        <!------------------------------------------------------------------------ Guide Collapse ----------------------------------------------------------------------->
-        <div class="collapse" id="guide">
-          <div class="d-flex">
-            <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
-              <div class="border-bottom">
-                <h2 style="color: #e2c0bb;">No Guide History</h2>
-                <button class="btn btn-theme-outline px-5 py-3 mt-2 mb-5">Become a Guide</button> 
-              </div>
-              <div class="border-bottom py-5">
-                <h2 style="color: #e2c0bb;">No Guide Reviews</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!----------------------------------------------------------------- End of Guide Collapse ----------------------------------------------------------------------->
-
-        
-
-        <!-------------------------------------------------------------------- Traveller Collapse ----------------------------------------------------------------------->
-        <div class="collapse" id="traveller">
-          <div class="d-flex">
-            <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
-              <div class="border-bottom">
-                <h2 style="color: #e2c0bb;">No Traveller History</h2>
-                <button class="btn btn-theme-outline px-5 py-3 mt-2 mb-5" id="btn-search-des">Search for Destinations...</button> 
-              </div>
-              <div class="border-bottom py-5">
-                <h2 style="color: #e2c0bb;">No Traveller Reviews</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-------------------------------------------------------------- End of Traveller Collapse ----------------------------------------------------------------------->
-
-
-
       </div>
-    </section>
-  </main>
+      <!-- End of About Me Collapse -->
 
-  <!---------------------------------------------------------------------------------- Footer ----------------------------------------------------------------------->
-  <footer class="mt-5" id="main-footer" style="height: 80vh; background: #1b1919; color: white; padding: 112px 0;">
-		<div class="container">
-			<div class="row">
 
-				<div class="col-md-12 col-12 text-center">
-					<div style="line-height:2rem;">
-						<h2 style="font-family: Cormorant Garamond; margin-bottom: 40px; font-size:22px;">Have Questions? Contact us:</h2>
-            <span class="text-lightgray">
-              <i class="fa fa-map-marker"></i>
-              <span class="text">&nbsp;Dhulikhel, Kavre, Nepal</span><br>
-              <i class="fa fa-phone"></i>
-              <span class="text">&nbsp;+977-9865727861</span><br>
-              <i class="fa fa-envelope"></i>
-              <span class="text">&nbsp;travellum@gmail.com</span>
-            </span>
-					</div>
-        </div>
-        
-      </div>
       
-			<div class="row">
-
-				<div class="col-md-12 text-center">
-					<img src="{% static 'images/expo_creations.png' %}" style="margin-top: 5%;">
-					<p style="margin-top: 2%;" class="text-lightgray">
-						Travellum &copy; 2020 All Rights Reserved </p>
-        </div>
-        
-			</div>
-		</div>
-  </footer>
-  <!-------------------------------------------------------------------------- End of Footer ----------------------------------------------------------------------->
-
-  
-
-  <!---------------------------------------------------------------------------------- Modals ----------------------------------------------------------------------->
-  <!-- Edit Profile Modal -->
-  <div class="modal" id="edit_profile_modal">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">
-            Edit Profile
-          </h5>
-          <button class="close" data-dismiss="modal">
-            &times;
-          </button>
-        </div>
-        <div class="modal-body">
-          <form action="">
-
-            <!-- Choose Image Overlay -->
-            <!-- Source: https://codepen.io/JohanDelValle/pen/mZwKrx?editors=1100 -->
-            <div class="d-flex justify-content-around">
-              <span>
-                <label for="profile_pic">
-                  <div class="profile-pic">
-                      <span class="fa fa-camera"></span>
-                      <span>Change Image</span>
-                  </div>
-                  </label>
-                  <input type="File" name="profile_pic" id="profile_pic">
-              </span>
+      <!--=============== Guide Collapse ===================-->
+      <div class="collapse" id="guide">
+        <div class="d-flex">
+          <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
+            <div class="border-bottom">
+              <h2 style="color: #e2c0bb;">No Guide History</h2>
+              <button class="btn btn-theme-outline px-5 py-3 mt-2 mb-5">Become a Guide</button> 
             </div>
-            <!-- End of Choose Image Overlay -->
-
-            <!-- Edit Profile Inputs -->
-            <div class="form-group">
-              <label for="location">First Name</label>
-              <input type="text" class="form-control" id="f_name">
+            <div class="border-bottom py-5">
+              <h2 style="color: #e2c0bb;">No Guide Reviews</h2>
             </div>
-            <div class="form-group">
-              <label for="location">Last Name</label>
-              <input type="text" class="form-control" id="l_name">
-            </div>
-
-            <div class="form-group">
-              <label for="location">Location</label>
-              <input type="text" class="form-control" id="location">
-            </div>
-
-	    <div class="form-group">
-              <label for="slogan">Slogan</label>
-              <input type="text" class="form-control" id="slogan" placeholder="Ready to show you around my city...">
-            </div>
-		  
-            <div class="form-group">
-              <label for="about_me">About Me</label>
-              <textarea class="form-control" rows="3"></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="Languages">Languages</label><br>
-              <input type="text" class="form-control" id="languages">
-            </div>
-
-            <div class="form-group">
-              <label for="pph">Price/hr</label><br>
-              <input type="number" class="form-control" id="pph" disabled>
-            </div>
-
-            <div class="form-group">
-              <label for="gender">Gender</label>
-              <select class="form-control" id="gender">
-                <option>Female</option>
-                <option>Male</option>
-                <option>Biraj</option>
-                <!-- <option>4</option> -->
-              </select>
-            </div>  
-
-            <div class="form-group">
-              <label>Interests</label><br>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="English" value="option1">
-                <label class="form-check-label" for="English"> Exploration & Sightseeing</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="English" value="option1">
-                <label class="form-check-label" for="English"> Food & Restaurants</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="English" value="option1">
-                <label class="form-check-label" for="English"> Driving Tours</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="English" value="option1">
-                <label class="form-check-label" for="English"> Sports & Recreation</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="English" value="option1">
-                <label class="form-check-label" for="English"> Art & Museums</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="English" value="option1">
-                <label class="form-check-label" for="English"> History & Culture</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="English" value="option1">
-                <label class="form-check-label" for="English"> Nightlife & Bars</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="English" value="option1">
-                <label class="form-check-label" for="English"> Shopping</label>
-              </div>
-            </div>
-            <!-- End of Edit Profile Inputs -->
-
-          </form>
-          <div class="modal-footer">
-            <input type="submit" value="Save Changes" class="btn btn-success">
           </div>
+        </div>
+      </div>
+      <!-- End of Guide Collapse -->
+
+      
+
+      <!--============= Traveller Collapse ================-->
+      <div class="collapse" id="traveller">
+        <div class="d-flex">
+          <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
+            <div class="border-bottom">
+              <h2 style="color: #e2c0bb;">No Traveller History</h2>
+              <button class="btn btn-theme-outline px-5 py-3 mt-2 mb-5" id="btn-search-des">Search for Destinations...</button> 
+            </div>
+            <div class="border-bottom py-5">
+              <h2 style="color: #e2c0bb;">No Traveller Reviews</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of Traveller Collapse -->
+
+    </div>
+  </section>
+</main>
+
+
+<!--========================= Modals =====================-->
+
+
+<!--================= Edit Profile Modal =================-->
+<div class="modal" id="edit_profile_modal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Edit Profile
+        </h5>
+        <button class="close" data-dismiss="modal">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="">
+
+          <!-- Choose Image Overlay -->
+          <!-- Source: https://codepen.io/JohanDelValle/pen/mZwKrx?editors=1100 -->
+          <div class="d-flex justify-content-around">
+            <span>
+              <label for="profile_pic">
+                <div class="profile-pic">
+                    <span class="fa fa-camera"></span>
+                    <span>Change Image</span>
+                </div>
+                </label>
+                <input type="File" name="profile_pic" id="profile_pic">
+            </span>
+          </div>
+          <!-- End of Choose Image Overlay -->
+
+          <!--============ Edit Profile Inputs ==================-->
+          <div class="form-group">
+            <label for="location">First Name</label>
+            <input type="text" class="form-control" id="f_name">
+          </div>
+          <div class="form-group">
+            <label for="location">Last Name</label>
+            <input type="text" class="form-control" id="l_name">
+          </div>
+
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" class="form-control" id="location">
+          </div>
+
+    <div class="form-group">
+            <label for="slogan">Slogan</label>
+            <input type="text" class="form-control" id="slogan" placeholder="Ready to show you around my city...">
+          </div>
+    
+          <div class="form-group">
+            <label for="about_me">About Me</label>
+            <textarea class="form-control" rows="3"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="Languages">Languages</label><br>
+            <input type="text" class="form-control" id="languages">
+          </div>
+
+          <div class="form-group">
+            <label for="pph">Price/hr</label><br>
+            <input type="number" class="form-control" id="pph" disabled>
+          </div>
+
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <select class="form-control" id="gender">
+              <option>Female</option>
+              <option>Male</option>
+              <option>Biraj</option>
+              <!-- <option>4</option> -->
+            </select>
+          </div>  
+
+          <div class="form-group">
+            <label>Interests</label><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="English" value="option1">
+              <label class="form-check-label" for="English"> Exploration & Sightseeing</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="English" value="option1">
+              <label class="form-check-label" for="English"> Food & Restaurants</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="English" value="option1">
+              <label class="form-check-label" for="English"> Driving Tours</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="English" value="option1">
+              <label class="form-check-label" for="English"> Sports & Recreation</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="English" value="option1">
+              <label class="form-check-label" for="English"> Art & Museums</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="English" value="option1">
+              <label class="form-check-label" for="English"> History & Culture</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="English" value="option1">
+              <label class="form-check-label" for="English"> Nightlife & Bars</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="English" value="option1">
+              <label class="form-check-label" for="English"> Shopping</label>
+            </div>
+          </div>
+          <!-- End of Edit Profile Inputs -->
+
+        </form>
+        <div class="modal-footer">
+          <input type="submit" value="Save Changes" class="btn btn-success">
         </div>
       </div>
     </div>
   </div>
-  <!-- End of Edit Profile Modal -->
-  <!----------------------------------------------------------------- End of Modals ----------------------------------------------------------------------->
+</div>
+<!-- End of Edit Profile Modal -->
+<!-- End of Modals -->
 
-
-
-<!-- Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-
-<!-- Focus Search Input -->
-<script>
-  var d = document;
-  d.getElementById("btn-search-des").onclick = function() {
-    d.getElementById("searchDesInput").focus();
-  };
-</script>
-
-<!-- Navbar Animation -->
-<script>
-  $(document).ready(function() {
-    $(window).scroll(function() {
-      if($(window).scrollTop()>50) {
-        $('.my-navbar').addClass('navbar-scroll');
-      } else {
-        $('.my-navbar').removeClass('navbar-scroll');
-      }
-    });
-  });
-</script>
-
-<!-- Dashboard Collapse JS -->
-<script>
-  $('.port-item').click(function () {
-    $('.collapse').collapse('hide');
-  });
-
-  $(document).on('click', '[data-toggle="lightbox"]', function (e) {
-    e.preventDefault();
-    $(this).ekkoLightbox();
-  });
-</script>
-
-</body>
-</html>
+{% endblock %}
