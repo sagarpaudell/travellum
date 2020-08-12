@@ -27,7 +27,7 @@
           <div class="d-flex flex-column">
             <div class="px-4 py-2 bg-transparent text-white">
               <div class="d-flex flex-row justify-content-between align-items-center">
-                <h4 class="display-5">Ready to show you around my city..</h4>
+                <h4 class="display-5">{% if traveller_user %}{% for traveller in traveller_user %}{{traveller.slogan}}{% endfor %}{% endif %}</h4>
               </div>
             </div>
 
@@ -39,13 +39,19 @@
                       {% for traveller in traveller_user %}
                         {{traveller.address}}<br>
                         <h1>{{ traveller.first_name }} {{ traveller.last_name }} </h1>
-                        Replies within: 84 hours
+                        {% if traveller.is_guide %}Replies within: 84 hours{% endif %}
                       {% endfor %}
                     {% endif %}
                   </div>
-                  <div class="col-md-6 text-right">
-                    <h3><span class="display-4 d-inline text-success">$</span>0.1/hr</h3>
-                  </div>
+                  {% if traveller_user %}
+                    {% for traveller in traveller_user %}
+                      {% if traveller.is_guide %}
+                        <div class="col-md-6 text-right">
+                          <h3><span class="display-4 d-inline text-success">Rs.</span>{{traveller.price_per_hour}}/hr</h3>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
                 </div>
               </div>
             </div>
@@ -83,19 +89,48 @@
             <ul class="d-flex p-3" style="list-style: none;">
               <div class="mr-3">
                 <li>
-                  <!-- <i class="text-danger fa fa-times"></i> -->
-                  <i class="text-success fa fa-check"></i>
-                  <small>Add your Location</small>
+                  {% if traveller_user %}
+                    {% for traveller in traveller_user %}
+                      {% if traveller.address %}
+                        <i class="text-success fa fa-check"></i>
+                        <small>Add your Location</small>
+                      {% else %}
+                        <i class="text-danger fa fa-times"></i>
+                        <small>Add your Location</small>
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+
                 </li>
+
                 <li>
-                  <!-- <i class="text-danger fa fa-times"></i> -->
-                  <i class="text-success fa fa-check"></i>
-                  <small>Add Profile Picture</small>
+                  {% if traveller_user %}
+                    {% for traveller in traveller_user %}
+                      {% if traveller.photo_main %}
+                        <i class="text-success fa fa-check"></i>
+                        <small>Add Profile Picture</small>
+                      {% else %}
+                        <i class="text-danger fa fa-times"></i>
+                        <small>Add Profile Picture</small>
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+
                 </li>
+
                 <li>
-                  <i class="text-danger fa fa-times"></i>
-                  <!-- <i class="text-success fa fa-check"></i> -->
-                  <small>Add Languages you speak</small>
+                  {% if traveller_user %}
+                    {% for traveller in traveller_user %}
+                      {% if traveller.languages %}
+                        <i class="text-success fa fa-check"></i>
+                        <small>Add Languages you Speak</small>
+                      {% else %}
+                        <i class="text-danger fa fa-times"></i>
+                        <small>Add Languages you Speak</small>
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+
                 </li>
               </div>
               <div>
@@ -104,10 +139,20 @@
                   <!-- <i class="text-success fa fa-check"></i> -->
                   <small>Add Hobbies</small>
                 </li>
+
                 <li>
-                  <i class="text-danger fa fa-times"></i>
-                  <!-- <i class="text-success fa fa-check"></i> -->
-                  <small>About Yourself</small>
+                  {% if traveller_user %}
+                    {% for traveller in traveller_user %}
+                      {% if traveller.bio %}
+                        <i class="text-success fa fa-check"></i>
+                        <small>Add About Yourself</small>
+                      {% else %}
+                        <i class="text-danger fa fa-times"></i>
+                        <small>Add About Yourself</small>
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+
                 </li>
               </div>
             </ul>
@@ -125,7 +170,7 @@
           <!--======= Profile Description Section ==========-->
           <h2 class="px-3" style="color: #e2c0bb;">Hi there! Nice to meet you</h2>
           <p class="p-3 text-justify">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt sint quaerat velit vel, maiores aspernatur soluta fugiat dicta ipsum, accusamus quas voluptatum ad tempora perspiciatis. Veniam incidunt eligendi minima ut ullam rem praesentium doloremque eum commodi nobis consequatur fugiat sequi earum ipsam assumenda eveniet atque animi, fugit aliquid itaque facere voluptates! Non ipsam animi illum. Modi ad reprehenderit corrupti cum similique doloribus mollitia ratione eius, architecto placeat, libero repellendus dolor. 
+            {% if traveller_user %}{% for traveller in traveller_user %}{{traveller.bio}}{% endfor %}{% endif %}
             <br>
             <p class="pr-3 pb-3 pl-3 text-justify collapse" id="collapse-btn-1">More content lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta explicabo ad pariatur nisi nulla vel numquam officiis laboriosam, commodi corrupti nostrum iste voluptatibus quaerat perferendis odit, doloribus amet corporis cumque dolores minus asperiores laudantium ut similique aliquam. Perspiciatis repellat mollitia ex ut! Vero nostrum nihil ea, eveniet blanditiis voluptas expedita enim nam odio. Nemo autem repudiandae voluptate inventore, facilis nihil blanditiis esse nisi, consequatur maxime perspiciatis, deserunt laborum vero est! Deserunt facere ad delectus non?</p>
             <div class="container">
@@ -140,7 +185,7 @@
 
           <!--============= Languages Section ============-->
           <h4 class="px-3" style="color: #e2c0bb;">Languages</h4>
-          <p class="p-3 border-bottom">Nepali</p>
+          <p class="p-3 border-bottom">{% if traveller_user %}{% for traveller in traveller_user %}{{traveller.languages}}{% endfor %}{% endif %}</p>
           <!-- End of Languages Section -->
 
           <!--============= Interests Section ==============-->
@@ -209,7 +254,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="">
+        <form action="{% url 'dashboard' %}" method="POST" enctype="multipart/form-data"">
+        {% csrf_token %}
 
           <!-- Choose Image Overlay -->
           <!-- Source: https://codepen.io/JohanDelValle/pen/mZwKrx?editors=1100 -->
@@ -221,7 +267,7 @@
                     <span>Change Image</span>
                 </div>
                 </label>
-                <input type="File" name="profile_pic" id="profile_pic">
+                <input type="File" name="photo_main" id="profile_pic">
             </span>
           </div>
           <!-- End of Choose Image Overlay -->
@@ -229,45 +275,75 @@
           <!--============ Edit Profile Inputs ==================-->
           <div class="form-group">
             <label for="location">First Name</label>
-            <input type="text" class="form-control" id="f_name">
+            <input type="text" class="form-control" name="first_name" {% if traveller_user %}{% for traveller in traveller_user %} value="{{traveller.first_name}}" {% endfor %}{% endif %}>
           </div>
           <div class="form-group">
             <label for="location">Last Name</label>
-            <input type="text" class="form-control" id="l_name">
+            <input type="text" class="form-control" name="last_name" {% if traveller_user %}{% for traveller in traveller_user %} value="{{traveller.last_name}}" {% endfor %}{% endif %}>
           </div>
 
           <div class="form-group">
             <label for="location">Location</label>
-            <input type="text" class="form-control" id="location">
+            <input type="text" class="form-control" name="address" {% if traveller_user %}{% for traveller in traveller_user %} value="{{traveller.address}}" {% endfor %}{% endif %}>
           </div>
 
-    <div class="form-group">
+          <div class="form-group">
             <label for="slogan">Slogan</label>
-            <input type="text" class="form-control" id="slogan" placeholder="Ready to show you around my city...">
+            <input type="text" class="form-control" name="slogan" {% if traveller_user %}{% for traveller in traveller_user %} value="{{traveller.slogan}}" {% endfor %}{% endif %}>
           </div>
     
           <div class="form-group">
             <label for="about_me">About Me</label>
-            <textarea class="form-control" rows="3"></textarea>
+            <textarea class="form-control" rows="3" name="bio">{% if traveller_user %}{% for traveller in traveller_user %}{{traveller.bio}}{% endfor %}{% endif %}</textarea>
           </div>
 
           <div class="form-group">
             <label for="Languages">Languages</label><br>
-            <input type="text" class="form-control" id="languages">
+            <input type="text" class="form-control" name="languages" {% if traveller_user %}{% for traveller in traveller_user %} value="{{traveller.languages}}" {% endfor %}{% endif %}>
           </div>
 
-          <div class="form-group">
-            <label for="pph">Price/hr</label><br>
-            <input type="number" class="form-control" id="pph" disabled>
-          </div>
+          {% if traveller_user %}
+            {% for traveller in traveller_user %}
+              {% if traveller.is_guide %}
+                <div class="form-group">
+                  <label for="pph">Price/hr</label><br>
+                  <input type="number" class="form-control" name="pph" >
+                </div>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
 
           <div class="form-group">
             <label for="gender">Gender</label>
-            <select class="form-control" id="gender">
-              <option>Female</option>
-              <option>Male</option>
-              <option>Biraj</option>
-              <!-- <option>4</option> -->
+            <select class="form-control" name="gender">
+              {% if traveller_user %}
+                {% for traveller in traveller_user %}
+                  {% ifnotequal traveller.gender "" %}<option selected>{{traveller.gender}}</option>{% endifnotequal %}
+
+                  {% ifequal traveller.gender "Male" %}
+                  <option>Female</option>
+                  <option>Other</option>
+                  {% endifequal %}
+
+                  {% ifequal traveller.gender "Female" %}
+                  <option>Male</option>
+                  <option>Other</option>
+                  {% endifequal %}
+
+                  {% ifequal traveller.gender "Other" %}
+                  <option>Female</option>
+                  <option>Male</option>
+                  {% endifequal %}
+
+                  {% ifequal traveller.gender "" %}
+                  <option>Female</option>
+                  <option>Male</option>
+                  <option>Other</option>
+                  {% endifequal %}
+
+                  <!-- <option>4</option> -->
+                {% endfor %}
+              {% endif %}
             </select>
           </div>  
 
@@ -308,10 +384,11 @@
           </div>
           <!-- End of Edit Profile Inputs -->
 
+        
+          <div class="modal-footer">
+            <input type="submit" value="Save Changes" name="Update Profile" class="btn btn-success">
+          </div>
         </form>
-        <div class="modal-footer">
-          <input type="submit" value="Save Changes" class="btn btn-success">
-        </div>
       </div>
     </div>
   </div>
