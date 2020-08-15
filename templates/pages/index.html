@@ -11,10 +11,13 @@
 	<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i"
 		rel="stylesheet">
 
+
 	<link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 	<link rel="stylesheet" href="{% static 'css/aos.css' %}">
 	<link rel="stylesheet" href="{% static 'css/custom_style.css' %}">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+		integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 
 <body>
@@ -61,20 +64,28 @@
 	<section id="home-section">
 		<div class="col-rt-12">
 
-			<div class="image-wrapper">
+			<div class="image-wrapper" style="display: flex; align-items:center;
+			justify-content:center;">
 				<img src="{% static 'images/bgDarken.jpg' %}" class="image" alt="background-image">
 
-				<div class="header-content" data-aos="zoom-in" data-aos-duration="1300">
-					<h1>TRAVELLUM</h1>
-					<h3>Travel !! Before you run out of time</h3>
-					{% if  user.is_authenticated%}
-					{% else %}
-					<h1><a href="{% url 'register' %}" class="btn btn-primary py-3 px-4"
-							style="background-color:#e66b58; font-size:1.4rem; ">Join now</a>
-					</h1>
-					{% endif %}
+				<div class="container" style="display: flex;
+					justify-content: center; position:absolute;">
+					<form class="form-inline ">
+
+						<input class="form-control form-control-lg mr-3 w-200" style="margin: 0 auto;" type="text"
+							placeholder="Search Destinations here" aria-label="SearchPlaces">
+						<i class="fa fa-search fa-lg mt-2 ml-2"></i>
+					</form>
 				</div>
 
+				<div class="container"
+					style="display: flex; justify-content: center;  position:absolute; margin-top:23%; ">
+					{% if  user.is_authenticated%}
+					{% else %}
+					<a href=" {% url 'register' %}" class="btn btn-primary"
+						style="background-color:#e66b58; font-size:1.5rem; ">Join now </a>
+					{% endif %}
+				</div>
 			</div>
 		</div>
 	</section>
@@ -82,7 +93,7 @@
 	<section class="section" id="about-section">
 		<div class="container" data-aos="fade-up" data-aos-duration="1300">
 
-			<div class="col-md-6 col-lg-12 bg-lighten">
+			<div class="col-md-12 col-lg-12 bg-lighten">
 				<div class="py-md-12">
 					<div class="row justify-content-start pb-3">
 						<div class="col-md-12 heading-section text-center  p-5 p-lg-0">
@@ -199,19 +210,16 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-					<div class="project">
-						<div class="img">
-							<a href="#"><img src="{% static 'images/lumbini.jpg' %}" class="img-fluid" alt="Image"></a>
-						</div>
-						<div class="text">
 
-							<h3><a href="#">Lumbini</a></h3>
-						</div>
-					</div>
+				<div class="container" style="display: flex;
+				justify-content: center; margin-bottom:10%; " data-aos="fade-up" data-aos-duration="800">
+					<a href="" class="btn btn-primary" style="background-color:#e66b58; font-size:1.2rem; ">View all
+						Places
+						&#8594; </a>
 				</div>
 			</div>
 		</div>
+
 	</section>
 	<!-- Search Guides section -->
 	<section class="section no-pb no-pt" data-aos="fade-up" data-aos-duration="800">
@@ -251,7 +259,7 @@
 		</div>
 	</section>
 	<!-- Top Guides Section -->
-	<section class="section" id="top-guides">
+	<section class="section" id="top-guides" style="margin-top:4%;">
 		<div class="container">
 			<div class="row justify-content-center pb-5" data-aos="fade-up" data-aos-duration="800">
 				<div class="col-md-12 heading-section text-center ">
@@ -259,40 +267,39 @@
 					<h2 class="mb-4">Our highly rated guides:</h2>
 				</div>
 			</div>
-				
-				<div class="row">
-					{% if guides %}
-						{% for guide in guides %}	
-							<div class="col-md-4 col-lg-3" data-aos="flip-right" data-aos-duration="800" style="background-color: rgb(248, 248, 248);
+
+			<div class="row">
+				{% if guides %}
+				{% for guide in guides %}
+				<div class="col-md-4 col-lg-3" data-aos="flip-right" data-aos-duration="800" style="background-color: rgb(248, 248, 248);
 								margin-bottom: 1%;
 								padding: 20px;
 								box-shadow: 5px 5px 8px #a2a2a8;
 								border-radius:3%;">
-								<div class="project">
-									<div class="img" style="width:90%; height:90%; margin:auto; border-radius:50%; ">
-										<a href="#"><img src="{{ guide.photo_main.url }}" class="img-fluid"
-												style="border-radius: 50%;" alt="Image"></a>
-									</div>
-									<div class="text">
-										<h3><a href="#">{{ guide.name }}</a></h3>
-										<div class="star d-flex clearfix">Rating: &nbsp;
-											<div class="mr-auto float-left">
-												<span class="ion-ios-star"></span>
-												<span class="ion-ios-star"></span>
-												<span class="ion-ios-star"></span>
-												<span class="ion-ios-star"></span>
-												<span class="ion-ios-star"></span>
-											</div>
-										</div>
-										<p><strong>Address:</strong> {{ guide.address }}</p>
-									</div>
+					<div class="project">
+						<div class="img" style="width:90%; height:90%; margin:auto; border-radius:50%; ">
+							<a href="#"><img src="{{ guide.photo_main.url }}" class="img-fluid"
+									style="border-radius: 50%;" alt="Image"></a>
+						</div>
+						<div class="text">
+							<h3><a href="#">{{ guide.name }}</a></h3>
+							<div class="star d-flex clearfix">Rating: &nbsp;
+								<div class="mr-auto float-left">
+									<span class="ion-ios-star"></span>
+									<span class="ion-ios-star"></span>
+									<span class="ion-ios-star"></span>
+									<span class="ion-ios-star"></span>
+									<span class="ion-ios-star"></span>
 								</div>
-
 							</div>
-						{% endfor %}
-					{% endif %}
-
+						</div>
+						<p><strong>Address:</strong> {{ guide.address }}</p>
+					</div>
 				</div>
+				{% endfor %}
+				{% endif %}
+			</div>
+		</div>
 	</section>
 
 	<footer class="footer section">

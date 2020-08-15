@@ -310,11 +310,11 @@ body {
   
   
   .form-control {
-    height: 52px !important;
+    height: 70px !important;
     background: #fff !important;
     color: #000000 !important;
     font-size: 18px;
-    border-radius: 5px;
+    border-radius: 10px;
     -webkit-box-shadow: none !important;
     box-shadow: none !important; }
     .form-control:focus, .form-control:active {
@@ -401,7 +401,7 @@ body {
     
         @media (max-width: 767.98px) {
           .image-wrapper img {
-            height: 50vh;
+            height: 60vh;
             vertical-align: middle;
             width: 100%;
           }
@@ -409,95 +409,50 @@ body {
     
         /*Image Header-Text area*/
     
-        .header-content {
+        /* .header-content {
 
           position: absolute;
-          top: 30%;
-          left: 30%;
+          top: 40%;
+          left:40%;
         }
     
-        .header-content h1 {
-          font-size: 5.5em;
-          margin-bottom: 0;
-          font-weight: 700;
-          color: white;
-          /* text-shadow: .05em .01em .05em #09011f8a; */
-          font-family: "Poppins";
-        }
-    
-        .header-content h3 {
-          padding-top: 1%;
-          padding-left: 5%;
-          font-size: 2em;
-          font-weight: 700;
-          color: white;
-          font-family: "Cormorant Garamond", Georgia, serif;
-    
-        }
-    
-        @media only screen and (min-width: 992px) and (max-width: 1199px) {
-          .header-content h1 {
-            font-size: 5em;
-          }
-    
-          .header-content h3 {
-            font-size: 2.3em;
-          }
-    
+        
+         @media only screen and (min-width: 992px) and (max-width: 1199px) {
+          
           .header-content {
             top: 37%;
-            left: 25%;
+            left: 40%;
           }
     
         }
     
         @media only screen and (min-width: 768px) and (max-width: 991px) {
-          .header-content h1 {
-            font-size: 3em;
-          }
-    
-          .header-content h3 {
-            font-size: 2em;
-          }
-    
+          
           .header-content {
             top: 30%;
-            left: 18%;
+            left: 40%;
           }
     
         }
     
     
     
-        @media only screen and (min-width: 480px) and (max-width: 767px) {
-          .header-content h1 {
-            font-size: 2em;
-          }
-    
-          .header-content h3 {
-            font-size: 1em;
-          }
-    
+        @media only screen and (max-width: 767px) {
+
           .header-content {
             top: 28%;
             left: 32%;
           }
         }
+      
     
-        @media only screen and (max-width: 480px) {
-          .header-content h1 {
-            font-size: 2em;
-          }
-    
-          .header-content h3 {
-            font-size: 1em;
-          }
+         @media only screen and (max-width: 480px) {
     
           .header-content {
             top: 25%;
             left: 16%;
           }
-        }
+        }  */
     /* End of landing page Image section */
     
 
