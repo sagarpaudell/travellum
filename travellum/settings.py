@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'guides.apps.GuidesConfig',
     'travellers.apps.TravellersConfig',
     'pages.apps.PagesConfig',
+    'places.apps.PlacesConfig',
     
     
    'django.contrib.admin',
