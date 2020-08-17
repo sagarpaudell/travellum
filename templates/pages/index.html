@@ -232,15 +232,23 @@
 			<div class="row">
 				<div class="col-md-8">
 					<div class="search-wrap-1  p-4">
-						<form action="#" class="search-property-1">
+						<form action="{% url 'search' %}" class="search-property-1">
 							<div class="row">
 								<div class="col-lg align-items-end">
 									<div class="form-group">
 										<label for="#">Check out the available guides:</label>
 										<div class="form-field">
 											<div class="icon"><span class="ion-ios-search"></span></div>
-											<input type="text" class="form-control"
-												placeholder="Enter your destination">
+											<!-- <input type="text" class="form-control"
+												placeholder="Enter your destination"> -->
+											<select name="places" class="form-control">
+												<option selected="true" disabled="disabled">Enter your destination</option>
+												{% if places %}
+													{% for place in places %}
+														<option value="{{ place.name }}">{{ place.name }}</option>
+													{% endfor %}
+												{% endif %}
+											</select>
 										</div>
 									</div>
 								</div>
