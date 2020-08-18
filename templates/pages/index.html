@@ -384,7 +384,8 @@
 <script>
     $( function() {
       $( "#search_places" ).autocomplete({		//function for autocomplete that takes id of field
-        source: "{% url 'search' %}"			//source for autocomplete // requires JSON list
+		source: "{% url 'search' %}",			//source for autocomplete // requires JSON list
+		minLength: 2
       });
     } );
     </script>
