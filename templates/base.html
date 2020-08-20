@@ -1,13 +1,15 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- Meta Tags -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Fonts -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
   <link rel="stylesheet" href="{% static 'css/all.css' %}">
 
   <!-- Bootstrap -->
@@ -15,6 +17,10 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <!-- Custom CSS from landing page for places-->
+  <link rel="stylesheet" href="{% static 'css/custom_style.css' %}">
+
 
   <title>Dashboard</title>
 </head>
@@ -24,13 +30,13 @@
   <!-- NavBar -->
   {% include 'partials/_navbar.html' %}
 
-    <!-- Main Content -->
+  <!-- Main Content -->
   {% block content %} {% endblock %}
 
   <!-- Footer -->
   {% include 'partials/_footer.html' %}
 
-  
+
   <!--===================== Bootstrap JS ====================-->
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
@@ -39,7 +45,7 @@
   <!--================== Focus Search Input ===================-->
   <script>
     var d = document;
-    d.getElementById("btn-search-des").onclick = function() {
+    d.getElementById("btn-search-des").onclick = function () {
       d.getElementById("searchDesInput").focus();
     };
   </script>
@@ -47,7 +53,7 @@
 
   <!--=================== Validation ============================-->
   <script>
-    var d = document; 
+    var d = document;
     function hidePassword() {
       var x = d.getElementById("password");
       if (x.type === "password") {
@@ -58,8 +64,8 @@
     }
 
     var validateString = (value) => {
-        const numberRegex = /^[a-zA-Z]+$/;
-        return numberRegex.test(value);
+      const numberRegex = /^[a-zA-Z]+$/;
+      return numberRegex.test(value);
     }
 
     function handleValidation() {
@@ -76,20 +82,20 @@
 
     function handlePwValidation() {
       if (password.value.length >= 6) {
-      this.classList.remove("is-invalid");
+        this.classList.remove("is-invalid");
       } else {
-      this.classList.add("is-invalid");
+        this.classList.add("is-invalid");
       }
     }
     d.getElementById('password').onkeyup = handlePwValidation;
   </script>
-  
+
 
   <!--================== Navbar Animation ======================-->
   <script>
-    $(document).ready(function() {
-      $(window).scroll(function() {
-        if($(window).scrollTop()>50) {
+    $(document).ready(function () {
+      $(window).scroll(function () {
+        if ($(window).scrollTop() > 50) {
           $('.my-navbar').addClass('navbar-scroll');
         } else {
           $('.my-navbar').removeClass('navbar-scroll');
@@ -97,7 +103,7 @@
       });
     });
   </script>
-  
+
 
   <!--============= Dashboard Collapse JS =====================-->
   <script>
@@ -111,4 +117,5 @@
     });
   </script>
 </body>
+
 </html>
