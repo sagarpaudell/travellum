@@ -70,17 +70,19 @@
 				<img src="{% static 'images/bgDarken.jpg' %}" class="image" alt="background-image">
 
 				<div class="container" style="display: flex;
-					justify-content: center; position:absolute;">
-					<form class="form-inline " >
+					justify-content: center; position:absolute;" data-aos="zoom-in" data-aos-duration="1300">
+					<form class="form-inline ">
 
 						<input class="form-control form-control-lg mr-3 w-200" style="margin: 0 auto;" type="text"
-							placeholder="Search Destinations here" aria-label="SearchPlaces" name="search_places" id="search_places">
+							placeholder="Search Destinations here" aria-label="SearchPlaces" name="search_places"
+							id="search_places">
 						<i class="fa fa-search fa-lg mt-2 ml-2"></i>
 					</form>
 				</div>
 
 				<div class="container"
-					style="display: flex; justify-content: center;  position:absolute; margin-top:23%; ">
+					style="display: flex; justify-content: center;  position:absolute; margin-top:23%;"
+					data-aos="zoom-in" data-aos-duration="1300">
 					{% if  user.is_authenticated%}
 					{% else %}
 					<a href=" {% url 'register' %}" class="btn btn-primary"
@@ -147,8 +149,8 @@
 				<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
 					<div class="project">
 						<div class="img">
-							<a href="#"><img src="{% static 'images/kathmandu.jpg' %}" class="img-fluid"
-									alt="Image"></a>
+							<a href="#"><img src="{% static 'images/trees.jpg' %}" class="img-fluid" alt="Image"
+									style="height:350px;"></a>
 						</div>
 						<div class="text">
 
@@ -159,7 +161,8 @@
 				<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
 					<div class="project">
 						<div class="img">
-							<a href="#"><img src="{% static 'images/ilam.jpg' %}" class="img-fluid" alt="Image"></a>
+							<a href="#"><img src="{% static 'images/ilam.jpg' %}" class="img-fluid" alt="Image"
+									style="height:350px;"></a>
 						</div>
 						<div class="text">
 
@@ -170,7 +173,8 @@
 				<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
 					<div class="project">
 						<div class="img">
-							<a href="#"><img src="{% static 'images/janakpur.jpg' %}" class="img-fluid" alt="Image"></a>
+							<a href="#"><img src="{% static 'images/janakpur.jpg' %}" class="img-fluid" alt="Image"
+									style="height:350px;"></a>
 						</div>
 						<div class="text">
 
@@ -181,7 +185,8 @@
 				<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
 					<div class="project">
 						<div class="img">
-							<a href="#"><img src="{% static 'images/patan.jpg' %}" class="img-fluid" alt="Image"></a>
+							<a href="#"><img src="{% static 'images/patan.jpg' %}" class="img-fluid" alt="Image"
+									style="height:350px;"></a>
 						</div>
 						<div class="text">
 
@@ -192,7 +197,8 @@
 				<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
 					<div class="project">
 						<div class="img">
-							<a href="#"><img src="{% static 'images/chitwan.jpg' %}" class="img-fluid" alt="Image"></a>
+							<a href="#"><img src="{% static 'images/chitwan.jpg' %}" class="img-fluid" alt="Image"
+									style="height:350px;"></a>
 						</div>
 						<div class="text">
 
@@ -203,7 +209,8 @@
 				<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
 					<div class="project">
 						<div class="img">
-							<a href="#"><img src="{% static 'images/pokhara.jpg' %}" class="img-fluid" alt="Image"></a>
+							<a href="#"><img src="{% static 'images/pokhara.jpg' %}" class="img-fluid" alt="Image"
+									style="height:350px;"></a>
 						</div>
 						<div class="text">
 
@@ -214,7 +221,8 @@
 
 				<div class="container" style="display: flex;
 				justify-content: center; margin-bottom:10%; " data-aos="fade-up" data-aos-duration="800">
-					<a href="" class="btn btn-primary" style="background-color:#e66b58; font-size:1.2rem; ">View all
+					<a href=" {% url 'places' %}" class="btn btn-primary"
+						style="background-color:#e66b58; font-size:1.2rem; ">View all
 						Places
 						&#8594; </a>
 				</div>
@@ -243,11 +251,12 @@
 											<!-- <input type="text" class="form-control"
 												placeholder="Enter your destination" name="search" id="search"> -->
 											<select name="places" class="form-control">
-												<option selected="true" disabled="disabled">Enter your destination</option>
+												<option selected="true" disabled="disabled">Enter your destination
+												</option>
 												{% if places %}
-													{% for place in places %}
-														<option value="{{ place.name }}">{{ place.name }}</option>
-													{% endfor %}
+												{% for place in places %}
+												<option value="{{ place.name }}">{{ place.name }}</option>
+												{% endfor %}
 												{% endif %}
 											</select>
 										</div>
@@ -382,11 +391,12 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-    $( function() {
-      $( "#search_places" ).autocomplete({		//function for autocomplete that takes id of field
-		source: "{% url 'search' %}",			//source for autocomplete // requires JSON list
-		minLength: 2
-      });
-    } );
-    </script>
+	$(function () {
+		$("#search_places").autocomplete({		//function for autocomplete that takes id of field
+			source: "{% url 'search' %}",			//source for autocomplete // requires JSON list
+			minLength: 2
+		});
+	});
+</script>
+
 </html>
