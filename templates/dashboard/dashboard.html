@@ -59,7 +59,8 @@
           </div>
         </div>
       </div>        
-
+      
+      {% if my_profile %}
       <div>
         <div class="d-flex flex-row text-white align-items-stretch text-center bg-white" id="custom-menu">
           <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#about_me">
@@ -75,6 +76,7 @@
             <span class="d-none d-md-inline">Traveller</span>
           </div>
       </div>
+      {% endif %}
       <!--=========== End of Dashboard Navigation ==========-->
 
 
@@ -84,7 +86,7 @@
         <div class="card card-body bg-white px-3 py-5">
           
           <!--========= Edit Profile Section ===============-->
-          <h4 class="px-3" style="color: #e2c0bb;">Let People know about you</h4>
+          {% if my_profile %}<h4 class="px-3" style="color: #e2c0bb;">Let People know about you</h4>
           <div>
             <ul class="d-flex p-3" style="list-style: none;">
               <div class="mr-3">
@@ -158,10 +160,14 @@
             </ul>
             
           </div>
+          {% endif %}
+          
           <div class="container">
             <div class="row">
               <div class="col-md-10"></div>
+              {% if my_profile %}
               <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="modal" data-target="#edit_profile_modal">Edit Profile</button>
+              {% endif %}
             </div>
           </div>
           <span class="border-bottom"></span><br>
@@ -307,7 +313,7 @@
               {% if traveller.is_guide %}
                 <div class="form-group">
                   <label for="pph">Price/hr</label><br>
-                  <input type="number" class="form-control" name="pph" >
+                  <input type="number" class="form-control" name="pph" value="{{traveller.price_per_hour}}" >
                 </div>
               {% endif %}
             {% endfor %}

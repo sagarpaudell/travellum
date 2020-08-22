@@ -1,7 +1,7 @@
 {
-    "python.pythonPath": "venv/bin/python",
+    "python.pythonPath": "C:\\Users\\biraj\\.virtualenvs\\travellum-dok5VB7f\\Scripts\\python.exe",
     "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true
+    "python.linting.enabled": false
 }
 
 // "python.pythonPath": "C:\\Users\\bimal\\.virtualenvs\\travellum-sfv8Iz43\\Scripts\\python.exe"

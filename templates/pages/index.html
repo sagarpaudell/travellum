@@ -286,11 +286,11 @@
 								border-radius:3%;">
 					<div class="project">
 						<div class="img" style="width:90%; height:90%; margin:auto; border-radius:50%; ">
-							<a href="#"><img src="{{ guide.photo_main.url }}" class="img-fluid"
+							<a href="{% url 'view_profile' guide.id %}"><img src="{{ guide.photo_main.url }}" class="img-fluid"
 									style="border-radius: 50%;" alt="Image"></a>
 						</div>
 						<div class="text">
-							<h3><a href="#">{{ guide.name }}</a></h3>
+							<h3><a href="{% url 'view_profile' guide.id %}">{{ guide.first_name }} {{ guide.last_name }}</a></h3>
 							<div class="star d-flex clearfix">Rating: &nbsp;
 								<div class="mr-auto float-left">
 									<span class="ion-ios-star"></span>
