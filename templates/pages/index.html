@@ -6,6 +6,7 @@
 	<title>Travellum-Home</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<!-- fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -73,7 +74,8 @@
 					<form class="form-inline ">
 
 						<input class="form-control form-control-lg mr-3 w-200" style="margin: 0 auto;" type="text"
-							placeholder="Search destinations here" aria-label="SearchPlaces">
+							placeholder="Search Destinations here" aria-label="SearchPlaces" name="search_places"
+							id="search_places">
 						<i class="fa fa-search fa-lg mt-2 ml-2"></i>
 					</form>
 				</div>
@@ -239,15 +241,24 @@
 			<div class="row">
 				<div class="col-md-8">
 					<div class="search-wrap-1  p-4">
-						<form action="#" class="search-property-1">
+						<form action="{% url 'search' %}" class="search-property-1">
 							<div class="row">
 								<div class="col-lg align-items-end">
 									<div class="form-group">
 										<label for="#">Check out the available guides:</label>
 										<div class="form-field">
 											<div class="icon"><span class="ion-ios-search"></span></div>
-											<input type="text" class="form-control"
-												placeholder="Enter your destination">
+											<!-- <input type="text" class="form-control"
+												placeholder="Enter your destination" name="search" id="search"> -->
+											<select name="places" class="form-control">
+												<option selected="true" disabled="disabled">Enter your destination
+												</option>
+												{% if places %}
+												{% for place in places %}
+												<option value="{{ place.name }}">{{ place.name }}</option>
+												{% endfor %}
+												{% endif %}
+											</select>
 										</div>
 									</div>
 								</div>
@@ -376,5 +387,16 @@
 		AOS.init();
 	</script>
 </body>
+<!-- scripts for jquery autocomplete -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+	$(function () {
+		$("#search_places").autocomplete({		//function for autocomplete that takes id of field
+			source: "{% url 'search' %}",			//source for autocomplete // requires JSON list
+			minLength: 2
+		});
+	});
+</script>
 
 </html>

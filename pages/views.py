@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from travellers.models import Traveller
+from places.models import Place
  
 def index(request):
     guides = Traveller.objects.all().filter(is_guide=True)
+    places = Place.objects.all()
     context = {
         'guides':guides,
+        'places':places
     }
     return render(request, 'pages/index.html', context)
 def login(request):
