@@ -35,10 +35,11 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'guides.apps.GuidesConfig',
     'travellers.apps.TravellersConfig',
+    'places.apps.PlacesConfig',
     'pages.apps.PagesConfig',
     
     
-   'django.contrib.admin',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
