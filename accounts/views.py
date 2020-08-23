@@ -48,11 +48,7 @@ def login_view(request):
         if user is not None:
             auth.login(request, user)
             if user.is_authenticated:
-                traveller_user = Traveller.objects.all().filter(email=user)
-                context = {
-                                'traveller_user':traveller_user,
-                        }
-                return render(request, 'dashboard/dashboard.html', context)
+                return redirect('dashboard')
         else:
             messages.warning(request, 'invalid credentials')
             return redirect('login')

@@ -64,21 +64,25 @@ Dashboard
 
           </div>
         </div>
+      </div>        
+      
+      {% if my_profile %}
+      <div>
+        <div class="d-flex flex-row text-white align-items-stretch text-center bg-white" id="custom-menu">
+          <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#about_me">
+            <i class="fa fa-user fa-2x pr-2"></i>
+            <span class="d-none d-md-inline">About Me</span>
+          </div>
+          <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#guide">
+            <i class="fa fa-id-card fa-2x pr-2"></i>
+            <span class="d-none d-md-inline">Guide</span>
+          </div>
+          <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#traveller">
+            <i class="fa fa-suitcase fa-2x pr-2"></i>
+            <span class="d-none d-md-inline">Traveller</span>
+          </div>
       </div>
-      <div class="d-flex flex-row text-white align-items-stretch text-center bg-white" id="custom-menu">
-        <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#about_me">
-          <i class="fa fa-user fa-2x pr-2"></i>
-          <span class="d-none d-md-inline">About Me</span>
-        </div>
-        <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#guide">
-          <i class="fa fa-id-card fa-2x pr-2"></i>
-          <span class="d-none d-md-inline">Guide</span>
-        </div>
-        <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#traveller">
-          <i class="fa fa-suitcase fa-2x pr-2"></i>
-          <span class="d-none d-md-inline">Traveller</span>
-        </div>
-      </div>
+      {% endif %}
       <!--=========== End of Dashboard Navigation ==========-->
 
 
@@ -86,25 +90,24 @@ Dashboard
       <!--============== About Me Collapse =================-->
       <div id="about_me" class="collapse show">
         <div class="card card-body bg-white px-3 py-5">
-
+          
           <!--========= Edit Profile Section ===============-->
-          <h4 class="px-3" style="color: #e2c0bb;">Let People know about you</h4>
+          {% if my_profile %}<h4 class="px-3" style="color: #e2c0bb;">Let People know about you</h4>
           <div>
             <ul class="d-flex p-3" style="list-style: none;">
               <div class="mr-3">
                 <li>
                   {% if traveller_user %}
-                  {% for traveller in traveller_user %}
-                  {% if traveller.address %}
-                  <i class="text-success fa fa-check"></i>
-                  <small>Add your Location</small>
-                  {% else %}
-                  <i class="text-danger fa fa-times"></i>
-                  <small>Add your Location</small>
-                  {% endif %}
-                  {% endfor %}
-                  {% endif %}
-
+                    {% for traveller in traveller_user %}
+                    {% if traveller.address %}
+                    <i class="text-success fa fa-check"></i>
+                    <small>Add your Location</small>
+                    {% else %}
+                    <i class="text-danger fa fa-times"></i>
+                    <small>Add your Location</small>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
                 </li>
 
                 <li>
@@ -160,13 +163,15 @@ Dashboard
                 </li>
               </div>
             </ul>
-
           </div>
+          {% endif %}
+          
           <div class="container">
             <div class="row">
               <div class="col-md-10"></div>
-              <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="modal"
-                data-target="#edit_profile_modal">Edit Profile</button>
+              {% if my_profile %}
+              <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="modal" data-target="#edit_profile_modal">Edit Profile</button>
+              {% endif %}
             </div>
           </div>
           <span class="border-bottom"></span><br>
@@ -346,32 +351,14 @@ Dashboard
         <label for="gender">Gender</label>
         <select class="form-control" name="gender">
           {% if traveller_user %}
-          {% for traveller in traveller_user %}
-          {% ifnotequal traveller.gender "" %}<option selected>{{traveller.gender}}</option>{% endifnotequal %}
-
-          {% ifequal traveller.gender "Male" %}
-          <option>Female</option>
-          <option>Other</option>
-          {% endifequal %}
-
-          {% ifequal traveller.gender "Female" %}
-          <option>Male</option>
-          <option>Other</option>
-          {% endifequal %}
-
-          {% ifequal traveller.gender "Other" %}
-          <option>Female</option>
-          <option>Male</option>
-          {% endifequal %}
-
-          {% ifequal traveller.gender "" %}
-          <option>Female</option>
-          <option>Male</option>
-          <option>Other</option>
-          {% endifequal %}
-
-          <!-- <option>4</option> -->
-          {% endfor %}
+            {% for traveller in traveller_user %}
+              {% if traveller.is_guide %}
+                <div class="form-group">
+                  <label for="pph">Price/hr</label><br>
+                  <input type="number" class="form-control" name="pph" value="{{traveller.price_per_hour}}" >
+                </div>
+              {% endif %}
+            {% endfor %}
           {% endif %}
         </select>
       </div>

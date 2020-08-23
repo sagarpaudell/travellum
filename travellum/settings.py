@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'travellers.apps.TravellersConfig',
     'places.apps.PlacesConfig',
     'pages.apps.PagesConfig',
+    'places.apps.PlacesConfig',
     
     
     'django.contrib.admin',
