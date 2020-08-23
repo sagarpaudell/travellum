@@ -29,7 +29,7 @@
       <div class="col-lg-1 col-md-2 collapse-on-phones">
         <div class="navbar-nav">              
           <span class="nav-item text-center">
-            <a href="#" class="nav-link text-light"> Places</a>
+            <a href="{% url 'places' %}" class="nav-link text-light"> Places</a>
           </span>
         </div>
         <!-- a -->
@@ -46,6 +46,7 @@
       <div class="col-lg-1 col-md-1 col-3 text-center">
         <div class="navbar-nav">
           <div class="nav-item text-center top-head-dropdown">
+            {% if  user.is_authenticated%}
             <a type="button" class="nav-link dropdown-toggle" data-toggle="dropdown">
               <img class="hw-bell" src="{% static 'svg/bell.svg' %}" alt="">
             </a>
@@ -93,6 +94,11 @@
                 </a> 
               </li>
             </ul>
+            {% else %}
+              <a type="button" class="nav-link dropdown-toggle" href='/accounts/login/'>
+                <img class="hw-bell" src="{% static 'svg/bell.svg' %}" alt="">
+              </a>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -101,21 +107,26 @@
         <div class="navbar-nav">
           <span class="nav-item text-center dropdown" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown">
             <a href="" class="nav-link text-light">
-              {% if traveller_user %}
-                {% for traveller in traveller_user %}
-                  {% if traveller.photo_main %}
-                    <img class="hw-dp" src="{{ traveller.photo_main.url }}" alt="">
-                  {% else %}
-                    <img class="hw-dp" src="{% static 'images/default.png' %}" alt="">
-                  {% endif %}
-                {% endfor %}                
+              {% if  user.is_authenticated%}
+                {% if traveller_user %}
+                  {% for traveller in traveller_user %}
+                    {% if traveller.photo_main %}
+                        <img class="hw-dp" src="{{ traveller_dp.url }}" alt="">
+                    {% else %}
+                        <img class="hw-dp" src="{% static 'images/default.png' %}" alt="">
+                    {% endif %}
+                  {% endfor %}                
+                {% endif %}
               {% endif %}
             </a>
           </span>
+
+          {% if  user.is_authenticated %}
           <div class="dropdown-menu" style="position: absolute; min-width: 80px; background: rgba(255,255,255,0.9);" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="#">Visibility</a>
             <a class="dropdown-item" href="/accounts/logout">Log Out</a>
           </div>
+          {% endif %}
         </div>
         <!-- a -->
       </div>
@@ -126,7 +137,7 @@
           <i class="fas fa-bars" style="color: white; font-size: 1.4rem;"></i>
         </div>
         <span class="dropdown-menu" style="min-width: 100px !important;">
-          <a href="#" class="text-dark pl-3">Places</a>
+          <a href="{% url 'places' %}" class="text-dark pl-3">Places</a>
           <div class="m-2"></div>
           <a href="#" class="text-dark pl-3">Visibility</a>
           <div class="m-2"></div>

@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/custom_style.css' %}">
+{% endblock %}
+
+{% block title %} 
+Places
+{% endblock %}
+
+{% block content %}
+<div class="container"
+    style="background-color:#fcfcfc; width:70%; margin-top:1%; margin-bottom:10%; border-radius:1%; padding:2rem;">
+    <div class="row justify-content-center pb-3" data-aos="fade-up" data-aos-duration="800">
+        <div class="col-md-12 heading-section text-center ">
+            <span class="subheading"> Explore local places</span>
+            <h2 class="mb-1">Best Places to Travel in the Country.</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
+            <div class="project">
+                <div class="img">
+                    <a href="{% url 'placedetails' %}"><img src="{% static 'images/kathmandu.jpg' %}" class="img-fluid"
+                            alt="Image" style="height:315px; width:max-content; "></a>
+                </div>
+                <div class="text">
+
+                    <h3 style="text-align: center;"><a href="#">Kathmandu</a></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
+            <div class="project">
+                <div class="img">
+                    <a href="#"><img src="{% static 'images/kathmandu.jpg' %}" class="img-fluid" alt="Image"
+                            style="height:315px; width:max-content; "></a>
+                </div>
+                <div class="text">
+
+                    <h3 style="text-align: center;"><a href="#">Kathmandu</a></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
+            <div class="project">
+                <div class="img">
+                    <a href="#"><img src="{% static 'images/ilam.jpg' %}" class="img-fluid" alt="Image"
+                            style="height:315px; width:max-content; "></a>
+                </div>
+                <div class="text">
+
+                    <h3 style="text-align: center;"><a href="#">Ilam</a></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
+            <div class="project">
+                <div class="img">
+                    <a href="#"><img src="{% static 'images/janakpur.jpg' %}" class="img-fluid" alt="Image"
+                            style="height:315px; width:max-content; "></a>
+                </div>
+                <div class="text">
+
+                    <h3 style="text-align: center;"><a href="#">Janakpur</a></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
+            <div class="project">
+                <div class="img">
+                    <a href="#"><img src="{% static 'images/person1.jpg' %}" class="img-fluid" alt="Image"
+                            style="height:315px; width:max-content; "></a>
+                </div>
+                <div class="text">
+
+                    <h3 style="text-align: center;"><a href="#">Kathmandu</a></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
+            <div class="project">
+                <div class="img">
+                    <a href="#"><img src="{% static 'images/ilam.jpg' %}" class="img-fluid" alt="Image"
+                            style="height:315px; width:max-content; "></a>
+                </div>
+                <div class="text">
+
+                    <h3 style="text-align: center;"><a href="#">Ilam</a></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
+            <div class="project">
+                <div class="img">
+                    <a href="#"><img src="{% static 'images/janakpur.jpg' %}" class="img-fluid" alt="Image"
+                            style="height:315px; width:max-content; "></a>
+                </div>
+                <div class="text">
+
+                    <h3 style="text-align: center;"><a href="#">Janakpur</a></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
+            <div class="project">
+                <div class="img">
+                    <a href="#"><img src="{% static 'images/ilam.jpg' %}" class="img-fluid" alt="Image"
+                            style="height:315px; width:max-content; "></a>
+                </div>
+                <div class="text">
+
+                    <h3 style="text-align: center;"><a href="#">Ilam</a></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
+            <div class="project">
+                <div class="img">
+                    <a href="#"><img src="{% static 'images/janakpur.jpg' %}" class="img-fluid" alt="Image"
+                            style="height:315px; width:max-content; "></a>
+                </div>
+                <div class="text">
+
+                    <h3 style="text-align: center;"><a href="#">Janakpur</a></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
+            <div class="project">
+                <div class="img">
+                    <a href="#"><img src="{% static 'images/trees.jpg' %}" class="img-fluid" alt="Image"
+                            style="height:315px; width:max-content; "></a>
+                </div>
+                <div class="text">
+
+                    <h3 style="text-align: center;"><a href="#">Ilam</a></h3>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+{% endblock %}
