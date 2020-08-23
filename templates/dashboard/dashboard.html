@@ -352,12 +352,28 @@ Dashboard
         <select class="form-control" name="gender">
           {% if traveller_user %}
             {% for traveller in traveller_user %}
-              {% if traveller.is_guide %}
-                <div class="form-group">
-                  <label for="pph">Price/hr</label><br>
-                  <input type="number" class="form-control" name="pph" value="{{traveller.price_per_hour}}" >
-                </div>
-              {% endif %}
+              {% ifnotequal traveller.gender "" %}<option selected>{{traveller.gender}}</option>{% endifnotequal %}
+
+              {% ifequal traveller.gender "Male" %}
+              <option>Female</option>
+              <option>Other</option>
+              {% endifequal %}
+
+              {% ifequal traveller.gender "Female" %}
+              <option>Male</option>
+              <option>Other</option>
+              {% endifequal %}
+
+              {% ifequal traveller.gender "Other" %}
+              <option>Female</option>
+              <option>Male</option>
+              {% endifequal %}
+
+              {% ifequal traveller.gender "" %}
+              <option>Female</option>
+              <option>Male</option>
+              <option>Other</option>
+              {% endifequal %}
             {% endfor %}
           {% endif %}
         </select>

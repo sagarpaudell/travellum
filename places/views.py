@@ -10,10 +10,6 @@ def places(request):
 
 def placedetails(request):
     return render(request, 'places/placedetails.html') 
-<<<<<<< HEAD
-    return redirect('index')
-=======
->>>>>>> 501af96765ff5a25567ef51c184ab33685bb0d56
 
 def search(request):
     if 'term' in request.GET:  #check for source files for autocomplete 
