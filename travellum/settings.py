@@ -36,16 +36,13 @@ INSTALLED_APPS = [
     'guides.apps.GuidesConfig',
     'travellers.apps.TravellersConfig',
     'places.apps.PlacesConfig',
-<<<<<<< HEAD
     'chat.apps.ChatConfig',
     
     
     'pages.apps.PagesConfig',    
     
-=======
-    'pages.apps.PagesConfig',    
+       
     
->>>>>>> c79ea8083c8b0cf570e4a217f296ba5d4ac7816f
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -99,17 +96,12 @@ AUTH_USER_MODEL = 'accounts.User'
 # }
 DATABASES = {
     'default': {
-<<<<<<< HEAD
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'travellum_db',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': 'localhost'
 
-=======
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
->>>>>>> c79ea8083c8b0cf570e4a217f296ba5d4ac7816f
     }
 }
 
