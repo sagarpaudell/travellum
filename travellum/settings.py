@@ -36,13 +36,8 @@ INSTALLED_APPS = [
     'guides.apps.GuidesConfig',
     'travellers.apps.TravellersConfig',
     'places.apps.PlacesConfig',
-    'chat.apps.ChatConfig',
-    
-    
-    'pages.apps.PagesConfig',    
-    
+    'chat.apps.ChatConfig',    
        
-    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
