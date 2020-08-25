@@ -118,6 +118,18 @@
                   {% endfor %}                
                 {% endif %}
               {% endif %}
+              <!-- ================User with no dp while viewing other's profile============= -->
+              {% if  user.is_authenticated%}
+                {% if logged_in_user %}
+                  {% for traveller in logged_in_user %}
+                    {% if traveller.photo_main %}
+                        <img class="hw-dp" src="{{ traveller_dp.url }}" alt="">
+                    {% else %}
+                        <img class="hw-dp" src="{% static 'images/default.png' %}" alt="">
+                    {% endif %}
+                  {% endfor %}                
+                {% endif %}
+              {% endif %}
             </a>
           </span>
 
