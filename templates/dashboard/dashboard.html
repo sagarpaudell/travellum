@@ -227,7 +227,7 @@ Dashboard
           <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
             <div class="border-bottom">
               <h2 style="color: #e2c0bb;">No Guide History</h2>
-              <button class="btn btn-theme-outline px-5 py-3 mt-2 mb-5">Become a Guide</button>
+              <button class="btn btn-theme-outline px-5 py-3 mt-2 mb-5" data-toggle="modal" data-target="#guide_form_modal">Become a Guide</button>
             </div>
             <div class="border-bottom py-5">
               <h2 style="color: #e2c0bb;">No Guide Reviews</h2>
@@ -277,7 +277,7 @@ Dashboard
         </button>
       </div>
       <div class="modal-body">
-        <form action="{% url 'dashboard' %}" method="POST" enctype="multipart/form-data"">
+        <form action="{% url 'dashboard' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
           <!-- Choose Image Overlay -->
@@ -426,6 +426,61 @@ Dashboard
 </div>
 </div>
 <!-- End of Edit Profile Modal -->
+
+
+<div class="modal" id="guide_form_modal">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Guide-Form Fillup
+        </h5>
+        <button class="close" data-dismiss="modal">
+          &times;
+        </button>
+      </div>
+      <form action="#" method="POST">
+        {% csrf_token %}
+        <div class="modal-body">
+
+          <div class="form-group mb-4">
+            <label for="Document Type">Document Type</label><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="docType" id="ctzn" required>
+              <label class="form-check-label" for="ctzn">Citizenship</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="docType" id="license" required>
+              <label class="form-check-label" for="license">Driving License</label>
+            </div>
+          </div>
+
+          <div class="form-group mb-4">
+            <p>Document Front</p>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="ctzn-front" name="ctzn-front" accept="image/*" required>
+              <label class="custom-file-label" for="ctzn-front">Choose file</label>
+            </div>
+          </div>
+
+          <div class="form-group mb-4">
+            <p>Document Back</p>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="ctzn-back" name="ctzn-back" accept="image/*" required>
+              <label class="custom-file-label" for="ctzn-back">Choose file</label>
+            </div>
+          </div>
+
+        </div>
+        
+        <div class="modal-footer">
+          <input type="submit" value="Be a Guide" name="Guide-Form" class="btn btn-success">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
 <!-- End of Modals -->
 
 {% endblock %}

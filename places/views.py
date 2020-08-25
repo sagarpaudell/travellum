@@ -1,15 +1,23 @@
 import json
 
 from django.http import JsonResponse
-from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Place
 
 def places(request):
-    return render(request, 'places/places.html') 
+    places = Place.objects.all()
+    context = {
+        'places':places
+    }
+    return render(request, 'places/places.html', context) 
 
 
-def placedetails(request):
-    return render(request, 'places/placedetails.html') 
+def placedetails(request, place_id):
+    place = get_object_or_404(Place, pk=place_id)
+    context = {
+        'place':place
+    }
+    return render(request, 'places/placedetails.html', context) 
 
 def search(request):
     if 'term' in request.GET:  #check for source files for autocomplete 
@@ -18,4 +26,11 @@ def search(request):
         for place in pla:
             placenames.append(place.name)
         return JsonResponse(placenames, safe=False)
-    return render(request, 'places/search.html')
+
+    searchtag = request.GET['search_places']
+    places = Place.objects.all().filter(name__icontains=searchtag) | Place.objects.all().filter(description__icontains=searchtag) | Place.objects.all().filter(city__icontains=searchtag) | Place.objects.all().filter(country__icontains=searchtag )
+    context = {
+        'places':places
+    }
+    return render(request, 'places/places.html', context)
+  
