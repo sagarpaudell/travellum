@@ -71,12 +71,12 @@
 
 				<div class="container" style="display: flex;
 					justify-content: center; position:absolute;" data-aos="zoom-in" data-aos-duration="1300">
-					<form class="form-inline ">
+					<form action = "{% url 'search' %}" class="form-inline ">
 
 						<input class="form-control form-control-lg mr-3 w-200" style="margin: 0 auto;" type="text"
 							placeholder="Search Destinations here" aria-label="SearchPlaces" name="search_places"
 							id="search_places">
-						<i class="fa fa-search fa-lg mt-2 ml-2"></i>
+						<input type="submit" value="search" class="form-control btn btn-primary"><i class="fa fa-search fa-lg mt-2 ml-2"></i>
 					</form>
 				</div>
 

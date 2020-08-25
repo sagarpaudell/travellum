@@ -26,4 +26,11 @@ def search(request):
         for place in pla:
             placenames.append(place.name)
         return JsonResponse(placenames, safe=False)
-    return render(request, 'places/search.html')
+
+    searchtag = request.GET['search_places']
+    places = Place.objects.all().filter(name__icontains=searchtag)
+    context = {
+        'places':places
+    }
+    return render(request, 'places/places.html', context)
+  
