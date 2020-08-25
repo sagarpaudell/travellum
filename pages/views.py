@@ -5,7 +5,7 @@ from places.models import Place
  
 def index(request):
     guides = Traveller.objects.all().filter(is_guide=True)
-    places = Place.objects.all()
+    places = Place.objects.all()[:6]
     context = {
         'guides':guides,
         'places':places

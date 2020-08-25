@@ -146,19 +146,23 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-					<div class="project">
-						<div class="img">
-							<a href="#"><img src="{% static 'images/trees.jpg' %}" class="img-fluid" alt="Image"
-									style="height:350px;"></a>
-						</div>
-						<div class="text">
+				{% if places %}
+					{% for place in places %}
+						<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
+							<div class="project">
+								<div class="img">
+									<a href="{% url 'placedetails' place.id %}"><img src="{{ place.photo_1.url }}" class="img-fluid" alt="Image"
+											style="height:350px;"></a>
+								</div>
+								<div class="text">
 
-							<h3><a href="#">Kathmandu</a></h3>
+									<h3><a href="{% url 'placedetails' place.id %}">{{ place.name }}</a></h3>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
+					{% endfor %}
+				{% endif %}
+				<!-- <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
 					<div class="project">
 						<div class="img">
 							<a href="#"><img src="{% static 'images/ilam.jpg' %}" class="img-fluid" alt="Image"
@@ -217,7 +221,7 @@
 							<h3><a href="#">Pokhara</a></h3>
 						</div>
 					</div>
-				</div>
+				</div>-->
 
 				<div class="container" style="display: flex;
 				justify-content: center; margin-bottom:10%; " data-aos="fade-up" data-aos-duration="800">
@@ -225,7 +229,7 @@
 						style="background-color:#e66b58; font-size:1.2rem; ">View all
 						Places
 						&#8594; </a>
-				</div>
+				</div> 
 			</div>
 		</div>
 
@@ -283,7 +287,7 @@
 				<div class="col-md-12 heading-section text-center ">
 					<span class="subheading">Populars</span>
 					<h2 class="mb-4">Our highly rated guides:</h2>
-				</div>
+				</div> mor
 			</div>
 
 			<div class="row">
