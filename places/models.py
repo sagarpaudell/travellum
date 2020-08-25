@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 
+
 class Place(models.Model):
     name = models.CharField(max_length=200,blank=True)
     city = models.CharField(max_length=100,blank=True)
@@ -12,4 +13,5 @@ class Place(models.Model):
     description = models.TextField(blank=True)
     is_published = models.BooleanField(default=True)
     total_tours = models. IntegerField(default=0)
+   
 

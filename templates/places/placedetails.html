@@ -121,52 +121,28 @@ Details
         <h2 class="px-3 mb-4 border-bottom " style="color: #daa198; ">Guides available in Kathmandu:</h2>
         <div class="container">
             <div class="row">
-
+                {% if available_guides %}
+                {% for guide in available_guides %}
                 <div class="col-md-6 mb-4">
                     <div class="row">
                         <div class="col-md-4">
-                            <img src="{% static 'images/samesh.jpg' %}" alt="Avatar" class="avatar"
+                            <img src="{{guide.info.photo_main.url}}" alt="Avatar" class="avatar"
                                 style="width: 150px; height: 150px; border-radius: 50%; margin-left:8%;">
                         </div>
                         <div class="col-md-8">
-                            <strong>Guide's Name:</strong>&nbsp;&nbsp;Ramlal Chaudhary <br>
-                            <strong>Contact No:</strong>: 9801511029 <br>
+                            <strong>Guide's Name:</strong>&nbsp;&nbsp;{{guide.info.first_name}} {{guide.info.last_name}} <br>
+                            <strong>Contact No:</strong>: {{guide.info.contact_no}} <br>
                             <strong>Guide rating:</strong> 4/5 <br>
                             <a href="#" class="btn btn-theme">View Profile</a>
 
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-4">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="{% static 'images/deependra.jpg' %}" alt="Avatar" class="avatar"
-                                style="width: 150px; height: 150px; border-radius: 50%; margin-left:8%;">
-                        </div>
-                        <div class="col-md-8">
-                            <strong>Guide's Name:</strong>&nbsp;&nbsp;Deependra Hamal <br>
-                            <strong>Contact No:</strong>: 9801511029 <br>
-                            <strong>Guide rating:</strong> 4.5/5 <br>
-                            <a href="#" class="btn btn-theme">View Profile</a>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="{% static 'images/trees.jpg' %}" alt="Avatar" class="avatar"
-                                style="width: 150px; height: 150px; border-radius: 50%; margin-left:8%;">
-                        </div>
-                        <div class="col-md-8">
-                            <strong>Guide's Name:</strong>&nbsp;&nbsp;Biraj Bhatta <br>
-                            <strong>Contact No:</strong>: 9801511029 <br>
-                            <strong>Guide rating:</strong> 4.5/5 <br>
-                            <a href="#" class="btn btn-theme">View Profile</a>
-
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
+                {% else %}
+                    <h1> no available guides in your region</h1>
+                {% endif %}
+                
             </div>
         </div>
     </div>

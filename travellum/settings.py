@@ -25,7 +25,7 @@ SECRET_KEY = 'qi3^m_agsbz45g$nysz6-4d0@=q5&g$ik&xy&ax^tmf#$o$k&7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['1128ca8fb80b.ngrok.io','127.0.0.1']
 
 
 # Application definition
@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'travellers.apps.TravellersConfig',
     'places.apps.PlacesConfig',
     'chat.apps.ChatConfig',
-    
+    #'channels',    
     
     'pages.apps.PagesConfig',    
     
@@ -78,7 +78,7 @@ TEMPLATES = [
         },
     },
 ]
-
+#ASGI_APPLICATION = 'travellum.routing.application'
 WSGI_APPLICATION = 'travellum.wsgi.application'
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -122,6 +122,13 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+CHANNEL_LAYERS={
+    'default':{
+        'BACKEND':'channels_redis.core.RedisChannelLayer',
+        'CONFIG' : [('127.0.0.1',6379)]
+    }
+}
 
 
 # Internationalization
