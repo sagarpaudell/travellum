@@ -2,6 +2,10 @@
 
 {% load static %}
 
+{% block title %} 
+Dashboard
+{% endblock %}
+
 {% block content %}
 
 <main>
@@ -104,72 +108,61 @@
                     {% endif %}
                     {% endfor %}
                     {% endif %}
+                </li>
 
-                  </li>
+                <li>
+                  {% if traveller_user %}
+                  {% for traveller in traveller_user %}
+                  {% if traveller.photo_main %}
+                  <i class="text-success fa fa-check"></i>
+                  <small>Add Profile Picture</small>
+                  {% else %}
+                  <i class="text-danger fa fa-times"></i>
+                  <small>Add Profile Picture</small>
+                  {% endif %}
+                  {% endfor %}
+                  {% endif %}
 
-                  <li>
-                    {% if traveller_user %}
-                    {% for traveller in traveller_user %}
-                    {% if traveller.photo_main %}
-                    <i class="text-success fa fa-check"></i>
-                    <small>Add Profile Picture</small>
-                    {% else %}
-                    <i class="text-danger fa fa-times"></i>
-                    <small>Add Profile Picture</small>
-                    {% endif %}
-                    {% endfor %}
-                    {% endif %}
+                </li>
 
-                  </li>
+                <li>
+                  {% if traveller_user %}
+                  {% for traveller in traveller_user %}
+                  {% if traveller.languages %}
+                  <i class="text-success fa fa-check"></i>
+                  <small>Add Languages you Speak</small>
+                  {% else %}
+                  <i class="text-danger fa fa-times"></i>
+                  <small>Add Languages you Speak</small>
+                  {% endif %}
+                  {% endfor %}
+                  {% endif %}
 
-                  <li>
-                    {% if traveller_user %}
-                    {% for traveller in traveller_user %}
-                    {% if traveller.languages %}
-                    <i class="text-success fa fa-check"></i>
-                    <small>Add Languages you Speak</small>
-                    {% else %}
-                    <i class="text-danger fa fa-times"></i>
-                    <small>Add Languages you Speak</small>
-                    {% endif %}
-                    {% endfor %}
-                    {% endif %}
+                </li>
+              </div>
+              <div>
+                <li>
+                  <i class="text-danger fa fa-times"></i>
+                  <!-- <i class="text-success fa fa-check"></i> -->
+                  <small>Add Hobbies</small>
+                </li>
 
-                  </li>
-                </div>
-                <div>
-                  <li>
-                    <i class="text-danger fa fa-times"></i>
-                    <!-- <i class="text-success fa fa-check"></i> -->
-                    <small>Add Hobbies</small>
-                  </li>
+                <li>
+                  {% if traveller_user %}
+                  {% for traveller in traveller_user %}
+                  {% if traveller.bio %}
+                  <i class="text-success fa fa-check"></i>
+                  <small>Add About Yourself</small>
+                  {% else %}
+                  <i class="text-danger fa fa-times"></i>
+                  <small>Add About Yourself</small>
+                  {% endif %}
+                  {% endfor %}
+                  {% endif %}
 
-                  <li>
-                    {% if traveller_user %}
-                    {% for traveller in traveller_user %}
-                    {% if traveller.bio %}
-                    <i class="text-success fa fa-check"></i>
-                    <small>Add About Yourself</small>
-                    {% else %}
-                    <i class="text-danger fa fa-times"></i>
-                    <small>Add About Yourself</small>
-                    {% endif %}
-                    {% endfor %}
-                    {% endif %}
-
-                  </li>
-                </div>
-              </ul>
-
-            </div>
-            <div class="container">
-              <div class="row">
-                <div class="col-md-10"></div>
-                <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="modal"
-                  data-target="#edit_profile_modal">Edit Profile</button>
+                </li>
               </div>
             </ul>
-            
           </div>
           {% endif %}
           
@@ -180,86 +173,90 @@
               <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="modal" data-target="#edit_profile_modal">Edit Profile</button>
               {% endif %}
             </div>
-            <span class="border-bottom"></span><br>
-            <!-- End of Edit Profile Section -->
-
-            <!--======= Profile Description Section ==========-->
-            <h2 class="px-3" style="color: #e2c0bb;">Hi there! Nice to meet you</h2>
-            <p class="p-3 text-justify">
-              {% if traveller_user %}{% for traveller in traveller_user %}{{traveller.bio}}{% endfor %}{% endif %}
-              <br>
-            <p class="pr-3 pb-3 pl-3 text-justify collapse" id="collapse-btn-1">More content lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Dicta explicabo ad pariatur nisi nulla vel numquam officiis laboriosam,
-              commodi corrupti nostrum iste voluptatibus quaerat perferendis odit, doloribus amet corporis cumque
-              dolores minus asperiores laudantium ut similique aliquam. Perspiciatis repellat mollitia ex ut! Vero
-              nostrum nihil ea, eveniet blanditiis voluptas expedita enim nam odio. Nemo autem repudiandae voluptate
-              inventore, facilis nihil blanditiis esse nisi, consequatur maxime perspiciatis, deserunt laborum vero est!
-              Deserunt facere ad delectus non?</p>
-            <div class="container">
-              <div class="row">
-                <div class="col-md-10"></div>
-                <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="collapse"
-                  data-target="#collapse-btn-1">Read More</button>
-              </div>
-            </div>
-            <span class="border-bottom"></span>
-            </p>
-            <!-- End of Profile Description Section -->
-
-            <!--============= Languages Section ============-->
-            <h4 class="px-3" style="color: #e2c0bb;">Languages</h4>
-            <p class="p-3 border-bottom">
-              {% if traveller_user %}{% for traveller in traveller_user %}{{traveller.languages}}{% endfor %}{% endif %}
-            </p>
-            <!-- End of Languages Section -->
-
-            <!--============= Interests Section ==============-->
-            <h4 class="px-3" style="color: #e2c0bb;">Interests</h4>
-            <p class="p-3 border-bottom">Travelling</p>
-            <!-- End of Interests Section -->
-
           </div>
-        </div>
-        <!-- End of About Me Collapse -->
+          <span class="border-bottom"></span><br>
+          <!-- End of Edit Profile Section -->
 
+          <!--======= Profile Description Section ==========-->
+          <h2 class="px-3" style="color: #e2c0bb;">Hi there! Nice to meet you</h2>
+          <p class="p-3 text-justify">
+            {% if traveller_user %}{% for traveller in traveller_user %}{{traveller.bio}}{% endfor %}{% endif %}
+          </p>
+          <br>
 
-
-        <!--=============== Guide Collapse ===================-->
-        <div class="collapse" id="guide">
-          <div class="d-flex">
-            <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
-              <div class="border-bottom">
-                <h2 style="color: #e2c0bb;">No Guide History</h2>
-                <button class="btn btn-theme-outline px-5 py-3 mt-2 mb-5">Become a Guide</button>
-              </div>
-              <div class="border-bottom py-5">
-                <h2 style="color: #e2c0bb;">No Guide Reviews</h2>
-              </div>
+          <p class="px-3 pb-3 text-justify collapse" id="collapse-btn-1">
+            More content lorem ipsum dolor sit amet,
+            consectetur adipisicing elit. Dicta explicabo ad pariatur nisi nulla vel numquam officiis laboriosam,
+            commodi corrupti nostrum iste voluptatibus quaerat perferendis odit, doloribus amet corporis cumque
+            dolores minus asperiores laudantium ut similique aliquam. Perspiciatis repellat mollitia ex ut! Vero
+            nostrum nihil ea, eveniet blanditiis voluptas expedita enim nam odio. Nemo autem repudiandae voluptate
+            inventore, facilis nihil blanditiis esse nisi, consequatur maxime perspiciatis, deserunt laborum vero est!
+            Deserunt facere ad delectus non?
+          </p>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-10"></div>
+              <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="collapse"
+                data-target="#collapse-btn-1">Read More</button>
             </div>
           </div>
+          <span class="border-bottom"></span>
+          <!-- End of Profile Description Section -->
+
+          <!--============= Languages Section ============-->
+          <h4 class="px-3" style="color: #e2c0bb;">Languages</h4>
+          <p class="p-3 border-bottom">
+            {% if traveller_user %}{% for traveller in traveller_user %}{{traveller.languages}}{% endfor %}{% endif %}
+          </p>
+          <!-- End of Languages Section -->
+
+          <!--============= Interests Section ==============-->
+          <h4 class="px-3" style="color: #e2c0bb;">Interests</h4>
+          <p class="p-3 border-bottom">Travelling</p>
+          <!-- End of Interests Section -->
+
         </div>
-        <!-- End of Guide Collapse -->
-
-
-
-        <!--============= Traveller Collapse ================-->
-        <div class="collapse" id="traveller">
-          <div class="d-flex">
-            <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
-              <div class="border-bottom">
-                <h2 style="color: #e2c0bb;">No Traveller History</h2>
-                <button class="btn btn-theme-outline px-5 py-3 mt-2 mb-5" id="btn-search-des">Search for
-                  Destinations...</button>
-              </div>
-              <div class="border-bottom py-5">
-                <h2 style="color: #e2c0bb;">No Traveller Reviews</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- End of Traveller Collapse -->
-
       </div>
+      <!-- End of About Me Collapse -->
+
+
+
+      <!--=============== Guide Collapse ===================-->
+      <div class="collapse" id="guide">
+        <div class="d-flex">
+          <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
+            <div class="border-bottom">
+              <h2 style="color: #e2c0bb;">No Guide History</h2>
+              <button class="btn btn-theme-outline px-5 py-3 mt-2 mb-5">Become a Guide</button>
+            </div>
+            <div class="border-bottom py-5">
+              <h2 style="color: #e2c0bb;">No Guide Reviews</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of Guide Collapse -->
+
+
+
+      <!--============= Traveller Collapse ================-->
+      <div class="collapse" id="traveller">
+        <div class="d-flex">
+          <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
+            <div class="border-bottom">
+              <h2 style="color: #e2c0bb;">No Traveller History</h2>
+              <button class="btn btn-theme-outline px-5 py-3 mt-2 mb-5" id="btn-search-des">Search for
+                Destinations...</button>
+            </div>
+            <div class="border-bottom py-5">
+              <h2 style="color: #e2c0bb;">No Traveller Reviews</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of Traveller Collapse -->
+
+    </div>
   </section>
 </main>
 
@@ -355,12 +352,28 @@
         <select class="form-control" name="gender">
           {% if traveller_user %}
             {% for traveller in traveller_user %}
-              {% if traveller.is_guide %}
-                <div class="form-group">
-                  <label for="pph">Price/hr</label><br>
-                  <input type="number" class="form-control" name="pph" value="{{traveller.price_per_hour}}" >
-                </div>
-              {% endif %}
+              {% ifnotequal traveller.gender "" %}<option selected>{{traveller.gender}}</option>{% endifnotequal %}
+
+              {% ifequal traveller.gender "Male" %}
+              <option>Female</option>
+              <option>Other</option>
+              {% endifequal %}
+
+              {% ifequal traveller.gender "Female" %}
+              <option>Male</option>
+              <option>Other</option>
+              {% endifequal %}
+
+              {% ifequal traveller.gender "Other" %}
+              <option>Female</option>
+              <option>Male</option>
+              {% endifequal %}
+
+              {% ifequal traveller.gender "" %}
+              <option>Female</option>
+              <option>Male</option>
+              <option>Other</option>
+              {% endifequal %}
             {% endfor %}
           {% endif %}
         </select>

@@ -19,9 +19,9 @@ def dashboard(request):
     traveller_user = Traveller.objects.all().filter(email=user)
     if 'Update Profile' in request.POST:
       for traveller in traveller_user:
-        traveller.first_name = request.POST['first_name']
-        traveller.last_name = request.POST['last_name']
-        traveller.address = request.POST['address']
+        traveller.first_name = request.POST['first_name'].title()
+        traveller.last_name = request.POST['last_name'].title()
+        traveller.address = request.POST['address'].title()
         traveller.slogan = request.POST['slogan']
         traveller.bio = request.POST['bio']
         traveller.languages = request.POST['languages']
@@ -35,8 +35,8 @@ def dashboard(request):
         traveller.save()
 
       for user in root_user:
-        user.first_name = request.POST['first_name']
-        user.last_name = request.POST['last_name']
+        user.first_name = request.POST['first_name'].title()
+        user.last_name = request.POST['last_name'].title()
         user.save()
     return redirect('dashboard')
 
