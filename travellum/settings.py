@@ -25,7 +25,7 @@ SECRET_KEY = 'qi3^m_agsbz45g$nysz6-4d0@=q5&g$ik&xy&ax^tmf#$o$k&7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['1128ca8fb80b.ngrok.io','127.0.0.1']
+ALLOWED_HOSTS = ['1128ca8fb80b.ngrok.io','127.0.0.1','192.168.43.31']
 
 
 # Application definition
@@ -36,13 +36,8 @@ INSTALLED_APPS = [
     'guides.apps.GuidesConfig',
     'travellers.apps.TravellersConfig',
     'places.apps.PlacesConfig',
-    'chat.apps.ChatConfig',
-    #'channels',    
-    
-    'pages.apps.PagesConfig',    
-    
+    'chat.apps.ChatConfig',    
        
-    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -159,8 +154,8 @@ LOGIN_REDIRECT_URL = 'index'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = 'travellum7725@gmail.com'
+EMAIL_HOST_PASSWORD = 'hellotheremate'
 EMAIL_USE_TLS = True
 
 
