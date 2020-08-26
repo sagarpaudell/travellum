@@ -133,7 +133,7 @@ Details
                             <strong>Guide's Name:</strong>&nbsp;&nbsp;{{guide.info.first_name}} {{guide.info.last_name}} <br>
                             <strong>Contact No:</strong>: {{guide.info.contact_no}} <br>
                             <strong>Guide rating:</strong> 4/5 <br>
-                            <a href="#" class="btn btn-theme">View Profile</a>
+                            <a href="{% url 'view_profile' guide.info.id %}" class="btn btn-theme">View Profile</a>
 
                         </div>
                     </div>
