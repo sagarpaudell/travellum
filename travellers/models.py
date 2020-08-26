@@ -5,7 +5,7 @@ from accounts.models import User
 class Traveller(models.Model):
     first_name = models.CharField(max_length=200,blank=True)
     last_name = models.CharField(max_length=200,blank=True)
-    email = models.OneToOneField(User, on_delete= models.CASCADE, blank=True)
+    email = models.ForeignKey(User, on_delete= models.DO_NOTHING, blank=True)
     address = models.CharField(max_length=200,blank=True)
     city = models.CharField(max_length=100,blank=True)
     country = models.CharField(max_length=100,blank=True)
