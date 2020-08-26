@@ -8,7 +8,7 @@ from guides.views import GuideView
 def dashboard(request):
   user=request.user
   traveller_user=Traveller.objects.all().filter(email=user)
-  guide_user = Guide.objects.all().filter(email=user)
+  guide_user = Guide.objects.all().filter(email=user).first()
   for traveller in traveller_user:
     traveller_dp=traveller.photo_main
   context = {
