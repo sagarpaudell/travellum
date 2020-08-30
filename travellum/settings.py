@@ -36,13 +36,8 @@ INSTALLED_APPS = [
     'guides.apps.GuidesConfig',
     'travellers.apps.TravellersConfig',
     'places.apps.PlacesConfig',
-    'chat.apps.ChatConfig',
-    
-    
-    'pages.apps.PagesConfig',    
-    
+    'chat.apps.ChatConfig',    
        
-    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -78,7 +73,7 @@ TEMPLATES = [
         },
     },
 ]
-
+#ASGI_APPLICATION = 'travellum.routing.application'
 WSGI_APPLICATION = 'travellum.wsgi.application'
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -123,6 +118,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CHANNEL_LAYERS={
+    'default':{
+        'BACKEND':'channels_redis.core.RedisChannelLayer',
+        'CONFIG' : [('127.0.0.1',6379)]
+    }
+}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -152,8 +154,8 @@ LOGIN_REDIRECT_URL = 'index'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = 'travellum7725@gmail.com'
+EMAIL_HOST_PASSWORD = 'hellotheremate'
 EMAIL_USE_TLS = True
 
 

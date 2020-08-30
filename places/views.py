@@ -2,7 +2,9 @@ import json
 
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
-from .models import Place
+from .models import Place, Major_Attraction, Things_To_Do
+from guides.models import Guide
+from travellers.models import Traveller
 
 def places(request):
     places = Place.objects.all()
@@ -14,8 +16,23 @@ def places(request):
 
 def placedetails(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
+    attractions= Major_Attraction.objects.all().filter(place=place)
+    tasks= Things_To_Do.objects.all().filter(place=place)
+    temp_available_guides = Guide.objects.filter(places=place)
+    print(temp_available_guides)
+    available_guides=list()
+
+    for i in temp_available_guides:
+        user=i.email
+        traveller=Traveller.objects.filter(email=user).first()
+
+        available_guides.append({'guide':i , 'info':traveller})
+        print(user,traveller)
     context = {
-        'place':place
+        'available_guides' : available_guides,
+        'place':place,
+        'attractions':attractions,
+        'tasks':tasks,
     }
     return render(request, 'places/placedetails.html', context) 
 
@@ -28,7 +45,7 @@ def search(request):
         return JsonResponse(placenames, safe=False)
 
     searchtag = request.GET['search_places']
-    places = Place.objects.all().filter(name__icontains=searchtag)
+    places = Place.objects.all().filter(name__icontains=searchtag) | Place.objects.all().filter(description__icontains=searchtag) | Place.objects.all().filter(city__icontains=searchtag) | Place.objects.all().filter(country__icontains=searchtag )
     context = {
         'places':places
     }

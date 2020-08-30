@@ -19,24 +19,25 @@ Places
             <h2 class="mb-1">Best Places to Travel in the Country.</h2>
         </div>
     </div>
-    {% if places %}
-    {% for place in places %}
-        <div class="row">
-            <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-                <div class="project">
-                    <div class="img">
-                        <a href="{% url 'placedetails' place.id %}"><img src="{{ place.photo_1.url }}" class="img-fluid"
-                                alt="Image" style="height:315px; width:max-content; "></a>
-                    </div>
-                    <div class="text">
+    <div class="row">
+        {% if places %}
+            {% for place in places %}
+                <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
+                    <div class="project">
+                        <div class="img">
+                            <a href="{% url 'placedetails' place.id %}"><img src="{{ place.photo_1.url }}" class="img-fluid"
+                                    alt="Image" style="height:315px; width:max-content; "></a>
+                        </div>
+                        <div class="text">
 
-                        <h3 style="text-align: center;"><a href="{% url 'placedetails' place.id %}">{{ place.name }}</a></h3>
+                            <h3 style="text-align: center;"><a href="{% url 'placedetails' place.id %}">{{ place.name }}</a></h3>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        {% endfor %}
-    {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+
         <!-- <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
             <div class="project">
                 <div class="img">

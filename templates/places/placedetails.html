@@ -76,19 +76,11 @@ Details
 
     <div class="collapse" id="majorattractions">
         <h2 class="px-3 mb-4 border-bottom " style="color: #daa198; ">Some of the major attractions include:</h2>
-
-        <h4 class="px-3" style="color: #daa198;"><i class="fa fa-location-arrow pr-2"></i>Swayambhu</h4>
-        <p class="p-1 pb-3 px-3 border-bottom ">Located in the heart of kathnmandu................bla bla
-        </p>
-        <h4 class="px-3" style="color: #daa198;"><i class="fa fa-location-arrow pr-2"></i>Jawlakhel Zoo</h4>
-        <p class="p-1 pb-3 px-3 border-bottom "> Hometown of Samesh Bajracharya.You must definitely his Palace.
-        </p>
-        <h4 class="px-3" style="color: #daa198;"><i class="fa fa-location-arrow pr-2"></i>Pashupati</h4>
-        <p class="p-1 pb-3 px-3 border-bottom ">Pashupatinath Temple is a famous and sacred Hindu temple complex that is
-            located
-            on the banks of the Bagmati River, approximately 5 km north-east of Kathmandu in the eastern part of
-            Kathmandu Valley, the capital of Nepal.
-        </p>
+        {% for attraction in attractions %}
+            <h4 class="px-3" style="color: #daa198;"><i class="fa fa-location-arrow pr-2"></i>{{ attraction.attraction_name }}</h4>
+            <p class="p-1 pb-3 px-3 border-bottom ">{{ attraction.description }}
+            </p>
+        {% endfor %}
 
     </div>
     <!-- End of description Collapse -->
@@ -96,21 +88,12 @@ Details
     <!-- Things to do collapse -->
 
     <div class="collapse" id="thingstodo">
-        <h2 class="px-3 mb-4 border-bottom " style="color: #daa198; ">Popular things to do in Kathmandu:</h2>
-
-        <h4 class="px-3" style="color: #daa198;"><i class="fa fa-hand-point-right pr-2"></i>Taste newari cuisine</h4>
-        <p class="p-1 pb-3 px-3 ">Newari cuisine is the most celebrated food variety in the country that consists of
-            over
-            200 dishes. It is more elaborate than most Nepalese cuisines because the Kathmandu Valley has exceptionally
-            fertile alluvial soil and enough wealthy households to make growing produce more profitable than cultivating
-            rice and other staples.
-        </p>
-        <h4 class="px-3" style="color: #daa198;"><i class="fa fa-hand-point-right pr-2"></i>Hiking</h4>
-        <p class="p-1 pb-3 px-3"> Hiking is famous in kathmandu too....................
-        </p>
-        <h4 class="px-3" style="color: #daa198;"><i class="fa fa-hand-point-right pr-2"></i>Explore new</h4>
-        <p class="p-1 pb-3 px-3 "> न्यु रोड को गल्लि मा गएर एकचोटी नहराई त काठमाडौँ आएको मत्लबै भएन नि....
-        </p>
+        <h2 class="px-3 mb-4 border-bottom " style="color: #daa198; ">Popular things to do in {{ place.name }}:</h2>
+        {% for task in tasks %}
+            <h4 class="px-3" style="color: #daa198;"><i class="fa fa-hand-point-right pr-2"></i>{{ task.task_name }}</h4>
+            <p class="p-1 pb-3 px-3 ">{{task.description}}
+            </p>
+        {% endfor %}
 
     </div>
     <!-- End of things to do Collapse -->
@@ -121,52 +104,28 @@ Details
         <h2 class="px-3 mb-4 border-bottom " style="color: #daa198; ">Guides available in Kathmandu:</h2>
         <div class="container">
             <div class="row">
-
+                {% if available_guides %}
+                {% for guide in available_guides %}
                 <div class="col-md-6 mb-4">
                     <div class="row">
                         <div class="col-md-4">
-                            <img src="{% static 'images/samesh.jpg' %}" alt="Avatar" class="avatar"
+                            <img src="{{guide.info.photo_main.url}}" alt="Avatar" class="avatar"
                                 style="width: 150px; height: 150px; border-radius: 50%; margin-left:8%;">
                         </div>
                         <div class="col-md-8">
-                            <strong>Guide's Name:</strong>&nbsp;&nbsp;Ramlal Chaudhary <br>
-                            <strong>Contact No:</strong>: 9801511029 <br>
+                            <strong>Guide's Name:</strong>&nbsp;&nbsp;{{guide.info.first_name}} {{guide.info.last_name}} <br>
+                            <strong>Contact No:</strong>: {{guide.info.contact_no}} <br>
                             <strong>Guide rating:</strong> 4/5 <br>
-                            <a href="#" class="btn btn-theme">View Profile</a>
+                            <a href="{% url 'view_profile' guide.info.id %}" class="btn btn-theme">View Profile</a>
 
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-4">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="{% static 'images/deependra.jpg' %}" alt="Avatar" class="avatar"
-                                style="width: 150px; height: 150px; border-radius: 50%; margin-left:8%;">
-                        </div>
-                        <div class="col-md-8">
-                            <strong>Guide's Name:</strong>&nbsp;&nbsp;Deependra Hamal <br>
-                            <strong>Contact No:</strong>: 9801511029 <br>
-                            <strong>Guide rating:</strong> 4.5/5 <br>
-                            <a href="#" class="btn btn-theme">View Profile</a>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="{% static 'images/trees.jpg' %}" alt="Avatar" class="avatar"
-                                style="width: 150px; height: 150px; border-radius: 50%; margin-left:8%;">
-                        </div>
-                        <div class="col-md-8">
-                            <strong>Guide's Name:</strong>&nbsp;&nbsp;Biraj Bhatta <br>
-                            <strong>Contact No:</strong>: 9801511029 <br>
-                            <strong>Guide rating:</strong> 4.5/5 <br>
-                            <a href="#" class="btn btn-theme">View Profile</a>
-
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
+                {% else %}
+                    <h1> no available guides in your region</h1>
+                {% endif %}
+                
             </div>
         </div>
     </div>
