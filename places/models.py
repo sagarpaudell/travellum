@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from accounts.models import User 
 
 
 class Place(models.Model):
@@ -28,4 +29,10 @@ class Things_To_Do(models.Model):
     task_name = models.CharField(max_length=100,blank=True)
     description = models.TextField(blank=True)
    
+class Review(models.Model):
+    place_name = models.ForeignKey(Place,on_delete=models.CASCADE)
+    Reviewer = models.ForeignKey(User, on_delete=models.CASCADE)
+    place_review = models.TextField(blank=True)
+    ratings = models.DecimalField(max_digits=2, decimal_places=1, blank=True)
+
 
