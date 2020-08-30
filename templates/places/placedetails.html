@@ -68,7 +68,17 @@ Details
         <h2 class="px-3 pb-2 border-bottom" style="color: #daa198;">About kathmandu:</h2>
         <p class="pr-3 pb-5 pl-3 " style="margin-bottom: 10%;">{{ place.description }}
         </p>
-
+        <br>
+        <br>
+        <!-- Temporary place review section -->
+        {% if reviews %}
+            {% for review in reviews %}
+                <label>REVIEW BY {{ review.Reviewer.first_name }} ( {{ review.Reviewer }} )</label>
+                <p class="pr-3 pb-5 pl-3 " style="margin-bottom: 10%;">{{ review.place_review }}
+                </p>
+            {% endfor %}
+        {% endif %}
+        <!-- End of Temp. Review Section -->
     </div>
     <!-- End of description Collapse -->
 

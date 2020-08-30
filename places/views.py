@@ -2,7 +2,7 @@ import json
 
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
-from .models import Place
+from .models import Place, Review
 from guides.models import Guide
 from travellers.models import Traveller
 
@@ -16,8 +16,8 @@ def places(request):
 
 def placedetails(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
+    reviews = Review.objects.all().filter(place_name=place)
     temp_available_guides = Guide.objects.filter(places=place)
-    print(temp_available_guides)
     available_guides=list()
 
     for i in temp_available_guides:
@@ -28,7 +28,8 @@ def placedetails(request, place_id):
         print(user,traveller)
     context = {
         'available_guides' : available_guides,
-        'place':place
+        'place':place,
+        'reviews':reviews
     }
     return render(request, 'places/placedetails.html', context) 
 
