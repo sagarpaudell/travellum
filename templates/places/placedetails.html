@@ -68,7 +68,17 @@ Details
         <h2 class="px-3 pb-2 border-bottom" style="color: #daa198;">About kathmandu:</h2>
         <p class="pr-3 pb-5 pl-3 " style="margin-bottom: 10%;">{{ place.description }}
         </p>
-
+        <br>
+        <br>
+        <!-- Temporary place review section -->
+        {% if reviews %}
+            {% for review in reviews %}
+                <label>REVIEW BY {{ review.Reviewer.first_name }} ( {{ review.Reviewer }} )</label>
+                <p class="pr-3 pb-5 pl-3 " style="margin-bottom: 10%;">{{ review.place_review }}
+                </p>
+            {% endfor %}
+        {% endif %}
+        <!-- End of Temp. Review Section -->
     </div>
     <!-- End of description Collapse -->
 
@@ -76,19 +86,11 @@ Details
 
     <div class="collapse" id="majorattractions">
         <h2 class="px-3 mb-4 border-bottom " style="color: #daa198; ">Some of the major attractions include:</h2>
-
-        <h4 class="px-3" style="color: #daa198;"><i class="fa fa-location-arrow pr-2"></i>Swayambhu</h4>
-        <p class="p-1 pb-3 px-3 border-bottom ">Located in the heart of kathnmandu................bla bla
-        </p>
-        <h4 class="px-3" style="color: #daa198;"><i class="fa fa-location-arrow pr-2"></i>Jawlakhel Zoo</h4>
-        <p class="p-1 pb-3 px-3 border-bottom "> Hometown of Samesh Bajracharya.You must definitely his Palace.
-        </p>
-        <h4 class="px-3" style="color: #daa198;"><i class="fa fa-location-arrow pr-2"></i>Pashupati</h4>
-        <p class="p-1 pb-3 px-3 border-bottom ">Pashupatinath Temple is a famous and sacred Hindu temple complex that is
-            located
-            on the banks of the Bagmati River, approximately 5 km north-east of Kathmandu in the eastern part of
-            Kathmandu Valley, the capital of Nepal.
-        </p>
+        {% for attraction in attractions %}
+            <h4 class="px-3" style="color: #daa198;"><i class="fa fa-location-arrow pr-2"></i>{{ attraction.attraction_name }}</h4>
+            <p class="p-1 pb-3 px-3 border-bottom ">{{ attraction.description }}
+            </p>
+        {% endfor %}
 
     </div>
     <!-- End of description Collapse -->
@@ -96,21 +98,12 @@ Details
     <!-- Things to do collapse -->
 
     <div class="collapse" id="thingstodo">
-        <h2 class="px-3 mb-4 border-bottom " style="color: #daa198; ">Popular things to do in Kathmandu:</h2>
-
-        <h4 class="px-3" style="color: #daa198;"><i class="fa fa-hand-point-right pr-2"></i>Taste newari cuisine</h4>
-        <p class="p-1 pb-3 px-3 ">Newari cuisine is the most celebrated food variety in the country that consists of
-            over
-            200 dishes. It is more elaborate than most Nepalese cuisines because the Kathmandu Valley has exceptionally
-            fertile alluvial soil and enough wealthy households to make growing produce more profitable than cultivating
-            rice and other staples.
-        </p>
-        <h4 class="px-3" style="color: #daa198;"><i class="fa fa-hand-point-right pr-2"></i>Hiking</h4>
-        <p class="p-1 pb-3 px-3"> Hiking is famous in kathmandu too....................
-        </p>
-        <h4 class="px-3" style="color: #daa198;"><i class="fa fa-hand-point-right pr-2"></i>Explore new</h4>
-        <p class="p-1 pb-3 px-3 "> न्यु रोड को गल्लि मा गएर एकचोटी नहराई त काठमाडौँ आएको मत्लबै भएन नि....
-        </p>
+        <h2 class="px-3 mb-4 border-bottom " style="color: #daa198; ">Popular things to do in {{ place.name }}:</h2>
+        {% for task in tasks %}
+            <h4 class="px-3" style="color: #daa198;"><i class="fa fa-hand-point-right pr-2"></i>{{ task.task_name }}</h4>
+            <p class="p-1 pb-3 px-3 ">{{task.description}}
+            </p>
+        {% endfor %}
 
     </div>
     <!-- End of things to do Collapse -->
