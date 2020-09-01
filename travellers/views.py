@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from accounts.models import User
 from travellers.models import Traveller
 from guides.models import Guide, GuideReview
+from notifications.models import Notification
 
 def view_profile(request, traveller_id):
   user=request.user
+  notifications = Notification.objects.all().filter(receiver_email=user)
   
   if "review_form" in request.POST:
     print(request.POST)
@@ -40,6 +42,7 @@ def view_profile(request, traveller_id):
                     'traveller_user':traveller_user,
                     'my_profile':False,
                     'traveller_dp':traveller_dp,
+                    'notifications': notifications,
                     }
             return render(request, 'dashboard/dashboard.html',context)
         else:
@@ -47,7 +50,8 @@ def view_profile(request, traveller_id):
                 context = {
                     'logged_in_user':traveller_user_logged_in,
                     'traveller_user':traveller_user,
-                    'my_profile':False, 
+                    'my_profile':False,
+                    'notifications': notifications, 
                          }
                 return render(request, 'dashboard/dashboard.html',context)
 

@@ -3,19 +3,22 @@ from accounts.models import User
 from travellers.models import Traveller
 from guides.models import Guide
 from guides.views import GuideView
+from notifications.models import Notification
 
 # Create your views here.
 def dashboard(request):
   user=request.user
   traveller_user=Traveller.objects.all().filter(email=user)
   guide_user = Guide.objects.all().filter(email=user).first()
+  notifications = Notification.objects.all().filter(receiver_email=user)
   for traveller in traveller_user:
     traveller_dp=traveller.photo_main
   context = {
                 'traveller_user':traveller_user,
                 'my_profile':True,
                 'traveller_dp':traveller_dp,
-                'guide_user' : guide_user
+                'guide_user' : guide_user,
+                'notifications': notifications,
             }
  
   if (request.method == "POST" ):
