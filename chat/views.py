@@ -2,6 +2,8 @@ from accounts.models import User
 from chat.models import Chat
 from travellers.models import Traveller
 
+from operator import itemgetter
+
 from django.shortcuts import render,redirect
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
@@ -28,9 +30,17 @@ def chat(request, email):
             continue
         else:
             messages= all_chat_list.filter(Q(sender=user) | Q(receiver=user)).last()
+            last_message_time=messages.message_time.isoformat()
             is_last_messagebycurrentuser= True if messages.sender==current_user else False
             photo=Traveller.objects.filter(email=user).first().photo_main   
-            user_name_chat.append({'user':user, 'messages':messages,'last_message':messages.message_text[:40],'is_last_messagebycurrentuser':is_last_messagebycurrentuser,'user_photo':photo})        
+            user_name_chat.append({
+                'user':user, 
+                'messages' : messages, 
+                'last_message' : messages.message_text[:40],
+                'is_last_messagebycurrentuser' : is_last_messagebycurrentuser, 
+                'user_photo' : photo, 
+                'last_message_time' : last_message_time
+            })        
            
         # print(index)
         # print(user_name_chat[0]['is_last_messagebycurrentuser'])
@@ -39,7 +49,8 @@ def chat(request, email):
         # print(chat_list)
         
         index+=1
-        
+    
+    user_name_chat=sorted(user_name_chat, key=itemgetter('last_message_time'), reverse=True)
         
     context={ 
         'chat_details':user_name_chat,
@@ -49,6 +60,7 @@ def chat(request, email):
         'traveller_chatuser':Traveller.objects.filter(email=friend_user.id).first()
         
     }
+    
     print(context['traveller_currentuser'].photo_main)
    
     
@@ -70,4 +82,8 @@ def chatRedirect(request):
    
 
 
+@login_required
+def course_chat_room(request, course_id):
+    print(course_id)
+    return render(request, 'chat/room.html', {'course_id': course_id})
     
