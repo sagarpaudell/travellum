@@ -55,6 +55,14 @@ Dashboard
                   <div class="col-md-6 text-right">
                     <h3><span class="display-4 d-inline text-success">Rs.</span>{{traveller.price_per_hour}}/hr</h3>
                   </div>
+                  <div>
+                    <form action="{% url 'notifications' %}" method="POST">
+                      {% csrf_token %}
+                      
+                      <input type="hidden" name="traveller_id" value="{{ traveller.id }}">
+                      <input type="submit" name="request_guide">
+                    </form>
+                  </div>
                   {% endif %}
                   {% endfor %}
                   {% endif %}

@@ -12,6 +12,6 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('places/', include('places.urls')),
     path('chat/', include('chat.urls')),
-    path('guides/', include('travellers.urls'))
+    path('guides/', include('travellers.urls')),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -51,11 +51,14 @@ def dashboard(request):
       #for guide form
     if 'Guide-Form' in request.POST:
       GuideView(request)  #calls guide's view in guide app
+    
+    #for notification
+    if 'request_guide' in request.POST:
+      notifications(request) 
       
     return redirect('dashboard')
   return render(request, 'dashboard/dashboard.html',context)
 
-  
   
     
 
