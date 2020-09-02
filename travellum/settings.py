@@ -36,8 +36,8 @@ INSTALLED_APPS = [
     'guides.apps.GuidesConfig',
     'travellers.apps.TravellersConfig',
     'places.apps.PlacesConfig',
-    'chat.apps.ChatConfig',    
-       
+    'chat.apps.ChatConfig',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -91,12 +91,8 @@ AUTH_USER_MODEL = 'accounts.User'
 # }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'travellum_db',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost'
-
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
 
@@ -118,10 +114,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-CHANNEL_LAYERS={
-    'default':{
-        'BACKEND':'channels_redis.core.RedisChannelLayer',
-        'CONFIG' : [('127.0.0.1',6379)]
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': [('127.0.0.1', 6379)]
     }
 }
 
@@ -159,7 +155,7 @@ EMAIL_HOST_PASSWORD = 'hellotheremate'
 EMAIL_USE_TLS = True
 
 
-#Media Folder Settings
+# Media Folder Settings
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
