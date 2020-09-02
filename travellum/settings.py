@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'travellers.apps.TravellersConfig',
     'places.apps.PlacesConfig',
     'chat.apps.ChatConfig',
+    'notifications.apps.NotificationsConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',

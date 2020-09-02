@@ -51,48 +51,22 @@
               <img class="hw-bell" src="{% static 'svg/bell.svg' %}" alt="">
             </a>
             <ul class="dropdown-menu dropdown-menu-right">
-              <li>
-                <a href="#" class="top-text-block">
-                  <div class="top-text-heading">Biraj wants to <b>travel</b> with you</div>
-                  <div class="top-text-light">15 minutes ago</div>
-                </a> 
-              </li>
-              <li>
+              {% if notifications %}
+                {% for notification in notifications %}
+                  <li>
+                    <a href="#" class="top-text-block">
+                      <div class="top-text-heading">{{ notification.sender_name }} has made a request for guide.</div>
+                      <div class="top-text-light">15 minutes ago</div>
+                    </a> 
+                  </li>
+                {% endfor %}
+              {% endif %}
+              <!-- <li>
                 <a href="#" class="top-text-block">
                   <div class="top-text-heading">How was your <b>trip</b> with Buddha? Rate Buddha</div>
                   <div class="top-text-light">15 minutes ago</div>
                 </a> 
-              </li>
-              <li>
-                <a href="#" class="top-text-block">
-                  <div class="top-text-heading">Update <b>your profile</b> </div>
-                  <div class="top-text-light">15 minutes ago</div>
-                </a> 
-              </li>
-              <li>
-                <a href="#" class="top-text-block">
-                  <div class="top-text-heading">Update <b>your profile</b> </div>
-                  <div class="top-text-light">15 minutes ago</div>
-                </a> 
-              </li>
-              <li>
-                <a href="#" class="top-text-block">
-                  <div class="top-text-heading">Update <b>your profile</b> </div>
-                  <div class="top-text-light">15 minutes ago</div>
-                </a> 
-              </li>
-              <li>
-                <a href="#" class="top-text-block">
-                  <div class="top-text-heading">Update <b>your profile</b> </div>
-                  <div class="top-text-light">15 minutes ago</div>
-                </a> 
-              </li>
-              <li>
-                <a href="#" class="top-text-block">
-                  <div class="top-text-heading">Update <b>your profile</b> </div>
-                  <div class="top-text-light">15 minutes ago</div>
-                </a> 
-              </li>
+              </li> -->
             </ul>
             {% else %}
               <a type="button" class="nav-link dropdown-toggle" href='/accounts/login/'>
