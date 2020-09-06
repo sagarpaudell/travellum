@@ -32,7 +32,8 @@ def chat(request, email):
             messages= all_chat_list.filter(Q(sender=user) | Q(receiver=user)).last()
             last_message_time=messages.message_time.isoformat()
             is_last_messagebycurrentuser= True if messages.sender==current_user else False
-            photo=Traveller.objects.filter(email=user).first().photo_main   
+            photo=Traveller.objects.filter(email=user).first().photo_main  
+            print(photo) 
             user_name_chat.append({
                 'user':user, 
                 'messages' : messages, 

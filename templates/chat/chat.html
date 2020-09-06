@@ -69,7 +69,7 @@ Messenger
         <p>{{chat_friend.first_name}} {{chat_friend.last_name}} </p>
       </div>
       <div class="messages">
-        <ul>
+        <ul id='message-ul'>
           {% for chat in chat_list %}
           {% if chat.sender.email == user.email %}
           <li class="sent">
@@ -89,8 +89,8 @@ Messenger
         <div class="wrap">
           <form method="post">
             {% csrf_token %}
-            <input type="text" name="message" placeholder="Write your message" style="color: black;">
-            <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+            <input type="text" name="message" placeholder="Write your message" style="color: black;" id='chat-message-input'>
+            <button class="submit" id="submit-button"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
           </form>
         </div>
       </div>
@@ -98,4 +98,96 @@ Messenger
   </div>
 </div>
 
+<script>
+  $(document).ready(function(){
+  
+      var url='ws://'+ window.location.host+'/ws/chat/' + '{{chat_friend.email}}/';
+      var chatSocket = new WebSocket(url);
+      
+      chatSocket.onmessage = function(event){
+        var data = JSON.parse(event.data);
+        var message = data.message;
+        var $messages = $('#message-ul')
+        
+        var user = '{{user.email}}'
+      
+        if(user == data.sender) {
+          $messages.append('<li class="sent"><img src="{{ traveller_currentuser.photo_main.url }}" alt="" /><p>' + message + '</p></li>');
+             
+        } else{
+          $messages.append('<li class="replies"><img src="{{ traveller_chatuser.photo_main.url }}" alt="" /><p>' + message + '</p></li>');
+          
+        }
+            
+      };
+        
+      chatSocket.onclose = function(event){
+            console.error('Chat socket closed unexpectedly');
+      };
+      
+      chatSocket.onopen = function(event){
+        var $input = $('#chat-message-input');
+        var $submit = $('#submit-button');
+        
+        $submit.click(function(e){
+          e.preventDefault()
+          
+          var message= $input.val();
+          if(message){
+              chatSocket.send(JSON.stringify({'message':message}));
+              $input.val('');
+              $input.focus();
+              
+          }
+          $input.focus();
+        });
+      }
+
+      
+    
+
+  });
+
+
+  // $(document).ready(function(){
+  //   var url= 'ws://'+ window.location.host+'/ws/chat/' + '{{chat_friend.email}}/';
+  //   var chatsocket = new WebSocket(url);
+    
+  //   chatsocket.onmessage = function(e){
+      
+  //     var data = JSON.parse(e.data);
+  //     var message = data.message;
+  //     var $replies = $('#replies');
+  //     var $sent = $('sent');
+  //     var user = '{{user.email}}'
+      
+  //     if(user == data.sender) {
+  //       $sent.append('<img src="{{ traveller_currentuser.photo_main.url }}" alt="" /> + <p> + message + </p>');
+  //     } else{
+  //       $replies.append('<img src="{{ traveller_chatuser.photo_main.url }}" alt="" /> + <p> + message + </p>');
+  //     }
+
+  //   };
+    
+  //   chatSocket.onclose = function(e){
+  //     console.error('chat socket closed unexpectedly');
+  //   };
+  //   chatSocket.onopen = function(e){
+  //     var $input = $('#chat-message-input');
+  //     var $submit = $('#button');
+  //     $submit.click = function(){
+  //     }
+  //   };
+
+
+  //   })
+
+
+
+
+
+ 
+
+
+</script>
 {% endblock %}

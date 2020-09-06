@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'places.apps.PlacesConfig',
     'chat.apps.ChatConfig',
     'notifications.apps.NotificationsConfig',
-
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -74,28 +74,28 @@ TEMPLATES = [
         },
     },
 ]
-#ASGI_APPLICATION = 'travellum.routing.application'
-WSGI_APPLICATION = 'travellum.wsgi.application'
+ASGI_APPLICATION = 'travellum.routing.application'
+# WSGI_APPLICATION = 'travellum.wsgi.application'
 AUTH_USER_MODEL = 'accounts.User'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'travellum_db',
-#         'USER': 'postgres',
-#         'PASSWORD': 'postgres',
-#         'HOST': 'localhost'
-#     }
-# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'travellum_db',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost'
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'mydatabase',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -118,8 +118,10 @@ AUTH_PASSWORD_VALIDATORS = [
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': [('127.0.0.1', 6379)]
-    }
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
 }
 
 
