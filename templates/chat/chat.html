@@ -48,7 +48,7 @@ Messenger
                   <p style="color: aliceblue; font-size: 1rem; ">{{chat_detail.user.first_name}}
                     {{chat_detail.user.last_name}}
                   </p>
-                  <p class="preview" style="color: #20e58c; font-size: 0.9rem; ">
+                  <p class="preview" style="color: #ffffff; font-size: 0.7rem; font-weight: 200 ">
                     {% if chat_detail.is_last_messagebycurrentuser %}
                     you: {% endif %}{{chat_detail.last_message}}
 
@@ -89,7 +89,7 @@ Messenger
         <div class="wrap">
           <form method="post">
             {% csrf_token %}
-            <input type="text" name="message" placeholder="Write your message" style="color: black;" id='chat-message-input'>
+            <input type="text" name="message" placeholder="Write your message" style="color: black;" id='chat-message-input' autocomplete="off">
             <button class="submit" id="submit-button"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
           </form>
         </div>
@@ -113,11 +113,18 @@ Messenger
       
         if(user == data.sender) {
           $messages.append('<li class="sent"><img src="{{ traveller_currentuser.photo_main.url }}" alt="" /><p>' + message + '</p></li>');
-             
+          $(".messages").animate({ 
+                    scrollTop: $( 
+                      '.messages').get(0).scrollHeight 
+                }, 600);    
         } else{
           $messages.append('<li class="replies"><img src="{{ traveller_chatuser.photo_main.url }}" alt="" /><p>' + message + '</p></li>');
-          
+          $(".messages").animate({ 
+                    scrollTop: $( 
+                      '.messages').get(0).scrollHeight 
+                }, 600); 
         }
+        
             
       };
         
@@ -128,7 +135,10 @@ Messenger
       chatSocket.onopen = function(event){
         var $input = $('#chat-message-input');
         var $submit = $('#submit-button');
-        
+        $(".messages").animate({ 
+                    scrollTop: $( 
+                      '.messages').get(0).scrollHeight 
+                }, 1000); 
         $submit.click(function(e){
           e.preventDefault()
           
@@ -136,7 +146,7 @@ Messenger
           if(message){
               chatSocket.send(JSON.stringify({'message':message}));
               $input.val('');
-              $input.focus();
+              
               
           }
           $input.focus();
