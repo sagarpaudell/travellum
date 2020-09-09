@@ -5,6 +5,8 @@ from asgiref.sync import sync_to_async
 from accounts.models import User
 from chat.models import Chat
 
+from django.utils import timezone
+
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -22,6 +24,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         )
         #accept connection
         await self.accept()
+        
     async def disconnect(self, close_code):
         #leave room group
         await self.channel_layer.group_discard(
@@ -41,7 +44,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
             {
                 'type': 'chat_message',
                 'message': message,
-                'sender' : self.scope['user'].email
+                'sender' : self.scope['user'].email,
+                'time'   : timezone.now().isoformat()
             }
         )
         
@@ -55,3 +59,5 @@ class ChatConsumer(AsyncWebsocketConsumer):
         receiver = User.objects.get(id=self.friend_id)
         hello = Chat(sender=sender, receiver=receiver, message_text=message)
         hello.save()
+
+

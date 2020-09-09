@@ -68,7 +68,7 @@ def search(request):
         for place in pla:
             placenames.append(place.name)
         return JsonResponse(placenames, safe=False)
-
+    print(request.GET.get('term'))
     searchtag = request.GET['search_places']
     places = Place.objects.all().filter(name__icontains=searchtag) | Place.objects.all().filter(description__icontains=searchtag) | Place.objects.all().filter(city__icontains=searchtag) | Place.objects.all().filter(country__icontains=searchtag )
     context = {
