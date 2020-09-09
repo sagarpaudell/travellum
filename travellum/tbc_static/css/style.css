@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&display=swap');
@@ -24,7 +23,7 @@ a:hover {
   padding: 0rem !important;
 }
 .pad-1 {
-  padding: .3rem !important;
+  padding: 0.3rem !important;
 }
 
 .mar-0 {
@@ -32,7 +31,7 @@ a:hover {
 }
 
 .cursorpointer {
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .bg-theme {
@@ -46,7 +45,7 @@ a:hover {
 }
 
 .bg-white {
-  background: rgba(255,255,255,0.9);
+  background: rgba(255, 255, 255, 0.9);
   color: #333;
 }
 
@@ -59,7 +58,7 @@ a:hover {
 }
 
 .text-lightgray {
-  color: #999; 
+  color: #999;
 }
 
 .offset {
@@ -67,17 +66,17 @@ a:hover {
 }
 
 .bg-custom {
-  background: rgba(255,255,255,0.9);
+  background: rgba(255, 255, 255, 0.9);
   color: #333;
   height: 220px;
 }
 
-.bg-custom .container .row{
+.bg-custom .container .row {
   padding: 3.5rem 2rem;
 }
 
 .bg-white {
-  background: rgba(255,255,255,0.9);
+  background: rgba(255, 255, 255, 0.9);
   color: #333;
 }
 
@@ -104,23 +103,24 @@ a:hover {
   outline: none !important;
   box-shadow: none !important;
   color: #f8f9fa !important;
-
 }
 
 ::placeholder {
   color: #f8f9fa !important;
 }
 
-.navbar-brand, .navbar-nav, nav .container .row div:nth-child(2) form {
-  padding-top: .7rem;
-  padding-bottom: .7rem;
+.navbar-brand,
+.navbar-nav,
+nav .container .row div:nth-child(2) form {
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
 }
 
 .navbar-scroll {
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba(0,0,0,0.5) !important;
+  background: rgba(0, 0, 0, 0.5) !important;
   width: 100%;
   transition: 0.3s;
   animation: scroll 0.3s 1;
@@ -128,8 +128,12 @@ a:hover {
 }
 
 @keyframes scroll {
-  0%{transform: translateY(-100%);}
-  100%{transform: translateY(0%);}
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
 }
 
 .navbar-brand-sm {
@@ -168,7 +172,6 @@ a:hover {
   width: 32px !important;
   border-radius: 50%;
 }
-
 
 /*$$$$$$ Source: https://codepen.io/badhe/pen/OREomL $$$$$$*/
 .top-text-block {
@@ -238,7 +241,6 @@ a:hover {
   }
 }
 
-
 /* ======================= Accounts ========================= */
 .account-input {
   outline: none !important;
@@ -265,8 +267,6 @@ a:hover {
 .is-invalid {
   color: orangered !important;
 }
-
-
 
 /*========================== Section-1 =======================*/
 .section-1 {
@@ -295,7 +295,7 @@ a:hover {
   font-weight: 800;
 }
 
-.bg-custom .row h1{
+.bg-custom .row h1 {
   font-weight: 100;
 }
 
@@ -307,23 +307,23 @@ a:hover {
 .profile-pic {
   height: 150px !important;
   width: 150px !important;
-  background-image: url('../images/person1.jpg');
+  background-image: url('../images/default.png');
   background-size: cover;
   background-position: center;
   background-blend-mode: multiply;
   vertical-align: middle;
   text-align: center;
   color: transparent;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
   text-decoration: none;
   cursor: pointer;
 }
 
 .profile-pic:hover {
-  background-color: rgba(0,0,0,.5);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 10000;
   color: #fff;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
   text-decoration: none;
 }
 
@@ -340,17 +340,18 @@ a:hover {
 
 /*================== Media Queries ===========================*/
 
-@media screen and (max-width: 1200px) { /* larger desktops/laptops and smaller */
-  .bg-custom .container .row{
+@media screen and (max-width: 1200px) {
+  /* larger desktops/laptops and smaller */
+  .bg-custom .container .row {
     padding: 2rem;
   }
 }
 
 @media screen and (max-width: 991px) {
-  .bg-custom .container .row{
+  .bg-custom .container .row {
     padding: 1rem;
   }
-  
+
   #social-logins {
     width: 35% !important;
   }
@@ -359,25 +360,24 @@ a:hover {
     width: 36% !important;
     margin-left: 32% !important;
   }
-
 }
 
 @media screen and (max-width: 767px) {
   .navbar-brand-sm {
     display: inline !important;
   }
-  .navbar-brand{
+  .navbar-brand {
     display: none;
   }
   #searchDesInput {
     display: none !important;
   }
-  
+
   nav .container .row div:nth-child(2) form {
     justify-content: center;
   }
   .navbar-nav {
-    padding-top: .3rem;
+    padding-top: 0.3rem;
     padding-bottom: 0;
   }
   #search {
@@ -396,11 +396,12 @@ a:hover {
     display: block !important;
   }
 
-  .bg-custom .row h1{
+  .bg-custom .row h1 {
     font-size: 2rem;
   }
 
-  #accordion-login, #accordion-register {
+  #accordion-login,
+  #accordion-register {
     width: 75% !important;
     margin-left: 13% !important;
   }
@@ -415,10 +416,4 @@ a:hover {
   .reduce-on-phones-3 {
     font-size: 14px !important;
   }
-
 }
-
-
-
-
-
