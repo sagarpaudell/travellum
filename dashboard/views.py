@@ -63,12 +63,3 @@ def dashboard(request):
 
 
 
-  
-
-
-
-
-
-
-  
-
