@@ -25,7 +25,7 @@ SECRET_KEY = 'qi3^m_agsbz45g$nysz6-4d0@=q5&g$ik&xy&ax^tmf#$o$k&7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'travellers.apps.TravellersConfig',
     'places.apps.PlacesConfig',
     'chat.apps.ChatConfig',
-    'notifications.apps.NotificationsConfig',    
-       
+    'notifications.apps.NotificationsConfig',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -74,8 +74,8 @@ TEMPLATES = [
         },
     },
 ]
-#ASGI_APPLICATION = 'travellum.routing.application'
-WSGI_APPLICATION = 'travellum.wsgi.application'
+ASGI_APPLICATION = 'travellum.routing.application'
+# WSGI_APPLICATION = 'travellum.wsgi.application'
 AUTH_USER_MODEL = 'accounts.User'
 
 # Database
@@ -92,12 +92,8 @@ AUTH_USER_MODEL = 'accounts.User'
 # }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'travellum_db',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost'
-
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
 
@@ -119,11 +115,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-CHANNEL_LAYERS={
-    'default':{
-        'BACKEND':'channels_redis.core.RedisChannelLayer',
-        'CONFIG' : [('127.0.0.1',6379)]
-    }
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
 }
 
 
@@ -160,7 +158,7 @@ EMAIL_HOST_PASSWORD = 'hellotheremate'
 EMAIL_USE_TLS = True
 
 
-#Media Folder Settings
+# Media Folder Settings
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

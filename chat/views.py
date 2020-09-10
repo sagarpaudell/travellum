@@ -3,6 +3,7 @@ from chat.models import Chat
 from travellers.models import Traveller
 
 from operator import itemgetter
+from PIL import Image
 
 from django.shortcuts import render,redirect
 from django.db.models import Q
@@ -32,7 +33,8 @@ def chat(request, email):
             messages= all_chat_list.filter(Q(sender=user) | Q(receiver=user)).last()
             last_message_time=messages.message_time.isoformat()
             is_last_messagebycurrentuser= True if messages.sender==current_user else False
-            photo=Traveller.objects.filter(email=user).first().photo_main   
+            photo=Traveller.objects.filter(email=user).first().photo_main  
+            
             user_name_chat.append({
                 'user':user, 
                 'messages' : messages, 
@@ -49,7 +51,7 @@ def chat(request, email):
         # print(chat_list)
         
         index+=1
-    
+    # sort users in order of message time
     user_name_chat=sorted(user_name_chat, key=itemgetter('last_message_time'), reverse=True)
         
     context={ 
@@ -68,10 +70,10 @@ def chat(request, email):
     return render(request, "chat/chat.html", context)
 @login_required
 def chatRedirect(request):
-    chat_list = Chat.objects.filter(Q(sender=request.user) | Q(receiver=request.user))
+    last_message = Chat.objects.filter(Q(sender=request.user) | Q(receiver=request.user)).last()
+    
     try:
-        chat = chat_list[0]
-        user = chat.receiver if chat.sender==request.user else chat.sender
+        user = last_message.receiver if last_message.sender==request.user else last_message.sender
         print(user.email)
         return redirect(f"{user.email}")
 
@@ -82,8 +84,8 @@ def chatRedirect(request):
    
 
 
-@login_required
-def course_chat_room(request, course_id):
-    print(course_id)
-    return render(request, 'chat/room.html', {'course_id': course_id})
+# @login_required
+# def course_chat_room(request, course_id):
+#     print(course_id)
+#     return render(request, 'chat/room.html', {'course_id': course_id})
     

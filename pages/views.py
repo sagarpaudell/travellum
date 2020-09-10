@@ -5,7 +5,6 @@ from places.models import Place
 from guides.models import Guide
  
 def index(request):
-
     published_guides = Guide.objects.all().filter(is_published=True)
     x=list()
     for guide in published_guides:
