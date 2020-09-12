@@ -4,8 +4,6 @@ from travellers.models import Traveller
 from accounts.models import User
 from places.models import Place
 
-from django.core.validators import MaxValueValidator, MinValueValidator
-
 class Guide(models.Model):
     email = models.OneToOneField(User,on_delete= models.CASCADE, unique=True)
     reg_date = models.DateTimeField(default=datetime.now, blank=True)
@@ -17,18 +15,9 @@ class Guide(models.Model):
     citizenship_front = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     citizenship_back= models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     citizenship_number = models.CharField(max_length=20,blank=True)
-    reviews = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=3, blank=True, null=True)
     places = models.ManyToManyField(Place, blank=True)
 
     def __str__(self):
         return self.email.email
 
-class GuideReview(models.Model):
-    reviewer=models.OneToOneField(Traveller, on_delete=models.DO_NOTHING)
-    guide=models.ForeignKey(Guide, on_delete=models.DO_NOTHING)
-    review_text=models.TextField(blank=False)
-    review_score=models.IntegerField(default=4,
-        validators=[MaxValueValidator(5), MinValueValidator(0)]
-    )
-    review_date=models.DateTimeField(default=datetime.now, blank=True)

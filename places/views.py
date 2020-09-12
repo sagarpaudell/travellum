@@ -10,7 +10,7 @@ from accounts.models import User
 
 def places(request):
     current_user=request.user
-    if user.is_authenticated:
+    if current_user.is_authenticated:
         notifications = Notification.objects.all().filter(receiver_email=current_user)
         places = Place.objects.all()
         context = {
@@ -68,7 +68,7 @@ def search(request):
         for place in pla:
             placenames.append(place.name)
         return JsonResponse(placenames, safe=False)
-
+    print(request.GET.get('term'))
     searchtag = request.GET['search_places']
     places = Place.objects.all().filter(name__icontains=searchtag) | Place.objects.all().filter(description__icontains=searchtag) | Place.objects.all().filter(city__icontains=searchtag) | Place.objects.all().filter(country__icontains=searchtag )
     context = {

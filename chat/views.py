@@ -1,6 +1,7 @@
 from accounts.models import User
 from chat.models import Chat
 from travellers.models import Traveller
+from places.models import Place
 
 from operator import itemgetter
 from PIL import Image
@@ -43,7 +44,7 @@ def chat(request, email):
                 'user_photo' : photo, 
                 'last_message_time' : last_message_time
             })        
-           
+            print(messages.message_time.isoformat())
         # print(index)
         # print(user_name_chat[0]['is_last_messagebycurrentuser'])
         # print(user_name_chat[index]['user'])
@@ -63,8 +64,8 @@ def chat(request, email):
         
     }
     
-    print(context['traveller_currentuser'].photo_main)
-   
+    # print(context['traveller_currentuser'].photo_main)
+    print(context['chat_friend'])
     
 
     return render(request, "chat/chat.html", context)
@@ -81,7 +82,8 @@ def chatRedirect(request):
         print(chat_list.first())
         #print(user.email)
         return redirect("index")
-   
+
+
 
 
 # @login_required
