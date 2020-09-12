@@ -10,7 +10,7 @@ from accounts.models import User
 
 def places(request):
     current_user=request.user
-    if user.is_authenticated:
+    if current_user.is_authenticated:
         notifications = Notification.objects.all().filter(receiver_email=current_user)
         places = Place.objects.all()
         context = {
