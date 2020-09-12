@@ -6,19 +6,13 @@ from notifications.models import Notification
 from django.contrib import messages,auth
 
 def view_profile(request, traveller_id):
-  user=request.user
-  notifications = Notification.objects.all().filter(receiver_email=user)
+    user=request.user
   
 
-  if user.is_authenticated:
-    traveller_user_logged_in=Traveller.objects.all().filter(email=user)
-    for traveller in traveller_user_logged_in:
-        traveller_dp=traveller.photo_main
-    user=request.user
     if user.is_authenticated:
-        traveller_user_logged_in=Traveller.objects.all().filter(email=user)
-        for traveller in traveller_user_logged_in:
-            traveller_dp=traveller.photo_main
+        notifications = Notification.objects.all().filter(receiver_email=user)
+        traveller_user_logged_in= get_object_or_404(Traveller, email=user)
+        traveller_dp=traveller_user_logged_in.photo_main
 
     profile=get_object_or_404(Traveller, pk=traveller_id)
     if profile.email==user:
@@ -26,31 +20,28 @@ def view_profile(request, traveller_id):
 
     elif user.is_authenticated:
         if traveller_dp:
-            traveller_user=Traveller.objects.all().filter(email=profile.email)
             context = {
-                    'traveller_user':traveller_user,
+                    'traveller_user':profile,
                     'my_profile':False,
                     'traveller_dp':traveller_dp,
                     'notifications': notifications,
                     }
-            return render(request, 'dashboard/dashboard.html',context)
+            return render(request, 'travellers/travellers.html',context)
         else:
-                traveller_user=Traveller.objects.all().filter(email=profile.email)
                 context = {
                     'logged_in_user':traveller_user_logged_in,
-                    'traveller_user':traveller_user,
+                    'traveller_user':profile,
                     'my_profile':False,
                     'notifications': notifications, 
                          }
-                return render(request, 'dashboard/dashboard.html',context)
+                return render(request, 'travellers/travellers.html',context)
 
     else:
-        traveller_user=Traveller.objects.all().filter(email=profile.email)
         context = {
-                'traveller_user':traveller_user,
+                'traveller_user':profile,
                 'my_profile':False,
             }
-        return render(request, 'dashboard/dashboard.html',context)
+        return render(request, 'travellers/travellers.html',context)
 
 
 
