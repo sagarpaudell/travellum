@@ -5,6 +5,7 @@ from guides.models import Guide
 from guides.views import GuideView
 from notifications.models import Notification
 
+
 # Create your views here.
 def dashboard(request):
   user=request.user
@@ -65,13 +66,4 @@ def dashboard(request):
 
 
 
-
-  
-
-
-
-
-
-
-  
 

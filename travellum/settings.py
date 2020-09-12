@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'places.apps.PlacesConfig',
     'chat.apps.ChatConfig',
     'notifications.apps.NotificationsConfig',
+    'blog.apps.BlogConfig',
+    'history.apps.HistoryConfig',
     'channels',
     'django.contrib.admin',
     'django.contrib.auth',

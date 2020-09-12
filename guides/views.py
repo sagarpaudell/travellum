@@ -3,6 +3,7 @@ from django.conf import settings
 from django.shortcuts import render
 from .models import Guide
 from travellers.models import Traveller
+from history.models import History
 # Create your views here.
 
 

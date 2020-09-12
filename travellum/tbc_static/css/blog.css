@@ -1,0 +1,19 @@
+
+a {
+  color: white !important;
+}
+
+.bg-theme {
+  background: #e66b58 !important;
+  color: #fff !important;
+  transition: ease-in-out .3s;
+}
+
+.active {
+  text-decoration: underline !important;
+}
+
+.blog__nav:hover {
+  font-size: 1.1rem !important;
+  transition: ease .3s;
+}
