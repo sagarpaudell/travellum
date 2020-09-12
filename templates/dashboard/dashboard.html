@@ -18,9 +18,10 @@ Dashboard
           {% if traveller_user %}
           {% for traveller in traveller_user %}
           {% if traveller.photo_main %}
-          <img src="{{ traveller.photo_main.url }}" alt="">
+          <img class="profile-pic" style="height: 275px !important; width: 100% !important; cursor: auto;" src="{{ traveller.photo_main.url }}"  alt="">
           {% else %}
-          <img src="{% static 'images/default.png' %}" alt="">
+          <img src="{% static 'images/default.png' %}">
+          
           {% endif %}
           {% endfor %}
           {% endif %}
@@ -32,7 +33,15 @@ Dashboard
             <div class="px-4 py-2 bg-transparent text-white">
               <div class="d-flex flex-row justify-content-between align-items-center">
                 <h4 class="display-5">
-                  {% if traveller_user %}{% for traveller in traveller_user %}{{traveller.slogan}}{% endfor %}{% endif %}
+                  {% if traveller_user %}
+                  {% for traveller in traveller_user %}
+                  {% if traveller.slogan %}
+                  {{traveller.slogan}}
+                  {% else %}
+                  <p style="visibility: hidden; margin: 0;">Ready to show you around my city...</p>
+                  {% endif %}
+                  {% endfor %}
+                  {% endif %}
                 </h4>
               </div>
             </div>
@@ -212,7 +221,7 @@ Dashboard
           <!-- End of Profile Description Section -->
 
           <!--============= Languages Section ============-->
-          <h4 class="px-3" style="color: #e2c0bb;">Languages</h4>
+          <h4 class="px-3 py-3" style="color: #e2c0bb;">Languages</h4>
           <p class="p-3 border-bottom">
             {% if traveller_user %}{% for traveller in traveller_user %}{{traveller.languages}}{% endfor %}{% endif %}
           </p>
@@ -326,147 +335,158 @@ Dashboard
           <!-- Choose Image Overlay -->
           <!-- Source: https://codepen.io/JohanDelValle/pen/mZwKrx?editors=1100 -->
           <div class=" d-flex justify-content-around">
-          <span>
-            <label for="profile_pic">
-              <div class="profile-pic">
-                <span class="fa fa-camera"></span>
-                <span>Change Image</span>
-              </div>
-            </label>
-            <input type="File" name="photo_main" id="profile_pic">
-          </span>
-      </div>
-      <!-- End of Choose Image Overlay -->
+            <span>
+              <label for="profile_pic">
+                {% if traveller_user %}
+                {% for traveller in traveller_user %}
+                {% if traveller.photo_main %}
+                <div class="profile-pic" style="background-image: url('{{ traveller.photo_main.url }}')">
+                  <span class="fa fa-camera"></span>
+                  <span>Change Image</span>
+                </div>
+                {% else %}
+                <div class="profile-pic">
+                  <span class="fa fa-camera"></span>
+                  <span>Change Image</span>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+              </label>
+              <input type="File" name="photo_main" id="profile_pic">
+            </span>
+          </div>
+          <!-- End of Choose Image Overlay -->
 
-      <!--============ Edit Profile Inputs ==================-->
-      <div class="form-group">
-        <label for="location">First Name</label>
-        <input type="text" class="form-control" name="first_name"
-          {% if traveller_user %}{% for traveller in traveller_user %} value="{{traveller.first_name}}"
-          {% endfor %}{% endif %}>
-      </div>
-      <div class="form-group">
-        <label for="location">Last Name</label>
-        <input type="text" class="form-control" name="last_name"
-          {% if traveller_user %}{% for traveller in traveller_user %} value="{{traveller.last_name}}"
-          {% endfor %}{% endif %}>
-      </div>
+          <!--============ Edit Profile Inputs ==================-->
+          <div class="form-group">
+            <label for="location">First Name</label>
+            <input type="text" class="form-control" name="first_name"
+              {% if traveller_user %}{% for traveller in traveller_user %} value="{{traveller.first_name}}"
+              {% endfor %}{% endif %}>
+          </div>
+          <div class="form-group">
+            <label for="location">Last Name</label>
+            <input type="text" class="form-control" name="last_name"
+              {% if traveller_user %}{% for traveller in traveller_user %} value="{{traveller.last_name}}"
+              {% endfor %}{% endif %}>
+          </div>
 
-      <div class="form-group">
-        <label for="location">Location</label>
-        <input type="text" class="form-control" name="address"
-          {% if traveller_user %}{% for traveller in traveller_user %} value="{{traveller.address}}"
-          {% endfor %}{% endif %}>
-      </div>
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" class="form-control" name="address"
+              {% if traveller_user %}{% for traveller in traveller_user %} value="{{traveller.address}}"
+              {% endfor %}{% endif %}>
+          </div>
 
-      <div class="form-group">
-        <label for="slogan">Slogan</label>
-        <input type="text" class="form-control" name="slogan"
-          {% if traveller_user %}{% for traveller in traveller_user %} value="{{traveller.slogan}}"
-          {% endfor %}{% endif %}>
-      </div>
+          <div class="form-group">
+            <label for="slogan">Slogan</label>
+            <input type="text" class="form-control" name="slogan"
+              {% if traveller_user %}{% for traveller in traveller_user %} value="{{traveller.slogan}}"
+              {% endfor %}{% endif %}>
+          </div>
 
-      <div class="form-group">
-        <label for="about_me">About Me</label>
-        <textarea class="form-control" rows="3"
-          name="bio">{% if traveller_user %}{% for traveller in traveller_user %}{{traveller.bio}}{% endfor %}{% endif %}</textarea>
-      </div>
+          <div class="form-group">
+            <label for="about_me">About Me</label>
+            <textarea class="form-control" rows="3"
+              name="bio">{% if traveller_user %}{% for traveller in traveller_user %}{{traveller.bio}}{% endfor %}{% endif %}</textarea>
+          </div>
 
-      <div class="form-group">
-        <label for="Languages">Languages</label><br>
-        <input type="text" class="form-control" name="languages"
-          {% if traveller_user %}{% for traveller in traveller_user %} value="{{traveller.languages}}"
-          {% endfor %}{% endif %}>
-      </div>
+          <div class="form-group">
+            <label for="Languages">Languages</label><br>
+            <input type="text" class="form-control" name="languages"
+              {% if traveller_user %}{% for traveller in traveller_user %} value="{{traveller.languages}}"
+              {% endfor %}{% endif %}>
+          </div>
 
-      {% if traveller_user %}
-      {% for traveller in traveller_user %}
-      {% if traveller.is_guide %}
-      <div class="form-group">
-        <label for="pph">Price/hr</label><br>
-        <input type="number" class="form-control" name="pph">
-      </div>
-      {% endif %}
-      {% endfor %}
-      {% endif %}
-
-      <div class="form-group">
-        <label for="gender">Gender</label>
-        <select class="form-control" name="gender">
           {% if traveller_user %}
-            {% for traveller in traveller_user %}
-              {% ifnotequal traveller.gender "" %}<option selected>{{traveller.gender}}</option>{% endifnotequal %}
-
-              {% ifequal traveller.gender "Male" %}
-              <option>Female</option>
-              <option>Other</option>
-              {% endifequal %}
-
-              {% ifequal traveller.gender "Female" %}
-              <option>Male</option>
-              <option>Other</option>
-              {% endifequal %}
-
-              {% ifequal traveller.gender "Other" %}
-              <option>Female</option>
-              <option>Male</option>
-              {% endifequal %}
-
-              {% ifequal traveller.gender "" %}
-              <option>Female</option>
-              <option>Male</option>
-              <option>Other</option>
-              {% endifequal %}
-            {% endfor %}
+          {% for traveller in traveller_user %}
+          {% if traveller.is_guide %}
+          <div class="form-group">
+            <label for="pph">Price/hr</label><br>
+            <input type="number" class="form-control" name="pph">
+          </div>
           {% endif %}
-        </select>
-      </div>
+          {% endfor %}
+          {% endif %}
 
-      <div class="form-group">
-        <label>Interests</label><br>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="English" value="option1">
-          <label class="form-check-label" for="English"> Exploration & Sightseeing</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="English" value="option1">
-          <label class="form-check-label" for="English"> Food & Restaurants</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="English" value="option1">
-          <label class="form-check-label" for="English"> Driving Tours</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="English" value="option1">
-          <label class="form-check-label" for="English"> Sports & Recreation</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="English" value="option1">
-          <label class="form-check-label" for="English"> Art & Museums</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="English" value="option1">
-          <label class="form-check-label" for="English"> History & Culture</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="English" value="option1">
-          <label class="form-check-label" for="English"> Nightlife & Bars</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="English" value="option1">
-          <label class="form-check-label" for="English"> Shopping</label>
-        </div>
-      </div>
-      <!-- End of Edit Profile Inputs -->
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <select class="form-control" name="gender">
+              {% if traveller_user %}
+                {% for traveller in traveller_user %}
+                  {% ifnotequal traveller.gender "" %}<option selected>{{traveller.gender}}</option>{% endifnotequal %}
+
+                  {% ifequal traveller.gender "Male" %}
+                  <option>Female</option>
+                  <option>Other</option>
+                  {% endifequal %}
+
+                  {% ifequal traveller.gender "Female" %}
+                  <option>Male</option>
+                  <option>Other</option>
+                  {% endifequal %}
+
+                  {% ifequal traveller.gender "Other" %}
+                  <option>Female</option>
+                  <option>Male</option>
+                  {% endifequal %}
+
+                  {% ifequal traveller.gender "" %}
+                  <option>Female</option>
+                  <option>Male</option>
+                  <option>Other</option>
+                  {% endifequal %}
+                {% endfor %}
+              {% endif %}
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Interests</label><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="English" value="option1">
+              <label class="form-check-label" for="English"> Exploration & Sightseeing</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="English" value="option1">
+              <label class="form-check-label" for="English"> Food & Restaurants</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="English" value="option1">
+              <label class="form-check-label" for="English"> Driving Tours</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="English" value="option1">
+              <label class="form-check-label" for="English"> Sports & Recreation</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="English" value="option1">
+              <label class="form-check-label" for="English"> Art & Museums</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="English" value="option1">
+              <label class="form-check-label" for="English"> History & Culture</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="English" value="option1">
+              <label class="form-check-label" for="English"> Nightlife & Bars</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="English" value="option1">
+              <label class="form-check-label" for="English"> Shopping</label>
+            </div>
+          </div>
+          <!-- End of Edit Profile Inputs -->
 
 
-      <div class="modal-footer">
-        <input type="submit" value="Save Changes" name="Update Profile" class="btn btn-success">
-      </div>
+          <div class="modal-footer">
+            <input type="submit" value="Save Changes" name="Update Profile" class="btn btn-success">
+          </div>
+        </div>
       </form>
     </div>
   </div>
-</div>
 </div>
 <!-- End of Edit Profile Modal -->
 
