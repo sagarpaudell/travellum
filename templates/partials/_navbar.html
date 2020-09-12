@@ -105,7 +105,7 @@
 
           {% if  user.is_authenticated %}
           <div class="dropdown-menu" style="position: absolute; min-width: 80px; background: rgba(255,255,255,0.9);" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Visibility</a>
+            <a class="dropdown-item" style="cursor: pointer;" data-toggle="modal" data-target="#visibility">Visibility</a>
             <a class="dropdown-item" href="{% url 'my_blog' %}">My Blog</a>
             <a class="dropdown-item" href="/accounts/logout">Log Out</a>
           </div>
@@ -122,7 +122,7 @@
         <span class="dropdown-menu" style="min-width: 100px !important;">
           <a href="{% url 'places' %}" class="text-dark pl-3">Places</a>
           <div class="m-2"></div>
-          <a href="#" class="text-dark pl-3">Visibility</a>
+          <a href="#" class="text-dark pl-3" style="cursor: pointer;" data-toggle="modal" data-target="#visibility">Visibility</a>
           <div class="m-2"></div>
           <a href="{% url 'my_blog' %}" class="text-dark pl-3">My Blog</a>
           <div class="m-2"></div>
@@ -135,4 +135,30 @@
   </div>
 </nav>
 </header>
+
+<div class="modal" id="visibility">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Change Visibility
+        </h5>
+        <button class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center">
+          You are visible to travellers.
+          <!-- You are not visible to travellers. -->
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <a href="#" class="btn btn-outline-success mx-2 my-3" data-dismiss="modal">Make me Visbile</a>
+          <a href="#" class="btn btn-outline-danger mx-2 my-3" data-dismiss="modal">Make me Invisible</a>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <small class="text-muted" style="font-size: .9rem;">You won't be visible if you are inactive for more than 5 days</small>
+      </div>
+    </div>
+  </div>
+</div>
 <!--================ End of Navbar =======================-->
