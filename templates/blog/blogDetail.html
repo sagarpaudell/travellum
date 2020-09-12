@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} 
+Single Blogpost
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/blog.css'%}">
+{% endblock %}
+
+{% block content %}
+
+<main>
+  <div class="container my-5 bg-light">
+    <div class="row bg-theme py-3">
+      <div class="col-md-4 col-6 d-flex align-items-center">
+        <a class="px-3 text-light blog__nav" href="{% url 'my_blog' %}">My Blog</a>
+        <a class="text-light blog__nav active" href="{% url 'explore' %}">Explore</a>
+      </div>
+      <div class="col-md-8 col-6 text-right">
+        <button class="btn btn-danger" href="#" class="">
+          <i class="fas fa-pen"></i> 
+          Create Blog
+        </button>
+      </div>
+    </div>
+    <div style="height: 100vh;">
+      <h1>Blog Details</h1>
+    </div>
+  </div>
+</main>
+
+{% endblock %}
