@@ -82,19 +82,9 @@
           <span class="nav-item text-center dropdown" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown">
             <a href="" class="nav-link text-light">
               {% if  user.is_authenticated%}
-                {% if traveller_user %}
-                  {% if traveller_user.photo_main %}
-                      <img class="hw-dp" src="{{ traveller_dp.url }}" alt="">
-                  {% else %}
-                      <img class="hw-dp" src="{% static 'images/default.png' %}" alt="">
-                  {% endif %}                
-                {% endif %}
-              {% endif %}
-              <!-- ================User with no dp while viewing other's profile============= -->
-              {% if  user.is_authenticated%}
                 {% if logged_in_user %}
                     {% if logged_in_user.photo_main %}
-                        <img class="hw-dp" src="{{ traveller_dp.url }}" alt="">
+                        <img class="hw-dp" src="{{ logged_in_user.photo_main.url }}" alt="">
                     {% else %}
                         <img class="hw-dp" src="{% static 'images/default.png' %}" alt="">
                     {% endif %}                

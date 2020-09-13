@@ -12,11 +12,10 @@ def dashboard(request):
   traveller_user=get_object_or_404(Traveller, email=user)
   guide_user = Guide.objects.all().filter(email=user).first()
   notifications = Notification.objects.all().filter(receiver_email=user)
-  traveller_dp=traveller_user.photo_main
   context = {
                 'traveller_user':traveller_user,
                 'my_profile':True,
-                'traveller_dp':traveller_dp,
+                'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
                 'guide_user' : guide_user,
                 'notifications': notifications,
             }
