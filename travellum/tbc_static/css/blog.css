@@ -22,4 +22,8 @@ a {
   color: white !important;
 } */
 
+.caret-active {
+  color: blue;
+}
+
 
