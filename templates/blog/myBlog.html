@@ -20,13 +20,14 @@ Blog
         <a class="text-light blog__nav" href="{% url 'explore' %}" class="text-light">Explore</a>
       </div>
       <div class="col-md-8 col-6 text-right">
-        <a class="btn btn-danger" href="{% url 'create_blog_post' %}" class="">
+        <a class="btn btn-danger mr-3" href="{% url 'create_blog_post' %}">
           <i class="fas fa-pen"></i> 
           Create Blog
         </a>
       </div>
     </div>
-    <section class="main-content mx-4 my-5">
+    <section class="main-content px-4 py-5">
+      <h3 class="mb-4">Your Blog Posts </h3>
       <div class="card-columns">
         {% if blogs %}
         {% for blog in blogs %}
