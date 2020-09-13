@@ -110,6 +110,7 @@
           {% if  user.is_authenticated %}
           <div class="dropdown-menu" style="position: absolute; min-width: 80px; background: rgba(255,255,255,0.9);" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="#">Visibility</a>
+            <a class="dropdown-item" href="{% url 'my_blog' %}">My Blog</a>
             <a class="dropdown-item" href="/accounts/logout">Log Out</a>
           </div>
           {% endif %}
@@ -126,6 +127,8 @@
           <a href="{% url 'places' %}" class="text-dark pl-3">Places</a>
           <div class="m-2"></div>
           <a href="#" class="text-dark pl-3">Visibility</a>
+          <div class="m-2"></div>
+          <a href="{% url 'my_blog' %}" class="text-dark pl-3">My Blog</a>
           <div class="m-2"></div>
           <a href="/accounts/logout" class="text-dark pl-3">Logout</a>
         </span>

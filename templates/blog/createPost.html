@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} 
+Single Blogpost
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/blog.css'%}">
+{% endblock %}
+
+{% block content %}
+
+<main>
+  <div class="container my-5 bg-light">
+    <div class="row bg-theme py-3">
+      <div class="col-md-4 col-6 d-flex align-items-center">
+        <a class="px-3 text-light active blog__nav" data-toggle="modal" data-target="#myBlog">My Blog</a>
+        <a class="text-light blog__nav" data-toggle="modal" data-target="#explore" class="text-light">Explore</a>
+      </div>
+      <div class="col-md-8 col-6 text-right">
+        <button class="btn btn-danger" data-toggle="modal" data-target="#createPost">
+          <i class="fas fa-pen"></i> 
+          Create Blog
+        </button>
+      </div>
+    </div>
+
+    <div class="px-3 py-5">
+      <h3 class="my-3">Create Post</h3>
+
+      <form action="#" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="Title">Blog Title</label>
+            <input class="form-control" type="text" name="title" autocomplete="off" required>
+          </div>
+          <div class="col-md-6">
+            <label for="Title">Place</label>
+            <input class="form-control" list="places" name="place"
+            pattern="{{place_pattern}}"
+            title='enter a valid place' required>
+            
+            
+              <datalist id="places">
+              {% if places %}
+              {% for place in places %}
+                <option value="{{ place.name }}">
+              {% endfor %}
+              {% endif%}
+            </datalist>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="custom-file">Blog Post Image</label>
+            <div class="custom-file">
+              <input type="file" id="blog_pic" class="custom-file-input" name="photo" required>
+              <label class="custom-file-label" for="blog_pic">Choose File</label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="Date">Date</label>
+            <input class="form-control" type="text" value="{% now 'jS F Y' %}" disabled>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="blog_content">Blog Content</label>
+              <textarea class="form-control" id="blog_content" rows="3" name="description" required></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-12 d-flex justify-content-end">
+            <input type="submit" class="btn btn-success" value="Post to Travellum Blogs"></input>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</main>
+
+
+<!--================================ Modals ========================-->
+<div class="modal" id="createPost">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Discard your post?
+        </h5>
+        <button class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center">
+          Discard your post and redirect?
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <a href="{% url 'create_blog_post' %}" class="btn btn-outline-dark text-dark mx-2 my-3">Yes</a>
+          <button class="btn btn-dark mx-2 my-3" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="myBlog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Discard your post?
+        </h5>
+        <button class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center">
+          Discard your post and redirect?
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <a href="{% url 'my_blog' %}" class="btn btn-outline-dark text-dark mx-2 my-3">Yes</a>
+          <button class="btn btn-dark mx-2 my-3" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="explore">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Discard your post?
+        </h5>
+        <button class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center">
+          Discard your post and redirect?
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <a href="{% url 'explore' %}" class="btn btn-outline-dark text-dark mx-2 my-3">Yes</a>
+          <button class="btn btn-dark mx-2 my-3" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
