@@ -89,7 +89,13 @@ Single Blogpost
             <img src="https://source.unsplash.com/random/200x200" style="height: 62px; width: 62px; border-radius: 50%;" alt="prof_pic">
           </div>
           <div class="col-10 col-lg-11">
-            <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Samesh Bajracharya</h5>
+            <h5 class="text-muted d-flex align-items-center mb-n1" style="font-weight: 500; font-size: .8rem;">
+              Samesh Bajracharya &nbsp; 12 &nbsp;
+              <span style="font-size: 1.5rem;">
+                <i type="button" class="fas fa-angle-up" id="caret-up" onclick="handleCaretUp()"></i> 
+                <i type="button" class="fas fa-angle-down" id="caret-down" onclick="handleCaretDown()"></i> 
+              </span>
+            </h5>
             <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat incidunt odit, doloremque eveniet cupiditate autem laborum ea praesentium. Reprehenderit, doloribus?</p>
           </div>
         </div>
@@ -99,4 +105,17 @@ Single Blogpost
   </div>
 </main>
 
+{% endblock %}
+
+{% block script %}
+  <script>
+    function handleCaretUp () {
+      document.getElementById('caret-up').classList.toggle('caret-active');
+      document.getElementById('caret-down').classList.remove('caret-active');
+    }
+    function handleCaretDown () {
+      document.getElementById('caret-down').classList.toggle('caret-active');
+      document.getElementById('caret-up').classList.remove('caret-active');
+    }
+  </script>
 {% endblock %}
