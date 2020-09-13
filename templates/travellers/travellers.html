@@ -6,12 +6,6 @@
 Dashboard
 {% endblock %}
 
-{% block style %}
-<link rel="stylesheet" href="{% static 'css/rating.css' %}">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-{% endblock %}
-
 {% block content %}
 
 <main>
@@ -286,73 +280,7 @@ Dashboard
               {% endif %}
             </div>
             <div class="border-bottom py-5">
-              <h2 style="color: #e2c0bb;" class="mb-5">No Guide Reviews</h2>
-
-
-              
-              <div class="container text-left">
-                <div class="row border py-3 mb-5"  style="background: white !important;">
-                  <div class="col-2 col-lg-1 rounded">
-                    <img src="https://source.unsplash.com/random/200x200" style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
-                  </div>
-                  <form class="col-10 col-lg-11">
-                    <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Review this Guide</h5>
-                    <textarea class="form-control" rows="3"></textarea>
-                    <div class="mt-n4" style="display: flex; justify-content: flex-end;">
-                      <div class="rating">
-                        <input type="radio" id="star5" name="rating" value="5" />
-                        <label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
-                        <input type="radio" id="star4" name="rating" value="4" />
-                        <label class="star" for="star4" title="Great" aria-hidden="true"></label>
-                        <input type="radio" id="star3" name="rating" value="3" />
-                        <label class="star" for="star3" title="Very good" aria-hidden="true"></label>
-                        <input type="radio" id="star2" name="rating" value="2" />
-                        <label class="star" for="star2" title="Good" aria-hidden="true"></label>
-                        <input type="radio" id="star1" name="rating" value="1" />
-                        <label class="star" for="star1" title="Bad" aria-hidden="true"></label>
-                      </div>
-                    </div>
-                    <div style="display: flex; justify-content: flex-end;">
-                      <input class="btn btn-danger mt-2" type="submit">
-                    </div>
-                  </form>
-                </div>
-          
-                <div class="row border py-3 my-3" style="background: white !important;">
-                  <div class="col-2 col-lg-1">
-                    <img src="https://source.unsplash.com/random/200x200" style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
-                  </div>
-                  <div class="col-10 col-lg-11">
-                    <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Samesh Bajracharya</h5>
-                    <div class="review__rating m-n2">
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                    </div>
-                    <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat incidunt odit, doloremque eveniet cupiditate autem laborum ea praesentium. Reprehenderit, doloribus?</p>
-                  </div>
-                </div>
-                <div class="row border py-3 my-3" style="background: white !important;">
-                  <div class="col-2 col-lg-1">
-                    <img src="https://source.unsplash.com/random/200x200" style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
-                  </div>
-                  <div class="col-10 col-lg-11">
-                    <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Samesh Bajracharya</h5>
-                    <div class="review__rating m-n2">
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                    </div>
-                    <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat incidunt odit, doloremque eveniet cupiditate autem laborum ea praesentium. Reprehenderit, doloribus?</p>
-                  </div>
-                </div>
-              </div>  
-
-
-
+              <h2 style="color: #e2c0bb;">No Guide Reviews</h2>
             </div>
           </div>
         </div>
@@ -372,45 +300,6 @@ Dashboard
             </div>
             <div class="border-bottom py-5">
               <h2 style="color: #e2c0bb;">No Traveller Reviews</h2>
-
-
-
-              <div class="container text-left">
-                <div class="row border py-3 mb-5"  style="background: white !important;">
-                  <div class="col-2 col-lg-1 rounded">
-                    <img src="https://source.unsplash.com/random/200x200" style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
-                  </div>
-                  <form class="col-10 col-lg-11">
-                    <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Review this Traveller</h5>
-                    <textarea class="form-control" rows="3"></textarea>
-                    <div style="display: flex; justify-content: flex-end;">
-                      <input class="btn btn-danger mt-2" type="submit">
-                    </div>
-                  </form>
-                </div>
-          
-                <div class="row border py-3 my-3" style="background: white !important;">
-                  <div class="col-2 col-lg-1">
-                    <img src="https://source.unsplash.com/random/200x200" style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
-                  </div>
-                  <div class="col-10 col-lg-11">
-                    <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Samesh Bajracharya</h5>
-                    <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat incidunt odit, doloremque eveniet cupiditate autem laborum ea praesentium. Reprehenderit, doloribus?</p>
-                  </div>
-                </div>
-                <div class="row border py-3 my-3" style="background: white !important;">
-                  <div class="col-2 col-lg-1">
-                    <img src="https://source.unsplash.com/random/200x200" style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
-                  </div>
-                  <div class="col-10 col-lg-11">
-                    <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Samesh Bajracharya</h5>
-                    <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat incidunt odit, doloremque eveniet cupiditate autem laborum ea praesentium. Reprehenderit, doloribus?</p>
-                  </div>
-                </div>
-              </div>  
-
-
-
             </div>
           </div>
         </div>
