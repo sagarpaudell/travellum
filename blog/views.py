@@ -1,53 +1,18 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from accounts.models import User
-from travellers.models import Traveller
-from notifications.models import Notification
+from django.shortcuts import render
 
 
 def my_blog(request):
-    user=request.user
-    if user.is_authenticated:
-        notifications = Notification.objects.all().filter(receiver_email=user)
-        traveller_user = get_object_or_404(Traveller, email=user)
-        context = {
-                'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
-                'notifications': notifications,
-            }
-    return render(request, 'blog/myBlog.html',context)
+    return render(request, 'blog/myBlog.html')
 
 
 def explore(request):
-    user=request.user
-    if user.is_authenticated:
-        notifications = Notification.objects.all().filter(receiver_email=user)
-        traveller_user = get_object_or_404(Traveller, email=user)
-        context = {
-                'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
-                'notifications': notifications,
-            }
-    return render(request, 'blog/explore.html',context)
+    return render(request, 'blog/explore.html')
 
 
 def single_blog_post(request):
-    user=request.user
-    if user.is_authenticated:
-        notifications = Notification.objects.all().filter(receiver_email=user)
-        traveller_user = get_object_or_404(Traveller, email=user)
-        context = {
-                'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
-                'notifications': notifications,
-            }
-    return render(request, 'blog/blogDetail.html',context)
+    return render(request, 'blog/blogDetail.html')
 
 
 def create_blog_post(request):
-    user=request.user
-    if user.is_authenticated:
-        notifications = Notification.objects.all().filter(receiver_email=user)
-        traveller_user = get_object_or_404(Traveller, email=user)
-        context = {
-                'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
-                'notifications': notifications,
-            }
-    return render(request, 'blog/createPost.html',context)
+    return render(request, 'blog/createPost.html')
 
