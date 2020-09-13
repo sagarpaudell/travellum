@@ -81,7 +81,7 @@
         <div class="navbar-nav">
           <span class="nav-item text-center dropdown" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown">
             <a href="" class="nav-link text-light">
-              {% if  user.is_authenticated%}
+              {% if  user.is_authenticated %}
                 {% if logged_in_user %}
                     {% if logged_in_user.photo_main %}
                         <img class="hw-dp" src="{{ logged_in_user.photo_main.url }}" alt="">
