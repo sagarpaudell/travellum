@@ -30,14 +30,26 @@ Single Blogpost
     </div>
 
     <div class="px-4 py-5">
-      <h2 class="mb-0">Title of the Blog</h2>
-      <p class="text-muted" style="font-size: .9rem;">
+      <h2 class="mb-4">Title of the Blog</h2>
+      <p class="text-muted mb-1" style="font-size: .9rem;">
         <i class="fas fa-pen"></i> Buddha Mani Gautam &nbsp; <i class="fas fa-table"></i> 2020/12/09
       </p>
+      <div class="mb-5"  style="font-family: Poppins; font-weight: normal;">
+        <i class="fas fa-heart text-muted"> Liked by 100 people</i>
+      </div>
       <div class="row">
         <div class="col-12">
           <img src="https://source.unsplash.com/random/1920x1080" class="image-fluid" style="max-width: 60vw; max-height: 75vh;" alt="Blog Image">
           <p class="text-muted" style="font-size: 0.9rem;">Caption: A GLimpse of my Travel with Travellum</p>
+          <div class="my-4">
+            <a id="like-button" class="btn btn-outline-success text-muted mr-2" type="button" onclick="handleLike()"> 
+              <i class="fas fa-heart"> Like Post </i>
+            </a>
+            <a href="#comment-section" id="comment-btn" class="btn btn-outline-danger text-muted">
+              <i class="fas fa-heart"> Comment</i>
+            </a>
+          </div> 
+
         </div>
       </div>
 
@@ -55,6 +67,12 @@ Single Blogpost
         </div>
       </div>
 
+      <div id="comment-section" class="my-5"></div>
+      <div class="my-5 py-1"></div>
+      <div class="my-5"></div>
+      <div class="my-5"></div>
+      <div class="my-5"></div>
+      <div class="my-5"></div>
       <div class="row">
         <div class="col-12">
           <h4 class="mt-5">Comments</h4>
@@ -109,6 +127,9 @@ Single Blogpost
 
 {% block script %}
   <script>
+    function handleLike () {
+      document.getElementById('like-button').classList.toggle('like-active');
+    }
     function handleCaretUp () {
       document.getElementById('caret-up').classList.toggle('caret-active');
       document.getElementById('caret-down').classList.remove('caret-active');
