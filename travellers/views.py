@@ -7,34 +7,22 @@ from django.contrib import messages,auth
 
 def view_profile(request, traveller_id):
     user=request.user
-  
-
     if user.is_authenticated:
         notifications = Notification.objects.all().filter(receiver_email=user)
         traveller_user_logged_in= get_object_or_404(Traveller, email=user)
-        traveller_dp=traveller_user_logged_in.photo_main
 
     profile=get_object_or_404(Traveller, pk=traveller_id)
     if profile.email==user:
         return redirect('dashboard')
 
     elif user.is_authenticated:
-        if traveller_dp:
-            context = {
-                    'traveller_user':profile,
-                    'my_profile':False,
-                    'traveller_dp':traveller_dp,
-                    'notifications': notifications,
-                    }
-            return render(request, 'travellers/travellers.html',context)
-        else:
-                context = {
-                    'logged_in_user':traveller_user_logged_in,
-                    'traveller_user':profile,
-                    'my_profile':False,
-                    'notifications': notifications, 
-                         }
-                return render(request, 'travellers/travellers.html',context)
+        context = {
+                'logged_in_user':traveller_user_logged_in,     #logged_in_user is for avatar in navbar
+                'traveller_user':profile,
+                'my_profile':False,
+                'notifications': notifications,
+                 }
+        return render(request, 'travellers/travellers.html',context)
 
     else:
         context = {

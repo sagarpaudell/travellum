@@ -7,7 +7,7 @@ from .models import Blog, Comment
 
 
 
-# Create your views here.
+
 def my_blog(request):
     user=request.user
     if user.is_authenticated:

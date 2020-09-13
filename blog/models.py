@@ -35,7 +35,8 @@ class Comment(models.Model):
     blog_id=models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='ofblog')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
     comment = models.TextField()
-    like_users = models.ManyToManyField(User, related_name='likedcomments')
+    upvote_users = models.ManyToManyField(User, related_name='upvotedcomments')
+    downvote_users = models.ManyToManyField(User, related_name='downvotedcomments')
     comment_time = models.DateTimeField(default=timezone.now , blank=True )
 
     def __str__(self):

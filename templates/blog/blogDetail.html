@@ -54,7 +54,7 @@ Single Blogpost
         </div>
       </div>
 
-      <div class="container" id="make-comment-container">
+      <div class="container">
         <div class="row border py-3 mb-5"  style="background: white !important;">
           <div class="col-2 col-lg-1 rounded">
             <img src="{{user_picture.url}}" style="height: 62px; width: 62px; border-radius: 50%;" alt="prof_pic">
@@ -68,21 +68,26 @@ Single Blogpost
             </div>
           </form>
         </div>
-  
+        {% if comments %}
+        {% for comment in comments %}
         <div class="row border py-3 my-3" style="background: white !important;">
-          {% if comments %}
-          {% for comment in comments %}
+          
           <div class="col-2 col-lg-1">
             <img src="{{comment.get_profile_pic.url}}" style="height: 62px; width: 62px; border-radius: 50%;" alt="prof_pic">
           </div>
           <div class="col-10 col-lg-11">
-            <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">{{comment.commenter }}</h5>
+            <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">{{comment.commenter }} &nbsp; 12 &nbsp;
+              <span style="font-size: 1.5rem;">
+                <i type="button" class="fas fa-angle-up" id="caret-up" onclick="handleCaretUp()"></i> 
+                <i type="button" class="fas fa-angle-down" id="caret-down" onclick="handleCaretDown()"></i> 
+              </span>
+            </h5>
             <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">{{comment.comment}}</p>
           </div>
-          {% endfor %}
-          {% endif %}
         </div>
-
+        {% endfor %}
+        {% endif %}
+      </div>
         
       </div>
 
@@ -90,4 +95,17 @@ Single Blogpost
   </div>
 </main>
 
+{% endblock %}
+
+{% block script %}
+  <script>
+    function handleCaretUp () {
+      document.getElementById('caret-up').classList.toggle('caret-active');
+      document.getElementById('caret-down').classList.remove('caret-active');
+    }
+    function handleCaretDown () {
+      document.getElementById('caret-down').classList.toggle('caret-active');
+      document.getElementById('caret-up').classList.remove('caret-active');
+    }
+  </script>
 {% endblock %}
