@@ -1,6 +1,7 @@
 from django.db import models
 from accounts.models import User
 from places.models import Place
+from travellers.models import Traveller
 from datetime import datetime
 from django.utils import timezone
 from ckeditor.fields import RichTextField
@@ -31,7 +32,7 @@ class Blog(models.Model):
 
 
 class Comment(models.Model):
-    blog_id=models.OneToOneField(Blog, on_delete=models.CASCADE, related_name='ofblog')
+    blog_id=models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='ofblog')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
     comment = models.TextField()
     like_users = models.ManyToManyField(User, related_name='likedcomments')
@@ -39,6 +40,14 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'{self.id} in {self.blog_id.pk}'
+
+    def get_profile_pic(self):
+        picture=Traveller.objects.get(email=self.user).photo_main
+        return picture
+
+    def commenter(self):
+        return f'{self.user.first_name} {self.user.last_name}'
+        
 
 
     

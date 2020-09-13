@@ -30,28 +30,21 @@ Single Blogpost
     </div>
 
     <div class="px-4 py-5">
-      <h2 class="mb-0">Title of the Blog</h2>
+      <h2 class="mb-0">{{blog.title}}</h2>
       <p class="text-muted" style="font-size: .9rem;">
-        <i class="fas fa-pen"></i> Buddha Mani Gautam &nbsp; <i class="fas fa-table"></i> 2020/12/09
+        <i class="fas fa-pen"></i> {{blog.blogger}}; <i class="fas fa-table"></i> {{blog.get_time}}
       </p>
       <div class="row">
         <div class="col-12">
-          <img src="https://source.unsplash.com/random/1920x1080" class="image-fluid" style="max-width: 60vw; max-height: 75vh;" alt="Blog Image">
+          <img src="{{ blog.photo.url }}" class="image-fluid" style="max-width: 60vw; max-height: 75vh;" alt="Blog Image">
           <p class="text-muted" style="font-size: 0.9rem;">Caption: A GLimpse of my Travel with Travellum</p>
         </div>
       </div>
 
       <div class="row">
         <div class="col-12 text-justify">
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum consequuntur excepturi, porro ad voluptatibus enim voluptate sequi rerum unde quaerat velit provident, repellat, expedita reiciendis officia. Sequi expedita rerum maxime consectetur, laboriosam voluptate neque sapiente quia beatae. Commodi quidem repellendus eveniet in sunt soluta iste. Quaerat eos, vero doloribus optio, adipisci corporis ut, aliquam obcaecati incidunt quo eveniet cum porro aperiam odio. Perferendis amet optio iusto cupiditate quidem, autem aliquam beatae iste repellendus at laboriosam provident aut aspernatur nihil non? Consequatur corporis officia quos nam vero labore laborum dolorum rerum, dicta ipsum excepturi sunt, voluptas fugiat cumque deserunt! Quia, enim.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, fuga ea perferendis cumque officia similique quasi nam. Voluptatibus, laborum optio laudantium sit eaque aperiam. Praesentium ea amet voluptatem, omnis maiores facere labore in accusantium nostrum magnam neque commodi sit optio vel at alias modi pariatur eum tenetur? Natus praesentium placeat eligendi quas, impedit voluptatem nemo illo sed id quasi sit recusandae, voluptate unde doloremque quaerat temporibus dolore accusamus magni laboriosam ex. Corporis doloremque, animi illo tenetur vel nulla totam magni sit tempore rem, in, fugiat dolorem. Laboriosam voluptas officiis, ratione eaque aperiam eum architecto blanditiis, officia unde cupiditate alias corrupti illum perferendis veniam doloribus iste ipsam incidunt quibusdam. Repellendus fugiat suscipit excepturi rerum quidem ab, maxime quis possimus autem, commodi aspernatur consectetur officia eveniet pariatur quas repudiandae totam? Quos totam voluptas inventore velit laborum doloremque ipsum ducimus, ad fugiat iste exercitationem nobis sed sit cupiditate esse saepe expedita. Minima recusandae quos obcaecati repellendus adipisci illum! Non quas quo sapiente molestias repudiandae, iusto ipsam officiis debitis doloremque, quaerat tempora velit asperiores eius quam magni. Optio, iusto. Voluptas iusto asperiores dolorem placeat eos sint voluptatibus, laboriosam quisquam voluptatum nulla est quibusdam vitae nemo ipsa nostrum! Est necessitatibus obcaecati voluptate recusandae quas quia.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint ut itaque ullam et, cumque fuga vitae autem explicabo adipisci quibusdam. Nesciunt tenetur officiis voluptate? Possimus odit modi est, dolore beatae voluptatum quidem, corrupti architecto tempora nesciunt vero reiciendis iste laborum dicta iusto repellat quasi voluptatibus numquam recusandae explicabo dolorem dignissimos.
-          </p>
+          {{blog.description}}
+          
         </div>
       </div>
 
@@ -64,11 +57,12 @@ Single Blogpost
       <div class="container" id="make-comment-container">
         <div class="row border py-3 mb-5"  style="background: white !important;">
           <div class="col-2 col-lg-1 rounded">
-            <img src="https://source.unsplash.com/random/200x200" style="height: 62px; width: 62px; border-radius: 50%;" alt="prof_pic">
+            <img src="{{user_picture.url}}" style="height: 62px; width: 62px; border-radius: 50%;" alt="prof_pic">
           </div>
-          <form class="col-10 col-lg-11">
+          <form class="col-10 col-lg-11" action='#' method='POST'>
+            {% csrf_token %}
             <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Join the Discussion...</h5>
-            <textarea class="form-control" rows="3"></textarea>
+            <textarea class="form-control" rows="3" name="comment"></textarea>
             <div style="display: flex; justify-content: flex-end;">
               <input class="btn btn-danger mt-2" type="submit">
             </div>
@@ -76,23 +70,20 @@ Single Blogpost
         </div>
   
         <div class="row border py-3 my-3" style="background: white !important;">
+          {% if comments %}
+          {% for comment in comments %}
           <div class="col-2 col-lg-1">
-            <img src="https://source.unsplash.com/random/200x200" style="height: 62px; width: 62px; border-radius: 50%;" alt="prof_pic">
+            <img src="{{comment.get_profile_pic.url}}" style="height: 62px; width: 62px; border-radius: 50%;" alt="prof_pic">
           </div>
           <div class="col-10 col-lg-11">
-            <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Samesh Bajracharya</h5>
-            <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat incidunt odit, doloremque eveniet cupiditate autem laborum ea praesentium. Reprehenderit, doloribus?</p>
+            <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">{{comment.commenter }}</h5>
+            <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">{{comment.comment}}</p>
           </div>
+          {% endfor %}
+          {% endif %}
         </div>
-        <div class="row border py-3 my-3" style="background: white !important;">
-          <div class="col-2 col-lg-1">
-            <img src="https://source.unsplash.com/random/200x200" style="height: 62px; width: 62px; border-radius: 50%;" alt="prof_pic">
-          </div>
-          <div class="col-10 col-lg-11">
-            <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Samesh Bajracharya</h5>
-            <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat incidunt odit, doloremque eveniet cupiditate autem laborum ea praesentium. Reprehenderit, doloribus?</p>
-          </div>
-        </div>
+
+        
       </div>
 
     </div>

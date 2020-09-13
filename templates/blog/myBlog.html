@@ -39,9 +39,10 @@ Blog
             alt="Card image cap"
           >
           <div class="card-body">
-            <h5 class="card-title ">{{blog.description}}</h5>
+            <h5 class="card-title ">{{blog.title}}</h5>
             <div style="font-size: .9rem;" class="card-subtitle text-muted"><i class="fas fa-pen"></i> {{blog.blogger}}<br>{{blog.get_time}}</div>
-            <a href="{% url 'single_blog_post' %}" class="btn btn-danger my-2" style="font-size: 0.8rem;">Read More</a>
+            <a href="{% url 'single_blog_post' blog.id %}" class="btn btn-danger my-2" style="font-size: 0.8rem;">Read More</a>
+            
           </div>
        </div>
        {% endfor %}
