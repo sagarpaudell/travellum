@@ -39,5 +39,5 @@ def GuideView(request):
     message = f'follow this link to publish the user \
         http://127.0.0.1:8000/admin/guides/guide/{guide_user.pk}/change'
     email_from = settings.EMAIL_HOST_USER
-    recipient_list = ['buddhagautam231@gmail.com', 'birajkmc4@gmail.com']
+    recipient_list = ['buddhagautam231@gmail.com', 'birajkmc4@gmail.com','s2a6m0@gmail.com']
     send_mail( subject, message, email_from, recipient_list )
