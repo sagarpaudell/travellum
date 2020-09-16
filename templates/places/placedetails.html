@@ -3,17 +3,23 @@
 {% load static %}
 
 {% block style %}
-<link rel="stylesheet" href="{% static 'css/custom_style.css' %}">
+<link rel="stylesheet" href="{% static 'css/rating.css' %}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .checked {
+        color: #FECE31;
+    }
+</style>
+
+
 {% endblock %}
 
-<!-- yeta dynamic title haal hai biraje -->
-{% block title %} 
-Details 
+{% block title %}
+Details
 {% endblock %}
 
 {% block content %}
-<div class="container"
-    style="background-color:#fcfcfc; width:70%; margin-top:1%; margin-bottom:10%; border-radius:1%; padding:0%;">
+<div class="container">
 
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -27,10 +33,12 @@ Details
                 <img class="d-block w-100" src="{{ place.photo_1.url }}" alt="First slide">
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" {% if place.photo_2 %} src="{{ place.photo_2.url }}" {% endif %} alt="Second slide">
+                <img class="d-block w-100" {% if place.photo_2 %} src="{{ place.photo_2.url }}" {% endif %}
+                    alt="Second slide">
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" {% if place.photo_2 %} src="{{ place.photo_3.url }}" {% endif %} alt="Third slide">
+                <img class="d-block w-100" {% if place.photo_2 %} src="{{ place.photo_3.url }}" {% endif %}
+                    alt="Third slide">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -43,100 +51,176 @@ Details
         </a>
     </div>
     <div class="d-flex flex-row text-white align-items-stretch text-center bg-white" id="custom-menu">
-        <div class="port-item p-4 mx-md-3 sm-12 mx-1 bg-white" data-toggle="collapse" data-target="#description">
-            <i class="fa fa-list-alt fa-2x pr-2"></i></i>
+        <div class="port-item p-4 mx-md-3 sm-12 mx-1 bg-white" data-toggle="collapse" data-target="#description"
+            style="cursor: pointer;">
+            <i class="fas fa-list-alt fa-2x pr-2"></i></i>
             <span class="d-none d-md-inline">Description</span>
         </div>
-            <div class="port-item p-4 mx-md-3 sm-12 mx-1 bg-white" data-toggle="collapse"
-                data-target="#majorattractions">
-                <i class="fa fa-bullhorn fa-2x pr-2"></i>
-                <span class="d-none d-md-inline">Major attractions</span>
-            </div>
-            <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#thingstodo">
-                <i class="fa fa-clipboard-check fa-2x pr-2"></i>
-                <span class="d-none d-md-inline">Things to do</span>
-            </div>
-            <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#availableguides">
-                <i class="fa fa-user-alt fa-2x pr-2"></i>
-                <span class="d-none d-md-inline">Available guides</span>
-            </div>
+        <div class="port-item p-4 mx-md-3 sm-12 mx-1 bg-white" data-toggle="collapse" data-target="#majorattractions"
+            style="cursor: pointer;">
+            <i class="fas fa-bullhorn fa-2x pr-2"></i>
+            <span class="d-none d-md-inline">Major attractions</span>
         </div>
+        <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#thingstodo"
+            style="cursor: pointer;">
+            <i class="fas fa-clipboard-check fa-2x pr-2"></i>
+            <span class="d-none d-md-inline">Things to do</span>
+        </div>
+        <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#availableguides"
+            style="cursor: pointer;">
+            <i class="fas fa-user-alt fa-2x pr-2"></i>
+            <span class="d-none d-md-inline">Available guides</span>
+        </div>
+    </div>
 
 
     <!-- Description collapse -->
 
-    <div class="collapse" id="description">
-        <h2 class="px-3 pb-2 border-bottom" style="color: #daa198;">About kathmandu:</h2>
-        <p class="pr-3 pb-5 pl-3 " style="margin-bottom: 10%;">{{ place.description }}
+    <div class="collapse show bg-white" id="description"
+        style="border-bottom-left-radius:2%; border-bottom-right-radius:2%;">
+        <h2 class="px-3 pb-2 border-bottom" style="color: #daa198;">About {{place.name}}:</h2>
+        <p class="pr-3 pb-2 pl-3 ">{{ place.description }}
         </p>
         <br>
         <br>
         <!-- Temporary place review section -->
-        {% if reviews %}
-            {% for review in reviews %}
-                <label>REVIEW BY {{ review.Reviewer.first_name }} ( {{ review.Reviewer }} )</label>
-                <p class="pr-3 pb-5 pl-3 " style="margin-bottom: 10%;">{{ review.place_review }}
-                </p>
-            {% endfor %}
-        {% endif %}
+        <!-- {% if reviews %}
+        {% for review in reviews %}
+        <label>REVIEW BY {{ review.Reviewer.first_name }} ( {{ review.Reviewer }} )</label>
+        <p class="pr-3 pb-5 pl-3 " style="margin-bottom: 10%;">{{ review.place_review }}
+        </p>
+        {% endfor %}
+        {% endif %} -->
         <!-- End of Temp. Review Section -->
+        <div class="container" style="padding-bottom: 3%;">
+            <h5 class="text-muted" style="font-weight: 500; font-size: 1.4rem; margin-right:10%; margin-left:1%;">
+                Reviews:</h5>
+            {% if reviews %}
+            {% for review in reviews %}
+            <div class="row border py-3 my-3" style="background: white !important; margin-right:10%; margin-left:1%; ">
+                <div class="col-2 col-lg-1">
+                    <img src="https://source.unsplash.com/random/200x200"
+                        style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
+                </div>
+                <div class="col-10 col-lg-11">
+                    <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">
+                        {{ review.Reviewer.first_name }} {{ review.Reviewer.last_name }} ({{ review.Reviewer }})
+                    </h5>
+                    <div class="review__rating">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+
+                    <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">{{ review.place_review }}</p>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            <div class="row border py-3 mb-5"
+                style="background: white !important; margin-top:80px;  margin-right:10%; margin-left:1%; ">
+                <div class="col-2 col-lg-1 rounded">
+                    <img src="https://source.unsplash.com/random/200x200"
+                        style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
+                </div>
+                <form class="col-10 col-lg-11">
+                    <h5 class="text-muted" style="font-weight: 500; font-size: 1rem;">Know this place? Give your review
+                        here:
+                    </h5>
+                    <textarea class="form-control" rows="3"></textarea>
+                    <div class="mt-n4" style="display: flex;">
+                        <div class="rating">
+                            <input type="radio" id="star5" name="rating" value="5" />
+                            <label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
+                            <input type="radio" id="star4" name="rating" value="4" />
+                            <label class="star" for="star4" title="Great" aria-hidden="true"></label>
+                            <input type="radio" id="star3" name="rating" value="3" />
+                            <label class="star" for="star3" title="Very good" aria-hidden="true"></label>
+                            <input type="radio" id="star2" name="rating" value="2" />
+                            <label class="star" for="star2" title="Good" aria-hidden="true"></label>
+                            <input type="radio" id="star1" name="rating" value="1" />
+                            <label class="star" for="star1" title="Bad" aria-hidden="true"></label>
+                        </div>
+                    </div>
+                    <div style="display: flex;">
+                        <input class="btn btn-danger mt-2" type="submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+
     </div>
     <!-- End of description Collapse -->
 
     <!-- Major attractions collapse -->
 
-    <div class="collapse" id="majorattractions">
-        <h2 class="px-3 mb-4 border-bottom " style="color: #daa198; ">Some of the major attractions include:</h2>
-        {% for attraction in attractions %}
-            <h4 class="px-3" style="color: #daa198;"><i class="fa fa-location-arrow pr-2"></i>{{ attraction.attraction_name }}</h4>
-            <p class="p-1 pb-3 px-3 border-bottom ">{{ attraction.description }}
+    <div class="collapse bg-white" id="majorattractions"
+        style="border-bottom-left-radius:2%; border-bottom-right-radius:2%;">
+        <div style="padding-bottom: 3%;">
+            <h2 class="px-3 mb-4 border-bottom " style="color: #daa198; ">Some of the major attractions include:</h2>
+            {% for attraction in attractions %}
+            <h4 class="px-3" style="color: #daa198;"><i
+                    class="fa fa-location-arrow pr-2"></i>{{ attraction.attraction_name }}</h4>
+            <p class="pb-4 pl-3 border-bottom ">{{ attraction.description }}
             </p>
-        {% endfor %}
+            {% endfor %}
+        </div>
 
     </div>
     <!-- End of description Collapse -->
 
     <!-- Things to do collapse -->
 
-    <div class="collapse" id="thingstodo">
-        <h2 class="px-3 mb-4 border-bottom " style="color: #daa198; ">Popular things to do in {{ place.name }}:</h2>
-        {% for task in tasks %}
-            <h4 class="px-3" style="color: #daa198;"><i class="fa fa-hand-point-right pr-2"></i>{{ task.task_name }}</h4>
-            <p class="p-1 pb-3 px-3 ">{{task.description}}
+    <div class="collapse bg-white" id="thingstodo" style="border-bottom-left-radius:2%; border-bottom-right-radius:2%;">
+        <div style="padding-bottom: 3%;">
+            <h2 class="px-3 mb-4 border-bottom " style="color: #daa198; ">Popular things to do in {{ place.name }}:</h2>
+            {% for task in tasks %}
+            <h4 class="px-3" style="color: #daa198;"><i class="fa fa-hand-point-right pr-2"></i>{{ task.task_name }}
+            </h4>
+            <p class="p-1 pb-4 px-3 border-bottom ">{{task.description}}
             </p>
-        {% endfor %}
+            {% endfor %}
+        </div>
 
     </div>
     <!-- End of things to do Collapse -->
 
     <!-- Available guides collapse -->
 
-    <div class="collapse" id="availableguides">
-        <h2 class="px-3 mb-4 border-bottom " style="color: #daa198; ">Guides available in Kathmandu:</h2>
-        <div class="container">
-            <div class="row">
-                {% if available_guides %}
-                {% for guide in available_guides %}
-                <div class="col-md-6 mb-4">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="{{guide.info.photo_main.url}}" alt="Avatar" class="avatar"
-                                style="width: 150px; height: 150px; border-radius: 50%; margin-left:8%;">
-                        </div>
-                        <div class="col-md-8">
-                            <strong>Guide's Name:</strong>&nbsp;&nbsp;{{guide.info.first_name}} {{guide.info.last_name}} <br>
-                            <strong>Contact No:</strong>: {{guide.info.contact_no}} <br>
-                            <strong>Guide rating:</strong> 4/5 <br>
-                            <a href="{% url 'view_profile' guide.info.id %}" class="btn btn-theme">View Profile</a>
+    <div class="collapse bg-white" id="availableguides"
+        style="border-bottom-left-radius:2%; border-bottom-right-radius:2%;">
+        <div style="padding-bottom: 3%;">
+            <h2 class="px-3 mb-4 border-bottom " style="color: #daa198; ">Guides available in {{place.name}}:</h2>
+            <div class="container">
+                <div class="row">
+                    {% if available_guides %}
+                    {% for guide in available_guides %}
+                    <div class="col-md-6 mb-4">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="{{guide.info.photo_main.url}}" alt="Avatar" class="avatar"
+                                    style="width: 150px; height: 150px; border-radius: 50%; margin-left:8%;">
+                            </div>
+                            <div class="col-md-8" style="opacity: 0.9;">
+                                <strong>Guide's Name:</strong>&nbsp;&nbsp;{{guide.info.first_name}}
+                                {{guide.info.last_name}}
+                                <br>
+                                <strong>Contact No:</strong>: {{guide.info.contact_no}} <br>
+                                <strong>Guide rating:</strong> 4/5 <br>
+                                <a href="{% url 'view_profile' guide.info.id %}" class="btn btn-theme">View Profile</a>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-                {% endfor %}
-                {% else %}
+                    {% endfor %}
+                    {% else %}
                     <h1> no available guides in your region</h1>
-                {% endif %}
-                
+                    {% endif %}
+
+                </div>
             </div>
         </div>
     </div>

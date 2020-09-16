@@ -11,11 +11,13 @@ from accounts.models import User
 def places(request):
     current_user=request.user
     if current_user.is_authenticated:
+        traveller_user_logged_in= get_object_or_404(Traveller, email=current_user)
         notifications = Notification.objects.all().filter(receiver_email=current_user)
         places = Place.objects.all()
         context = {
             'places':places,
             'notifications': notifications,
+            'logged_in_user': traveller_user_logged_in,   #logged_in_user is for avatar in navbar
         }
     else:
         places = Place.objects.all()
@@ -28,6 +30,7 @@ def places(request):
 def placedetails(request, place_id):
     current_user=request.user
     if current_user.is_authenticated:
+        traveller_user_logged_in= get_object_or_404(Traveller, email=current_user)
         notifications = Notification.objects.all().filter(receiver_email=current_user)
     place = get_object_or_404(Place, pk=place_id)
     attractions= Major_Attraction.objects.all().filter(place=place)
@@ -50,6 +53,7 @@ def placedetails(request, place_id):
             'tasks':tasks,
             'reviews':reviews,
             'notifications': notifications,
+            'logged_in_user': traveller_user_logged_in,   #logged_in_user is for avatar in navbar
         }
     else:
         context = {
@@ -58,6 +62,7 @@ def placedetails(request, place_id):
             'attractions':attractions,
             'tasks':tasks,
             'reviews':reviews,
+            'logged_in_user': traveller_user_logged_in,   #logged_in_user is for avatar in navbar
         }
     return render(request, 'places/placedetails.html', context) 
 
@@ -70,7 +75,7 @@ def search(request):
         return JsonResponse(placenames, safe=False)
     print(request.GET.get('term'))
     searchtag = request.GET['search_places']
-    places = Place.objects.all().filter(name__icontains=searchtag) | Place.objects.all().filter(description__icontains=searchtag) | Place.objects.all().filter(city__icontains=searchtag) | Place.objects.all().filter(country__icontains=searchtag )
+    places = Place.objects.all().filter(name__icontains=searchtag) | Place.objects.all().filter(keywords__search=searchtag) | Place.objects.all().filter(city__icontains=searchtag) | Place.objects.all().filter(country__icontains=searchtag )
     context = {
         'places':places
     }

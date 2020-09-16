@@ -14,6 +14,7 @@ class Place(models.Model):
     description = models.TextField(blank=True)
     is_published = models.BooleanField(default=True)
     total_tours = models. IntegerField(default=0)
+    keywords = models.TextField(blank=True)
 
     def __str__(self):
         return self.name

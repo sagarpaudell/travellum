@@ -4,7 +4,6 @@ from places.models import Place
 from travellers.models import Traveller
 from datetime import datetime
 from django.utils import timezone
-from ckeditor.fields import RichTextField
 
 # Create your models here.
 
@@ -49,6 +48,8 @@ class Comment(models.Model):
     def commenter(self):
         return f'{self.user.first_name} {self.user.last_name}'
         
+    def vote_count(self):
+        return self.upvote_users.count() - self.downvote_users.count()
 
 
     

@@ -35,14 +35,22 @@ Single Blogpost
         <i class="fas fa-pen"></i> {{blog.blogger}}; <i class="fas fa-table"></i> {{blog.get_time}}
       </p>
       <div class="mb-5"  style="font-family: Poppins; font-weight: normal;">
-        <i class="fas fa-heart text-muted"> Liked by 100 people</i>
+        <i class="fas fa-heart text-muted"> Liked by <span id='like_count'>{{blog.likes_count}}</span> people</i>
       </div>
       <div class="row">
         <div class="col-12">
           <img src="{{ blog.photo.url }}" class="image-fluid" style="max-width: 60vw; max-height: 75vh;" alt="Blog Image">
           <p class="text-muted" style="font-size: 0.9rem;">Caption: A GLimpse of my Travel with Travellum</p>
           <div class="my-4">
-            <a id="like-button" class="btn btn-outline-success text-muted mr-2" type="button" onclick="handleLike()"> 
+            
+            {% if user in blog.like_users.all %}
+            <a id="like-button" class="btn btn-outline-success text-muted mr-2 like-active" type="button" onclick="handleLike('like-button')"> 
+            
+              {% else %}
+            <a id="like-button" class="btn btn-outline-success text-muted mr-2" type="button" onclick="handleLike('like-button')">  
+              
+              {% endif %}
+
               <i class="fas fa-heart"> Like Post </i>
             </a>
             <a href="#comment-section" id="comment-btn" class="btn btn-outline-danger text-muted">
@@ -94,10 +102,23 @@ Single Blogpost
             <img src="{{comment.get_profile_pic.url}}" style="height: 62px; width: 62px; border-radius: 50%;" alt="prof_pic">
           </div>
           <div class="col-10 col-lg-11">
-            <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">{{comment.commenter }} &nbsp; 12 &nbsp;
+            <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">{{comment.commenter }} &nbsp; <span id="vote_countof{{comment.id}}">{{comment.vote_count}}</span> &nbsp;
               <span style="font-size: 1.5rem;">
-                <i type="button" class="fas fa-angle-up" id="caret-up" onclick="handleCaretUp()"></i> 
-                <i type="button" class="fas fa-angle-down" id="caret-down" onclick="handleCaretDown()"></i> 
+                
+                {% if user in comment.upvote_users.all %}
+                <i type="button" class="fas fa-angle-up caret-active" id="caret-up{{comment.id}}" onclick="handleCaretUp('{{comment.id}}')"></i> 
+                <i type="button" class="fas fa-angle-down" id="caret-down{{comment.id}}" onclick="handleCaretDown('{{comment.id}}')"></i> 
+                
+                {% elif user in comment.downvote_users.all %}
+                <i type="button" class="fas fa-angle-up" id="caret-up{{comment.id}}" onclick="handleCaretUp('{{comment.id}}')"></i> 
+                <i type="button" class="fas fa-angle-down caret-active" id="caret-down{{comment.id}}" onclick="handleCaretDown('{{comment.id}}')"></i> 
+                
+                {% else %}
+                <i type="button" class="fas fa-angle-up" id="caret-up{{comment.id}}" onclick="handleCaretUp('{{comment.id}}')"></i> 
+                <i type="button" class="fas fa-angle-down" id="caret-down{{comment.id}}" onclick="handleCaretDown('{{comment.id}}')"></i> 
+                
+                {% endif %}
+
               </span>
             </h5>
             <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">{{comment.comment}}</p>
@@ -117,16 +138,52 @@ Single Blogpost
 
 {% block script %}
   <script>
-    function handleLike () {
-      document.getElementById('like-button').classList.toggle('like-active');
-    }
-    function handleCaretUp () {
-      document.getElementById('caret-up').classList.toggle('caret-active');
-      document.getElementById('caret-down').classList.remove('caret-active');
-    }
-    function handleCaretDown () {
-      document.getElementById('caret-down').classList.toggle('caret-active');
-      document.getElementById('caret-up').classList.remove('caret-active');
-    }
+    
+      var url = 'ws://'+ window.location.host+'/ws/blog_detail'+'/{{blog.id}}';
+      var chatSocket = new WebSocket(url);
+      
+      chatSocket.onmessage = function(e){
+        var data = JSON.parse(e.data)
+        if (data.vote_type=='upvote')
+          var count_id = "#vote_countof"+data.id
+          var count=data.count
+          $(count_id).text(count)
+
+        if (data.vote_type=='downvote')
+          var count_id = "#vote_countof"+data.id
+          var count=data.count
+          $(count_id).text(count)
+
+        if (data.vote_type=='like')
+          var count=data.count
+          $('#like_count').text(count)
+        
+      };
+
+      chatSocket.onopen = function(event){
+ 
+      };
+      chatSocket.onclose = function(event){
+        console.log('socket closed unexpectedly')
+      };
+
+      
+      function handleLike (x) {
+        document.getElementById('like-button').classList.toggle('like-active');
+        chatSocket.send(JSON.stringify({'vote_type':'like', 'id':x}))
+      }
+      function handleCaretUp (x) {
+        document.getElementById('caret-up'+x).classList.toggle('caret-active');
+        document.getElementById('caret-down'+x).classList.remove('caret-active');
+        chatSocket.send(JSON.stringify({'vote_type':'upvote', 'id':x}))
+      }
+      
+      function handleCaretDown (x) {
+        document.getElementById('caret-down'+x).classList.toggle('caret-active');
+        document.getElementById('caret-up'+x).classList.remove('caret-active');
+        chatSocket.send(JSON.stringify({'vote_type':'downvote', 'id':x}))
+      }
+   
+    
   </script>
 {% endblock %}

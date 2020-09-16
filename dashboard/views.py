@@ -4,7 +4,7 @@ from travellers.models import Traveller
 from guides.models import Guide
 from guides.views import GuideView
 from notifications.models import Notification
-
+from places.models import Place
 
 # Create your views here.
 def dashboard(request):

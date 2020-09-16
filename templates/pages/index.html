@@ -11,7 +11,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i"
 		rel="stylesheet">
-
+	
 
 	<link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
@@ -71,12 +71,19 @@
 
 				<div class="container" style="display: flex;
 					justify-content: center; position:absolute;" data-aos="zoom-in" data-aos-duration="1300">
-					<form action = "{% url 'search' %}" class="form-inline ">
-
-						<input class="form-control form-control-lg mr-3 w-200" style="margin: 0 auto;" type="text"
-							placeholder="Search Destinations here" aria-label="SearchPlaces" name="search_places"
-							id="search_places">
-						<input type="submit" value="search" class="form-control btn btn-primary"><i class="fa fa-search fa-lg mt-2 ml-2"></i>
+					<form action="{% url 'search' %}" class="form-inline ">
+						<div class="input-group span">
+							<input class="form-control form-control-lg mr-1 w-200"
+								style=" border:3px solid coral; border-radius:50px;" type="text"
+								placeholder="Search Destinations here" aria-label="SearchPlaces" name="search_places"
+								id="search_places">
+							<div>
+								<button type="submit" value="search" class="form-control btn btn-primary"
+									style="width:40px; height:40px !important;  margin-top: 45%; border-radius: 50%; "><i
+										class="fa fa-search"></i>
+								</button>
+							</div>
+						</div>
 					</form>
 				</div>
 
@@ -85,8 +92,7 @@
 					data-aos="zoom-in" data-aos-duration="1300">
 					{% if  user.is_authenticated%}
 					{% else %}
-					<a href=" {% url 'register' %}" class="btn btn-primary"
-						style="background-color:#e66b58; font-size:1.5rem; ">Join now </a>
+					<a href=" {% url 'register' %}" class="btn2">Join now </a>
 					{% endif %}
 				</div>
 			</div>
@@ -145,91 +151,31 @@
 					<p>“You don’t have to be rich to travel well.”</p>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" style="display: flex; justify-content: center;">
 				{% if places %}
-					{% for place in places %}
-						<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-							<div class="project">
-								<div class="img">
-									<a href="{% url 'placedetails' place.id %}"><img src="{{ place.photo_1.url }}" class="img-fluid" alt="Image"
-											style="height:350px;"></a>
-								</div>
-								<div class="text">
-
-									<h3><a href="{% url 'placedetails' place.id %}">{{ place.name }}</a></h3>
-								</div>
-							</div>
+				{% for place in places %}
+				<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
+					<div class="project">
+						<div class="img">
+							<a href="{% url 'placedetails' place.id %}"><img src="{{ place.photo_1.url }}"
+									class="img-fluid" alt="Image" style="height:350px;"></a>
 						</div>
-					{% endfor %}
+						<div class="text">
+
+							<h3 style="margin-top: 3%;"><a href="{% url 'placedetails' place.id %}">{{ place.name }}</a>
+							</h3>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
 				{% endif %}
-				<!-- <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-					<div class="project">
-						<div class="img">
-							<a href="#"><img src="{% static 'images/ilam.jpg' %}" class="img-fluid" alt="Image"
-									style="height:350px;"></a>
-						</div>
-						<div class="text">
-
-							<h3><a href="#">Ilam</a></h3>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-					<div class="project">
-						<div class="img">
-							<a href="#"><img src="{% static 'images/janakpur.jpg' %}" class="img-fluid" alt="Image"
-									style="height:350px;"></a>
-						</div>
-						<div class="text">
-
-							<h3><a href="#">Janakpur</a></h3>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-					<div class="project">
-						<div class="img">
-							<a href="#"><img src="{% static 'images/patan.jpg' %}" class="img-fluid" alt="Image"
-									style="height:350px;"></a>
-						</div>
-						<div class="text">
-
-							<h3><a href="#">Patan</a></h3>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-					<div class="project">
-						<div class="img">
-							<a href="#"><img src="{% static 'images/chitwan.jpg' %}" class="img-fluid" alt="Image"
-									style="height:350px;"></a>
-						</div>
-						<div class="text">
-
-							<h3><a href="#">Chitwan</a></h3>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-					<div class="project">
-						<div class="img">
-							<a href="#"><img src="{% static 'images/pokhara.jpg' %}" class="img-fluid" alt="Image"
-									style="height:350px;"></a>
-						</div>
-						<div class="text">
-
-							<h3><a href="#">Pokhara</a></h3>
-						</div>
-					</div>
-				</div>-->
-
 				<div class="container" style="display: flex;
 				justify-content: center; margin-bottom:10%; " data-aos="fade-up" data-aos-duration="800">
 					<a href=" {% url 'places' %}" class="btn btn-primary"
 						style="background-color:#e66b58; font-size:1.2rem; ">View all
 						Places
 						&#8594; </a>
-				</div> 
+				</div>
 			</div>
 		</div>
 
@@ -290,35 +236,39 @@
 				</div>
 			</div>
 
-			<div class="row">
+			<div class="row" style="display: flex;
+			justify-content: center;">
 				{% if guides %}
 				{% for guide in guides %}
 				<div class="col-md-4 col-lg-3" data-aos="flip-right" data-aos-duration="800" style="background-color: rgb(248, 248, 248);
-								margin-bottom: 1%;
-								padding: 20px;
+								padding: 10px;
+								margin:10px;
 								box-shadow: 5px 5px 8px #a2a2a8;
-								border-radius:3%;">
-					<div class="project">
-						<div class="img">
-							<a href="{% url 'view_profile' guide.id %}"><img src="{{ guide.photo_main.url }}"
-									class="img-fluid" style="width: 200px; height: 200px; border-radius: 50%; "
-									alt="Image"></a>
-						</div>
-						<div class="text">
-							<h3><a href="{% url 'view_profile' guide.id %}">{{ guide.first_name }}
-									{{ guide.last_name }}</a></h3>
-							<div class="star d-flex clearfix">Rating: &nbsp;
-								<div class="mr-auto float-left">
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-								</div>
+								border-radius:3%;
+								">
+
+					<div class="img" style="display:flex;
+						justify-content:center;">
+						<a href="{% url 'view_profile' guide.id %}"><img {% if guide.photo_main %}src="{{ guide.photo_main.url }}"{% else %} src="{% static 'images/default.png' %}" {% endif %}
+								class="img-fluid" style="width: 200px; height: 200px; border-radius: 50%; "
+								alt="Image"></a>
+					</div>
+					<div class="text">
+						<h3><a href="{% url 'view_profile' guide.id %}"
+								style="color: rgb(233, 122, 81);">{{ guide.first_name }}
+								{{ guide.last_name }}</a></h3>
+						<div class="star d-flex clearfix">Rating: &nbsp;
+							<div class="mr-auto float-left">
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
 							</div>
 						</div>
-						<p><strong>Address:</strong> {{ guide.address }}</p>
 					</div>
+					<p style="margin-bottom: 30%;"><strong>Address:</strong> {{ guide.address }}</p>
+
 				</div>
 				{% endfor %}
 				{% endif %}
