@@ -12,5 +12,6 @@ class History(models.Model):
     guide_rating = models.IntegerField(blank=True, validators=[MaxValueValidator(5), MinValueValidator(0)])
     traveller_review = models.TextField(blank=True)
     reg_date = models.DateTimeField(default=datetime.now, blank=True)
+    tour_complete = models.BooleanField(default = False)
     def __str__(self):
-        return self.place
+        return self.traveller.first_name
