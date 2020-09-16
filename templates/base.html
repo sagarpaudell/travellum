@@ -53,12 +53,12 @@
   <!--=================== Validation ============================-->
   <script>
     var d = document;
-    function hidePassword() {
+    function showPassword() {
       var x = d.getElementById("password");
-      if (x.type === "password") {
-        x.type = "text";
-      } else {
+      if (x.type === "text") {
         x.type = "password";
+      } else {
+        x.type = "text";
       }
     }
 

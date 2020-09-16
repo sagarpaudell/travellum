@@ -69,7 +69,7 @@
 			justify-content:center;">
 				<img src="{% static 'images/bgDarken.jpg' %}" class="image" alt="background-image">
 
-				<div class="container" style="display: flex;
+				<div class="container mb-lg-n5" style="display: flex;
 					justify-content: center; position:absolute;" data-aos="zoom-in" data-aos-duration="1300">
 					<form action="{% url 'search' %}" class="form-inline ">
 						<div class="input-group span">
@@ -92,7 +92,7 @@
 					data-aos="zoom-in" data-aos-duration="1300">
 					{% if  user.is_authenticated%}
 					{% else %}
-					<a href=" {% url 'register' %}" class="btn2">Join now </a>
+					<a href=" {% url 'register' %}" class="btn2 ml-n4 mt-md-n5">Join now </a>
 					{% endif %}
 				</div>
 			</div>
