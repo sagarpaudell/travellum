@@ -16,21 +16,55 @@ Register
 </div>
 
 <main>
-  <section class="text-light" style="height: 100vh;"> 
-    <div class="container text-center py-5">
-      <h1 class="text-uppercase reduce-on-phones-1" style="font-size: 22px; margin-bottom: 7px; color: #e2c0bb;">Explore local Places</h1>
-      <h1 class="reduce-on-phones-2" style="font-family: Cormorant Garamond;font-size:48px; margin-bottom:24px;">In the way of the locals</h1>
-      <p class="reduce-on-phones-3" style="margin-bottom: 70px; color: rgb(219, 218, 218);">"You don't have to be rich to travel well"</p>
-
-      <div class="row">
-        <div class="col-12">
-          <button class="w-50 bg-theme p-3 border-0" data-toggle="modal" data-target="#register_modal">
-            Register Now
-          </button>
-        </div>
+  <section class="text-light">
+    <div id="accounts-container" class="container w-50 my-5 text-muted px-5 py-5" style="min-height: 50vh; background: rgba(255, 255, 255, 0.91)">
+      <div class="text-center">
+        <h1 class="text-uppercase reduce-on-phones-1" style="font-size: 22px; margin-bottom: 7px; color: #e2c0bb;">
+          Explore local Places</h1>
+        <h1 class="reduce-on-phones-2" style="font-family: Cormorant Garamond; font-size:48px; margin-bottom:24px;">In
+          the way of the locals</h1>
+        <p class="reduce-on-phones-3" style="margin-bottom: 70px; color: #333">"You don't have to be rich
+          to travel well"</p>
       </div>
+      <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
 
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="f_name">First Name</label>
+            <input id="f_name" class="form-control reginput" name="first_name" type="text" pattern="[a-zA-Z]+" title="Must not contain letter or numbers" required>
+            <span class="invalid-feedback">First Name cannot be empty</span>
+            <span class="invalid-feedback">First Name cannot contain symbols or digits</span>
+          </div>
+          <div class="col-md-6">
+            <label for="l_name">Last Name</label>
+            <input id='l_name' class="form-control reginput" name="last_name" type="text" pattern="[a-zA-Z]+" title="Must not contain letter or numbers" required>
+            <span class="invalid-feedback">First Name cannot be empty</span>
+            <span class="invalid-feedback">Last Name cannot have symbols or digits</span>
+          </div>
+        </div>
 
+        <div class="row">
+          <div class="col-md-6">
+            <label for="Email">Email</label>
+            <input class="form-control reginput" name="email" type="email" required>
+          </div>
+          <div class="col-md-6">
+            <label for="Password">Password</label>
+            <input id="password" class="form-control reginput" name="password1" type="password" pattern=".{6,}" title="Must contain at least 6 characters" required>
+            <span id="length" class="invalid-feedback">Password must contain minimum <b>6 characters</b></span>
+            
+            <div class="text-muted mt-2">
+              <input type="checkbox" onclick="showPassword()"> Show Password
+            </div>
+          </div>
+        </div>
+        <div class="row d-flex justify-content-end px-3">
+            <input class="btn btn-success" type="submit" value="Register">
+        </div>
+        <hr class="mt-3">
+        <small class="text-muted">Already have an account? <a href="/accounts/login">Login</a></small>
+      </form>
     </div>
   </section>
 </main>

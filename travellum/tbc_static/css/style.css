@@ -338,12 +338,18 @@ nav .container .row div:nth-child(2) form {
   cursor: pointer;
 }
 
+#accounts-container {
+  width: 50%;
+}
 /*================== Media Queries ===========================*/
 
 @media screen and (max-width: 1200px) {
   /* larger desktops/laptops and smaller */
   .bg-custom .container .row {
     padding: 2rem;
+  }
+  #accounts-container {
+    width: 68% !important;
   }
 }
 
@@ -359,6 +365,10 @@ nav .container .row div:nth-child(2) form {
   #accordion-login {
     width: 36% !important;
     margin-left: 32% !important;
+  }
+
+  #accounts-container {
+    width: 80% !important;
   }
 }
 
@@ -415,5 +425,8 @@ nav .container .row div:nth-child(2) form {
   }
   .reduce-on-phones-3 {
     font-size: 14px !important;
+  }
+  #accounts-container {
+    width: 100% !important;
   }
 }

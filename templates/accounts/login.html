@@ -16,16 +16,45 @@ Login
   </div>
 
   <main>
-    <section class="text-light" style="height: 100vh;">
-      <div class="container text-center py-5">
-        <h1 class="text-uppercase reduce-on-phones-1" style="font-size: 22px; margin-bottom: 7px; color: #e2c0bb;">
-          Explore local Places</h1>
-        <h1 class="reduce-on-phones-2" style="font-family: Cormorant Garamond; font-size:48px; margin-bottom:24px;">In
-          the way of the locals</h1>
-        <p class="reduce-on-phones-3" style="margin-bottom: 70px; color: rgb(219, 218, 218);">"You don't have to be rich
-          to travel well"</p>
+    <section class="text-light">
+      <div id="accounts-container" class="container my-5  text-muted px-5 py-5" style="min-height: 50vh; background: rgba(255, 255, 255, 0.91)">
+          <div class="text-center">
+            <h1 class="text-uppercase reduce-on-phones-1" style="font-size: 22px; margin-bottom: 7px; color: #e2c0bb;">
+              Explore local Places</h1>
+            <h1 class="reduce-on-phones-2" style="font-family: Cormorant Garamond; font-size:48px; margin-bottom:24px;">In
+              the way of the locals</h1>
+            <p class="reduce-on-phones-3" style="margin-bottom: 70px; color: #333">"You don't have to be rich
+              to travel well"</p>
+          </div>
+          <form class="" action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="Email">Email</label>
+                <input class="form-control" name="email" type="email" placeholder="someone@example.com">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="Password">Password</label>
+                <input class="form-control" name="password" type="password">
+              </div>
+            </div>
+            <div class="row d-flex justify-content-end px-3">
+              <!-- <div class="row col-md-11"></div> -->
+                <input class="btn btn-success" type="submit" value="Login">
+            </div>
+            <div class="modal-footer mt-4"></div>
+          </form>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <small><a href="#">Forgot Password?</a></small><br>
+            </div>
+            <div class="col-12 col-md-6 text-md-right">
+              <small class="text-muted"> Don't have an account? <a href="/accounts/register">Register Now</a></small>
+            </div>
+          </div>
+        </div>
 
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-12">
             <button id="social-logins" class="btn btn-primary mb-4">
               <i class="fab fa-facebook"></i> Login with Facebook
@@ -49,13 +78,13 @@ Login
           </div>
         </div>
 
-      </div>
+      </div> -->
     </section>
   </main>
 
   <!-- Modals -->
   <!-- Other Login Options Modal -->
-  <div class="modal" id="other_login_options">
+  <!-- <div class="modal" id="other_login_options">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -81,7 +110,7 @@ Login
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- End of Other Login Options Modal -->
   <!-- End of Modals -->
 
