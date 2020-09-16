@@ -233,9 +233,10 @@ Dashboard
           <h4 class="px-3" style="color: #e2c0bb;">User reviews</h4>
           <p class="p-3 border-bottom"></p>
 
-          <h4 class="px-3" style="color: #e2c0bb;">Review this guide</h4>
           {% if my_profile %}
           {% else %}
+          {% if has_travelled_with %}
+          <h4 class="px-3" style="color: #e2c0bb;">Review this guide</h4>
             <form action="#" id="carform" method="POST">
             {% csrf_token %}
               <label for="review">Review</label>
@@ -253,7 +254,7 @@ Dashboard
             <input type="submit" name="review_form">
             
             </form>
-            
+          {% endif %}
           {% endif %}
           <!-- End of Interests Section -->
 
