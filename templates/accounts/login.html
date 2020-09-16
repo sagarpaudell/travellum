@@ -17,7 +17,7 @@ Login
 
   <main>
     <section class="text-light">
-      <div id="accounts-container" class="container my-5  text-muted px-5 py-5" style="min-height: 50vh; background: rgba(255, 255, 255, 0.91)">
+      <div id="login-container" class="container my-5  text-muted px-5 py-5" style="min-height: 50vh; background: rgba(255, 255, 255, 0.91)">
           <div class="text-center">
             <h1 class="text-uppercase reduce-on-phones-1" style="font-size: 22px; margin-bottom: 7px; color: #e2c0bb;">
               Explore local Places</h1>
@@ -29,11 +29,11 @@ Login
           <form class="" action="{% url 'login' %}" method="post">
             {% csrf_token %}
             <div class="row">
-              <div class="col-md-6 mb-3">
+              <div class="col-md-12 mb-3">
                 <label for="Email">Email</label>
                 <input class="form-control" name="email" type="email" placeholder="someone@example.com">
               </div>
-              <div class="col-md-6 mb-3">
+              <div class="col-md-12 mb-3">
                 <label for="Password">Password</label>
                 <input class="form-control" name="password" type="password">
               </div>
