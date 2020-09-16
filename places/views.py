@@ -32,6 +32,15 @@ def placedetails(request, place_id):
     if current_user.is_authenticated:
         traveller_user_logged_in= get_object_or_404(Traveller, email=current_user)
         notifications = Notification.objects.all().filter(receiver_email=current_user)
+    if request.method == 'POST':
+        rating =  request.POST.get('rating')
+        place_review = request.POST['preview']
+        place_id = request.POST['plid']
+        placeReviewed = get_object_or_404(Place, pk=place_id)
+        Reviewer = traveller_user_logged_in
+        rev = Review(place_name=placeReviewed, Reviewer=Reviewer, place_review = place_review, ratings=rating)
+        rev.save()
+
     place = get_object_or_404(Place, pk=place_id)
     attractions= Major_Attraction.objects.all().filter(place=place)
     tasks= Things_To_Do.objects.all().filter(place=place)
@@ -81,3 +90,6 @@ def search(request):
     }
     return render(request, 'places/places.html', context)
   
+
+
+
