@@ -11,7 +11,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i"
 		rel="stylesheet">
-
+	
 
 	<link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
@@ -244,32 +244,12 @@
 								padding: 10px;
 								margin:10px;
 								box-shadow: 5px 5px 8px #a2a2a8;
-<<<<<<< HEAD
-								border-radius:3%;">
-					<div class="project">
-						<div class="img">static
-							<a href="{% url 'view_profile' guide.id %}"><img {% if guide.photo_main %}src="{{ guide.photo_main.url }}"{% else %} src="{% static 'images/default.png' %}" {% endif %}
-									class="img-fluid" style="width: 200px; height: 200px; border-radius: 50%; "
-									alt="Image"></a>
-						</div>
-						<div class="text">
-							<h3><a href="{% url 'view_profile' guide.id %}">{{ guide.first_name }}
-									{{ guide.last_name }}</a></h3>
-							<div class="star d-flex clearfix">Rating: &nbsp;
-								<div class="mr-auto float-left">
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-									<span class="ion-ios-star"></span>
-								</div>
-=======
 								border-radius:3%;
 								">
 
 					<div class="img" style="display:flex;
 						justify-content:center;">
-						<a href="{% url 'view_profile' guide.id %}"><img src="{{ guide.photo_main.url }}"
+						<a href="{% url 'view_profile' guide.id %}"><img {% if guide.photo_main %}src="{{ guide.photo_main.url }}"{% else %} src="{% static 'images/default.png' %}" {% endif %}
 								class="img-fluid" style="width: 200px; height: 200px; border-radius: 50%; "
 								alt="Image"></a>
 					</div>
@@ -284,7 +264,6 @@
 								<span class="fa fa-star checked"></span>
 								<span class="fa fa-star"></span>
 								<span class="fa fa-star"></span>
->>>>>>> 42eee37815104aaad00aec45efe673eff7d9ddf1
 							</div>
 						</div>
 					</div>

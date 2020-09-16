@@ -36,6 +36,11 @@ Places
             </div>
         </div>
         {% endfor %}
+        {% else %}
+            <div>
+                <h2> Sorry, the search results couldn't be found. Try again with specific keywords</h2> 
+                <a href="{% url 'index' %}"><u>Back to Home </u></a>
+            </div>
         {% endif %}
     </div>
 
