@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+import requests as req
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -99,12 +100,7 @@ DATABASES = {
 #         'NAME': 'mydatabase',
 #     }
 # }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': 'mydatabase',
-#     }
-# }
+#
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -130,7 +126,7 @@ CHANNEL_LAYERS = {
         'CONFIG': {
             "hosts": [('127.0.0.1', 6379)],
             "capacity": 1500,
-            "expiry":10,
+            "expiry": 10,
         },
     },
 }
@@ -175,8 +171,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
-#esewa
+# esewa
 #!/usr/bin/python3
+<<<<<<< HEAD
 import requests as req
 
 url ="https://uat.esewa.com.np/epay/main"
@@ -190,3 +187,32 @@ d = {'amt': 100,
     'su':'http://merchant.com.np/page/esewa_payment_success?q=su',
     'fu':'http://merchant.com.np/page/esewa_payment_failed?q=fu'}
 resp = req.post(url, d)
+=======
+
+
+url = "https://uat.esewa.com.np/epay/main"
+d = {'amt': 100,
+     'pdc': 0,
+     'psc': 0,
+     'txAmt': 0,
+     'tAmt': 100,
+     'pid': 'ee2c3ca1-696b-4cc5-a6be-2c40d929d453',
+     'scd': 'epay_payment',
+     'su': 'http://merchant.com.np/page/esewa_payment_success?q=su',
+     'fu': 'http://merchant.com.np/page/esewa_payment_failed?q=fu'}
+resp = req.post(url, d)
+
+# import requests as req
+
+# url ="https://uat.esewa.com.np/epay/main"
+# d = {'amt': 100,
+#     'pdc': 0,
+#     'psc': 0,
+#     'txAmt': 0,
+#     'tAmt': 100,
+#     'pid':'ee2c3ca1-696b-4cc5-a6be-2c40d929d453',
+#     'scd':'epay_payment',
+#     'su':'http://merchant.com.np/page/esewa_payment_success?q=su',
+#     'fu':'http://merchant.com.np/page/esewa_payment_failed?q=fu'}
+# resp = req.post(url, d)
+>>>>>>> 42eee37815104aaad00aec45efe673eff7d9ddf1

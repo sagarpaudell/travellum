@@ -31,7 +31,7 @@ def explore(request):
                 'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
                 'notifications': notifications,
             }
-    blogs = Blog.objects.filter(user=request.user)
+    blogs = Blog.objects.all()
     context.update({'blogs': blogs})
     return render(request, 'blog/explore.html', context)
 
@@ -88,6 +88,7 @@ def create_blog_post(request):
             is_guide    = Guide.objects.get(email=request.user).is_published,
         )
         blog.save()
+        return redirect('my_blog')
     places=Place.objects.all()
     place_pattern=''
     for place in places:
