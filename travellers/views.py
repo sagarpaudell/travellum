@@ -3,6 +3,7 @@ from accounts.models import User
 from travellers.models import Traveller
 from guides.models import Guide
 from notifications.models import Notification
+from history.models import History
 from django.contrib import messages,auth
 
 def view_profile(request, traveller_id):
@@ -16,11 +17,17 @@ def view_profile(request, traveller_id):
         return redirect('dashboard')
 
     elif user.is_authenticated:
+        travel_history = History.objects.all().filter(traveller = user , guide = profile.email)
+        has_travelled_with = False
+        for history in travel_history:
+            if history.tour_complete:
+                has_travelled_with = True
         context = {
                 'logged_in_user':traveller_user_logged_in,     #logged_in_user is for avatar in navbar
                 'traveller_user':profile,
                 'my_profile':False,
                 'notifications': notifications,
+                'has_travelled_with': has_travelled_with,
                  }
         return render(request, 'travellers/travellers.html',context)
 

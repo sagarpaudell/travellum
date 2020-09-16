@@ -64,6 +64,7 @@ Dashboard
                     <h3><span class="display-4 d-inline text-success">Rs.</span>{{traveller_user.price_per_hour}}/hr</h3>
                   </div>
                   <div>
+                    {% if not my_profile %}
                     <form action="{% url 'notifications' %}" method="POST">
                       {% csrf_token %}
                       
@@ -83,6 +84,7 @@ Dashboard
                       <input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="hidden" name="fu">
                       <input value="Pay via Esewa" type="submit">
                       </form>
+                      {% endif %}
                   </div>
                   {% endif %}
                   {% endif %}
@@ -239,9 +241,9 @@ Dashboard
           <h4 class="px-3" style="color: #e2c0bb;">User reviews</h4>
           <p class="p-3 border-bottom"></p>
 
-          <h4 class="px-3" style="color: #e2c0bb;">Review this guide</h4>
           {% if my_profile %}
           {% else %}
+          <h4 class="px-3" style="color: #e2c0bb;">Review this guide</h4>
             <form action="#" id="carform" method="POST">
             {% csrf_token %}
               <label for="review">Review</label>
