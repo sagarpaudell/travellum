@@ -29,84 +29,24 @@ Blog
     <section class="main-content px-4 py-5">
       <h3 class="mb-4">Your Blog Posts </h3>
       <div class="card-columns">
+        {% if blogs %}
+        {% for blog in blogs %}
         <div class="card mb-4">
           <img 
             class="card-img-top" 
             style="width: 100% !important; height: 30vh !important; object-fit: cover !important;" 
-            src="https://source.unsplash.com/random/800x1000" 
+            src="{{ blog.photo.url }}" 
             alt="Card image cap"
           >
           <div class="card-body">
-            <h5 class="card-title ">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum omnis, numquam voluptates ut itaque et voluptas minima sint maxime temporibus ipsa harum at corrupti ad. Placeat illo qui dignissimos tempora.</h5>
-            <div style="font-size: .9rem;" class="card-subtitle text-muted"><i class="fas fa-pen"></i> Buddha Mani Gautam<br>2020/12/09</div>
-            <a href="{% url 'single_blog_post' %}" class="btn btn-danger my-2" style="font-size: 0.8rem;">Read More</a>
+            <h5 class="card-title ">{{blog.title}}</h5>
+            <div style="font-size: .9rem;" class="card-subtitle text-muted"><i class="fas fa-pen"></i> {{blog.blogger}}<br>{{blog.get_time}}</div>
+            <a href="{% url 'single_blog_post' blog.id %}" class="btn btn-danger my-2" style="font-size: 0.8rem;">Read More</a>
+            
           </div>
-        </div>
-        <div class="card mb-4">
-          <img 
-            class="card-img-top" 
-            style="width: 100% !important; height: 30vh !important; object-fit: cover !important;" 
-            src="https://source.unsplash.com/random/800x1000" 
-            alt="Card image cap"
-          >
-          <div class="card-body">
-            <h5 class="card-title ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nulla, cupiditate culpa nisi sit eveniet sapiente amet maxime iusto reiciendis?</h5>
-            <div style="font-size: .9rem;" class="card-subtitle text-muted"><i class="fas fa-pen"></i> Buddha Mani Gautam<br>2020/12/09</div>
-            <a href="{% url 'single_blog_post' %}" class="btn btn-danger my-2" style="font-size: 0.8rem;">Read More</a>
-          </div>
-        </div>
-        <div class="card mb-4">
-          <img 
-            class="card-img-top" 
-            style="width: 100% !important; height: 30vh !important; object-fit: cover !important;" 
-            src="https://source.unsplash.com/random/800x1000" 
-            alt="Card image cap"
-          >
-          <div class="card-body">
-            <h5 class="card-title ">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit quae, nesciunt sed tempora animi corrupti quis cum inventore nemo ullam asperiores laboriosam</h5>
-            <div style="font-size: .9rem;" class="card-subtitle text-muted"><i class="fas fa-pen"></i> Buddha Mani Gautam<br>2020/12/09</div>
-            <a href="{% url 'single_blog_post' %}" class="btn btn-danger my-2" style="font-size: 0.8rem;">Read More</a>
-          </div>
-        </div>
-        <div class="card mb-4">
-          <img 
-            class="card-img-top" 
-            style="width: 100% !important; height: 30vh !important; object-fit: cover !important;" 
-            src="https://source.unsplash.com/random/800x1000" 
-            alt="Card image cap"
-          >
-          <div class="card-body">
-            <h5 class="card-title ">Blog Post</h5>
-            <div style="font-size: .9rem;" class="card-subtitle text-muted"><i class="fas fa-pen"></i> Buddha Mani Gautam<br>2020/12/09</div>
-            <a href="{% url 'single_blog_post' %}" class="btn btn-danger my-2" style="font-size: 0.8rem;">Read More</a>
-          </div>
-        </div>
-        <div class="card mb-4">
-          <img 
-            class="card-img-top" 
-            style="width: 100% !important; height: 30vh !important; object-fit: cover !important;" 
-            src="https://source.unsplash.com/random/800x1000" 
-            alt="Card image cap"
-          >
-          <div class="card-body">
-            <h5 class="card-title ">Blog Post</h5>
-            <div style="font-size: .9rem;" class="card-subtitle text-muted"><i class="fas fa-pen"></i> Buddha Mani Gautam<br>2020/12/09</div>
-            <a href="{% url 'single_blog_post' %}" class="btn btn-danger my-2" style="font-size: 0.8rem;">Read More</a>
-          </div>
-        </div>
-        <div class="card mb-4">
-          <img 
-            class="card-img-top" 
-            style="width: 100% !important; height: 30vh !important; object-fit: cover !important;" 
-            src="https://source.unsplash.com/random/800x1000" 
-            alt="Card image cap"
-          >
-          <div class="card-body">
-            <h5 class="card-title ">Blog Post</h5>
-            <div style="font-size: .9rem;" class="card-subtitle text-muted"><i class="fas fa-pen"></i> Buddha Mani Gautam<br>2020/12/09</div>
-            <a href="{% url 'single_blog_post' %}" class="btn btn-danger my-2" style="font-size: 0.8rem;">Read More</a>
-          </div>
-        </div>
+       </div>
+       {% endfor %}
+       {% endif %}
       </div>
     </section>
 

@@ -30,15 +30,27 @@ Single Blogpost
     <div class="px-4 py-5">
       <h3 class="mb-4">Create Post</h3>
 
-      <form action="">
+      <form action="#" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
         <div class="row mb-3">
           <div class="col-md-6">
             <label for="Title">Blog Title</label>
-            <input class="form-control" type="text" required>
+            <input class="form-control" type="text" name="title" autocomplete="off" required>
           </div>
           <div class="col-md-6">
-            <label for="Title">Author</label>
-            <input class="form-control" type="text" value="Buddha Mani Gautam" disabled>
+            <label for="Title">Place</label>
+            <input class="form-control" list="places" name="place"
+            pattern="{{place_pattern}}"
+            title='enter a valid place' required>
+            
+            
+              <datalist id="places">
+              {% if places %}
+              {% for place in places %}
+                <option value="{{ place.name }}">
+              {% endfor %}
+              {% endif%}
+            </datalist>
           </div>
         </div>
 
@@ -46,13 +58,13 @@ Single Blogpost
           <div class="col-md-6">
             <label for="custom-file">Blog Post Image</label>
             <div class="custom-file">
-              <input type="file" id="blog_pic" class="custom-file-input" required>
+              <input type="file" id="blog_pic" class="custom-file-input" name="photo" required>
               <label class="custom-file-label" for="blog_pic">Choose File</label>
             </div>
           </div>
           <div class="col-md-6">
             <label for="Date">Date</label>
-            <input class="form-control" type="text" value="2020/09/12" disabled>
+            <input class="form-control" type="text" value="{% now 'jS F Y' %}" disabled>
           </div>
         </div>
 
@@ -60,7 +72,7 @@ Single Blogpost
           <div class="col-md-12">
             <div class="form-group">
               <label for="blog_content">Blog Content</label>
-              <textarea class="form-control" id="blog_content" rows="3" required></textarea>
+              <textarea class="form-control" id="blog_content" rows="3" name="description" required></textarea>
             </div>
           </div>
         </div>
@@ -144,5 +156,6 @@ Single Blogpost
     </div>
   </div>
 </div>
+
 
 {% endblock %}

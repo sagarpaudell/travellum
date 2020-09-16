@@ -1,4 +1,8 @@
 
+html {
+  scroll-behavior: smooth;
+}
+
 a {
   color: white !important;
 }
@@ -22,4 +26,11 @@ a {
   color: white !important;
 } */
 
+.caret-active, .like-active {
+  color: blue !important;
+}
+
+#comment-btn:hover, #like-button:hover {
+  color: white !important;
+}
 
