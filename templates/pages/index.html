@@ -299,8 +299,8 @@
 								box-shadow: 5px 5px 8px #a2a2a8;
 								border-radius:3%;">
 					<div class="project">
-						<div class="img">
-							<a href="{% url 'view_profile' guide.id %}"><img src="{{ guide.photo_main.url }}"
+						<div class="img">static
+							<a href="{% url 'view_profile' guide.id %}"><img {% if guide.photo_main %}src="{{ guide.photo_main.url }}"{% else %} src="{% static 'images/default.png' %}" {% endif %}
 									class="img-fluid" style="width: 200px; height: 200px; border-radius: 50%; "
 									alt="Image"></a>
 						</div>
