@@ -58,4 +58,13 @@ def logout_view(request):
     auth.logout(request)
     return redirect('index')
 
+def reset_view(request):
+    return render(request, 'accounts/reset.html')
+
+def v_code_view(request):
+    return render(request, 'accounts/code.html')
+
+def change_pw_view(request):
+    return render(request, 'accounts/change.html')
+
 

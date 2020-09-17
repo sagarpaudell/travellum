@@ -1,0 +1,101 @@
+{% extends 'base.html' %} 
+
+{% load static %}
+
+{% block title %} 
+Reset Password
+{% endblock %}
+
+{% block content %}  
+<div 
+  id="login-container" 
+  class="container text-muted my-5 px-3 py-5" 
+  style="min-height: 50vh; background: rgba(255, 255, 255, 0.91)"
+>
+  <form method="post" class="d-flex align-items-center justify-content-center">
+    {% csrf_token %}
+    <div>
+      <p 
+        class="m-0" 
+        style="font-size: .96rem; visibility: hidden;"
+      >
+      Type your email in the field below to receive your validation code.
+      </p>
+      <label 
+        for="new_pw" 
+        style="font-size: .96rem;"
+      >
+        New Password
+      </label>
+      <div class="col-md-12 p-0">
+        <input 
+          id="new_pw" 
+          class="form-control mb-3" 
+          name="new_pw" 
+          type="password" 
+          required
+        >
+      </div>
+      <label 
+        for="new_pw2" 
+        style="font-size: .96rem;"
+      >
+        New Password (Again)
+      </label>
+      <div class="col-md-12 p-0">
+        <input 
+          id="new_pw2" 
+          class="form-control mb-3" 
+          name="new_pw2" 
+          type="password" 
+          required
+        >
+      </div>
+      <button 
+        id="submit"
+        type="submit" 
+        class="btn btn-sm btn-outline-dark px-3" 
+        value="Submit"
+      >
+        Change Password
+      </button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
+
+{% block script %}
+  <script>
+    var p1=document.getElementById('new_pw')
+    var p2=document.getElementById('new_pw2')
+    var submit=document.getElementById('submit')
+    function myFunction(){
+      if(p1.value != p2.value) {
+        alert('Passwords do not match')
+      }
+      if(p1.value.length < 6) {
+        alert('Password must be greater than 6 characters')
+      } else {
+
+      }
+    }
+    function handleP1Validation() {
+      if (p1.value.length >= 6) {
+        this.classList.remove("is-invalid");
+      } else {
+        this.classList.add("is-invalid");
+      }
+    }
+    function handleP2Validation() {
+      if (p2.value.length >= 6) {
+        this.classList.remove("is-invalid");
+      } else {
+        this.classList.add("is-invalid");
+      }
+    }
+    submit.onclick = myFunction;
+    p1.onkeyup = handleP1Validation;
+    p2.onkeyup = handleP2Validation;
+  </script>
+{% endblock %}
