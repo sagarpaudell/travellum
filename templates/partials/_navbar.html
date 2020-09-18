@@ -17,14 +17,14 @@
       <div class="col-lg-7 col-md-5 col-3" id="search-bar-on-nav">
         <div class="navbar-nav mt-n1">
           <form action="{% url 'search' %}" class="form-inline ">
-            <!-- <a href="#" id="search">
+            <a href="{% url 'index' %}" id="search">
               <i style="font-size: 1.1rem; padding-top: 5px;" class="fa fa-search text-light"></i>
-            </a> -->
+            </a>
             <!-- <input class="form-control form-control-lg mr-1 w-200"
             style=" border:3px solid coral; border-radius:50px;" type="text"
             placeholder="Search Destinations here" aria-label="SearchPlaces" name="search_places"
             id="search_places"> -->
-            <input type="text" class="bg-transparent border-0" id="searchDesInput" name="search_places" placeholder="Search Locations...">
+            <input type="text" class="bg-transparent border-0" id="searchDesInput" name="search_places" placeholder=" Search Locations...">
           </form>
         </div>
         <!-- a -->
@@ -154,7 +154,10 @@
       </div>
     </div>
   </div>
-</div>
+</div>  
+<a href="" id="chat-bubble" class="m-5 px-3 bg-primary">
+  <i class="fas fa-comments"></i>
+</a>
 <!--================ End of Navbar =======================-->
 
 

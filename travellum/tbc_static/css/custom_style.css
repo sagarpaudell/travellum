@@ -227,26 +227,26 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
   border-radius: 0; 
 }
   ::-webkit-input-placeholder {
-    color: rgba(0, 0, 0, 0.4) !important; 
+    color: #333 !important; 
     font-size: 1rem !important;
   }
   ::-moz-placeholder {
-    color: rgba(0, 0, 0, 0.4) !important; 
+    color: #333 !important; 
     font-size: 1rem !important;
 
   }
   ::-ms-input-placeholder {
-    color: rgba(0, 0, 0, 0.4) !important; 
+    color: #333 !important; 
     font-size: 1rem !important;
 
   }
   ::-moz-placeholder {
-    color: rgba(0, 0, 0, 0.4) !important; 
+    color: #333 !important; 
     font-size: 1rem !important;
 
   }
 
-      /*search button*/
+/*search button*/
 .search-property-1 .form-group .form-control.btn {
   text-align: center;
   padding: 0 10px !important;
@@ -493,10 +493,10 @@ textarea.form-control {
   color:white;
   text-transform: uppercase;
   border: 0.1em solid #e66b58;
-  padding: 0.2em 1em;
+  padding: 0.5em 1em;
   border-radius: 5px;
   height: 60px;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   
   
 }
@@ -507,12 +507,12 @@ textarea.form-control {
 
 @media only screen and (max-width: 780px) {
   #btn2 {
-    /* margin-top: rem !important; */
+    margin-top: .3rem !important;
     position: absolute;
     background: none;
     color:white;
     text-transform: uppercase;
-    border: 0.1em solid #e66b58;
+    border: 0.12em solid #e66b58;
     padding: 0.6em;
     border-radius: 3px;
     height: 45px;
