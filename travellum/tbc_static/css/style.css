@@ -295,8 +295,8 @@ nav .container .row div:nth-child(2) form {
   font-weight: 800;
 }
 
-.bg-custom .row h1 {
-  font-weight: 100;
+.bg-custom .row h2 {
+  font-weight: 100 !important;
 }
 
 #custom-menu i {
