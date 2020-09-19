@@ -96,7 +96,10 @@ DATABASES = {
 }
 
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 91d9f51c03642a862a7b3ae8bbffd9ad028d910f
 
 # DATABASES = {
 #     'default': {

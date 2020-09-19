@@ -13,6 +13,7 @@ class Notification(models.Model):
     reg_date = models.DateTimeField(default=datetime.now, blank=True)
     is_accepted = models.BooleanField(default=False)
     is_ignored = models.BooleanField(default=False)
+    completed = models.BooleanField(default=False)
 
 
     def __str__(self):
