@@ -20,7 +20,7 @@ class Traveller(models.Model):
     photo_2 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     photo_3 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     reg_date = models.DateTimeField(default=datetime.now, blank=True)
-    is_published = models.BooleanField(default=True)
+    is_published = models.BooleanField(default=False)
     tours_count = models. IntegerField(default=0)
     is_guide = models.BooleanField(default=False)
     price_per_hour= models.DecimalField(max_digits=5,default=0,decimal_places = 0)

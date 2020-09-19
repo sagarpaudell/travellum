@@ -20,7 +20,7 @@ Dashboard
     <div class="container py-5">
       <!--============ Dashboard Navigation ================-->
       <div class="row no-gutters">
-        <div class="col-lg-3 col-md-5">
+        <div class="col-lg-3 col-md-4">
           {% if traveller_user %}
           {% if traveller_user.photo_main %}
           <img class="profile-pic" style="height: 275px !important; width: 100% !important; cursor: auto;"
@@ -32,7 +32,7 @@ Dashboard
           {% endif %}
         </div>
 
-        <div class="col-lg-9 col-md-7">
+        <div class="col-lg-9 col-md-8">
 
           <div class="d-flex flex-column">
             <div class="px-4 py-2 bg-transparent text-white">
@@ -51,8 +51,8 @@ Dashboard
 
             <div class="bg-custom">
               <div class="container">
-                <div class="row p-0" style="margin: 3rem .5rem;">
-                  <div class="col-md-6">
+                <div class="row p-0 mx-2 my-3 py-2 my-md-5 mx-md-2">
+                  <div class="col-md-6 p-0">
                     {% if traveller_user %}
                     {{traveller_user.address}}<br>
                     <h2>{{ traveller_user.first_name }} {{ traveller_user.last_name }} </h2>
@@ -61,32 +61,35 @@ Dashboard
                   </div>
                   {% if traveller_user %}
                   {% if traveller_user.is_guide %}
-                  <div class="col-md-6 text-right">
-                    <h3><span class="display-5 d-inline text-success">Rs.</span>{{traveller_user.price_per_hour}}/hr
-                    </h3>
-                  </div>
-                  <div>
+                  <div class="col-md-6 p-0 text-right d-flex flex-column align-items-md-end justify-content-md-center align-items-start">
+                    <h3><span class="display-5 d-inline text-success">Rs.</span>{{traveller_user.price_per_hour}}/hr</h3>
                     <form action="{% url 'notifications' %}" method="POST">
                       {% csrf_token %}
                       <input type="hidden" name="traveller_id" value="{{ traveller_user.id }}">
-                      <input type="submit" name="request_guide">
+                      <input class="btn btn-success btn-md" type="submit" name="request_guide" value="Make Inquiry">
                     </form>
+                  </div>
+                  <div>
+                    
                     <a href="{%url 'payment_status'%}">Status</a>
                     <!-- <input value="{{traveller.price_per_hour| add:"35"}}" name="tAmt" type="hidden">
                     <input value="{{traveller.price_per_hour}}" name="amt" type="hidden"> -->
-                    <form action="https://uat.esewa.com.np/epay/main" method="POST">
+
+                    <!-- <form action="https://uat.esewa.com.np/epay/main" method="POST">
                       <input value="135" name="tAmt" type="hidden">
                       <input value="100" name="amt" type="hidden">
                       <input value="15" name="txAmt" type="hidden">
                       <input value="20" name="psc" type="hidden">
                       <input value="0.00" name="pdc" type="hidden">
                       <input value="epay_payment" name="scd" type="hidden">
-                      <input value="1217779" name="pid" type="hidden">
+                      <input value="1217779" name="pid" type="hidden"> -->
+
                       <!-- <input value="{{ traveller.id }}{{request.user.id}}" name="pid" type="hidden"> -->
-                      <input value="http://merchant.com.np/page/esewa_payment_success?q=su" type="hidden" name="su">
+                      
+                      <!-- <input value="http://merchant.com.np/page/esewa_payment_success?q=su" type="hidden" name="su">
                       <input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="hidden" name="fu">
                       <input value="Pay via Esewa" type="submit">
-                    </form>
+                    </form> -->
                   </div>
                   {% endif %}
                   {% endif %}
@@ -122,7 +125,8 @@ Dashboard
           <div class="card card-body bg-white px-3 py-5">
 
             <!--========= Edit Profile Section ===============-->
-            {% if my_profile %}<h4 class="px-3" style="color: #e2c0bb;">Let People know about you</h4>
+            {% if my_profile %}
+            <h4 class="px-3" style="color: #e2c0bb;">Let People know about you</h4>
 
             <div>
               <ul class="d-flex p-3" style="list-style: none;">
@@ -198,44 +202,44 @@ Dashboard
                 {% endif %}
               </div>
             </div>
-          </div>
-          <!-- <span class="border-bottom"></span><br> -->
-          <!-- End of Edit Profile Section -->
 
-          <!--======= Profile Description Section ==========-->
-          <h2 class="px-3" style="color: #e2c0bb;">Hi there! Nice to meet you</h2>
-          <p class="p-3 text-justify">
-            {% if traveller_user %}{{bio_first}}{% endif %}
-          </p>
-          <br>
+            <!-- <span class="border-bottom"></span><br> -->
+            <!-- End of Edit Profile Section -->
 
-          <p class="px-3 pb-3 text-justify collapse" id="collapse-btn-1">
-            {{bio_second}}
-          </p>
-          <div class="container">
-            <div class="row">
-              <div class="col-md-10"></div>
-              {% if bio_second %}
-              <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="collapse"
-                data-target="#collapse-btn-1">Read More</button>
-              {% endif %}
+            <!--======= Profile Description Section ==========-->
+            <h2 class="px-3" style="color: #e2c0bb;">Hi there! Nice to meet you</h2>
+            <p class="p-3 text-justify">
+              {% if traveller_user %}{{bio_first}}{% endif %}
+            </p>
+            <br>
+
+            <p class="px-3 pb-3 text-justify collapse" id="collapse-btn-1">
+              {{bio_second}}
+            </p>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-10"></div>
+                {% if bio_second %}
+                <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="collapse"
+                  data-target="#collapse-btn-1">Read More</button>
+                {% endif %}
+              </div>
             </div>
+            <span class="border-bottom"></span>
+            <!-- End of Profile Description Section -->
+
+            <!--============= Languages Section ============-->
+            <h4 class="px-3 py-3" style="color: #e2c0bb;">Languages</h4>
+            <p class="p-3 border-bottom">
+              {% if traveller_user %}{{traveller_user.languages}}{% endif %}
+            </p>
+            <!-- End of Languages Section -->
+
+            <!--============= Interests Section ==============-->
+            <h4 class="px-3" style="color: #e2c0bb;">Interests</h4>
+            <p class="p-3 border-bottom">Travelling</p>
+            <!-- End of Interests Section -->
           </div>
-          <span class="border-bottom"></span>
-          <!-- End of Profile Description Section -->
-
-          <!--============= Languages Section ============-->
-          <h4 class="px-3 py-3" style="color: #e2c0bb;">Languages</h4>
-          <p class="p-3 border-bottom">
-            {% if traveller_user %}{{traveller_user.languages}}{% endif %}
-          </p>
-          <!-- End of Languages Section -->
-
-          <!--============= Interests Section ==============-->
-          <h4 class="px-3" style="color: #e2c0bb;">Interests</h4>
-          <p class="p-3 border-bottom">Travelling</p>
-          <!-- End of Interests Section -->
-
         </div>
         <!-- End of About Me Collapse -->
 

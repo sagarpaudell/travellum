@@ -31,7 +31,7 @@ Reset Password
         <input 
           id="new_pw" 
           class="form-control mb-3" 
-          name="new_pw" 
+          name="new_pw1" 
           type="password" 
           required
         >
@@ -56,6 +56,9 @@ Reset Password
         type="submit" 
         class="btn btn-sm btn-outline-dark px-3" 
         value="Submit"
+        {% if email %}
+        name="{{email}}"
+        {% endif %}
       >
         Change Password
       </button>
