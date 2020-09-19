@@ -65,7 +65,7 @@
                 <hr class="m-1">
                 {% if notifications %}
                 {% for notification in notifications %}
-                {% if  notification.is_ignored or  notification.is_accepted%}
+                {% if  notification.is_ignored or notification.is_accepted%}
               
                   <div
                     class="d-flex align-items-center justify-content-center m-0" 
@@ -133,21 +133,12 @@
           </div>
         </div>
 
-<<<<<<< HEAD
-      <div class="navbar-collapse col-lg-1 col-md-1 col-3 collapse-on-phones">
-        <div class="navbar-nav">
-          <span class="nav-item text-center dropdown" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown">
-            <a href="" class="nav-link text-light">
-              {% if  user.is_authenticated %}     
-
-=======
         <div class="navbar-collapse col-lg-1 col-md-1 col-3 collapse-on-phones">
           <div class="navbar-nav">
             <span class="nav-item text-center dropdown" id="navbarDropdownMenuLink" role="button"
               data-toggle="dropdown">
               <a href="" class="nav-link text-light">
                 {% if  user.is_authenticated %}
->>>>>>> 0ef45fae561fd05edab691bc2926b15429ff5cfb
                 {% if logged_in_user %}
                 {% if logged_in_user.photo_main %}
                 <img class="hw-dp" src="{{ logged_in_user.photo_main.url }}" alt="">
