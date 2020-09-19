@@ -64,6 +64,15 @@
               <hr class="m-1">
               {% if notifications %}
                 {% for notification in notifications %}
+                {% if  notification.is_ignored or  notification.is_accepted%}
+              
+                  <div
+                    class="d-flex align-items-center justify-content-center m-0" 
+                    style="cursor: default; height: 90%; font-weight: normal;"
+                  >  
+                    No any Notifications
+                  </div>
+                {% else %}
                   <li>
                     <a href="#" class="top-text-block">
                       <div class="top-text-heading mb-2" style="font-size: .8rem;">
@@ -71,28 +80,40 @@
                       </div>
                       <div class="top-text-light" style="display: flex; justify-content: space-between; align-items: center; font-size: .7rem;">
                         {{ notification.whenpublished }}
-                        <span>
-                          <button class="btn btn-sm btn-success p-0" style="font-size: .75rem; padding: 2px !important;">
-                            Accept
-                          </button> 
-                          &nbsp;
-                          <button class="btn btn-sm btn-danger p-0" style="font-size: .75rem; padding: 2px !important;">
-                            Ignore
-                          </button>
-                        </span>
+                        <form action="{% url 'dashboard' %}" method="POST">
+                          {% csrf_token %}
+                          <span>
+                            <input type="hidden" value="{{ notification.id}}" name="noti_id">
+                            <input type="submit" value = "Accept" name = "accepted" class="btn btn-sm btn-success p-0" style="font-size: .75rem; padding: 2px !important;">
+                              
+                            
+                            &nbsp;
+                            <input type="submit" value="Ignore" name="ignored" class="btn btn-sm btn-danger p-0" style="font-size: .75rem; padding: 2px !important;">
+                              
+                            
+                          </span>
+                        </form>
                       </div>
                       
                     </a> 
                   </li>
+                  
+                {% endif %}
                 {% endfor %}
               
-              {% else %}
+              <!-- {% else %}
                 <div
-                  class="d-flex align-items-center justify-content-center m-0" 
+                  class="d-flex align-items-center j
+                    <div
+                      class="d-flex align-items-center justify-content-center m-0" 
+                      style="cursor: default; height: 90%; font-weight: normal;"
+                    >  
+                      No any Notifications
+                    </div>ustify-content-center m-0" 
                   style="cursor: default; height: 90%; font-weight: normal;"
                 >  
                   No any Notifications
-                </div>
+                </div> -->
               {% endif %}
 
               <!-- <li>
@@ -115,7 +136,8 @@
         <div class="navbar-nav">
           <span class="nav-item text-center dropdown" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown">
             <a href="" class="nav-link text-light">
-              {% if  user.is_authenticated %}
+              {% if  user.is_authenticated %}     
+
                 {% if logged_in_user %}
                     {% if logged_in_user.photo_main %}
                         <img class="hw-dp" src="{{ logged_in_user.photo_main.url }}" alt="">

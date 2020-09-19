@@ -54,10 +54,23 @@ def dashboard(request):
       GuideView(request)  #calls guide's view in guide app
     
     #for notification
-    if 'request_guide' in request.POST:
-      notifications(request) 
+    # if 'request_guide' in request.POST:
+    #   notifications(request) 
       
-    return redirect('dashboard')
+    # return redirect('dashboard')
+  
+ 
+    if 'accepted' in request.POST:
+      noti_id = request.POST['noti_id']
+      notification = get_object_or_404(Notification, pk=noti_id)
+      notification.is_accepted = True
+      notification.save()
+    if 'ignored' in request.POST:
+      noti_id = request.POST['noti_id']
+      notification = get_object_or_404(Notification, pk=noti_id)
+      notification.is_ignored = True
+      notification.save()
+
   return render(request, 'dashboard/dashboard.html',context)
 
   
