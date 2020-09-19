@@ -1,39 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script>
-    setTimeout(function () {
-      $('#message').fadeOut('fast');
-    }, 3000);
-  </script>
-</head>
-<body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    </head>
-  
-    <body>
-      {% if messages %}
-      {% for message in messages %}
-      <div id="message"
-        style="margin: auto; font-size:1rem; margin-top: 1rem; max-width: 50%; text-align: center; color: #fff;">
-        <div class="alert alert-warning alert-dismissible text-center" role="alert">
-          <div class="closebtn" data-dismiss="alert" onclick="this.element.style.display='none';">
+    <script>
+      setTimeout(function () {
+        $('#disappear').fadeOut('fast');
+      }, 3800);
+    </script>
+  </head>
+  <body>
+    {% if messages %} 
+    {% for message in messages %}
+    <div id="disappear">
+      <div id="login-container" class="container">
+        <div class="alert alert-info text-center w-100 mt-4 mb-n4 text-dark" style="font-size: .9rem;">
+          
             <strong>
-              {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} Error: &nbsp;{% else %}
-              {{ message.tags|title }} {% endif %}
+              {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} Error:
+              &nbsp;{% else %} {{ message.tags|title }} {% endif %}
             </strong>
             {{ message }}
-          </div>
+          
         </div>
       </div>
-      {% endfor %}
-      {% endif %}
-  
-    </body>
-  
-  </html>
+    </div>
+    {% endfor %} 
+    {% endif %}
+  </body>
+</html>
