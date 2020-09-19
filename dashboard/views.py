@@ -5,6 +5,9 @@ from guides.models import Guide
 from guides.views import GuideView
 from notifications.models import Notification
 from places.models import Place
+from datetime import datetime, timedelta
+from django import template
+from django.utils.timesince import timesince
 
 # Create your views here.
 def dashboard(request):
@@ -12,6 +15,7 @@ def dashboard(request):
   traveller_user=get_object_or_404(Traveller, email=user)
   guide_user = Guide.objects.all().filter(email=user).first()
   notifications = Notification.objects.all().filter(receiver_email=user)
+  
   context = {
                 'traveller_user':traveller_user,
                 'my_profile':True,

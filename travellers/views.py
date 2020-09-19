@@ -5,6 +5,9 @@ from guides.models import Guide
 from notifications.models import Notification
 from history.models import History
 from django.contrib import messages,auth
+from datetime import datetime
+import datetime
+from django.utils.timezone import utc
 
 def view_profile(request, traveller_id):
     user=request.user
@@ -36,7 +39,7 @@ def view_profile(request, traveller_id):
                 'traveller_user':profile,
                 'my_profile':False,
             }
-        return render(request, 'travellers/travellers.html',context)
+        return render(request, 'travellers/tr9806800001avellers.html',context)
 
 
 
@@ -45,9 +48,11 @@ def notifications(request):
     if request.method == 'POST':
         sender_user = request.user
         traveller_id = request.POST['traveller_id']
+
         receiver = get_object_or_404(Traveller, pk=traveller_id)
         sender_name = sender_user.first_name+" " +sender_user.last_name
         receiver_user = get_object_or_404(User, email=receiver.email)
+        reg_date = datetime.datetime.utcnow().replace(tzinfo=utc)
 
     #Check if user has made request already
     if request.user.is_authenticated:
@@ -57,7 +62,7 @@ def notifications(request):
             messages.error(request, 'You have already made a request to this guide')
             return redirect('/guides/'+traveller_id)
         else:
-            notification = Notification(receiver_email=receiver_user, sender_email=sender_user, sender_name = sender_name)
+            notification = Notification(receiver_email=receiver_user, sender_email=sender_user, sender_name = sender_name, reg_date= reg_date)
             notification.save()
         return redirect('/guides/'+traveller_id)        
     return redirect('/guides/'+traveller_id)
