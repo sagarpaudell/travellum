@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Payment
+{% endblock %}
+
+{% block content %}
+<!-- Successful payment block -->
+<section class="container-fluid" id="payment_successful">
+    <section class="row justify-content-center">
+        <section style="width:600px;  ">
+            <div style="background:#fff; padding:30px; border-radius:10px; box-shadow:0px 0px 10px 0px;">
+                <h1 class=" row justify-content-center" style="color:#4BB543 ;">Congratulations!!
+                </h1>
+                <p class="row justify-content-center" style="margin-bottom:8%; ">Your payment has been successful</p>
+                <div class="row ">
+                    <div class="col-md-10 col-sm-12">
+                        <h5 class="border-bottom" style="margin-bottom: 3%;">Transaction Details:</h5>
+                        <p style="margin: 1px;"><strong>Transaction ID: </strong>#12029093b290</p>
+                        <p style="margin: 1px;"><strong>Paid by: </strong>Bikesh Daju</p>
+                        <p style="margin: 1px;"><strong>Paid to: </strong>Gupta Sir</p>
+                        <p style="margin: 1px;"><strong>Amount: </strong>Rs.2000</p>
+                        <p style="margin: 1px;"><strong>Transaction medium: </strong>E-Sewa</p>
+                        <p style="margin: 1px;"><strong>Transaction date: </strong>2020/3/23</p>
+                        <button type="submit" class="btn btn-primary" style="margin-top:5%; ">Ok,Thanks</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </section>
+</section>
+
+<!-- failure payment block -->
+<section class="container-fluid" id="payment_failure">
+    <section class="row justify-content-center">
+        <section style="width:600px;  ">
+            <div
+                style="background:#fff; padding:30px; padding-bottom:1%; border-radius:10px; box-shadow:0px 0px 10px 0px;">
+                <h1 class=" row justify-content-center" style="color:#f00404e1 ;">Oopss!!
+                </h1>
+                <p class="row justify-content-center" style="margin-bottom:8%; ">Your payment wasn't successful</p>
+                <div class="row ">
+                    <div class="col-md-12 col-sm-12">
+                        <p style="margin: 3px;">There was a techical problem in making your payment.</p>
+                        <p style="margin-bottom: 4px;">(Please make sure that you have sufficient balance for the
+                            transaction
+                            and a good network connection before trying again.)
+                        </p>
+                        <button type="submit" class="btn btn-warning" style="margin-top:5%; ">Try again</button>
+                        <button type="submit" class="btn btn-info" style="margin-top:5%; float:right; "><i
+                                class="fas fa-angle-double-left"></i> Go back to
+                            Dashboard</button>
+
+                        <p style="margin-top:5%; margin-bottom: 0px;" class=" row justify-content-center">Didn't help?
+                            Contact us
+                            at:
+                            <u>&nbsp; travellum@gmail.com</u>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+</section>
+
+{% endblock %}

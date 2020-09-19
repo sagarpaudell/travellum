@@ -20,7 +20,7 @@ Messenger
 {% endblock %}
 
 {% block content %}
-<div style="display: flex; align-items: center; justify-content: center;">
+<div style="display: flex; align-items: center; justify-content: center; position:relative; ">
   <div id="frame" style="justify-content: center;">
     <div id="sidepanel" style="border-radius:10px 0px 0px 10px;">
       <div id="profile">
@@ -35,19 +35,19 @@ Messenger
       </div>
       <div id="search">
         <label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-        <input type="text" placeholder="Search contacts..." id="search_user" name="search_user"/>
+        <input type="text" placeholder="Search contacts..." id="search_user" name="search_user" />
       </div>
       <!--================side panel===================-->
       <div id="contacts">
         <ul>
           {% for chat_detail in chat_details %}
-          
+
           <a href="/chat/{{chat_detail.user.email}}">
             {% if chat_detail.user.email == chat_friend.email %}
             <li class="contact" style="background: #32465a;" id="bhroom">
-            {% else %}
+              {% else %}
             <li class="contact">
-            {% endif %}
+              {% endif %}
               <div class="wrap">
                 <img src="{{chat_detail.user_photo.url}}" alt="">
                 <div class=" meta">
@@ -76,14 +76,14 @@ Messenger
         <ul id='message-ul'>
           {% for chat in chat_list %}
           {% if chat.sender.email == user.email %}
-          <li class="sent" >
+          <li class="sent">
             <img src="{{ traveller_currentuser.photo_main.url }}" alt="" />
-            <p data-toggle="tooltip" data-placement="left" title="{{chat.message_time}}" >{{chat.message_text}}</p>
+            <p data-toggle="tooltip" data-placement="left" title="{{chat.message_time}}">{{chat.message_text}}</p>
           </li>
           {% else %}
           <li class="replies">
             <img src="{{ traveller_chatuser.photo_main.url }}" alt="" />
-            <p  data-toggle="tooltip" data-placement="right" title="{{chat.message_time}}" >{{chat.message_text}}</p>
+            <p data-toggle="tooltip" data-placement="right" title="{{chat.message_time}}">{{chat.message_text}}</p>
           </li>
           {% endif %}
           {% endfor %}
@@ -93,7 +93,8 @@ Messenger
         <div class="wrap">
           <form method="post">
             {% csrf_token %}
-            <input type="text" name="message" placeholder="Write your message" style="color: black;" id='chat-message-input' autocomplete="off">
+            <input type="text" name="message" placeholder="Write your message" style="color: black;"
+              id='chat-message-input' autocomplete="off">
             <button class="submit" id="submit-button"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
           </form>
         </div>
@@ -106,56 +107,56 @@ Messenger
 <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 
 <script>
-  $(document).ready(function(){
-  
-    var url='ws://'+ window.location.host+'/ws/chat/' + '{{chat_friend.email}}/';
+  $(document).ready(function () {
+
+    var url = 'ws://' + window.location.host + '/ws/chat/' + '{{chat_friend.email}}/';
     var chatSocket = new WebSocket(url);
-    
-    chatSocket.onmessage = function(event){
+
+    chatSocket.onmessage = function (event) {
       var data = JSON.parse(event.data);
       var message = data.message;
       var time = new Date(data['time']).toLocaleString('en');
       var $messages = $('#message-ul')
-      
+
       var user = '{{user.email}}'
-    
-      if(user == data.sender) {
-        $messages.append('<li class="sent"><img src="{{ traveller_currentuser.photo_main.url }}" alt="" /><p data-toggle="tooltip" data-placement="left" title = "'+ time + '" >' + message + '</p></li>');
-        $(".messages").animate({ 
-                  scrollTop: $( 
-                    '.messages').get(0).scrollHeight 
-              }, 600);    
-      } else{
-        $messages.append('<li class="replies"><img src="{{ traveller_chatuser.photo_main.url }}" alt="" /><p data-toggle="tooltip" data-placement="left" title = "'+ time + '" >' + message + '</p></li>');
-        $(".messages").animate({ 
-                  scrollTop: $( 
-                    '.messages').get(0).scrollHeight 
-              }, 600); 
+
+      if (user == data.sender) {
+        $messages.append('<li class="sent"><img src="{{ traveller_currentuser.photo_main.url }}" alt="" /><p data-toggle="tooltip" data-placement="left" title = "' + time + '" >' + message + '</p></li>');
+        $(".messages").animate({
+          scrollTop: $(
+            '.messages').get(0).scrollHeight
+        }, 600);
+      } else {
+        $messages.append('<li class="replies"><img src="{{ traveller_chatuser.photo_main.url }}" alt="" /><p data-toggle="tooltip" data-placement="left" title = "' + time + '" >' + message + '</p></li>');
+        $(".messages").animate({
+          scrollTop: $(
+            '.messages').get(0).scrollHeight
+        }, 600);
       }
       var $latest_text = $('#bhroom .preview')
-      if (user==data.sender){
-        $latest_text.text('you: ' + message.slice(0,40))
+      if (user == data.sender) {
+        $latest_text.text('you: ' + message.slice(0, 40))
       }
-      else{
-        $latest_text.text(message.slice(0,40))
+      else {
+        $latest_text.text(message.slice(0, 40))
       }
     };
-      
-    chatSocket.onclose = function(event){
-          console.error('Chat socket closed unexpectedly');
+
+    chatSocket.onclose = function (event) {
+      console.error('Chat socket closed unexpectedly');
     };
-    
-    chatSocket.onopen = function(event){
+
+    chatSocket.onopen = function (event) {
       var $input = $('#chat-message-input');
       var $submit = $('#submit-button');
-      
-      $(".messages").animate({ scrollTop: $( '.messages').get(0).scrollHeight }, 1000); 
-      
-      $submit.click(function(e){
+
+      $(".messages").animate({ scrollTop: $('.messages').get(0).scrollHeight }, 1000);
+
+      $submit.click(function (e) {
         e.preventDefault()
-        var message= $input.val();
-        if(message){
-          chatSocket.send(JSON.stringify({'message':message}));
+        var message = $input.val();
+        if (message) {
+          chatSocket.send(JSON.stringify({ 'message': message }));
           $input.val('');
         }
         $input.focus();
@@ -167,15 +168,15 @@ Messenger
     //     source: temp 	//source for autocomplete // requires JSON list
     //   });
     // });
-    
+
   });
 </script>
 
 
-  
+
 <script>
-  $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();   
+  $(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
   });
 </script>
 

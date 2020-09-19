@@ -99,7 +99,8 @@ Details
             {% for review in reviews %}
             <div class="row border py-3 my-3" style="background: white !important; margin-right:10%; margin-left:1%; ">
                 <div class="col-2 col-lg-1">
-                    <img {% if review.Reviewer.photo_main %} src="{{review.Reviewer.photo_main.url}}" {% else %} src="{% static 'images/default.png' %}" {% endif %}
+                    <img {% if review.Reviewer.photo_main %} src="{{review.Reviewer.photo_main.url}}" {% else %}
+                        src="{% static 'images/default.png' %}" {% endif %}
                         style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
                 </div>
                 <div class="col-10 col-lg-11">
@@ -108,33 +109,33 @@ Details
                     </h5>
                     <div class="review__rating">
                         {% if review.ratings == 1 %}
-                            <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
                         {% elif review.ratings == 2 %}
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
                         {% elif review.ratings == 3 %}
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
                         {% elif review.ratings == 4 %}
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
 
                         {% else %}
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
                         {% endif %}
-                    
+
                     </div>
 
 
@@ -143,13 +144,19 @@ Details
             </div>
             {% endfor %}
             {% endif %}
+<<<<<<< HEAD
+||||||| 85aad6e
+            {% if not %}
+=======
             
+>>>>>>> d44fba60f650b0ae89823be36e7b0dce7b059ecf
             <div class="row border py-3 mb-5"
                 style="background: white !important; margin-top:80px;  margin-right:10%; margin-left:1%; ">
                 <div class="col-2 col-lg-1 rounded">
-                    <img {% if logged_in_user.photo_main %} src="{{logged_in_user.photo_main.url}}" {% else %} src="{% static 'images/default.png' %}" {% endif %}
+                    <img {% if logged_in_user.photo_main %} src="{{logged_in_user.photo_main.url}}" {% else %}
+                        src="{% static 'images/default.png' %}" {% endif %}
                         style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
-                        
+
                 </div>
                 <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">
                     {{ logged_in_user.first_name }} {{ logged_in_user.last_name }}
@@ -159,7 +166,7 @@ Details
                     <h5 class="text-muted" style="font-weight: 500; font-size: 1rem;">Know this place? Give your review
                         here:
                     </h5>
-                    <textarea class="form-control" rows="3" name="preview"  required ></textarea>
+                    <textarea class="form-control" rows="3" name="preview" required></textarea>
                     <input type="hidden" value="{{ place.id }}" name="plid">
 
                     <div class="mt-n4" style="display: flex;">

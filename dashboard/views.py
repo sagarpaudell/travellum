@@ -13,6 +13,8 @@ from django.utils.timesince import timesince
 def dashboard(request):
   user=request.user
   traveller_user=get_object_or_404(Traveller, email=user)
+  bio = traveller_user.bio.split('.',5)
+  bio_first = ". ".join(bio[:5])+(".")
   guide_user = Guide.objects.all().filter(email=user).first()
   notifications = Notification.objects.all().filter(receiver_email=user)
   
@@ -22,6 +24,19 @@ def dashboard(request):
                 'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
                 'guide_user' : guide_user,
                 'notifications': notifications,
+                'bio_first': bio_first,
+            }
+
+  if (len(bio)>=5):
+    bio_second = bio[5]
+    context = {
+                'traveller_user':traveller_user,
+                'my_profile':True,
+                'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
+                'guide_user' : guide_user,
+                'notifications': notifications,
+                'bio_first': bio_first,
+                'bio_second': bio_second,
             }
  
   if (request.method == "POST" ):

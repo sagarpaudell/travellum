@@ -8,11 +8,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<!-- fonts -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+		integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+		crossorigin="anonymous" />
 	<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i"
 		rel="stylesheet">
-	
+
 
 	<link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
@@ -76,8 +78,8 @@
 						<div class="input-group span">
 							<input class="form-control form-control-lg mr-1 w-200"
 								style=" border:3px solid coral; border-radius:50px;" type="text"
-								placeholder="Search Destinations here . . ." aria-label="SearchPlaces" name="search_places"
-								id="search_places">
+								placeholder="Search Destinations here . . ." aria-label="SearchPlaces"
+								name="search_places" id="search_places">
 							<div>
 								<button type="submit" value="search" class="form-control btn btn-primary"
 									style="width:40px; height:40px !important;  margin-top: 45%; border-radius: 50%; "><i
@@ -109,7 +111,8 @@
 						<div class="col-md-12 heading-section text-justify p-3 p-md-5 p-lg-0 ">
 							<span class="subheading text-center">about travellum</span>
 							<h2 class="mb-4">How it works?</h2>
-							<p id="para"><strong>Travellum </strong>provides a platform to connect travelers. It helps you
+							<p id="para"><strong>Travellum </strong>provides a platform to connect travelers. It helps
+								you
 								find
 								the perfect person
 								to travel with. Maybe you want a guide who knows everything about the history of the
@@ -119,7 +122,8 @@
 								instead, if you are thinking of employing yourself as a travel guide, you can do
 								that
 								from travellum. It is as easy as opening a facebook account.</p>
-							<p id="para">We are trying our best to introduce freelancing to the travel industry. If you really
+							<p id="para">We are trying our best to introduce freelancing to the travel industry. If you
+								really
 								think you are capable of being a guide, we don’t ask you for your travel degree, you
 								can
 								simply register to our site. We will help you find the travellers who are looking
@@ -250,9 +254,10 @@
 
 					<div class="img" style="display:flex;
 						justify-content:center;">
-						<a href="{% url 'view_profile' guide.id %}"><img {% if guide.photo_main %}src="{{ guide.photo_main.url }}"{% else %} src="{% static 'images/default.png' %}" {% endif %}
-								class="img-fluid" style="width: 200px; height: 200px; border-radius: 50%; "
-								alt="Image"></a>
+						<a href="{% url 'view_profile' guide.id %}"><img
+								{% if guide.photo_main %}src="{{ guide.photo_main.url }}" {% else %}
+								src="{% static 'images/default.png' %}" {% endif %} class="img-fluid"
+								style="width: 200px; height: 200px; border-radius: 50%; " alt="Image"></a>
 					</div>
 					<div class="text">
 						<h3><a href="{% url 'view_profile' guide.id %}"
