@@ -71,7 +71,6 @@ def placedetails(request, place_id):
             'attractions':attractions,
             'tasks':tasks,
             'reviews':reviews,
-            'logged_in_user': traveller_user_logged_in,   #logged_in_user is for avatar in navbar
         }
     return render(request, 'places/placedetails.html', context) 
 
