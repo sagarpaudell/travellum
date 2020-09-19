@@ -39,7 +39,7 @@ def view_profile(request, traveller_id):
                 'traveller_user':profile,
                 'my_profile':False,
             }
-        return render(request, 'travellers/tr9806800001avellers.html',context)
+        return render(request, 'travellers/travellers.html',context)
 
 
 

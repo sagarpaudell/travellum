@@ -44,18 +44,18 @@ Dashboard
 
             <div class="bg-custom">
               <div class="container">
-                <div class="row">
+                <div class="row p-0" style="margin: 3rem .5rem;">
                   <div class="col-md-6">
                     {% if traveller_user %}
                     {{traveller_user.address}}<br>
-                    <h1>{{ traveller_user.first_name }} {{ traveller_user.last_name }} </h1>
+                    <h2>{{ traveller_user.first_name }} {{ traveller_user.last_name }} </h2>
                     {% if traveller_user.is_guide %}Replies within: 84 hours{% endif %}
                     {% endif %}
                   </div>
                   {% if traveller_user %}
                   {% if traveller_user.is_guide %}
                   <div class="col-md-6 text-right">
-                    <h3><span class="display-4 d-inline text-success">Rs.</span>{{traveller_user.price_per_hour}}/hr</h3>
+                    <h3><span class="display-5 d-inline text-success">Rs.</span>{{traveller_user.price_per_hour}}/hr</h3>
                   </div>
                   <div>
                     <form action="{% url 'notifications' %}" method="POST">
@@ -78,7 +78,7 @@ Dashboard
                       <input value="http://merchant.com.np/page/esewa_payment_success?q=su" type="hidden" name="su">
                       <input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="hidden" name="fu">
                       <input value="Pay via Esewa" type="submit">
-                      </form>
+                    </form>
                   </div>
                   {% endif %}
                   {% endif %}
@@ -90,7 +90,6 @@ Dashboard
         </div>
       </div>        
       
-      {% if my_profile %}
       <div>
         <div class="d-flex flex-row text-white align-items-stretch text-center bg-white" id="custom-menu">
           <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#about_me">
@@ -106,7 +105,6 @@ Dashboard
             <span class="d-none d-md-inline">Traveller</span>
           </div>
       </div>
-      {% endif %}
       <!--=========== End of Dashboard Navigation ==========-->
 
 
@@ -190,7 +188,7 @@ Dashboard
               {% endif %}
             </div>
           </div>
-          <span class="border-bottom"></span><br>
+          <!-- <span class="border-bottom"></span><br> -->
           <!-- End of Edit Profile Section -->
 
           <!--======= Profile Description Section ==========-->

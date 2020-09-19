@@ -205,7 +205,7 @@ nav .container .row div:nth-child(2) form {
   position: absolute;
   left: -168px;
   width: 350px;
-  height: 300px;
+  max-height: 300px;
   overflow: auto;
 }
 .top-head-dropdown li:last-child .top-text-block {
@@ -224,6 +224,7 @@ nav .container .row div:nth-child(2) form {
   -webkit-animation: spin-topbar 1s linear infinite;
   animation: spin-topbar 1s linear infinite;
 }
+
 @-webkit-keyframes spin-topbar {
   0% {
     -webkit-transform: rotate(0deg);
