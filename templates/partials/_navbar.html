@@ -2,44 +2,45 @@
 
 <!--================= Navbar ===============================-->
 <header>
-<nav class="navbar bg-transparent px-0 my-navbar">
-  <div class="container">
-    <div class="row w-100 pl-3">
+  <nav class="navbar bg-transparent px-0 my-navbar">
+    <div class="container">
+      <div class="row w-100 pl-3">
 
-      <div class="col-lg-2 col-md-3 col-3 text-center">
-        <a class="navbar-brand text-light" href="{%url 'index'%}">Travellum</a>
-        <div class="text-center" style="padding-top: 8px;">
-          <a class="navbar-brand text-light navbar-brand-sm " href="{%url 'index'%}" style="font-size: 1.5rem;">T</a>
+        <div class="col-lg-2 col-md-3 col-3 text-center">
+          <a class="navbar-brand text-light" href="{%url 'index'%}">Travellum</a>
+          <div class="text-center" style="padding-top: 8px;">
+            <a class="navbar-brand text-light navbar-brand-sm " href="{%url 'index'%}" style="font-size: 1.5rem;">T</a>
+          </div>
+          <!-- a -->
         </div>
-        <!-- a -->
-      </div>
 
-      <div class="col-lg-7 col-md-5 col-3" id="search-bar-on-nav">
-        <div class="navbar-nav mt-n1">
-          <form action="{% url 'search' %}" class="form-inline ">
-            <a href="{% url 'index' %}" id="search">
-              <i style="font-size: 1.1rem; padding-top: 5px;" class="fa fa-search text-light"></i>
-            </a>
-            <!-- <input class="form-control form-control-lg mr-1 w-200"
+        <div class="col-lg-7 col-md-5 col-3" id="search-bar-on-nav">
+          <div class="navbar-nav mt-n1">
+            <form action="{% url 'search' %}" class="form-inline ">
+              <a href="{% url 'index' %}" id="search">
+                <i style="font-size: 1.1rem; padding-top: 5px;" class="fa fa-search text-light"></i>
+              </a>
+              <!-- <input class="form-control form-control-lg mr-1 w-200"
             style=" border:3px solid coral; border-radius:50px;" type="text"
             placeholder="Search Destinations here" aria-label="SearchPlaces" name="search_places"
             id="search_places"> -->
-            <input type="text" class="bg-transparent border-0" id="searchDesInput" name="search_places" placeholder=" Search Locations...">
-          </form>
+              <input type="text" class="bg-transparent border-0" id="searchDesInput" name="search_places"
+                placeholder=" Search Locations...">
+            </form>
+          </div>
+          <!-- a -->
         </div>
-        <!-- a -->
-      </div>
-      
-      <div class="col-lg-1 col-md-2 collapse-on-phones">
-        <div class="navbar-nav">              
-          <span class="nav-item text-center">
-            <a href="{% url 'places' %}" class="nav-link text-light"> Places</a>
-          </span>
-        </div>
-        <!-- a -->
-      </div>
 
-      <!-- <div class="col-lg-1 col-md-1 col-3 text-center">
+        <div class="col-lg-1 col-md-2 collapse-on-phones">
+          <div class="navbar-nav">
+            <span class="nav-item text-center">
+              <a href="{% url 'places' %}" class="nav-link text-light"> Places</a>
+            </span>
+          </div>
+          <!-- a -->
+        </div>
+
+        <!-- <div class="col-lg-1 col-md-1 col-3 text-center">
         <div class="navbar-nav">
           <span class="nav-item text-center">
             <a href="" class="nav-link"><img class="hw-bell" src="{% static 'svg/bell.svg' %}" alt=""></a>
@@ -47,23 +48,32 @@
         </div>
       </div> -->
 
-      <div class="col-lg-1 col-md-1 col-3 text-center">
-        <div class="navbar-nav">
-          <div class="nav-item text-center top-head-dropdown">
-            {% if  user.is_authenticated%}
-            <a type="button" class="nav-link dropdown-toggle" data-toggle="dropdown">
-              <img class="hw-bell" src="{% static 'svg/bell.svg' %}" alt="">
-            </a>
-            <ul id="droppie" class="dropdown-menu pt-0">
-              <div class="px-3 mx-1 py-1 mt-1 d-flex justify-content-between" style="font-size: .8rem !important;">
-                Refresh
-                <button class="border-0 bg-transparent">
-                  <i class="fas fa-redo-alt"></i>
-                </button>
-              </div>
-              <hr class="m-1">
-              {% if notifications %}
+        <div class="col-lg-1 col-md-1 col-3 text-center">
+          <div class="navbar-nav">
+            <div class="nav-item text-center top-head-dropdown">
+              {% if  user.is_authenticated%}
+              <a type="button" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                <img class="hw-bell" src="{% static 'svg/bell.svg' %}" alt="">
+              </a>
+              <ul id="droppie" class="dropdown-menu pt-0">
+                <div class="px-3 mx-1 py-1 mt-1 d-flex justify-content-between" style="font-size: .8rem !important;">
+                  Refresh
+                  <button class="border-0 bg-transparent">
+                    <i class="fas fa-redo-alt"></i>
+                  </button>
+                </div>
+                <hr class="m-1">
+                {% if notifications %}
                 {% for notification in notifications %}
+                {% if  notification.is_ignored or  notification.is_accepted%}
+              
+                  <div
+                    class="d-flex align-items-center justify-content-center m-0" 
+                    style="cursor: default; height: 90%; font-weight: normal;"
+                  >  
+                    No any Notifications
+                  </div>
+                {% else %}
                   <li>
                     <a href="#" class="top-text-block">
                       <div class="top-text-heading mb-2" style="font-size: .8rem;">
@@ -71,92 +81,106 @@
                       </div>
                       <div class="top-text-light" style="display: flex; justify-content: space-between; align-items: center; font-size: .7rem;">
                         {{ notification.whenpublished }}
-                        <span>
-                          <button class="btn btn-sm btn-success p-0" style="font-size: .75rem; padding: 2px !important;">
-                            Accept
-                          </button> 
-                          &nbsp;
-                          <button class="btn btn-sm btn-danger p-0" style="font-size: .75rem; padding: 2px !important;">
-                            Ignore
-                          </button>
-                        </span>
+                        <form action="{% url 'dashboard' %}" method="POST">
+                          {% csrf_token %}
+                          <span>
+                            <input type="hidden" value="{{ notification.id}}" name="noti_id">
+                            <input type="submit" value = "Accept" name = "accepted" class="btn btn-sm btn-success p-0" style="font-size: .75rem; padding: 2px !important;">
+                              
+                            
+                            &nbsp;
+                            <input type="submit" value="Ignore" name="ignored" class="btn btn-sm btn-danger p-0" style="font-size: .75rem; padding: 2px !important;">
+                              
+                            
+                          </span>
+                        </form>
                       </div>
                       
                     </a> 
                   </li>
+                  
+                {% endif %}
                 {% endfor %}
               
-              {% else %}
+              <!-- {% else %}
                 <div
-                  class="d-flex align-items-center justify-content-center m-0" 
+                  class="d-flex align-items-center j
+                    <div
+                      class="d-flex align-items-center justify-content-center m-0" 
+                      style="cursor: default; height: 90%; font-weight: normal;"
+                    >  
+                      No any Notifications
+                    </div>ustify-content-center m-0" 
                   style="cursor: default; height: 90%; font-weight: normal;"
                 >  
                   No any Notifications
-                </div>
+                </div> -->
               {% endif %}
 
-              <!-- <li>
+                <!-- <li>
                 <a href="#" class="top-text-block">
                   <div class="top-text-heading">How was your <b>trip</b> with Buddha? Rate Buddha</div>
                   <div class="top-text-light">15 minutes ago</div>
                 </a> 
               </li> -->
-            </ul>
-            {% else %}
+              </ul>
+              {% else %}
               <a type="button" class="nav-link dropdown-toggle" href='/accounts/login/'>
                 <img class="hw-bell" src="{% static 'svg/bell.svg' %}" alt="">
               </a>
-            {% endif %}
+              {% endif %}
+            </div>
           </div>
         </div>
-      </div>
 
+<<<<<<< HEAD
       <div class="navbar-collapse col-lg-1 col-md-1 col-3 collapse-on-phones">
         <div class="navbar-nav">
           <span class="nav-item text-center dropdown" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown">
             <a href="" class="nav-link text-light">
-              {% if  user.is_authenticated %}
-                {% if logged_in_user %}
-                    {% if logged_in_user.photo_main %}
-                        <img class="hw-dp" src="{{ logged_in_user.photo_main.url }}" alt="">
-                    {% else %}
-                        <img class="hw-dp" src="{% static 'images/default.png' %}" alt="">
-                    {% endif %}                
-                {% endif %}
-              {% endif %}
-            </a>
-          </span>
+              {% if  user.is_authenticated %}     
 
-          {% if  user.is_authenticated %}
-          <div class="dropdown-menu" style="position: absolute; min-width: 80px; background: rgba(255,255,255,0.9);" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" style="cursor: pointer;" data-toggle="modal" data-target="#visibility">Visibility</a>
-            <a class="dropdown-item" href="{% url 'my_blog' %}">My Blog</a>
-            <a class="dropdown-item" href="/accounts/logout">Log Out</a>
+=======
+        <div class="navbar-collapse col-lg-1 col-md-1 col-3 collapse-on-phones">
+          <div class="navbar-nav">
+            <span class="nav-item text-center dropdown" id="navbarDropdownMenuLink" role="button"
+              data-toggle="dropdown">
+              <a href="" class="nav-link text-light">
+                {% if  user.is_authenticated %}
+>>>>>>> 0ef45fae561fd05edab691bc2926b15429ff5cfb
+                {% if logged_in_user %}
+                {% if logged_in_user.photo_main %}
+                <img class="hw-dp" src="{{ logged_in_user.photo_main.url }}" alt="">
+                {% else %}
+                <img class="hw-dp" src="{% static 'images/default.png' %}" alt="">
+                {% endif %}
+                {% endif %}
+                {% endif %}
+              </a>
+            </span>
+
+            {% if  user.is_authenticated %}
+            <div class="dropdown-menu" style="position: absolute; min-width: 80px; background: rgba(255,255,255,0.9);"
+              aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" style="cursor: pointer;" data-toggle="modal"
+                data-target="#visibility">Visibility</a>
+              <a class="dropdown-item" href="{% url 'my_blog' %}">My Blog</a>
+              <a class="dropdown-item" href="/accounts/logout">Log Out</a>
+            </div>
+            {% endif %}
           </div>
-          {% endif %}
+          <!-- a -->
+        </div>
+
+        <div class="dropdown col-md-1 col-3 mt-3 show-on-phones-and-hide-on-others text-center">
+          <div role="button" class="pl-3 dropdown-toggle text-center" data-toggle="dropdown">
+            <i class="fas fa-bars" style="color: white; font-size: 1.4rem;"></i>
+          </div>
+
         </div>
         <!-- a -->
       </div>
-
-      <div class="dropdown col-md-1 col-3 mt-3 show-on-phones-and-hide-on-others text-center">
-        <div role="button" class="pl-3 dropdown-toggle text-center" data-toggle="dropdown">
-          <i class="fas fa-bars" style="color: white; font-size: 1.4rem;"></i>
-        </div>
-        <span class="dropdown-menu" style="min-width: 100px !important;">
-          <a href="{% url 'places' %}" class="text-dark pl-3">Places</a>
-          <div class="m-2"></div>
-          <a href="#" class="text-dark pl-3" style="cursor: pointer;" data-toggle="modal" data-target="#visibility">Visibility</a>
-          <div class="m-2"></div>
-          <a href="{% url 'my_blog' %}" class="text-dark pl-3">My Blog</a>
-          <div class="m-2"></div>
-          <a href="/accounts/logout" class="text-dark pl-3">Logout</a>
-        </span>
-      </div>
-      
-    </div>
-    <!-- a -->
-  </div>
-</nav>
+  </nav>
 </header>
 
 <div class="modal fade" id="visibility">
@@ -179,11 +203,12 @@
         </div>
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <small class="text-muted" style="font-size: .9rem;">You won't be visible if you are inactive for more than 5 days</small>
+        <small class="text-muted" style="font-size: .9rem;">You won't be visible if you are inactive for more than 5
+          days</small>
       </div>
     </div>
   </div>
-</div>  
+</div>
 <a href="" id="chat-bubble" class="m-5 px-3 bg-primary">
   <i class="fas fa-comments"></i>
 </a>
@@ -194,15 +219,15 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-	$(function () {
-		$("#search_places").autocomplete({		//function for autocomplete that takes id of field
-			source: "{% url 'search' %}",
-			minLength: 2
-		});
-	});
+  $(function () {
+    $("#search_places").autocomplete({		//function for autocomplete that takes id of field
+      source: "{% url 'search' %}",
+      minLength: 2
+    });
+  });
 </script>
 <script>
-$("#droppie").click(function(e){
-   e.stopPropagation();
-})
+  $("#droppie").click(function (e) {
+    e.stopPropagation();
+  })
 </script>

@@ -11,6 +11,8 @@ class Notification(models.Model):
     title = models.CharField(max_length=200,blank=True)
     notification = models.TextField(blank=True)
     reg_date = models.DateTimeField(default=datetime.now, blank=True)
+    is_accepted = models.BooleanField(default=False)
+    is_ignored = models.BooleanField(default=False)
 
 
     def __str__(self):
