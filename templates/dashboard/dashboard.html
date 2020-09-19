@@ -199,72 +199,72 @@ Dashboard
                 {% endif %}
               </div>
             </div>
-          </div>
-          <span class="border-bottom"></span><br>
-          <!-- End of Edit Profile Section -->
 
-          <!--======= Profile Description Section ==========-->
-          <h2 class="px-3" style="color: #e2c0bb;">Hi there! Nice to meet you</h2>
-          <p class="p-3 text-justify">
-            {% if traveller_user %}{{bio_first}}{% endif %}
-          </p>
-          <br>
+            <span class="border-bottom"></span><br>
+            <!-- End of Edit Profile Section -->
 
-          <p class="px-3 pb-3 text-justify collapse" id="collapse-btn-1">
-            {{bio_second}}
-          </p>
-          <div class="container">
-            <div class="row">
-              <div class="col-md-10"></div>
-              {% if bio_second %}
-              <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="collapse"
-                data-target="#collapse-btn-1">Read More</button>
-              {% endif %}
-            </div>
-            <span class="border-bottom"></span>
-            <!-- End of Profile Description Section -->
-
-            <!--============= Languages Section ============-->
-            <h4 class="px-3 py-3" style="color: #e2c0bb;">Languages</h4>
-            <p class="p-3 border-bottom">
-              {% if traveller_user %}{{traveller_user.languages}}{% endif %}
+            <!--======= Profile Description Section ==========-->
+            <h2 class="px-3" style="color: #e2c0bb;">Hi there! Nice to meet you</h2>
+            <p class="p-3 text-justify">
+              {% if traveller_user %}{{bio_first}}{% endif %}
             </p>
-            <!-- End of Languages Section -->
+            <br>
 
-            <!--============= Interests Section ==============-->
-            <h4 class="px-3" style="color: #e2c0bb;">Interests</h4>
-            <p class="p-3 border-bottom">Travelling</p>
-            <!-- End of Interests Section -->
+            <p class="px-3 pb-3 text-justify collapse" id="collapse-btn-1">
+              {{bio_second}}
+            </p>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-10"></div>
+                {% if bio_second %}
+                <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="collapse"
+                  data-target="#collapse-btn-1">Read More</button>
+                {% endif %}
+              </div>
+              <span class="border-bottom"></span>
+              <!-- End of Profile Description Section -->
 
-            <!--======review section======-->
-            <h4 class="px-3" style="color: #e2c0bb;">User reviews</h4>
-            <p class="p-3 border-bottom"></p>
+              <!--============= Languages Section ============-->
+              <h4 class="px-3 py-3" style="color: #e2c0bb;">Languages</h4>
+              <p class="p-3 border-bottom">
+                {% if traveller_user %}{{traveller_user.languages}}{% endif %}
+              </p>
+              <!-- End of Languages Section -->
 
-            {% if my_profile %}
-            {% else %}
-            <h4 class="px-3" style="color: #e2c0bb;">Review this guide</h4>
-            <form action="#" id="carform" method="POST">
-              {% csrf_token %}
-              <label for="review">Review</label>
-              <input type="text" id="fname" name="review">
-              <br>
-              <label for="rating">Rating</label>
-              <select id="rating" name="rating">
-                <option value="1">1
-                <option>
-                <option value="2">2 </option>
-                <option value="3">3 </option>
-                <option value="4">4 </option>
-                <option value="5">5 </option>
-              </select>
-              <br>
-              <input type="submit" name="review_form">
+              <!--============= Interests Section ==============-->
+              <h4 class="px-3" style="color: #e2c0bb;">Interests</h4>
+              <p class="p-3 border-bottom">Travelling</p>
+              <!-- End of Interests Section -->
 
-            </form>
+              <!--======review section======-->
+              <h4 class="px-3" style="color: #e2c0bb;">User reviews</h4>
+              <p class="p-3 border-bottom"></p>
 
-            {% endif %}
-            <!-- End of Interests Section -->
+              {% if my_profile %}
+              {% else %}
+              <h4 class="px-3" style="color: #e2c0bb;">Review this guide</h4>
+              <form action="#" id="carform" method="POST">
+                {% csrf_token %}
+                <label for="review">Review</label>
+                <input type="text" id="fname" name="review">
+                <br>
+                <label for="rating">Rating</label>
+                <select id="rating" name="rating">
+                  <option value="1">1
+                  <option>
+                  <option value="2">2 </option>
+                  <option value="3">3 </option>
+                  <option value="4">4 </option>
+                  <option value="5">5 </option>
+                </select>
+                <br>
+                <input type="submit" name="review_form">
 
+              </form>
+
+              {% endif %}
+              <!-- End of Interests Section -->
+            </div>
           </div>
         </div>
         <!-- End of About Me Collapse -->

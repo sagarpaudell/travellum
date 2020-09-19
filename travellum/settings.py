@@ -96,7 +96,7 @@ DATABASES = {
 }
 
 
-  }
+
 
 # DATABASES = {
 #     'default': {

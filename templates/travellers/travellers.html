@@ -122,7 +122,8 @@ Dashboard
           <div class="card card-body bg-white px-3 py-5">
 
             <!--========= Edit Profile Section ===============-->
-            {% if my_profile %}<h4 class="px-3" style="color: #e2c0bb;">Let People know about you</h4>
+            {% if my_profile %}
+            <h4 class="px-3" style="color: #e2c0bb;">Let People know about you</h4>
 
             <div>
               <ul class="d-flex p-3" style="list-style: none;">
@@ -198,44 +199,44 @@ Dashboard
                 {% endif %}
               </div>
             </div>
-          </div>
-          <!-- <span class="border-bottom"></span><br> -->
-          <!-- End of Edit Profile Section -->
 
-          <!--======= Profile Description Section ==========-->
-          <h2 class="px-3" style="color: #e2c0bb;">Hi there! Nice to meet you</h2>
-          <p class="p-3 text-justify">
-            {% if traveller_user %}{{bio_first}}{% endif %}
-          </p>
-          <br>
+            <!-- <span class="border-bottom"></span><br> -->
+            <!-- End of Edit Profile Section -->
 
-          <p class="px-3 pb-3 text-justify collapse" id="collapse-btn-1">
-            {{bio_second}}
-          </p>
-          <div class="container">
-            <div class="row">
-              <div class="col-md-10"></div>
-              {% if bio_second %}
-              <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="collapse"
-                data-target="#collapse-btn-1">Read More</button>
-              {% endif %}
+            <!--======= Profile Description Section ==========-->
+            <h2 class="px-3" style="color: #e2c0bb;">Hi there! Nice to meet you</h2>
+            <p class="p-3 text-justify">
+              {% if traveller_user %}{{bio_first}}{% endif %}
+            </p>
+            <br>
+
+            <p class="px-3 pb-3 text-justify collapse" id="collapse-btn-1">
+              {{bio_second}}
+            </p>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-10"></div>
+                {% if bio_second %}
+                <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="collapse"
+                  data-target="#collapse-btn-1">Read More</button>
+                {% endif %}
+              </div>
             </div>
+            <span class="border-bottom"></span>
+            <!-- End of Profile Description Section -->
+
+            <!--============= Languages Section ============-->
+            <h4 class="px-3 py-3" style="color: #e2c0bb;">Languages</h4>
+            <p class="p-3 border-bottom">
+              {% if traveller_user %}{{traveller_user.languages}}{% endif %}
+            </p>
+            <!-- End of Languages Section -->
+
+            <!--============= Interests Section ==============-->
+            <h4 class="px-3" style="color: #e2c0bb;">Interests</h4>
+            <p class="p-3 border-bottom">Travelling</p>
+            <!-- End of Interests Section -->
           </div>
-          <span class="border-bottom"></span>
-          <!-- End of Profile Description Section -->
-
-          <!--============= Languages Section ============-->
-          <h4 class="px-3 py-3" style="color: #e2c0bb;">Languages</h4>
-          <p class="p-3 border-bottom">
-            {% if traveller_user %}{{traveller_user.languages}}{% endif %}
-          </p>
-          <!-- End of Languages Section -->
-
-          <!--============= Interests Section ==============-->
-          <h4 class="px-3" style="color: #e2c0bb;">Interests</h4>
-          <p class="p-3 border-bottom">Travelling</p>
-          <!-- End of Interests Section -->
-
         </div>
         <!-- End of About Me Collapse -->
 
