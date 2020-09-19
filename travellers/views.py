@@ -16,6 +16,8 @@ def view_profile(request, traveller_id):
         traveller_user_logged_in = get_object_or_404(Traveller, email=user)
 
     profile=get_object_or_404(Traveller, pk=traveller_id)
+    bio = profile.bio.split('.',5)
+    bio_first = ". ".join(bio[:5])+(".")
     guide_reviews = Guide_Review.objects.all().filter(guide=profile.email)
     if request.method == 'POST':
         guide_rating =  request.POST.get('rating')
@@ -40,7 +42,21 @@ def view_profile(request, traveller_id):
                 'notifications': notifications,
                 'has_travelled_with': has_travelled_with,
                 'guide_reviews': guide_reviews,
+                'bio_first': bio_first,
                  }
+
+        if (len(bio)>=5):
+            bio_second = bio[5]
+            context = {
+                'logged_in_user':traveller_user_logged_in,     #logged_in_user is for avatar in navbar
+                'traveller_user':profile,
+                'my_profile':False,
+                'notifications': notifications,
+                'has_travelled_with': has_travelled_with,
+                'guide_reviews': guide_reviews,
+                'bio_first': bio_first,
+                'bio_second': bio_second,
+            }
         return render(request, 'travellers/travellers.html',context)
 
     else:
@@ -48,6 +64,17 @@ def view_profile(request, traveller_id):
                 'traveller_user':profile,
                 'my_profile':False,
                 'guide_reviews': guide_reviews,
+                'bio_first': bio_first,
+            }
+        
+        if (len(bio)>=5):
+            bio_second = bio[5]
+            context = {
+                'traveller_user':profile,
+                'my_profile':False,
+                'guide_reviews': guide_reviews,
+                'bio_first': bio_first,
+                'bio_second': bio_second,
             }
         return render(request, 'travellers/travellers.html',context)
 

@@ -202,24 +202,20 @@ Dashboard
           <!--======= Profile Description Section ==========-->
           <h2 class="px-3" style="color: #e2c0bb;">Hi there! Nice to meet you</h2>
           <p class="p-3 text-justify">
-            {% if traveller_user %}{{traveller_user.bio}}{% endif %}
+            {% if traveller_user %}{{bio_first}}{% endif %}
           </p>
           <br>
 
           <p class="px-3 pb-3 text-justify collapse" id="collapse-btn-1">
-            More content lorem ipsum dolor sit amet,
-            consectetur adipisicing elit. Dicta explicabo ad pariatur nisi nulla vel numquam officiis laboriosam,
-            commodi corrupti nostrum iste voluptatibus quaerat perferendis odit, doloribus amet corporis cumque
-            dolores minus asperiores laudantium ut similique aliquam. Perspiciatis repellat mollitia ex ut! Vero
-            nostrum nihil ea, eveniet blanditiis voluptas expedita enim nam odio. Nemo autem repudiandae voluptate
-            inventore, facilis nihil blanditiis esse nisi, consequatur maxime perspiciatis, deserunt laborum vero est!
-            Deserunt facere ad delectus non?
+            {{bio_second}}
           </p>
           <div class="container">
             <div class="row">
               <div class="col-md-10"></div>
+              {% if bio_second %}
               <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="collapse"
                 data-target="#collapse-btn-1">Read More</button>
+              {% endif %}
             </div>
           </div>
           <span class="border-bottom"></span>
