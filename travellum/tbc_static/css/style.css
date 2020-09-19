@@ -339,7 +339,7 @@ nav .container .row div:nth-child(2) form {
 }
 
 #login-container {
-  width: 43%;
+  width: 43% !important;
 }
 
 #register-container {

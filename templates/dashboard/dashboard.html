@@ -276,7 +276,10 @@ Dashboard
         <div class="d-flex">
           <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
             <div class="col-md-12 border-bottom mb-5">
-              <h2 style="color: #e2c0bb;">Update Guide Details</h2>
+              <h2 style="color: #e2c0bb;">Edit Guide Details</h2>
+              Edit your price, reply time, document 
+              <button class="btn btn-theme mt-2" data-toggle="modal" data-target="#guide_details">Edit Guide Details</button>
+              <div class="mb-5"></div>
             </div>
 
             <div class="col-md-12 border-bottom">
@@ -310,7 +313,7 @@ Dashboard
                   </div>
                 {% else %}
                   <p class="mt-4"> Your request for becoming a guide is being processed...</p>
-                  <p class="pb-3 mb-5">You will be notified as soon.</p>
+                  <p class="pb-3 mb-5">You will be notified soon.</p>
                 {% endif %}
               {% else %}  
                 <button class="btn btn-theme-outline px-5 py-3 mt-2 mb-5" data-toggle="modal" data-target="#guide_form_modal">Become a Guide</button>
