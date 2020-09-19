@@ -50,18 +50,18 @@ Dashboard
 
             <div class="bg-custom">
               <div class="container">
-                <div class="row">
+                <div class="row p-0" style="margin: 3rem .5rem;">
                   <div class="col-md-6">
                     {% if traveller_user %}
                     {{traveller_user.address}}<br>
-                    <h1>{{ traveller_user.first_name }} {{ traveller_user.last_name }} </h1>
+                    <h2>{{ traveller_user.first_name }} {{ traveller_user.last_name }} </h2>
                     {% if traveller_user.is_guide %}Replies within: 84 hours{% endif %}
                     {% endif %}
                   </div>
                   {% if traveller_user %}
                   {% if traveller_user.is_guide %}
                   <div class="col-md-6 text-right">
-                    <h3><span class="display-4 d-inline text-success">Rs.</span>{{traveller_user.price_per_hour}}/hr</h3>
+                    <h3><span class="display-5 d-inline text-success">Rs.</span>{{traveller_user.price_per_hour}}/hr</h3>
                   </div>
                   <div>
                     {% if not my_profile %}
@@ -275,13 +275,42 @@ Dashboard
       <div class="collapse" id="guide">
         <div class="d-flex">
           <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
-            <div class="border-bottom">
+            <div class="col-md-12 border-bottom mb-5">
+              <h2 style="color: #e2c0bb;">Update Guide Details</h2>
+            </div>
+
+            <div class="col-md-12 border-bottom">
               <h2 style="color: #e2c0bb;">No Guide History</h2>
               {% if guide_user %}
                 {% if guide_user.is_published %}
-                  <h1> Guide update form</h1>
+                  <div class="mx-5 px-5"> 
+                    <div class="mt-5"></div>
+                    <p class="col-12 text-left">
+                      You travelled with 
+                      <a href="">someone</a> 
+                      to 
+                      <a href="">somewhere</a>
+                      - 2020/9/18
+                    </p>
+                    <p class="col-12 text-left">
+                      You travelled with 
+                      <a href="">someone</a> 
+                      to 
+                      <a href="">somewhere</a>
+                      - 2020/9/18
+                    </p>
+                    <p class="col-12 text-left">
+                      You travelled with 
+                      <a href="">someone</a> 
+                      to 
+                      <a href="">somewhere</a>
+                      - 2020/9/18
+                    </p>
+                    <div class="mb-5"></div>
+                  </div>
                 {% else %}
-                  <h1> your guide request has been emailed to the admins </h1>
+                  <p class="mt-4"> Your request for becoming a guide is being processed...</p>
+                  <p class="pb-3 mb-5">You will be notified as soon.</p>
                 {% endif %}
               {% else %}  
                 <button class="btn btn-theme-outline px-5 py-3 mt-2 mb-5" data-toggle="modal" data-target="#guide_form_modal">Become a Guide</button>
@@ -421,6 +450,8 @@ Dashboard
 
     </div>
   </section>
+
+
 </main>
 
 

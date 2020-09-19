@@ -1,0 +1,54 @@
+{% extends 'base.html' %} 
+
+{% load static %}
+
+{% block title %} 
+Reset Password
+{% endblock %}
+
+{% block content %}
+
+<div 
+  id="login-container" 
+  class="container text-muted my-5 px-3 py-5" 
+  style="min-height: 50vh; background: rgba(255, 255, 255, 0.91)"
+>
+  <form action="{% url 'v_code' %}" class="d-flex align-items-center justify-content-center">
+    <div>
+      <p class="mt-4 mb-0" style="font-size: .96rem;">If you don't have an account <a href="{% url 'register' %}">click here</a></p>
+      <label for="vEmail" style="font-size: .96rem;">Type your email in the field below to receive your validation code.</label>
+      <div class="col-md-12 p-0">
+        <input id="vEmail" type="email" class="form-control mb-3" name="vEmail" type="text" required />
+      </div>
+      <input type="submit" class="btn btn-sm btn-outline-dark px-3 mb-4" value="Submit" />
+      <div id="hidden" hidden="true">
+        <p class="mb-2">Didn't receive email?</p>
+        <button class="btn btn-outline-dark btn-sm" id="creative-name" onclick="myFunction()">Send again</button>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+  let creativeName=document.getElementById('creative-name')
+  function myFunction(){
+    let count = 30;
+    let hi = setInterval(()=>{
+      count -= 1;
+      creativeName.innerHTML=`Send again (${count})`
+      if(count == 0) clearInterval(hi)
+    }, 1000)
+    
+    creativeName.disabled=true;
+    setTimeout(()=>{
+      creativeName.disabled=false;
+    },30000)
+  }
+  document.getElementById('hidden')
+  setTimeout(()=>{
+    hidden.hidden=false
+  }, 5000)
+</script>
+{% endblock %}

@@ -295,8 +295,8 @@ nav .container .row div:nth-child(2) form {
   font-weight: 800;
 }
 
-.bg-custom .row h1 {
-  font-weight: 100;
+.bg-custom .row h2 {
+  font-weight: 100 !important;
 }
 
 #custom-menu i {
@@ -338,8 +338,25 @@ nav .container .row div:nth-child(2) form {
   cursor: pointer;
 }
 
-#accounts-container {
+#login-container {
+  width: 43%;
+}
+
+#register-container {
   width: 50%;
+}
+
+#chat-bubble {
+  z-index: 99; 
+  position: fixed; 
+  color: white; 
+  font-size: 2rem; 
+  right: 0; 
+  bottom: 0; 
+  padding-top: .65rem !important;
+  padding-bottom: .65rem !important;
+  border-radius: 50%;
+  cursor: pointer;
 }
 /*================== Media Queries ===========================*/
 
@@ -348,7 +365,10 @@ nav .container .row div:nth-child(2) form {
   .bg-custom .container .row {
     padding: 2rem;
   }
-  #accounts-container {
+  #login-container {
+    width: 68% !important;
+  }
+  #register-container {
     width: 68% !important;
   }
 }
@@ -367,7 +387,10 @@ nav .container .row div:nth-child(2) form {
     margin-left: 32% !important;
   }
 
-  #accounts-container {
+  #login-container {
+    width: 80% !important;
+  }
+  #register-container {
     width: 80% !important;
   }
 }
@@ -426,7 +449,24 @@ nav .container .row div:nth-child(2) form {
   .reduce-on-phones-3 {
     font-size: 14px !important;
   }
-  #accounts-container {
+  #login-container {
     width: 100% !important;
+  }
+  #register-container {
+    width: 100% !important;
+  }
+
+  #chat-bubble {
+    opacity: 0.8;
+    z-index: 99; 
+    position: fixed; 
+    color: white; 
+    font-size: 1rem; 
+    margin: 1rem !important;
+    padding-top: .9rem !important;
+    padding-bottom: .9rem !important;
+    right: 0; 
+    bottom: 0; 
+    border-radius: 50%;
   }
 }
