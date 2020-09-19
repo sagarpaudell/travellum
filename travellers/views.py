@@ -61,3 +61,6 @@ def notifications(request):
             notification.save()
         return redirect('/guides/'+traveller_id)        
     return redirect('/guides/'+traveller_id)
+
+def create_trip(request):
+    return render(request, 'travellers/create_trip.html')
