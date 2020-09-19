@@ -489,14 +489,17 @@ Dashboard
                   <span>Change Image</span>
                 </div>
                 {% else %}
-                <div class="profile-pic">
-                  <span class="fa fa-camera"></span>
-                  <span>Change Image</span>
+                <div>
+                  <div id="dp-edit-profile" class="profile-pic" >
+                    <span class="fa fa-camera"></span>
+                    <span>Change Image</span>
+                  </div>
+                  <!-- <img id="dp-edit-profile" style="width: 150px !important; height: 150px !important;" alt=""> -->
                 </div>
                 {% endif %}
                 {% endif %}
               </label>
-              <input type="File" name="photo_main" id="profile_pic" onchange="preview_image(event)">
+              <input type="File" name="photo_main" id="profile_pic" onchange="readURL(this)">
             </span>
           </div>
           <!-- End of Choose Image Overlay -->
@@ -762,14 +765,19 @@ Dashboard
 {% endblock %}
 
 {% block script %}
-  <script type="text/javascript">
-  function preview_image(event) {
-    var reader = new FileReader();
-    reader.onload = function() {
-      var output = document.getElementById("output_image");
-      output.src = reader.result;
-    };
-    reader.readAsDataURL(event.target.files[0]);
-  }
+  <script>
+    
+
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          $('#dp-edit-profile').css('background-image','url('+e.target.result+')');
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
   </script>
 {% endblock %}
