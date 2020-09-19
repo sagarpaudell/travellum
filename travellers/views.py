@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from accounts.models import User
 from travellers.models import Traveller
-from guides.models import Guide
+from guides.models import Guide, Guide_Review
 from notifications.models import Notification
 from history.models import History
 from django.contrib import messages,auth
@@ -13,9 +13,19 @@ def view_profile(request, traveller_id):
     user=request.user
     if user.is_authenticated:
         notifications = Notification.objects.all().filter(receiver_email=user)
-        traveller_user_logged_in= get_object_or_404(Traveller, email=user)
+        traveller_user_logged_in = get_object_or_404(Traveller, email=user)
 
     profile=get_object_or_404(Traveller, pk=traveller_id)
+    bio = profile.bio.split('.',5)
+    bio_first = ". ".join(bio[:5])+(".")
+    guide_reviews = Guide_Review.objects.all().filter(guide=profile.email)
+    if request.method == 'POST':
+        guide_rating =  request.POST.get('rating')
+        guide_review = request.POST['review']
+        guide = get_object_or_404(User, email=profile.email)
+        guide_reviewer = traveller_user_logged_in
+        g_review = Guide_Review(guide = guide, guide_reviewer=guide_reviewer, guide_review=guide_review, guide_ratings=guide_rating)
+        g_review.save()
     if profile.email==user:
         return redirect('dashboard')
 
@@ -31,15 +41,42 @@ def view_profile(request, traveller_id):
                 'my_profile':False,
                 'notifications': notifications,
                 'has_travelled_with': has_travelled_with,
+                'guide_reviews': guide_reviews,
+                'bio_first': bio_first,
                  }
+
+        if (len(bio)>=5):
+            bio_second = bio[5]
+            context = {
+                'logged_in_user':traveller_user_logged_in,     #logged_in_user is for avatar in navbar
+                'traveller_user':profile,
+                'my_profile':False,
+                'notifications': notifications,
+                'has_travelled_with': has_travelled_with,
+                'guide_reviews': guide_reviews,
+                'bio_first': bio_first,
+                'bio_second': bio_second,
+            }
         return render(request, 'travellers/travellers.html',context)
 
     else:
         context = {
                 'traveller_user':profile,
                 'my_profile':False,
+                'guide_reviews': guide_reviews,
+                'bio_first': bio_first,
             }
-        return render(request, 'travellers/tr9806800001avellers.html',context)
+        
+        if (len(bio)>=5):
+            bio_second = bio[5]
+            context = {
+                'traveller_user':profile,
+                'my_profile':False,
+                'guide_reviews': guide_reviews,
+                'bio_first': bio_first,
+                'bio_second': bio_second,
+            }
+        return render(request, 'travellers/travellers.html',context)
 
 
 

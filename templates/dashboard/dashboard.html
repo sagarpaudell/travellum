@@ -40,7 +40,7 @@ Dashboard
                 <h4 class="display-5">
                   {% if traveller_user %}
                   {% if traveller_user.slogan %}
-                  {{traveller.slogan}}
+                  {{traveller_user.slogan}}
                   {% else %}
                   <p style="visibility: hidden; margin: 0;">Ready to show you around my city...</p>
                   {% endif %}
@@ -199,31 +199,27 @@ Dashboard
                 {% endif %}
               </div>
             </div>
-            <span class="border-bottom"></span><br>
-            <!-- End of Edit Profile Section -->
+          </div>
+          <span class="border-bottom"></span><br>
+          <!-- End of Edit Profile Section -->
 
-            <!--======= Profile Description Section ==========-->
-            <h2 class="px-3" style="color: #e2c0bb;">Hi there! Nice to meet you</h2>
-            <p class="p-3 text-justify">
-              {% if traveller_user %}{{traveller_user.bio}}{% endif %}
-            </p>
-            <br>
+          <!--======= Profile Description Section ==========-->
+          <h2 class="px-3" style="color: #e2c0bb;">Hi there! Nice to meet you</h2>
+          <p class="p-3 text-justify">
+            {% if traveller_user %}{{bio_first}}{% endif %}
+          </p>
+          <br>
 
-            <p class="px-3 pb-3 text-justify collapse" id="collapse-btn-1">
-              More content lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Dicta explicabo ad pariatur nisi nulla vel numquam officiis laboriosam,
-              commodi corrupti nostrum iste voluptatibus quaerat perferendis odit, doloribus amet corporis cumque
-              dolores minus asperiores laudantium ut similique aliquam. Perspiciatis repellat mollitia ex ut! Vero
-              nostrum nihil ea, eveniet blanditiis voluptas expedita enim nam odio. Nemo autem repudiandae voluptate
-              inventore, facilis nihil blanditiis esse nisi, consequatur maxime perspiciatis, deserunt laborum vero est!
-              Deserunt facere ad delectus non?
-            </p>
-            <div class="container">
-              <div class="row">
-                <div class="col-md-10"></div>
-                <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="collapse"
-                  data-target="#collapse-btn-1">Read More</button>
-              </div>
+          <p class="px-3 pb-3 text-justify collapse" id="collapse-btn-1">
+            {{bio_second}}
+          </p>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-10"></div>
+              {% if bio_second %}
+              <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="collapse"
+                data-target="#collapse-btn-1">Read More</button>
+              {% endif %}
             </div>
             <span class="border-bottom"></span>
             <!-- End of Profile Description Section -->
@@ -280,19 +276,20 @@ Dashboard
           <div class="d-flex">
             <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
               <div class="col-md-12 border-bottom mb-5">
-                <h2 style="color: #e2c0bb;">Edit Guide Details</h2>
-                <p class="mt-4 mb-2">Edit your price, reply time and document </p>
-                <button class="btn btn-theme mt-2" data-toggle="modal" data-target="#edit-guide-details">Edit Guide
-                  Details</button>
-                <div class="mb-5"></div>
-              </div>
-              <div class="col-md-12 border-bottom mb-5">
                 <h2 style="color: #e2c0bb;">Create a Trip</h2>
                 <p class="mt-4 mb-2"> To create a trip with your traveller :</p>
                 <a href="{% url 'create_trip'%}"><button class="btn btn-theme mt-2">Click
                     Here <i class="fas fa-angle-double-right"></i></button></a>
                 <div class="mb-5"></div>
               </div>
+              <div class="col-md-12 border-bottom mb-5">
+                <h2 style="color: #e2c0bb;">Edit Guide Details</h2>
+                <p class="mt-4 mb-2">Edit your price, reply time and document </p>
+                <button class="btn btn-theme mt-2" data-toggle="modal" data-target="#edit-guide-details">Edit Guide
+                  Details</button>
+                <div class="mb-5"></div>
+              </div>
+
 
               <div class="col-md-12 border-bottom">
                 <h2 style="color: #e2c0bb;">No Guide History</h2>
@@ -511,19 +508,22 @@ Dashboard
               <label for="profile_pic">
                 {% if traveller_user %}
                 {% if traveller_user.photo_main %}
-                <div class="profile-pic" style="background-image: url('{{ traveller.photo_main.url }}')">
+                <div class="profile-pic" style="background-image: url('{{ traveller_user.photo_main.url }}')">
                   <span class="fa fa-camera"></span>
                   <span>Change Image</span>
                 </div>
                 {% else %}
-                <div class="profile-pic">
-                  <span class="fa fa-camera"></span>
-                  <span>Change Image</span>
+                <div>
+                  <div id="dp-edit-profile" class="profile-pic">
+                    <span class="fa fa-camera"></span>
+                    <span>Change Image</span>
+                  </div>
+                  <!-- <img id="dp-edit-profile" style="width: 150px !important; height: 150px !important;" alt=""> -->
                 </div>
                 {% endif %}
                 {% endif %}
               </label>
-              <input type="File" name="photo_main" id="profile_pic">
+              <input type="File" name="photo_main" id="profile_pic" onchange="readURL(this)">
             </span>
           </div>
           <!-- End of Choose Image Overlay -->
@@ -785,6 +785,99 @@ Dashboard
 </div>
 </div>
 <!-- End of Edit Guide Details -->
+
+<!-- End of Become a Guide Form -->
+
+<!--========== Edit Guide Details ==============-->
+<div class="modal fade" id="edit-guide-details">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Edit Guide Details
+        </h5>
+
+        <button class="close" data-dismiss="modal">
+          &times;
+        </button>
+      </div>
+      <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label for="pph">Price/hr</label><br>
+            <input type="number" class="form-control" id="pph" step="200" name="pph">
+          </div>
+
+          <div class="form-group">
+            <label for="pph">Replies within</label><br>
+            <input type="number" class="form-control" min="4" id="rep-with" name="rep-with">
+          </div>
+
+          <div class="form-group mb-4">
+            <label for="Document Type">Document Type</label><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="docType" id="ctzn" value="ctzn" required>
+              <label class="form-check-label" for="ctzn">Citizenship</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="docType" id="license" value="license" required>
+              <label class="form-check-label" for="license">Driving License</label>
+            </div>
+          </div>
+
+          <div class="form-group mb-4">
+            <p>Document Front</p>
+            <div class="custom-file">
+              <input class="custom-file-input" type="File" name="doc-front" id="ctzn-front" required>
+              <label class="custom-file-label" for="ctzn-front">Choose file</label>
+            </div>
+          </div>
+
+          <div class="form-group mb-4">
+            <p>Document Back</p>
+            <div class="custom-file">
+              <input class="custom-file-input" type="File" name="doc-back" id="ctzn-back" required>
+              <label class="custom-file-label" for="ctzn-back">Choose file</label>
+            </div>
+          </div>
+
+          <div class="form-group mb-4">
+            <p>Document Number</p>
+            <input type="text" class="form-control" name="doc-number" required>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <input type="submit" value="Be a Guide" name="Guide-Form" class="btn btn-success">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+<!-- End of Edit Guide Details -->
+
 <!-- End of Modals -->
 
+{% endblock %}
+
+{% block script %}
+<script>
+
+
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#dp-edit-profile').css('background-image', 'url(' + e.target.result + ')');
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+</script>
 {% endblock %}

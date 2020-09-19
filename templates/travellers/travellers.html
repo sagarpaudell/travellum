@@ -6,6 +6,12 @@
 Dashboard
 {% endblock %}
 
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/rating.css' %}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% endblock %}
+
 {% block content %}
 
 <main>
@@ -34,7 +40,7 @@ Dashboard
                 <h4 class="display-5">
                   {% if traveller_user %}
                   {% if traveller_user.slogan %}
-                  {{traveller.slogan}}
+                  {{traveller_user.slogan}}
                   {% else %}
                   <p style="visibility: hidden; margin: 0;">Ready to show you around my city...</p>
                   {% endif %}
@@ -45,18 +51,18 @@ Dashboard
 
             <div class="bg-custom">
               <div class="container">
-                <div class="row">
+                <div class="row p-0" style="margin: 3rem .5rem;">
                   <div class="col-md-6">
                     {% if traveller_user %}
                     {{traveller_user.address}}<br>
-                    <h1>{{ traveller_user.first_name }} {{ traveller_user.last_name }} </h1>
+                    <h2>{{ traveller_user.first_name }} {{ traveller_user.last_name }} </h2>
                     {% if traveller_user.is_guide %}Replies within: 84 hours{% endif %}
                     {% endif %}
                   </div>
                   {% if traveller_user %}
                   {% if traveller_user.is_guide %}
                   <div class="col-md-6 text-right">
-                    <h3><span class="display-4 d-inline text-success">Rs.</span>{{traveller_user.price_per_hour}}/hr
+                    <h3><span class="display-5 d-inline text-success">Rs.</span>{{traveller_user.price_per_hour}}/hr
                     </h3>
                   </div>
                   <div>
@@ -92,7 +98,6 @@ Dashboard
         </div>
       </div>
 
-      {% if my_profile %}
       <div>
         <div class="d-flex flex-row text-white align-items-stretch text-center bg-white" id="custom-menu">
           <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#about_me">
@@ -108,7 +113,6 @@ Dashboard
             <span class="d-none d-md-inline">Traveller</span>
           </div>
         </div>
-        {% endif %}
         <!--=========== End of Dashboard Navigation ==========-->
 
 
@@ -194,78 +198,44 @@ Dashboard
                 {% endif %}
               </div>
             </div>
-            <span class="border-bottom"></span><br>
-            <!-- End of Edit Profile Section -->
-
-            <!--======= Profile Description Section ==========-->
-            <h2 class="px-3" style="color: #e2c0bb;">Hi there! Nice to meet you</h2>
-            <p class="p-3 text-justify">
-              {% if traveller_user %}{{traveller_user.bio}}{% endif %}
-            </p>
-            <br>
-
-            <p class="px-3 pb-3 text-justify collapse" id="collapse-btn-1">
-              More content lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Dicta explicabo ad pariatur nisi nulla vel numquam officiis laboriosam,
-              commodi corrupti nostrum iste voluptatibus quaerat perferendis odit, doloribus amet corporis cumque
-              dolores minus asperiores laudantium ut similique aliquam. Perspiciatis repellat mollitia ex ut! Vero
-              nostrum nihil ea, eveniet blanditiis voluptas expedita enim nam odio. Nemo autem repudiandae voluptate
-              inventore, facilis nihil blanditiis esse nisi, consequatur maxime perspiciatis, deserunt laborum vero est!
-              Deserunt facere ad delectus non?
-            </p>
-            <div class="container">
-              <div class="row">
-                <div class="col-md-10"></div>
-                <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="collapse"
-                  data-target="#collapse-btn-1">Read More</button>
-              </div>
-            </div>
-            <span class="border-bottom"></span>
-            <!-- End of Profile Description Section -->
-
-            <!--============= Languages Section ============-->
-            <h4 class="px-3 py-3" style="color: #e2c0bb;">Languages</h4>
-            <p class="p-3 border-bottom">
-              {% if traveller_user %}{{traveller_user.languages}}{% endif %}
-            </p>
-            <!-- End of Languages Section -->
-
-            <!--============= Interests Section ==============-->
-            <h4 class="px-3" style="color: #e2c0bb;">Interests</h4>
-            <p class="p-3 border-bottom">Travelling</p>
-            <!-- End of Interests Section -->
-
-            <!--======review section======-->
-            <h4 class="px-3" style="color: #e2c0bb;">User reviews</h4>
-            <p class="p-3 border-bottom"></p>
-
-            {% if my_profile %}
-            {% else %}
-            {% if has_travelled_with %}
-            <h4 class="px-3" style="color: #e2c0bb;">Review this guide</h4>
-            <form action="#" id="carform" method="POST">
-              {% csrf_token %}
-              <label for="review">Review</label>
-              <input type="text" id="fname" name="review">
-              <br>
-              <label for="rating">Rating</label>
-              <select id="rating" name="rating">
-                <option value="1">1
-                <option>
-                <option value="2">2 </option>
-                <option value="3">3 </option>
-                <option value="4">4 </option>
-                <option value="5">5 </option>
-              </select>
-              <br>
-              <input type="submit" name="review_form">
-
-            </form>
-            {% endif %}
-            {% endif %}
-            <!-- End of Interests Section -->
-
           </div>
+          <!-- <span class="border-bottom"></span><br> -->
+          <!-- End of Edit Profile Section -->
+
+          <!--======= Profile Description Section ==========-->
+          <h2 class="px-3" style="color: #e2c0bb;">Hi there! Nice to meet you</h2>
+          <p class="p-3 text-justify">
+            {% if traveller_user %}{{bio_first}}{% endif %}
+          </p>
+          <br>
+
+          <p class="px-3 pb-3 text-justify collapse" id="collapse-btn-1">
+            {{bio_second}}
+          </p>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-10"></div>
+              {% if bio_second %}
+              <button class="btn btn-theme mb-4 col-md-2 text-light" data-toggle="collapse"
+                data-target="#collapse-btn-1">Read More</button>
+              {% endif %}
+            </div>
+          </div>
+          <span class="border-bottom"></span>
+          <!-- End of Profile Description Section -->
+
+          <!--============= Languages Section ============-->
+          <h4 class="px-3 py-3" style="color: #e2c0bb;">Languages</h4>
+          <p class="p-3 border-bottom">
+            {% if traveller_user %}{{traveller_user.languages}}{% endif %}
+          </p>
+          <!-- End of Languages Section -->
+
+          <!--============= Interests Section ==============-->
+          <h4 class="px-3" style="color: #e2c0bb;">Interests</h4>
+          <p class="p-3 border-bottom">Travelling</p>
+          <!-- End of Interests Section -->
+
         </div>
         <!-- End of About Me Collapse -->
 
@@ -288,34 +258,106 @@ Dashboard
                   data-target="#guide_form_modal">Become a Guide</button>
                 {% endif %}
               </div>
-              <div class="border-bottom py-5">
+
+              <div class="container text-left">
+                {% if has_travelled_with %}
+                <div class="row border py-3 mb-5" style="background: white !important;">
+                  <div class="col-2 col-lg-1 rounded">
+                    <img {% if logged_in_user.photo_main %} src="{{logged_in_user.photo_main.url}}" {% else %}
+                      src="{% static 'images/default.png' %}" {% endif %}
+                      style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
+                  </div>
+                  <form method="POST" class="col-10 col-lg-11">
+                    {% csrf_token %}
+                    <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Review this Guide</h5>
+                    <textarea class="form-control" rows="3" name="review" required></textarea>
+
+                    <div class="mt-n4" style="display: flex; justify-content: flex-end;">
+                      <div class="rating">
+                        <input type="radio" id="star5" name="rating" value="5" />
+                        <label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
+                        <input type="radio" id="star4" name="rating" value="4" />
+                        <label class="star" for="star4" title="Great" aria-hidden="true"></label>
+                        <input type="radio" id="star3" name="rating" value="3" />
+                        <label class="star" for="star3" title="Very good" aria-hidden="true"></label>
+                        <input type="radio" id="star2" name="rating" value="2" />
+                        <label class="star" for="star2" title="Good" aria-hidden="true"></label>
+                        <input type="radio" id="star1" name="rating" value="1" />
+                        <label class="star" for="star1" title="Bad" aria-hidden="true"></label>
+                      </div>
+                    </div>
+                    <div style="display: flex; justify-content: flex-end;">
+                      <input class="btn btn-danger mt-2" type="submit">
+                    </div>
+                  </form>
+                </div>
+                {% endif %}
+
+                {% if guide_reviews %}
+                {% for guide_review in guide_reviews %}
+                <div class="row border py-3 my-3" style="background: white !important;">
+                  <div class="col-2 col-lg-1">
+                    <img src={{guide_review.guide_reviewer.photo_main.url}}
+                      style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
+                  </div>
+                  <div class="col-10 col-lg-11">
+                    <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">
+                      {{ guide_review.guide_reviewer.first_name }} {{ guide_review.guide_reviewer.last_name }}</h5>
+                    <div class="review__rating m-n2">
+                      {% if guide_review.guide_ratings == 1 %}
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      {% elif guide_review.guide_ratings == 2 %}
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      {% elif guide_review.guide_ratings == 3 %}
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      {% elif guide_review.guide_ratings == 4 %}
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      {% else %}
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      {% endif %}
+                    </div>
+                    <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">{{guide_review.guide_review}}</p>
+                  </div>
+                </div>
+                {% endfor %}
+                {% else %}
                 <h2 style="color: #e2c0bb;">No Guide Reviews</h2>
+                {% endif %}
               </div>
             </div>
           </div>
-        </div>
-        <!-- End of Guide Collapse -->
+          <!-- End of Guide Collapse -->
 
 
 
-        <!--============= Traveller Collapse ================-->
-        <div class="collapse" id="traveller">
-          <div class="d-flex">
-            <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
-              <div class="border-bottom">
-                <h2 style="color: #e2c0bb;">No Traveller History</h2>
-                <button class="btn btn-theme-outline px-5 py-3 mt-2 mb-5" id="btn-search-des">Search for
-                  Destinations...</button>
-              </div>
-              <div class="border-bottom py-5">
-                <h2 style="color: #e2c0bb;">No Traveller Reviews</h2>
+          <!--============= Traveller Collapse ================-->
+          <div class="collapse" id="traveller">
+            <div class="d-flex">
+              <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
+                <div class="border-bottom">
+                  <h2 style="color: #e2c0bb;">No Traveller History</h2>
+                  <button class="btn btn-theme-outline px-5 py-3 mt-2 mb-5" id="btn-search-des">Search for
+                    Destinations...</button>
+                </div>
+                <div class="border-bottom py-5">
+                  <h2 style="color: #e2c0bb;">No Traveller Reviews</h2>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <!-- End of Traveller Collapse -->
+          <!-- End of Traveller Collapse -->
 
-      </div>
+        </div>
   </section>
 </main>
 
