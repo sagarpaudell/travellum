@@ -5,19 +5,38 @@ from guides.models import Guide
 from guides.views import GuideView
 from notifications.models import Notification
 from places.models import Place
+from datetime import datetime, timedelta
+from django import template
+from django.utils.timesince import timesince
 
 # Create your views here.
 def dashboard(request):
   user=request.user
   traveller_user=get_object_or_404(Traveller, email=user)
+  bio = traveller_user.bio.split('.',5)
+  bio_first = ". ".join(bio[:5])+(".")
   guide_user = Guide.objects.all().filter(email=user).first()
   notifications = Notification.objects.all().filter(receiver_email=user)
+  
   context = {
                 'traveller_user':traveller_user,
                 'my_profile':True,
                 'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
                 'guide_user' : guide_user,
                 'notifications': notifications,
+                'bio_first': bio_first,
+            }
+
+  if (len(bio)>=5):
+    bio_second = bio[5]
+    context = {
+                'traveller_user':traveller_user,
+                'my_profile':True,
+                'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
+                'guide_user' : guide_user,
+                'notifications': notifications,
+                'bio_first': bio_first,
+                'bio_second': bio_second,
             }
  
   if (request.method == "POST" ):
@@ -50,10 +69,23 @@ def dashboard(request):
       GuideView(request)  #calls guide's view in guide app
     
     #for notification
-    if 'request_guide' in request.POST:
-      notifications(request) 
+    # if 'request_guide' in request.POST:
+    #   notifications(request) 
       
-    return redirect('dashboard')
+    # return redirect('dashboard')
+  
+ 
+    if 'accepted' in request.POST:
+      noti_id = request.POST['noti_id']
+      notification = get_object_or_404(Notification, pk=noti_id)
+      notification.is_accepted = True
+      notification.save()
+    if 'ignored' in request.POST:
+      noti_id = request.POST['noti_id']
+      notification = get_object_or_404(Notification, pk=noti_id)
+      notification.is_ignored = True
+      notification.save()
+
   return render(request, 'dashboard/dashboard.html',context)
 
   
