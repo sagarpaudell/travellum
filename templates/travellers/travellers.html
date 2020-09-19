@@ -62,18 +62,20 @@ Dashboard
                   <div>
                     <form action="{% url 'notifications' %}" method="POST">
                       {% csrf_token %}
-
-                      <input type="hidden" name="traveller_id" value="{{ traveller.id }}">
+                      <input type="hidden" name="traveller_id" value="{{ traveller_user.id }}">
                       <input type="submit" name="request_guide">
                     </form>
+                    <a href="{%url 'payment_status'%}">Status</a>
+                    <!-- <input value="{{traveller.price_per_hour| add:"35"}}" name="tAmt" type="hidden">
+                    <input value="{{traveller.price_per_hour}}" name="amt" type="hidden"> -->
                     <form action="https://uat.esewa.com.np/epay/main" method="POST">
-                      <input value="{{traveller.price_per_hour| add:"35"}}" name="tAmt" type="hidden">
-                      <input value="{{traveller.price_per_hour}}" name="amt" type="hidden">
+                      <input value="135" name="tAmt" type="hidden">
+                      <input value="100" name="amt" type="hidden">
                       <input value="15" name="txAmt" type="hidden">
                       <input value="20" name="psc" type="hidden">
                       <input value="0.00" name="pdc" type="hidden">
                       <input value="epay_payment" name="scd" type="hidden">
-                      <input value="121" name="pid" type="hidden">
+                      <input value="1217779" name="pid" type="hidden">
                       <!-- <input value="{{ traveller.id }}{{request.user.id}}" name="pid" type="hidden"> -->
                       <input value="http://merchant.com.np/page/esewa_payment_success?q=su" type="hidden" name="su">
                       <input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="hidden" name="fu">
