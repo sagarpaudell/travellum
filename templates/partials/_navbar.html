@@ -65,13 +65,30 @@
                 <hr class="m-1">
                 {% if notifications %}
                 {% for notification in notifications %}
-                {% if  notification.is_ignored or  notification.is_accepted%}
-              
+                {% if  notification.is_ignored or notification.is_accepted %}
+                  {% if notification.is_ignored %}
+                        <div class="top-text-heading mb-2" style="font-size: .8rem;">
+                          {{ notification.receiver_email.first_name }} is unavailable for this trip.
+                        </div>
+                  {% elif  notification.is_accepted %}
+                        <div class="top-text-heading mb-2" style="font-size: .8rem;">
+                          {{ notification.receiver_email.first_name }} is available for this trip. You can chat with him now
+                        </div>
+                  {% else %}
+                    <div
+                      class="d-flex align-items-center justify-content-center m-0" 
+                      style="cursor: default; height: 90%; font-weight: normal;"
+                    >  
+                      No any Notifications
+                    </div>
+                  {% endif %}
+                
+                {% elif notification.completed %}
                   <div
-                    class="d-flex align-items-center justify-content-center m-0" 
-                    style="cursor: default; height: 90%; font-weight: normal;"
-                  >  
-                    No any Notifications
+                      class="d-flex align-items-center justify-content-center m-0" 
+                      style="cursor: default; height: 90%; font-weight: normal;"
+                    >  
+                      No any Notifications
                   </div>
                 {% else %}
                   <li>
@@ -85,6 +102,7 @@
                           {% csrf_token %}
                           <span>
                             <input type="hidden" value="{{ notification.id}}" name="noti_id">
+                            <input type="hidden" value="{{ notification.sender_email }}" name="receiver_email">
                             <input type="submit" value = "Accept" name = "accepted" class="btn btn-sm btn-success p-0" style="font-size: .75rem; padding: 2px !important;">
                               
                             
@@ -101,20 +119,7 @@
                   
                 {% endif %}
                 {% endfor %}
-              
-              <!-- {% else %}
-                <div
-                  class="d-flex align-items-center j
-                    <div
-                      class="d-flex align-items-center justify-content-center m-0" 
-                      style="cursor: default; height: 90%; font-weight: normal;"
-                    >  
-                      No any Notifications
-                    </div>ustify-content-center m-0" 
-                  style="cursor: default; height: 90%; font-weight: normal;"
-                >  
-                  No any Notifications
-                </div> -->
+            
               {% endif %}
 
                 <!-- <li>
@@ -133,21 +138,12 @@
           </div>
         </div>
 
-<<<<<<< HEAD
-      <div class="navbar-collapse col-lg-1 col-md-1 col-3 collapse-on-phones">
-        <div class="navbar-nav">
-          <span class="nav-item text-center dropdown" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown">
-            <a href="" class="nav-link text-light">
-              {% if  user.is_authenticated %}     
-
-=======
         <div class="navbar-collapse col-lg-1 col-md-1 col-3 collapse-on-phones">
           <div class="navbar-nav">
             <span class="nav-item text-center dropdown" id="navbarDropdownMenuLink" role="button"
               data-toggle="dropdown">
               <a href="" class="nav-link text-light">
                 {% if  user.is_authenticated %}
->>>>>>> 0ef45fae561fd05edab691bc2926b15429ff5cfb
                 {% if logged_in_user %}
                 {% if logged_in_user.photo_main %}
                 <img class="hw-dp" src="{{ logged_in_user.photo_main.url }}" alt="">

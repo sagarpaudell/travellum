@@ -7,7 +7,9 @@ from notifications.models import Notification
 from places.models import Place
 from datetime import datetime, timedelta
 from django import template
+import datetime
 from django.utils.timesince import timesince
+from django.utils.timezone import utc
 
 # Create your views here.
 def dashboard(request):
@@ -76,9 +78,16 @@ def dashboard(request):
   
  
     if 'accepted' in request.POST:
+      receiver_email = request.POST['receiver_email']
+      receiver_user = get_object_or_404(User,email=receiver_email)
+      sender_user = request.user
+      sender_name = sender_user.first_name+" " +sender_user.last_name
+      reg_date = datetime.datetime.utcnow().replace(tzinfo=utc)
       noti_id = request.POST['noti_id']
-      notification = get_object_or_404(Notification, pk=noti_id)
-      notification.is_accepted = True
+      noti = get_object_or_404(Notification, pk=noti_id)
+      noti.completed = True
+      noti.save()
+      notification = Notification(receiver_email=receiver_user, sender_email=sender_user, sender_name = sender_name,is_accepted = True, reg_date= reg_date)
       notification.save()
     if 'ignored' in request.POST:
       noti_id = request.POST['noti_id']
