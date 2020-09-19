@@ -21,3 +21,12 @@ class Guide(models.Model):
     def __str__(self):
         return self.email.email
 
+class Guide_Review(models.Model):
+    guide = models.ForeignKey(User, on_delete= models.CASCADE)
+    guide_reviewer = models.ForeignKey(Traveller, on_delete= models.CASCADE)
+    guide_review = models.TextField(blank=True)
+    guide_ratings = models.IntegerField(blank=True)
+
+
+
+
