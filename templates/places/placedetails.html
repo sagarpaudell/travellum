@@ -78,8 +78,15 @@ Details
 
     <div class="collapse show bg-white" id="description"
         style="border-bottom-left-radius:2%; border-bottom-right-radius:2%;">
-        <h2 class="px-3 pb-2 border-bottom" style="color: #daa198;">About {{place.name}}:</h2>
-        <p class="pr-3 pb-2 pl-3 ">{{ place.description }}
+        <h4 class="p-4 pb-2 border-bottom" style="color: #daa198;">About {{place.name}}:</h4>
+        <p class="p-4">{{ place.description }}
+            <div class="p-4 pb-2 border-bottom"></div>
+            <div class="col-md-12 text-center border-bottom my-5">
+                <h2 style="color: #e2c0bb;">View Blogs of {{ place.name }}</h2>
+                <p class="mt-4 mb-2"></p>
+                <button class="btn btn-theme mt-2">Go to Travellum Blogs >></button>
+                <div class="mb-5"></div>
+            </div>
         </p>
         <br>
         <br>
@@ -93,7 +100,7 @@ Details
         {% endif %} -->
         <!-- End of Temp. Review Section -->
         <div class="container" style="padding-bottom: 3%;">
-            <h5 class="text-muted" style="font-weight: 500; font-size: 1.4rem; margin-right:10%; margin-left:1%;">
+            <h5 class="text-muted mt-n5 mb-n5" style="font-weight: 500; font-size: 1.4rem; margin-right:10%; margin-left:1%;">
                 Reviews:</h5>
             {% if reviews %}
             {% for review in reviews %}
@@ -192,7 +199,7 @@ Details
     <div class="collapse bg-white" id="majorattractions"
         style="border-bottom-left-radius:2%; border-bottom-right-radius:2%;">
         <div style="padding-bottom: 3%;">
-            <h2 class="px-3 mb-4 border-bottom " style="color: #daa198; ">Some of the major attractions include:</h2>
+            <h4 class="p-4 mb-4 border-bottom " style="color: #daa198; ">Some of the major attractions include:</h4>
             {% for attraction in attractions %}
             <h4 class="px-3" style="color: #daa198;"><i
                     class="fa fa-location-arrow pr-2"></i>{{ attraction.attraction_name }}</h4>
@@ -208,7 +215,7 @@ Details
 
     <div class="collapse bg-white" id="thingstodo" style="border-bottom-left-radius:2%; border-bottom-right-radius:2%;">
         <div style="padding-bottom: 3%;">
-            <h2 class="px-3 mb-4 border-bottom " style="color: #daa198; ">Popular things to do in {{ place.name }}:</h2>
+            <h4 class="p-4 mb-4 border-bottom " style="color: #daa198; ">Popular things to do in {{ place.name }}:</h4>
             {% for task in tasks %}
             <h4 class="px-3" style="color: #daa198;"><i class="fa fa-hand-point-right pr-2"></i>{{ task.task_name }}
             </h4>
@@ -225,7 +232,7 @@ Details
     <div class="collapse bg-white" id="availableguides"
         style="border-bottom-left-radius:2%; border-bottom-right-radius:2%;">
         <div style="padding-bottom: 3%;">
-            <h2 class="px-3 mb-4 border-bottom " style="color: #daa198; ">Guides available in {{place.name}}:</h2>
+            <h4 class="p-4 mb-4 border-bottom " style="color: #daa198; ">Guides available in {{place.name}}:</h4>
             <div class="container">
                 <div class="row">
                     {% if available_guides %}
@@ -249,7 +256,7 @@ Details
                     </div>
                     {% endfor %}
                     {% else %}
-                    <h1> no available guides in your region</h1>
+                    <p class="m-4"> No available guides in your region</p>
                     {% endif %}
 
                 </div>

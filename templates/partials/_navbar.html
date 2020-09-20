@@ -73,11 +73,6 @@
                   {% elif  notification.is_accepted %}
                         <div class="top-text-heading mb-2" style="font-size: .8rem;">
                           {{ notification.sender_name }} is available for this trip. You can chat with him now
-<<<<<<< HEAD
-                        </div>      notification = get_object_or_404(Notification, pk=noti_id)
-                        notification.is_ignored = True
-                        notification.save()
-=======
                         </div>   
                         {% if trip_notifications %}
                           {% for trip_noti in trip_notifications %}
@@ -86,7 +81,6 @@
                             </div>
                           {% endfor %}
                         {% endif %}
->>>>>>> 5a1762553b2f212bb12fc3851ecc1aad24d46e42
                   {% else %}
                     <div
                       class="d-flex align-items-center justify-content-center m-0" 

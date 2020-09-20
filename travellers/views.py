@@ -34,16 +34,10 @@ def view_profile(request, traveller_id):
     elif user.is_authenticated:
         travel_history = History.objects.all().filter(traveller = user , guide = profile.email)
         has_travelled_with = False
-<<<<<<< HEAD
-        for history in travel_history:
-            if history.tour_complete:
-                has_travelled_with = True
-=======
         if travel_history:
             for history in travel_history:
                 if history.tour_complete:
                     has_travelled_with = True
->>>>>>> 5a1762553b2f212bb12fc3851ecc1aad24d46e42
         notification_history = Notification.objects.all().filter(receiver_email = profile.email , sender_email = user)
         has_accepted = False
         for noti in notification_history:
@@ -138,11 +132,8 @@ def create_trip(request, traveller_id):
 
        history= History(traveller=traveller, guide=guide, place=place, no_of_people=no_of_people, no_of_children=no_of_children, total_hours=total_hours, total_price=total_price)
        history.save()
-<<<<<<< HEAD
-=======
        trip_notification=Trip_Notification(receiver_email=traveller_user.email, sender_email = request.user, form= history)
        trip_notification.save()
->>>>>>> 5a1762553b2f212bb12fc3851ecc1aad24d46e42
        traveller_id = request.POST['traveller_id']
        return redirect('/view_profile/'+traveller_id)
     context = {

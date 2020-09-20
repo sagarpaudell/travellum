@@ -7,11 +7,7 @@ from guides.models import Guide, Guide_Review
 from guides.views import GuideView
 from notifications.models import Notification, Trip_Notification
 from places.models import Place
-<<<<<<< HEAD
-from places.models import Place
-=======
 from history.models import History
->>>>>>> 5a1762553b2f212bb12fc3851ecc1aad24d46e42
 from datetime import datetime, timedelta
 from django import template
 import datetime
@@ -27,10 +23,7 @@ def dashboard(request):
   guide_user = Guide.objects.all().filter(email=user).first()
   guide_reviews = Guide_Review.objects.all().filter(guide=user)
   notifications = Notification.objects.all().filter(receiver_email=user)
-<<<<<<< HEAD
-=======
   trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user)
->>>>>>> 5a1762553b2f212bb12fc3851ecc1aad24d46e42
   places = Place.objects.all()
   place_pattern=''
   for place in places:
