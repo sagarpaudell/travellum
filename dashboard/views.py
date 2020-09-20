@@ -139,7 +139,10 @@ def confirm_trip(request):
     tax = 0.05*amount
     service_charge = 0.2*amount
     total_amount=amount+tax+service_charge
+<<<<<<< HEAD
     pid = tn_instance.id*1010
+=======
+>>>>>>> 7ae63cbf64e6f16037beae1751bfe111b14f9014
   context = {
                 'traveller_user':traveller_user,
                 'logged_in_user':traveller_user,

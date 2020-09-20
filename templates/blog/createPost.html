@@ -15,7 +15,7 @@ Single Blogpost
 <main>
   <div class="container my-5 bg-light">
     <div class="row bg-theme py-3">
-      <div class="col-md-4 col-6 d-flex align-items-center">
+      <div id="blog-nav" class="col-md-4 col-6 d-flex align-items-center">
         <a class="px-3 text-light active blog__nav" style="cursor: pointer !important;" data-toggle="modal" data-target="#myBlog">My Blog</a>
         <a class="text-light blog__nav" style="cursor: pointer !important;" data-toggle="modal" data-target="#explore" class="text-light">Explore</a>
       </div>
@@ -64,7 +64,7 @@ Single Blogpost
           </div>
           <div class="col-md-6">
             <label for="Date">Date</label>
-            <input class="form-control" type="text" value="{% now 'jS F Y' %}" disabled>
+            <input class="form-control" type="text" value="{% blog.post_time|date: 'Y-m-d' %}" disabled>
           </div>
         </div>
 

@@ -15,7 +15,7 @@ Single Blogpost
 <main>
   <div class="container my-5 bg-light">
     <div class="row bg-theme py-3">
-      <div id="blog-nav" class="col-md-4 col-6 d-flex align-items-center">
+      <div class="col-md-4 col-6 d-flex align-items-center">
         <a class="px-3 text-light blog__nav" href="{% url 'my_blog' %}">My Blog</a>
         <a class="text-light blog__nav active" href="{% url 'explore' %}">Explore</a>
       </div>
@@ -27,21 +27,21 @@ Single Blogpost
       </div>
     </div>
     <section class="main-content px-4 py-5">
-      <h3 class="mb-4">Blogs associated with different places</h3>
+      <h3 class="mb-4">Explore Other's Awesome Travel Blogs </h3>
       <div class="card-columns">
-        {% if places %}
-        {% for place in places %}
+        {% if blogs %}
+        {% for blog in blogs %}
         <div class="card mb-4">
           <img 
             class="card-img-top" 
             style="width: 100% !important; height: 30vh !important; object-fit: cover !important;" 
-            src="{{ place.photo_1.url }}" 
+            src="{{ blog.photo.url }}" 
             alt="Card image cap"
           >
           <div class="card-body">
-            <h5 class="card-title ">{{Place.name}}</h5>
-            <div style="font-size: .9rem;" class="card-subtitle text-muted"><i class="fas fa-pen"></i> {{place.name}}</div>
-            <a href="{% url 'blogs_byplace' place.id %}" class="btn btn-danger my-2" style="font-size: 0.8rem;">View blogs</a>
+            <h5 class="card-title ">{{blog.title}}</h5>
+            <div style="font-size: .9rem;" class="card-subtitle text-muted"><i class="fas fa-pen"></i> {{blog.blogger}}<br>{{blog.get_time}}</div>
+            <a href="{% url 'single_blog_post' blog.id %}" class="btn btn-danger my-2" style="font-size: 0.8rem;">Read More</a>
           </div>
        </div>
        {% endfor %}

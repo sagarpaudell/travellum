@@ -1,13 +1,14 @@
-from django.shortcuts import render, redirect, get_object_or_404
 from places.models import Place
 from travellers.models import Traveller
 from guides.models import Guide
 from notifications.models import Notification
 from .models import Blog, Comment
 
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 
-
+@login_required
 def my_blog(request):
     user=request.user
     if user.is_authenticated:
@@ -31,9 +32,13 @@ def explore(request):
                 'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
                 'notifications': notifications,
             }
-    blogs = Blog.objects.all()
-    context.update({'blogs': blogs})
+    
+    places = Place.objects.all()
+    context.update({'places': places})
     return render(request, 'blog/explore.html', context)
+
+
+
 
 def single_blog_post(request,id):
     user=request.user
@@ -44,7 +49,6 @@ def single_blog_post(request,id):
                 'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
                 'notifications': notifications,
             }
-    
     
     blog = Blog.objects.get(id=id)
     comments = Comment.objects.filter(blog_id=id)
@@ -63,6 +67,8 @@ def single_blog_post(request,id):
 
     return render(request, 'blog/blogDetail.html', context)
 
+
+@login_required
 def create_blog_post(request):
     user=request.user
     if user.is_authenticated:
@@ -79,13 +85,15 @@ def create_blog_post(request):
         description = form_data['description']
         photo = request.FILES['photo']
         place= request.POST['place']
+        guide = Guide.objects.filter(email = request.user).first()
+        is_guide = False if not guide else guide.is_published
         blog = Blog(
             user        = request.user, 
             title       = title, 
             description = description,
             photo       = photo,
             place       = Place.objects.get(name=place),
-            is_guide    = Guide.objects.get(email=request.user).is_published,
+            is_guide    = is_guide
         )
         blog.save()
         return redirect('my_blog')
@@ -100,7 +108,61 @@ def create_blog_post(request):
 
     return render(request, 'blog/createPost.html',context)
 
+@login_required
+def edit_blog_post(request, blog_id):
+    user=request.user
+    if user.is_authenticated:
+        notifications = Notification.objects.all().filter(receiver_email=user)
+        traveller_user = get_object_or_404(Traveller, email=user)
+        context = {
+                'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
+                'notifications': notifications,
+            }
 
-def edit_blog_post(request):
-    return render(request, 'blog/editPost.html')
-    
+    if request.method == 'POST':
+        form_data = request.POST
+        title = form_data['title']
+        description = form_data['description']
+        place= request.POST['place']
+        guide = Guide.objects.filter(email = request.user).first()
+        is_guide = False if not guide else guide.is_published
+        blog = get_object_or_404(Blog, pk=blog_id)
+        print(form_data)
+        blog.title       = title 
+        blog.description = description
+        
+        if 'photo' in request.FILES:
+            blog.photo       = request.FILES['photo']
+        blog.place       = Place.objects.get(name=place)
+        blog.is_guide    = is_guide
+        blog.save()
+        
+        return redirect('single_blog_post', id=blog_id)
+
+    places=Place.objects.all()
+    place_pattern=''
+    for place in places:
+        place_pattern = place.name+'|'+place_pattern
+    blog = get_object_or_404(Blog, pk=blog_id)
+    context.update({
+        'blog': blog,
+        'places':places,
+        'place_pattern':place_pattern[:-1]
+    })
+    return render(request, 'blog/editPost.html', context)
+
+
+@login_required
+def delete_blog_post(request, blog_id):
+    blog = get_object_or_404(Blog, id = blog_id)
+    if request.user == blog.user:
+        blog.delete()
+    return redirect('my_blog')
+
+def blogs_byplace(request, id):
+    place = Place.objects.get(pk= id)
+    print(place)
+    blogs = Blog.objects.filter(place = place)
+    print(blogs)
+    return render(request, 'blog/place_blog.html', {'blogs':blogs})
+
