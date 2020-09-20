@@ -1,13 +1,9 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from accounts.models import User
 from travellers.models import Traveller
-<<<<<<< HEAD
-from guides.models import Guide
 from guides.views import GuideView, GuideUpdateView
-=======
 from guides.models import Guide, Guide_Review
 from guides.views import GuideView
->>>>>>> ef3be6b2a56d32bc85600b2f3a476a7c37c1420e
 from notifications.models import Notification
 from places.models import Place
 from places.models import Place
@@ -40,7 +36,7 @@ def dashboard(request):
                 'notifications': notifications,
                 'bio_first': bio_first,
                 'places' : places,
-                'place_pattern' : place_pattern
+                'place_pattern' : place_pattern,
                 'guide_reviews': guide_reviews,
             }
   

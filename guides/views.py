@@ -35,6 +35,7 @@ def GuideView(request):
         driverlicense_back=doc_photo_back,
         driverlicense_number=doc_number,
         )
+
     guide_user.save()
     guide_user=Guide.objects.filter(email=user).first()
     subject = f'{user.email} has requested to be published as guide'
@@ -51,6 +52,7 @@ def GuideUpdateView(request):
     place = request.POST['place']
     guide_user.place= Place.objects.get(name=place)
     guide_user.price = request.POST['pph']
+    guide_user.replies_withn = request.POST['rep-with']
     guide_user.save()
         
     

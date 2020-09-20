@@ -17,6 +17,7 @@ class Guide(models.Model):
     citizenship_number = models.CharField(max_length=20,blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=3, blank=True, null=True)
     places = models.ManyToManyField(Place, blank=True)
+    replies_within = models.IntegerField(default=1)
 
     def __str__(self):
         return self.email.email
