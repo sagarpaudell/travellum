@@ -135,10 +135,18 @@ def confirm_trip(request):
   if request.method == "POST":
     trip_noti_id = request.POST['tn_id']
     tn_instance = get_object_or_404(Trip_Notification,pk=trip_noti_id)
+    amount = tn_instance.form.total_price
+    tax = 0.05*amount
+    service_charge = 0.2*amount
+    total_amount=amount+tax+service_charge
   context = {
                 'traveller_user':traveller_user,
                 'logged_in_user':traveller_user,
-                'tn_instance':tn_instance, 
+                'tn_instance':tn_instance,
+                'amount':amount,
+                'tax':tax,
+                'service_charge':service_charge,
+                'total_amount': total_amount,
             }
   return render(request, 'dashboard/confirm_trip.html',context)
 
