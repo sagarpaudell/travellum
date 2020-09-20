@@ -20,14 +20,22 @@ class Blog(models.Model):
     def likes_count(self):
         return self.like_users.count()
 
-    def __str__(self):
-        return f'{self.id} by {self.user.email}'
-
     def blogger(self):
         return f'{self.user.first_name} {self.user.last_name}'
 
     def get_time(self):
         return self.post_time
+
+    def get_place(self):
+        return self.place.name
+
+    def gettraveller_id(self):
+        traveller = Traveller.objects.get(email=self.user)
+        return traveller.id
+
+    def __str__(self):
+        return f'{self.id} by {self.user.email}'
+
 
 
 class Comment(models.Model):

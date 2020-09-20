@@ -35,12 +35,12 @@ Single Blogpost
         <div class="row mb-3">
           <div class="col-md-6">
             <label for="Title">Blog Title</label>
-            <input class="form-control" type="text" name="title" autocomplete="off" required>
+            <input class="form-control" type="text" name="title" autocomplete="off" value="{{ blog.title }}"required>
           </div>
           <div class="col-md-6">
             <label for="Title">Place</label>
             <input class="form-control" list="places" name="place"
-            pattern="{{place_pattern}}"
+            pattern="{{place_pattern}}" value="{{blog.get_place}}"
             title='enter a valid place' required>
             
             
@@ -58,13 +58,13 @@ Single Blogpost
           <div class="col-md-6">
             <label for="custom-file">Blog Post Image</label>
             <div class="custom-file">
-              <input type="file" id="blog_pic" class="custom-file-input" name="photo" required>
+              <input type="file" id="blog_pic" name="photo" class="custom-file-input">
               <label class="custom-file-label" for="blog_pic">Choose File</label>
             </div>
           </div>
           <div class="col-md-6">
             <label for="Date">Date</label>
-            <input class="form-control" type="text" value="{% now 'jS F Y' %}" disabled>
+            <input class="form-control" type="text" value="{{blog.post_time}}" disabled>
           </div>
         </div>
 
@@ -72,14 +72,14 @@ Single Blogpost
           <div class="col-md-12">
             <div class="form-group">
               <label for="blog_content">Blog Content</label>
-              <textarea class="form-control" id="blog_content" rows="25" name="description" required></textarea>
+              <textarea class="form-control" id="blog_content" rows="25" name="description"  required>{{blog.description}}</textarea>
             </div>
           </div>
         </div>
 
         <div class="row mb-3">
           <div class="col-md-12 d-flex justify-content-end">
-            <input type="submit" class="btn btn-success" value="Edit Blog"></input>
+            <input type="submit" class="btn btn-success" value="Save changes"></input>
           </div>
         </div>
 
