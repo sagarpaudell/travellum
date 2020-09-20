@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from accounts.models import User
+from chat.models import Chat
 from travellers.models import Traveller
 from guides.views import GuideView, GuideUpdateView
 from guides.models import Guide, Guide_Review
@@ -106,6 +107,9 @@ def dashboard(request):
       noti.save()
       notification = Notification(receiver_email=receiver_user, sender_email=sender_user, sender_name = sender_name,is_accepted = True, reg_date= reg_date)
       notification.save()
+      chat = Chat(sender = receiver_user, receiver = sender_user, message_text = 'hello')
+      chat.save()
+
     if 'ignored' in request.POST:
       noti_id = request.POST['noti_id']
       notification = get_object_or_404(Notification, pk=noti_id)
