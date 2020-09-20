@@ -89,11 +89,11 @@ class Notification(models.Model):
 
 
 class Trip_Notification(models.Model):
-    trip_receiver_email = models.ForeignKey(User, on_delete= models.DO_NOTHING, blank=True, related_name="trip_receiver_email")
-    trip_sender_email = models.ForeignKey(User, on_delete= models.DO_NOTHING, blank=True, related_name="trip_sender_email")
+    receiver_email = models.ForeignKey(User, on_delete= models.DO_NOTHING, blank=True, related_name="trip_receiver_email")
+    sender_email = models.ForeignKey(User, on_delete= models.DO_NOTHING, blank=True, related_name="trip_sender_email")
     form = models.ForeignKey(History, on_delete=models.CASCADE)
     has_accepted = models.BooleanField(default=False)
     has_rejected = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.trip_receiver_email.email
+        return self.receiver_email.email
