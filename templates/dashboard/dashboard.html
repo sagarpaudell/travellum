@@ -60,7 +60,7 @@ Dashboard
                     {% endif %}
                   </div>
                   {% if traveller_user %}
-                  {% if traveller_user.is_guide %}
+                  {% if guide_user.is_published %}
                   <div class="col-md-6 text-right">
                     <h3><span class="display-5 d-inline text-success">Rs.</span>{{guide_user.price}}/hr
                     </h3>
@@ -536,15 +536,6 @@ Dashboard
             <input type="text" class="form-control" name="languages" {% if traveller_user %}
               value="{{traveller_user.languages}}" {% endif %}>
           </div>
-
-          {% if traveller_user %}
-          {% if traveller_user.is_guide %}
-          <div class="form-group">
-            <label for="pph">Price/hr</label><br>
-            <input type="number" class="form-control" name="pph">
-          </div>
-          {% endif %}
-          {% endif %}
 
           <div class="form-group">
             <label for="gender">Gender</label>

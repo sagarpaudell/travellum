@@ -66,8 +66,6 @@ def dashboard(request):
       traveller_user.slogan = request.POST['slogan']
       traveller_user.bio = request.POST['bio']
       traveller_user.languages = request.POST['languages']
-      if traveller_user.is_guide:
-        traveller_user.price_per_hour = request.POST['pph']
       traveller_user.gender = request.POST['gender']
         
       if request.FILES:
