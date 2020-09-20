@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 from accounts.models import User
+from history.models import History
 from django.utils import timezone
 import math
 
@@ -85,3 +86,14 @@ class Notification(models.Model):
 
             else:
                 return str(years) + " years ago"
+
+
+class Trip_Notification(models.Model):
+    receiver_email = models.ForeignKey(User, on_delete= models.DO_NOTHING, blank=True, related_name="trip_receiver_email")
+    sender_email = models.ForeignKey(User, on_delete= models.DO_NOTHING, blank=True, related_name="trip_sender_email")
+    form = models.ForeignKey(History, on_delete=models.CASCADE)
+    has_accepted = models.BooleanField(default=False)
+    has_rejected = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.receiver_email.email

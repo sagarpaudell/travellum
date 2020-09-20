@@ -5,7 +5,7 @@ from travellers.models import Traveller
 from guides.views import GuideView, GuideUpdateView
 from guides.models import Guide, Guide_Review
 from guides.views import GuideView
-from notifications.models import Notification
+from notifications.models import Notification, Trip_Notification
 from places.models import Place
 from places.models import Place
 from datetime import datetime, timedelta
@@ -23,6 +23,7 @@ def dashboard(request):
   guide_user = Guide.objects.all().filter(email=user).first()
   guide_reviews = Guide_Review.objects.all().filter(guide=user)
   notifications = Notification.objects.all().filter(receiver_email=user)
+  trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user)
   places = Place.objects.all()
   place_pattern=''
   for place in places:
@@ -35,6 +36,7 @@ def dashboard(request):
                 'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
                 'guide_user' : guide_user,
                 'notifications': notifications,
+                'trip_notifications': trip_notifications,
                 'bio_first': bio_first,
                 'places' : places,
                 'place_pattern' : place_pattern,
@@ -50,6 +52,7 @@ def dashboard(request):
                 'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
                 'guide_user' : guide_user,
                 'notifications': notifications,
+                'trip_notifications': trip_notifications,
                 'bio_first': bio_first,
                 'bio_second': bio_second,
                 'guide_reviews': guide_reviews,
@@ -112,8 +115,16 @@ def dashboard(request):
 
     if 'ignored' in request.POST:
       noti_id = request.POST['noti_id']
-      notification = get_object_or_404(Notification, pk=noti_id)
-      notification.is_ignored = True
+      receiver_email = request.POST['receiver_email']
+      receiver_user = get_object_or_404(User,email=receiver_email)
+      sender_user = request.user
+      sender_name = sender_user.first_name+" " +sender_user.last_name
+      reg_date = datetime.datetime.utcnow().replace(tzinfo=utc)
+      noti_id = request.POST['noti_id']
+      noti = get_object_or_404(Notification, pk=noti_id)
+      noti.completed = True
+      noti.save()
+      notification = Notification(receiver_email=receiver_user, sender_email=sender_user, sender_name = sender_name,is_ignored = True, reg_date= reg_date)
       notification.save()
 
   return render(request, 'dashboard/dashboard.html',context)

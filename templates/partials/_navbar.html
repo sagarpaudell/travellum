@@ -68,12 +68,19 @@
                 {% if  notification.is_ignored or notification.is_accepted %}
                   {% if notification.is_ignored %}
                         <div class="top-text-heading mb-2" style="font-size: .8rem;">
-                          {{ notification.sender_email.first_name }} is unavailable for this trip.
+                          {{ notification.sender_name }} is unavailable for this trip.
                         </div>
                   {% elif  notification.is_accepted %}
                         <div class="top-text-heading mb-2" style="font-size: .8rem;">
-                          {{ notification.sender_email.first_name }} is available for this trip. You can chat with him now
-                        </div>
+                          {{ notification.sender_name }} is available for this trip. You can chat with him now
+                        </div>   
+                        {% if trip_notifications %}
+                          {% for trip_noti in trip_notifications %}
+                            <div class="top-text-heading mb-2" style="font-size: .8rem;">
+                              {{ trip_noti.sender_email.first_name }} has created a trip. You can finalize the trip <a href=""><u>here</u></a>.
+                            </div>
+                          {% endfor %}
+                        {% endif %}
                   {% else %}
                     <div
                       class="d-flex align-items-center justify-content-center m-0" 
