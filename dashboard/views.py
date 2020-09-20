@@ -1,8 +1,13 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from accounts.models import User
 from travellers.models import Traveller
+<<<<<<< HEAD
 from guides.models import Guide
 from guides.views import GuideView, GuideUpdateView
+=======
+from guides.models import Guide, Guide_Review
+from guides.views import GuideView
+>>>>>>> ef3be6b2a56d32bc85600b2f3a476a7c37c1420e
 from notifications.models import Notification
 from places.models import Place
 from places.models import Place
@@ -19,6 +24,7 @@ def dashboard(request):
   bio = traveller_user.bio.split('.',5)
   bio_first = ". ".join(bio[:5])+(".")
   guide_user = Guide.objects.all().filter(email=user).first()
+  guide_reviews = Guide_Review.objects.all().filter(guide=user)
   notifications = Notification.objects.all().filter(receiver_email=user)
   places = Place.objects.all()
   place_pattern=''
@@ -35,6 +41,7 @@ def dashboard(request):
                 'bio_first': bio_first,
                 'places' : places,
                 'place_pattern' : place_pattern
+                'guide_reviews': guide_reviews,
             }
   
 
@@ -48,6 +55,7 @@ def dashboard(request):
                 'notifications': notifications,
                 'bio_first': bio_first,
                 'bio_second': bio_second,
+                'guide_reviews': guide_reviews,
             }
  
   if (request.method == "POST" ):
