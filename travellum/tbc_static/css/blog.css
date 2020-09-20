@@ -3,7 +3,7 @@ html {
   scroll-behavior: smooth;
 }
 
-a {
+.blog-container a {
   color: white !important;
 }
 
