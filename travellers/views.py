@@ -145,5 +145,3 @@ def create_trip(request, traveller_id):
     return render(request, 'travellers/create_trip.html',context)
 
 
-def payment_status(request):
-    return render(request, 'travellers/payment_status.html')

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Guide,Guide_Review
+from .models import Guide,Guide_Review,Transaction
 
 class GuideAdmin(admin.ModelAdmin):
     list_display = ('id','email','is_published','tours_count')
@@ -17,3 +17,8 @@ class Guide_ReviewAdmin(admin.ModelAdmin):
 admin.site.register(Guide_Review, Guide_ReviewAdmin)
 
 
+class TransactionAdmin(admin.ModelAdmin):
+    list_display = ('pid','refId', 'paid_by', 'paid_to')
+    list_display_links = ('pid','refId', 'paid_by', 'paid_to')
+
+admin.site.register(Transaction, TransactionAdmin)

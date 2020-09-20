@@ -30,4 +30,13 @@ class Guide_Review(models.Model):
 
 
 
+class Transaction(models.Model):
+    paid_by = models.ForeignKey(User, on_delete= models.DO_NOTHING, blank=True, related_name="payer")
+    paid_to = models.ForeignKey(User, on_delete= models.DO_NOTHING, blank=True, related_name="earner")
+    pid = models.CharField(blank=True, max_length=10)
+    refId = models.CharField(blank=True, max_length=10)
+    tamt = models.DecimalField(blank=True, decimal_places=4, max_digits=10)
+    t_date = models.DateTimeField(auto_now_add=True, blank=True)
 
+    def __str__(self):
+        return self.refId

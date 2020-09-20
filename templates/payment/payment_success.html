@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Payment Success
+{% endblock %}
+
+{% block content %}
+<!-- Successful payment block -->
+<section class="container-fluid" id="payment_successful">
+    <section class="row justify-content-center">
+        <section style="width:600px;  ">
+            <div style="background:#fff; padding:30px; border-radius:10px; box-shadow:0px 0px 10px 0px;">
+                <h1 class=" row justify-content-center" style="color:#4BB543 ;">Congratulations!!
+                </h1>
+                <p class="row justify-content-center" style="margin-bottom:8%; ">Your payment has been successful</p>
+                <div class="row ">
+                    <div class="col-md-10 col-sm-12">
+                        <h5 class="border-bottom" style="margin-bottom: 3%;">Transaction Details:</h5>
+                        <p style="margin: 1px;"><strong>Transaction ID: </strong>{{ oid }}</p>
+                        <p style="margin: 1px;"><strong>Paid by: </strong>{{ t_noti.receiver_email.first_name}}</p>
+                        <p style="margin: 1px;"><strong>Paid to: </strong>{{ t_noti.sender_email.first_name  }}</p>
+                        <p style="margin: 1px;"><strong>Amount: </strong>Rs.{{ tamt }}</p>
+                        <p style="margin: 1px;"><strong>Transaction medium: </strong>E-Sewa</p>
+                        <p style="margin: 1px;"><strong>Transaction date: </strong>{{ trans.t_date}}</p>
+                        <button type="submit" class="btn btn-primary" style="margin-top:5%; ">Ok,Thanks</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </section>
+</section>
+
+{% endblock %}
