@@ -2,8 +2,9 @@ from django.shortcuts import render,redirect, get_object_or_404
 from accounts.models import User
 from travellers.models import Traveller
 from guides.models import Guide
-from guides.views import GuideView
+from guides.views import GuideView, GuideUpdateView
 from notifications.models import Notification
+from places.models import Place
 from places.models import Place
 from datetime import datetime, timedelta
 from django import template
@@ -19,6 +20,11 @@ def dashboard(request):
   bio_first = ". ".join(bio[:5])+(".")
   guide_user = Guide.objects.all().filter(email=user).first()
   notifications = Notification.objects.all().filter(receiver_email=user)
+  places = Place.objects.all()
+  place_pattern=''
+  for place in places:
+      place_pattern = place.name+'|'+place_pattern
+  
   
   context = {
                 'traveller_user':traveller_user,
@@ -27,7 +33,10 @@ def dashboard(request):
                 'guide_user' : guide_user,
                 'notifications': notifications,
                 'bio_first': bio_first,
+                'places' : places,
+                'place_pattern' : place_pattern
             }
+  
 
   if (len(bio)>=5):
     bio_second = bio[5]
@@ -64,11 +73,17 @@ def dashboard(request):
 
       root_user.first_name = request.POST['first_name'].title()
       root_user.last_name = request.POST['last_name'].title()
+      print(traveller_user.photo_main)
       root_user.save()
       
-      #for guide form
+      #for guide creation form
     if 'Guide-Form' in request.POST:
       GuideView(request)  #calls guide's view in guide app
+
+    if 'Guide-Update-Form' in request.POST:
+      GuideUpdateView(request)
+    
+
     
     #for notification
     # if 'request_guide' in request.POST:
