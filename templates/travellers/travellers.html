@@ -355,7 +355,7 @@ Dashboard
               <div class="col-md-12 border-bottom mb-5">
                 <h2 style="color: #e2c0bb;">Create a Trip</h2>
                 <p class="mt-4 mb-2"> To create a trip with your traveller :</p>
-                <a href="{% url 'create_trip'%}"><button class="btn btn-theme mt-2">Click
+                <a href="{% url 'create_trip' traveller_user.id%}"><button class="btn btn-theme mt-2">Click
                     Here <i class="fas fa-angle-double-right"></i></button></a>
                 <div class="mb-5"></div>
               </div>
