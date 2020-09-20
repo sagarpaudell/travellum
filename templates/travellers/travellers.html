@@ -342,28 +342,36 @@ Dashboard
               </div>
             </div>
           </div>
-          <!-- End of Guide Collapse -->
+        </div>
+        <!-- End of Guide Collapse -->
 
 
 
-          <!--============= Traveller Collapse ================-->
-          <div class="collapse" id="traveller">
-            <div class="d-flex">
-              <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
-                <div class="border-bottom">
-                  <h2 style="color: #e2c0bb;">No Traveller History</h2>
-                  <button class="btn btn-theme-outline px-5 py-3 mt-2 mb-5" id="btn-search-des">Search for
-                    Destinations...</button>
-                </div>
-                <div class="border-bottom py-5">
-                  <h2 style="color: #e2c0bb;">No Traveller Reviews</h2>
-                </div>
+        <!--============= Traveller Collapse ================-->
+        <div class="collapse" id="traveller">
+          <div class="d-flex">
+            <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
+              {% if has_accepted %}
+              <div class="col-md-12 border-bottom mb-5">
+                <h2 style="color: #e2c0bb;">Create a Trip</h2>
+                <p class="mt-4 mb-2"> To create a trip with your traveller :</p>
+                <a href="{% url 'create_trip'%}"><button class="btn btn-theme mt-2">Click
+                    Here <i class="fas fa-angle-double-right"></i></button></a>
+                <div class="mb-5"></div>
+              </div>
+              {% endif %}
+              <div class="border-bottom">
+                <h2 style="color: #e2c0bb;">No Traveller History</h2>   
+              </div>
+              <div class="border-bottom py-5">
+                <h2 style="color: #e2c0bb;">No Traveller Reviews</h2>
               </div>
             </div>
           </div>
-          <!-- End of Traveller Collapse -->
-
         </div>
+        <!-- End of Traveller Collapse -->
+
+      </div>
   </section>
 </main>
 
