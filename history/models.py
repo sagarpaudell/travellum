@@ -15,7 +15,7 @@ class History(models.Model):
     end_date = models.DateTimeField(default=datetime.now(), blank=True)
     no_of_people = models.IntegerField(blank=True, default =1)
     no_of_children = models.IntegerField(blank=True, default=0)
-    total_hours = models.IntegerField(blank=True)
-    total_price = models.IntegerField(blank=True)
+    total_hours = models.IntegerField(blank=True, default=0)
+    total_price = models.IntegerField(blank=True, default=0)
     def __str__(self):
         return self.traveller.first_name
