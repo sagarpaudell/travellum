@@ -84,7 +84,7 @@ Details
             <div class="col-md-12 text-center border-bottom my-5">
                 <h2 style="color: #e2c0bb;">View Blogs of {{ place.name }}</h2>
                 <p class="mt-4 mb-2"></p>
-                <button class="btn btn-theme mt-2">Go to Travellum Blogs >></button>
+                <button class="btn btn-theme mt-2"><a href="{% url 'blogs_byplace' place.id %}" class='text-light' > Go to Travellum Blogs >></a></button>
                 <div class="mb-5"></div>
             </div>
         </p>
