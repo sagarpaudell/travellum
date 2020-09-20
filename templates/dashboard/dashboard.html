@@ -275,6 +275,8 @@ Dashboard
         <div class="collapse" id="guide">
           <div class="d-flex">
             <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
+              {% if guide_user %}
+              {% if guide_user.is_published %}
               <div class="col-md-12 border-bottom mb-5">
                 <h2 style="color: #e2c0bb;">Create a Trip</h2>
                 <p class="mt-4 mb-2"> To create a trip with your traveller :</p>
@@ -289,7 +291,8 @@ Dashboard
                   Details</button>
                 <div class="mb-5"></div>
               </div>
-
+              {% endif %}
+              {% endif %}
 
               <div class="col-md-12 border-bottom">
                 <h2 style="color: #e2c0bb;">No Guide History</h2>
@@ -334,7 +337,8 @@ Dashboard
 
 
                 <div class="container text-left">
-                  {% if guide_reviews %}
+                {% if guide_user.is_published %}
+                {% if guide_reviews %}
                 {% for guide_review in guide_reviews %}
                 <div class="row border py-3 my-3" style="background: white !important;">
                   <div class="col-2 col-lg-1">
@@ -373,6 +377,7 @@ Dashboard
                 {% endfor %}
                 {% else %}
                 <h2 style="color: #e2c0bb;">No Guide Reviews</h2>
+                {% endif %}
                 {% endif %}
                 </div>
             </div>

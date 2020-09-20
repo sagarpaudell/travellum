@@ -251,6 +251,7 @@ Dashboard
             <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
               <div class="border-bottom">
                 <h2 style="color: #e2c0bb;">No Guide History</h2>
+                {% if my_profile %}
                 {% if guide_user %}
                 {% if guide_user.is_published %}
                 <h1> Guide update form</h1>
@@ -260,6 +261,7 @@ Dashboard
                 {% else %}
                 <button class="btn btn-theme-outline px-5 py-3 mt-2 mb-5" data-toggle="modal"
                   data-target="#guide_form_modal">Become a Guide</button>
+                {% endif %}
                 {% endif %}
               </div>
 
