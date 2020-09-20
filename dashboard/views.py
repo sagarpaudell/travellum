@@ -5,9 +5,13 @@ from travellers.models import Traveller
 from guides.views import GuideView, GuideUpdateView
 from guides.models import Guide, Guide_Review
 from guides.views import GuideView
-from notifications.models import Notification
+from notifications.models import Notification, Trip_Notification
 from places.models import Place
+<<<<<<< HEAD
 from places.models import Place
+=======
+from history.models import History
+>>>>>>> 5a1762553b2f212bb12fc3851ecc1aad24d46e42
 from datetime import datetime, timedelta
 from django import template
 import datetime
@@ -23,6 +27,10 @@ def dashboard(request):
   guide_user = Guide.objects.all().filter(email=user).first()
   guide_reviews = Guide_Review.objects.all().filter(guide=user)
   notifications = Notification.objects.all().filter(receiver_email=user)
+<<<<<<< HEAD
+=======
+  trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user)
+>>>>>>> 5a1762553b2f212bb12fc3851ecc1aad24d46e42
   places = Place.objects.all()
   place_pattern=''
   for place in places:
@@ -35,6 +43,7 @@ def dashboard(request):
                 'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
                 'guide_user' : guide_user,
                 'notifications': notifications,
+                'trip_notifications': trip_notifications,
                 'bio_first': bio_first,
                 'places' : places,
                 'place_pattern' : place_pattern,
@@ -50,6 +59,7 @@ def dashboard(request):
                 'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
                 'guide_user' : guide_user,
                 'notifications': notifications,
+                'trip_notifications': trip_notifications,
                 'bio_first': bio_first,
                 'bio_second': bio_second,
                 'guide_reviews': guide_reviews,
@@ -78,6 +88,7 @@ def dashboard(request):
       root_user.last_name = request.POST['last_name'].title()
       print(traveller_user.photo_main)
       root_user.save()
+      return redirect ('dashboard')
       
       #for guide creation form
     if 'Guide-Form' in request.POST:
@@ -125,6 +136,18 @@ def dashboard(request):
       notification.save()
 
   return render(request, 'dashboard/dashboard.html',context)
+
+def confirm_trip(request):
+  traveller_user = get_object_or_404 (Traveller , email=request.user)
+  if request.method == "POST":
+    trip_noti_id = request.POST['tn_id']
+    tn_instance = get_object_or_404(Trip_Notification,pk=trip_noti_id)
+  context = {
+                'traveller_user':traveller_user,
+                'logged_in_user':traveller_user,
+                'tn_instance':tn_instance, 
+            }
+  return render(request, 'dashboard/confirm_trip.html',context)
 
   
     

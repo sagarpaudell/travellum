@@ -11,6 +11,7 @@ Create Trip
 <section class="container-fluid">
     <section class="row justify-content-center">
         <section style="width:60%;  ">
+<<<<<<< HEAD
             <form style="background:#fff; padding:30px; border-radius:10px; box-shadow:0px 0px 10px 0px;" method="POST">
                 {% csrf_token %}
                 <h2 class=" row justify-content-center margin-bottom:20%;">Create a trip:</h2>
@@ -71,8 +72,74 @@ Create Trip
                         <button type="submit" class="btn btn-primary" name="confirm" style="margin-right:6%; ">Confirm</button>
                         <button type="submit" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</button>
                     </div>
+=======
+            <div style="background:#fff; padding:30px; border-radius:10px; box-shadow:0px 0px 10px 0px;">
+                <form method="POST">
+                    {% csrf_token %}
+                    <h2 class=" row justify-content-center margin-bottom:20%;">Create a trip:</h2>
+                    <div class="row">
+                        <div class="col-md-10 col-sm-12">
+                            <input type="hidden" name="traveller_id" value="{{ traveller_user.id }}">
+                            <div class="form-group">
+                                <label>Traveller's name:</label>
+                                <input class="form-control" id=" " name="traveller_name" value="{{traveller_user.first_name}} {{traveller_user.last_name}}" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-10 col-sm-12">
+                            <div class="form-group">
+                                <label>Traveller's email address:</label>
+                                <input class="form-control" id=" " name="traveller_email" value="{{traveller_user.email}}" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-10 col-sm-12">
+                            <div class="form-group">
+                                <label for="Title">Destination</label>
+                                <input class="form-control" list="places" name="place"
+                                pattern="{{place_pattern}}"
+                                title='enter a valid place' required>
+                                <datalist id="places">
+                                    {% if places %}
+                                    {% for place in places %}
+                                    <option value="{{ place.name }}">
+                                    {% endfor %}
+                                    {% endif%}
+                                </datalist>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-sm-6">
+                            <div class="form-group">
+                                <label>No. of people(>12 years of age):</label>
+                                <input class="form-control" id=" " name="no_of_people">
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-sm-6">
+                            <div class="form-group">
+                                <label>No.of children:</label>
+                                <input class="form-control" id=" " name="no_of_children">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <label>Total no. of travelling days/hours:</label>
+                                <input class="form-control" id=" " name="travel_hours">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                <label>Total cost(Rs.):</label>
+                                <input class="form-control" id=" " name="cost">
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-6">
+                            <button type="submit" class="btn btn-primary" name="confirm" style="margin-right:6%; ">Confirm</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="col-md-12 col-sm-6">
+                    <a href="{% url 'view_profile' traveller_user.id %}"><button type="submit" class="btn btn-danger position-relative" style="top:-38px;left:90px;" name="cancel"><i class="fas fa-times"></i> Cancel</button></a>
+>>>>>>> 5a1762553b2f212bb12fc3851ecc1aad24d46e42
                 </div>
-            </form>
+            </div>
         </section>
     </section>
 </section>

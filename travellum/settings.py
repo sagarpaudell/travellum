@@ -93,7 +93,6 @@ AUTH_USER_MODEL = 'accounts.User'
 #         'PASSWORD': 'postgres',
 #         'HOST': 'localhost'
 #     }
-# }
 
 
 
