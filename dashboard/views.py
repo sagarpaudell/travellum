@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from accounts.models import User
 from travellers.models import Traveller
-from guides.models import Guide
+from guides.models import Guide, Guide_Review
 from guides.views import GuideView
 from notifications.models import Notification
 from places.models import Place
@@ -18,6 +18,7 @@ def dashboard(request):
   bio = traveller_user.bio.split('.',5)
   bio_first = ". ".join(bio[:5])+(".")
   guide_user = Guide.objects.all().filter(email=user).first()
+  guide_reviews = Guide_Review.objects.all().filter(guide=user)
   notifications = Notification.objects.all().filter(receiver_email=user)
   
   context = {
@@ -27,6 +28,7 @@ def dashboard(request):
                 'guide_user' : guide_user,
                 'notifications': notifications,
                 'bio_first': bio_first,
+                'guide_reviews': guide_reviews,
             }
 
   if (len(bio)>=5):
@@ -39,6 +41,7 @@ def dashboard(request):
                 'notifications': notifications,
                 'bio_first': bio_first,
                 'bio_second': bio_second,
+                'guide_reviews': guide_reviews,
             }
  
   if (request.method == "POST" ):
