@@ -68,11 +68,11 @@
                 {% if  notification.is_ignored or notification.is_accepted %}
                   {% if notification.is_ignored %}
                         <div class="top-text-heading mb-2" style="font-size: .8rem;">
-                          {{ notification.receiver_email.first_name }} is unavailable for this trip.
+                          {{ notification.sender_name }} is unavailable for this trip.
                         </div>
                   {% elif  notification.is_accepted %}
                         <div class="top-text-heading mb-2" style="font-size: .8rem;">
-                          {{ notification.receiver_email.first_name }} is available for this trip. You can chat with him now
+                          {{ notification.sender_name }} is available for this trip. You can chat with him now
                         </div>
                   {% else %}
                     <div
