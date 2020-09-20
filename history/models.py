@@ -13,8 +13,8 @@ class History(models.Model):
     tour_complete = models.BooleanField(default = False)
     start_date = models.DateTimeField(blank=True)
     end_date = models.DateTimeField(blank=True)
-    no_of_people = models.IntegerField(blank=True)
-    no_of_children = models.IntegerField(blank=True)
+    no_of_people = models.IntegerField(blank=True, default =1)
+    no_of_children = models.IntegerField(blank=True, default=0)
     total_price = models.IntegerField(blank=True)
     def __str__(self):
         return self.traveller.first_name
