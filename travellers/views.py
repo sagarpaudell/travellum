@@ -4,7 +4,7 @@ from travellers.models import Traveller
 from places.models import Place
 from history.models import History
 from guides.models import Guide, Guide_Review
-from notifications.models import Notification
+from notifications.models import Notification, Trip_Notification
 from history.models import History
 from django.contrib import messages,auth
 from datetime import datetime
@@ -131,6 +131,8 @@ def create_trip(request, traveller_id):
 
        history= History(traveller=traveller, guide=guide, place=place, no_of_people=no_of_people, no_of_children=no_of_children, total_hours=total_hours, total_price=total_price)
        history.save()
+       trip_notification=Trip_Notification(receiver_email=traveller_user.email, sender_email = request.user, form= history)
+       trip_notification.save()
        traveller_id = request.POST['traveller_id']
        return redirect('/view_profile/'+traveller_id)
     context = {
