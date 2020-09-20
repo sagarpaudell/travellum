@@ -60,9 +60,9 @@ Dashboard
                     {% endif %}
                   </div>
                   {% if traveller_user %}
-                  {% if traveller_user.is_guide %}
+                  {% if guide_user.is_published %}
                   <div class="col-md-6 text-right">
-                    <h3><span class="display-5 d-inline text-success">Rs.</span>{{traveller_user.price_per_hour}}/hr
+                    <h3><span class="display-5 d-inline text-success">Rs.</span>{{guide_user.price}}/hr
                     </h3>
                   </div>
                   <div>
@@ -98,7 +98,6 @@ Dashboard
         </div>
       </div>
 
-      {% if my_profile %}
       <div>
         <div class="d-flex flex-row text-white align-items-stretch text-center bg-white" id="custom-menu">
           <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#about_me">
@@ -114,7 +113,6 @@ Dashboard
             <span class="d-none d-md-inline">Traveller</span>
           </div>
         </div>
-        {% endif %}
         <!--=========== End of Dashboard Navigation ==========-->
 
 
@@ -275,21 +273,17 @@ Dashboard
         <div class="collapse" id="guide">
           <div class="d-flex">
             <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
-              <div class="col-md-12 border-bottom mb-5">
-                <h2 style="color: #e2c0bb;">Create a Trip</h2>
-                <p class="mt-4 mb-2"> To create a trip with your traveller :</p>
-                <a href="{% url 'create_trip'%}"><button class="btn btn-theme mt-2">Click
-                    Here <i class="fas fa-angle-double-right"></i></button></a>
-                <div class="mb-5"></div>
-              </div>
+              {% if guide_user %}
+              {% if guide_user.is_published %}
               <div class="col-md-12 border-bottom mb-5">
                 <h2 style="color: #e2c0bb;">Edit Guide Details</h2>
-                <p class="mt-4 mb-2">Edit your price, reply time and document </p>
+                <p class="mt-4 mb-2">Edit your price and document </p>
                 <button class="btn btn-theme mt-2" data-toggle="modal" data-target="#edit-guide-details">Edit Guide
                   Details</button>
                 <div class="mb-5"></div>
               </div>
-
+              {% endif %}
+              {% endif %}
 
               <div class="col-md-12 border-bottom">
                 <h2 style="color: #e2c0bb;">No Guide History</h2>
@@ -329,82 +323,54 @@ Dashboard
                   data-target="#guide_form_modal">Become a Guide</button>
                 {% endif %}
               </div>
-              <div class="border-bottom py-5">
-                <h2 style="color: #e2c0bb;" class="mb-5">No Guide Reviews</h2>
+              
 
 
 
                 <div class="container text-left">
-                  <div class="row border py-3 mb-5" style="background: white !important;">
-                    <div class="col-2 col-lg-1 rounded">
-                      <img src="https://source.unsplash.com/random/200x200"
-                        style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
-                    </div>
-                    <form class="col-10 col-lg-11">
-                      <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Review this Guide</h5>
-                      <textarea class="form-control" rows="3"></textarea>
-                      <div class="mt-n4" style="display: flex; justify-content: flex-end;">
-                        <div class="rating">
-                          <input type="radio" id="star5" name="rating" value="5" />
-                          <label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
-                          <input type="radio" id="star4" name="rating" value="4" />
-                          <label class="star" for="star4" title="Great" aria-hidden="true"></label>
-                          <input type="radio" id="star3" name="rating" value="3" />
-                          <label class="star" for="star3" title="Very good" aria-hidden="true"></label>
-                          <input type="radio" id="star2" name="rating" value="2" />
-                          <label class="star" for="star2" title="Good" aria-hidden="true"></label>
-                          <input type="radio" id="star1" name="rating" value="1" />
-                          <label class="star" for="star1" title="Bad" aria-hidden="true"></label>
-                        </div>
-                      </div>
-                      <div style="display: flex; justify-content: flex-end;">
-                        <input class="btn btn-danger mt-2" type="submit">
-                      </div>
-                    </form>
+                {% if guide_user.is_published %}
+                {% if guide_reviews %}
+                {% for guide_review in guide_reviews %}
+                <div class="row border py-3 my-3" style="background: white !important;">
+                  <div class="col-2 col-lg-1">
+                    <img src={{guide_review.guide_reviewer.photo_main.url}}
+                      style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
                   </div>
-
-                  <div class="row border py-3 my-3" style="background: white !important;">
-                    <div class="col-2 col-lg-1">
-                      <img src="https://source.unsplash.com/random/200x200"
-                        style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
+                  <div class="col-10 col-lg-11">
+                    <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">
+                      {{ guide_review.guide_reviewer.first_name }} {{ guide_review.guide_reviewer.last_name }}</h5>
+                    <div class="review__rating m-n2">
+                      {% if guide_review.guide_ratings == 1 %}
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      {% elif guide_review.guide_ratings == 2 %}
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      {% elif guide_review.guide_ratings == 3 %}
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      {% elif guide_review.guide_ratings == 4 %}
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      {% else %}
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      <label class="star mr-n2" aria-hidden="true"></label>
+                      {% endif %}
                     </div>
-                    <div class="col-10 col-lg-11">
-                      <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Samesh Bajracharya</h5>
-                      <div class="review__rating m-n2">
-                        <label class="star mr-n2" aria-hidden="true"></label>
-                        <label class="star mr-n2" aria-hidden="true"></label>
-                        <label class="star mr-n2" aria-hidden="true"></label>
-                        <label class="star mr-n2" aria-hidden="true"></label>
-                        <label class="star mr-n2" aria-hidden="true"></label>
-                      </div>
-                      <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">Lorem ipsum dolor sit amet,
-                        consectetur adipisicing elit. Quaerat incidunt odit, doloremque eveniet cupiditate autem laborum
-                        ea praesentium. Reprehenderit, doloribus?</p>
-                    </div>
-                  </div>
-                  <div class="row border py-3 my-3" style="background: white !important;">
-                    <div class="col-2 col-lg-1">
-                      <img src="https://source.unsplash.com/random/200x200"
-                        style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
-                    </div>
-                    <div class="col-10 col-lg-11">
-                      <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Samesh Bajracharya</h5>
-                      <div class="review__rating m-n2">
-                        <label class="star mr-n2" aria-hidden="true"></label>
-                        <label class="star mr-n2" aria-hidden="true"></label>
-                        <label class="star mr-n2" aria-hidden="true"></label>
-                        <label class="star mr-n2" aria-hidden="true"></label>
-                      </div>
-                      <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">Lorem ipsum dolor sit amet,
-                        consectetur adipisicing elit. Quaerat incidunt odit, doloremque eveniet cupiditate autem laborum
-                        ea praesentium. Reprehenderit, doloribus?</p>
-                    </div>
+                    <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">{{guide_review.guide_review}}</p>
                   </div>
                 </div>
-
-
-
-              </div>
+                {% endfor %}
+                {% else %}
+                <h2 style="color: #e2c0bb;">No Guide Reviews</h2>
+                {% endif %}
+                {% endif %}
+                </div>
             </div>
           </div>
         </div>
@@ -564,15 +530,6 @@ Dashboard
               value="{{traveller_user.languages}}" {% endif %}>
           </div>
 
-          {% if traveller_user %}
-          {% if traveller_user.is_guide %}
-          <div class="form-group">
-            <label for="pph">Price/hr</label><br>
-            <input type="number" class="form-control" name="pph">
-          </div>
-          {% endif %}
-          {% endif %}
-
           <div class="form-group">
             <label for="gender">Gender</label>
             <select class="form-control" name="gender">
@@ -731,53 +688,32 @@ Dashboard
         {% csrf_token %}
         <div class="modal-body">
 
-          <div class="form-group">
+          <div class="form-group mb-4">
             <label for="pph">Price/hr</label><br>
-            <input type="number" class="form-control" id="pph" step="200" name="pph">
+            <input type="number" class="form-control" id="pph" step="100" name="pph">
           </div>
 
           <div class="form-group">
-            <label for="pph">Replies within</label><br>
-            <input type="number" class="form-control" min="4" id="rep-with" name="rep-with">
+            <label for="rep-with">Replies within(hours)</label><br>
+            <input type="number" class="form-control" min="6" id="rep-with" name="rep-with">
           </div>
 
-          <div class="form-group mb-4">
-            <label for="Document Type">Document Type</label><br>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="docType" id="ctzn" value="ctzn" required>
-              <label class="form-check-label" for="ctzn">Citizenship</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="docType" id="license" value="license" required>
-              <label class="form-check-label" for="license">Driving License</label>
-            </div>
-          </div>
-
-          <div class="form-group mb-4">
-            <p>Document Front</p>
-            <div class="custom-file">
-              <input class="custom-file-input" type="File" name="doc-front" id="ctzn-front" required>
-              <label class="custom-file-label" for="ctzn-front">Choose file</label>
-            </div>
-          </div>
-
-          <div class="form-group mb-4">
-            <p>Document Back</p>
-            <div class="custom-file">
-              <input class="custom-file-input" type="File" name="doc-back" id="ctzn-back" required>
-              <label class="custom-file-label" for="ctzn-back">Choose file</label>
-            </div>
-          </div>
-
-          <div class="form-group mb-4">
-            <p>Document Number</p>
-            <input type="text" class="form-control" name="doc-number" required>
+          <div class="form-group md-4">
+            <label for="Title">Place</label><br>
+            <input class="form-control" list="places" name="place" pattern="{{place_pattern}}" title='enter a valid place' required>
+            <datalist id="places">
+              {% if places %}
+              {% for place in places %}
+                <option value="{{ place.name }}">
+              {% endfor %}
+              {% endif%}
+            </datalist>
           </div>
 
         </div>
 
         <div class="modal-footer">
-          <input type="submit" value="Be a Guide" name="Guide-Form" class="btn btn-success">
+          <input type="submit" value="save changes" name="Guide-Update-Form" class="btn btn-success">
         </div>
       </form>
     </div>

@@ -55,6 +55,7 @@ def login_view(request):
                     return redirect('dashboard')
             else:
                 messages.warning(request, 'verification link has been sent to your account. You need to verify your account 1st to login')
+                send_verificationmail(email)
                 return redirect('login')
         else:
             messages.warning(request, 'invalid credentials')

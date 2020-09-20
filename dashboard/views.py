@@ -1,9 +1,12 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from accounts.models import User
+from chat.models import Chat
 from travellers.models import Traveller
-from guides.models import Guide
+from guides.views import GuideView, GuideUpdateView
+from guides.models import Guide, Guide_Review
 from guides.views import GuideView
 from notifications.models import Notification
+from places.models import Place
 from places.models import Place
 from datetime import datetime, timedelta
 from django import template
@@ -18,7 +21,13 @@ def dashboard(request):
   bio = traveller_user.bio.split('.',5)
   bio_first = ". ".join(bio[:5])+(".")
   guide_user = Guide.objects.all().filter(email=user).first()
+  guide_reviews = Guide_Review.objects.all().filter(guide=user)
   notifications = Notification.objects.all().filter(receiver_email=user)
+  places = Place.objects.all()
+  place_pattern=''
+  for place in places:
+      place_pattern = place.name+'|'+place_pattern
+  
   
   context = {
                 'traveller_user':traveller_user,
@@ -27,7 +36,11 @@ def dashboard(request):
                 'guide_user' : guide_user,
                 'notifications': notifications,
                 'bio_first': bio_first,
+                'places' : places,
+                'place_pattern' : place_pattern,
+                'guide_reviews': guide_reviews,
             }
+  
 
   if (len(bio)>=5):
     bio_second = bio[5]
@@ -39,6 +52,7 @@ def dashboard(request):
                 'notifications': notifications,
                 'bio_first': bio_first,
                 'bio_second': bio_second,
+                'guide_reviews': guide_reviews,
             }
  
   if (request.method == "POST" ):
@@ -53,8 +67,6 @@ def dashboard(request):
       traveller_user.slogan = request.POST['slogan']
       traveller_user.bio = request.POST['bio']
       traveller_user.languages = request.POST['languages']
-      if traveller_user.is_guide:
-        traveller_user.price_per_hour = request.POST['pph']
       traveller_user.gender = request.POST['gender']
         
       if request.FILES:
@@ -64,11 +76,17 @@ def dashboard(request):
 
       root_user.first_name = request.POST['first_name'].title()
       root_user.last_name = request.POST['last_name'].title()
+      print(traveller_user.photo_main)
       root_user.save()
       
-      #for guide form
+      #for guide creation form
     if 'Guide-Form' in request.POST:
       GuideView(request)  #calls guide's view in guide app
+
+    if 'Guide-Update-Form' in request.POST:
+      GuideUpdateView(request)
+    
+
     
     #for notification
     # if 'request_guide' in request.POST:
@@ -89,6 +107,9 @@ def dashboard(request):
       noti.save()
       notification = Notification(receiver_email=receiver_user, sender_email=sender_user, sender_name = sender_name,is_accepted = True, reg_date= reg_date)
       notification.save()
+      chat = Chat(sender = receiver_user, receiver = sender_user, message_text = 'hello')
+      chat.save()
+
     if 'ignored' in request.POST:
       noti_id = request.POST['noti_id']
       receiver_email = request.POST['receiver_email']

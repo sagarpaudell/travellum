@@ -68,7 +68,7 @@ Messenger
     </div>
     <div class="content" style="border-radius:0px 10px 10px 0px;">
       <div class="contact-profile">
-        <img src="{{ traveller_chatuser.photo_main.url }}" alt="" />
+        <a href = "{% url 'view_profile' traveller_chatuser.id %}" ><img src="{{ traveller_chatuser.photo_main.url }}" alt="" /> </a>
 
         <p>{{chat_friend.first_name}} {{chat_friend.last_name}} </p>
       </div>
