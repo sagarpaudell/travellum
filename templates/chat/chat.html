@@ -2,17 +2,17 @@
 {% load static %}
 
 {% block style %}
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
-<link rel='stylesheet prefetch'
-  href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+<!-- <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'> -->
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
 <link rel="stylesheet" href="{% static 'css/chat.css' %}">
-
+<style>
+  #chat-bubble {
+    display: none;
+  }
+  #main-footer {
+    display: none;
+  }
+</style>
 {% endblock %}
 
 {% block title %}
@@ -33,18 +33,18 @@ Messenger
           <p>{{user.first_name}} {{user.last_name}}</p>
         </div>
       </div>
-      <div id="search">
+      <div id="search" class="mr-2">
         <label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-        <input type="text" placeholder="Search contacts..." id="search_user" name="search_user" />
+        <input type="text" class="w-100" placeholder="Search contacts..." id="search_user" name="search_user" />
       </div>
       <!--================side panel===================-->
       <div id="contacts">
-        <ul>
+        <ul class="p-0">
           {% for chat_detail in chat_details %}
 
           <a href="/chat/{{chat_detail.user.email}}">
             {% if chat_detail.user.email == chat_friend.email %}
-            <li class="contact" style="background: #32465a;" id="bhroom">
+            <li class="contact" style="background: #32465a; list-style-type: none;" id="bhroom">
               {% else %}
             <li class="contact">
               {% endif %}
@@ -72,18 +72,18 @@ Messenger
 
         <p>{{chat_friend.first_name}} {{chat_friend.last_name}} </p>
       </div>
-      <div class="messages">
+      <div class="messages position-relative" style="left:0">
         <ul id='message-ul'>
           {% for chat in chat_list %}
           {% if chat.sender.email == user.email %}
-          <li class="sent">
+          <li class="sent mt-2">
             <img src="{{ traveller_currentuser.photo_main.url }}" alt="" />
-            <p data-toggle="tooltip" data-placement="left" title="{{chat.message_time}}">{{chat.message_text}}</p>
+            <p data-toggle="tooltip" class="mb-1" data-placement="left" title="{{chat.message_time}}">{{chat.message_text}}</p>
           </li>
           {% else %}
-          <li class="replies">
+          <li class="replies mt-2">
             <img src="{{ traveller_chatuser.photo_main.url }}" alt="" />
-            <p data-toggle="tooltip" data-placement="right" title="{{chat.message_time}}">{{chat.message_text}}</p>
+            <p data-toggle="tooltip" class="mt-0 mb-1" data-placement="right" title="{{chat.message_time}}">{{chat.message_text}}</p>
           </li>
           {% endif %}
           {% endfor %}

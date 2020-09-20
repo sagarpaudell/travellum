@@ -66,13 +66,13 @@ Finalize Trip
                 </form>
                 
             <form action="https://uat.esewa.com.np/epay/main" method="POST">
-                <input value="120" name="tAmt" type="hidden">
-                <input value="100" name="amt" type="hidden">
-                <input value="5" name="txAmt" type="hidden">
-                <input value="15" name="psc" type="hidden">
+                <input value="{{ total_amount }}" name="tAmt" type="hidden">
+                <input value="{{ amount }}" name="amt" type="hidden">
+                <input value="{{ tax }}" name="txAmt" type="hidden">
+                <input value="{{ service_charge }}" name="psc" type="hidden">
                 <input value="0.00" name="pdc" type="hidden">
                 <input value="epay_payment" name="scd" type="hidden">
-                <input value="5023" name="pid" type="hidden">
+                <input value="5055" name="pid" type="hidden">
                 <!-- <input value="{{ traveller_user.id }}{{request.user.id}}" name="pid" type="hidden"> -->
                 <input value="http://merchant.com.np/page/esewa_payment_success?q=su" type="hidden" name="su">
                 <input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="hidden" name="fu">
