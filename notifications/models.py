@@ -5,6 +5,7 @@ from history.models import History
 from django.utils import timezone
 import math
 
+
 class Notification(models.Model):
     receiver_email = models.ForeignKey(User, on_delete= models.DO_NOTHING, blank=True, related_name="receiver_email")
     sender_email = models.ForeignKey(User, on_delete= models.DO_NOTHING, blank=True, related_name="sender_email")
@@ -97,3 +98,6 @@ class Trip_Notification(models.Model):
 
     def __str__(self):
         return self.receiver_email.email
+
+
+

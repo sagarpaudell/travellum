@@ -3,7 +3,7 @@ from accounts.models import User
 from chat.models import Chat
 from travellers.models import Traveller
 from guides.views import GuideView, GuideUpdateView
-from guides.models import Guide, Guide_Review
+from guides.models import Guide, Guide_Review, Transaction
 from guides.views import GuideView
 from notifications.models import Notification, Trip_Notification
 from places.models import Place
@@ -139,6 +139,10 @@ def confirm_trip(request):
     tax = 0.05*amount
     service_charge = 0.2*amount
     total_amount=amount+tax+service_charge
+<<<<<<< HEAD
+    pid = tn_instance.id*1010
+=======
+>>>>>>> 7ae63cbf64e6f16037beae1751bfe111b14f9014
   context = {
                 'traveller_user':traveller_user,
                 'logged_in_user':traveller_user,
@@ -147,8 +151,38 @@ def confirm_trip(request):
                 'tax':tax,
                 'service_charge':service_charge,
                 'total_amount': total_amount,
+                'pid':pid,
             }
+
   return render(request, 'dashboard/confirm_trip.html',context)
+
+def payment_success(request):
+    temp_oid = int(request.GET.get('oid', ''))
+    oid = temp_oid/1010
+    tamt = request.GET.get('amt', '')
+    refId = request.GET.get('refId', '')
+
+    t_noti = get_object_or_404(Trip_Notification, pk=oid)
+    t_noti.has_accepted = True
+    t_noti.save()
+    
+
+    paid_by = t_noti.receiver_email
+    paid_to = t_noti.sender_email
+    trans = Transaction(paid_by=paid_by, paid_to=paid_to, pid=oid, tamt=tamt, refId=refId)
+    trans.save()
+
+    context = {
+      'oid':oid,
+      'tamt':tamt,
+      'refId':refId,
+      't_noti':t_noti,
+      'trans':trans,
+    }
+    return render(request, 'payment/payment_success.html', context)
+
+def payment_failure(request):
+    return render(request, 'payment/payment_failure.html')
 
   
     
