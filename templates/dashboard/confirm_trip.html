@@ -12,7 +12,7 @@ Finalize Trip
     <section class="row justify-content-center">
         <section style="width:60%;  ">
             <div style="background:#fff; padding:30px; border-radius:10px; box-shadow:0px 0px 10px 0px;">
-                <form method="POST">
+                <form >
                     {% csrf_token %}
                     <h2 class=" row justify-content-center margin-bottom:20%;">Finalize Trip:</h2>
                     <div class="row">
@@ -60,13 +60,27 @@ Finalize Trip
                             </div>
                         </div>
                         <div class="col-md-12 col-sm-6">
-                            <button type="submit" class="btn btn-primary" name="pay_with_esewa" style="margin-right:6%; ">Pay with E-Sewa</button>
+                            
                         </div>
                     </div>
                 </form>
-                <div class="col-md-12 col-sm-6">
-                    <a href="{% url 'view_profile' traveller_user.id %}"><button type="submit" class="btn btn-danger position-relative" style="top:-38px;left:150px;" name="cancel"><i class="fas fa-times"></i> Reject</button></a>
-                </div>
+                
+            <form action="https://uat.esewa.com.np/epay/main" method="POST">
+                <input value="120" name="tAmt" type="hidden">
+                <input value="100" name="amt" type="hidden">
+                <input value="5" name="txAmt" type="hidden">
+                <input value="15" name="psc" type="hidden">
+                <input value="0.00" name="pdc" type="hidden">
+                <input value="epay_payment" name="scd" type="hidden">
+                <input value="5023" name="pid" type="hidden">
+                <!-- <input value="{{ traveller_user.id }}{{request.user.id}}" name="pid" type="hidden"> -->
+                <input value="http://merchant.com.np/page/esewa_payment_success?q=su" type="hidden" name="su">
+                <input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="hidden" name="fu">
+                <button type="submit" class="btn btn-primary" name="pay_with_esewa" style="margin-right:6%; ">Pay with E-Sewa</button>
+            </form>
+            <div class="col-md-12 col-sm-6">
+                <a href=""><button type="submit" class="btn btn-danger position-relative" style="top:-38px;left:150px;" name="cancel"><i class="fas fa-times"></i> Reject</button></a>
+            </div>
             </div>
         </section>
     </section>
