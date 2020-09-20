@@ -77,7 +77,7 @@
                         {% if trip_notifications %}
                           {% for trip_noti in trip_notifications %}
                             <div class="top-text-heading mb-2" style="font-size: .8rem;">
-                              {{ trip_noti.sender_email.first_name }} has created a trip. You can finalize the trip <a href=""><u>here</u></a>.
+                              {{ trip_noti.sender_email.first_name }} has created a trip. You can finalize the trip<form method="POST" action="{% url 'confirm_trip' %}">{% csrf_token %}<input name="tn_id" value="{{ trip_noti.id }}" type="hidden"><button type="submit"><u>here</u></button></form>
                             </div>
                           {% endfor %}
                         {% endif %}

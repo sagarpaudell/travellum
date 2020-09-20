@@ -7,7 +7,7 @@ from guides.models import Guide, Guide_Review
 from guides.views import GuideView
 from notifications.models import Notification, Trip_Notification
 from places.models import Place
-from places.models import Place
+from history.models import History
 from datetime import datetime, timedelta
 from django import template
 import datetime
@@ -81,6 +81,7 @@ def dashboard(request):
       root_user.last_name = request.POST['last_name'].title()
       print(traveller_user.photo_main)
       root_user.save()
+      return redirect ('dashboard')
       
       #for guide creation form
     if 'Guide-Form' in request.POST:
@@ -128,6 +129,18 @@ def dashboard(request):
       notification.save()
 
   return render(request, 'dashboard/dashboard.html',context)
+
+def confirm_trip(request):
+  traveller_user = get_object_or_404 (Traveller , email=request.user)
+  if request.method == "POST":
+    trip_noti_id = request.POST['tn_id']
+    tn_instance = get_object_or_404(Trip_Notification,pk=trip_noti_id)
+  context = {
+                'traveller_user':traveller_user,
+                'logged_in_user':traveller_user,
+                'tn_instance':tn_instance, 
+            }
+  return render(request, 'dashboard/confirm_trip.html',context)
 
   
     
