@@ -34,9 +34,10 @@ def view_profile(request, traveller_id):
     elif user.is_authenticated:
         travel_history = History.objects.all().filter(traveller = user , guide = profile.email)
         has_travelled_with = False
-        for history in travel_history:
-            if history.tour_complete:
-                has_travelled_with = True
+        if travel_history:
+            for history in travel_history:
+                if history.tour_complete:
+                    has_travelled_with = True
         notification_history = Notification.objects.all().filter(receiver_email = profile.email , sender_email = user)
         has_accepted = False
         for noti in notification_history:

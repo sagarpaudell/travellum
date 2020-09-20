@@ -12,7 +12,7 @@ class History(models.Model):
     reg_date = models.DateTimeField(default=datetime.now, blank=True)
     tour_complete = models.BooleanField(default = False)
     start_date = models.DateTimeField(default=datetime.now(), blank=True)
-    end_date = models.DateTimeField(default=datetime.now(), blank=True)
+    end_date = models.DateTimeField(null=True)
     no_of_people = models.IntegerField(blank=True, default =1)
     no_of_children = models.IntegerField(blank=True, default=0)
     total_hours = models.IntegerField(blank=True, default=0)
