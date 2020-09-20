@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from accounts.models import User
 from travellers.models import Traveller
+from places.models import Place
+from history.models import History
 from guides.models import Guide, Guide_Review
 from notifications.models import Notification
 from history.models import History
@@ -35,6 +37,11 @@ def view_profile(request, traveller_id):
         for history in travel_history:
             if history.tour_complete:
                 has_travelled_with = True
+        notification_history = Notification.objects.all().filter(receiver_email = profile.email , sender_email = user)
+        has_accepted = False
+        for noti in notification_history:
+            if noti.is_accepted:
+                has_accepted = True
         context = {
                 'logged_in_user':traveller_user_logged_in,     #logged_in_user is for avatar in navbar
                 'traveller_user':profile,
@@ -43,6 +50,7 @@ def view_profile(request, traveller_id):
                 'has_travelled_with': has_travelled_with,
                 'guide_reviews': guide_reviews,
                 'bio_first': bio_first,
+                'has_accepted': has_accepted,
                  }
 
         if (len(bio)>=5):
@@ -56,6 +64,7 @@ def view_profile(request, traveller_id):
                 'guide_reviews': guide_reviews,
                 'bio_first': bio_first,
                 'bio_second': bio_second,
+                'has_accepted':has_accepted,
             }
         return render(request, 'travellers/travellers.html',context)
 
@@ -97,15 +106,40 @@ def notifications(request):
         has_requested = Notification.objects.all().filter(receiver_email=receiver_user, sender_email=sender_user )
         if has_requested:
             messages.error(request, 'You have already made a request to this guide')
-            return redirect('/guides/'+traveller_id)
+            return redirect('/view_profile/'+traveller_id)
         else:
             notification = Notification(receiver_email=receiver_user, sender_email=sender_user, sender_name = sender_name, reg_date= reg_date)
             notification.save()
-        return redirect('/guides/'+traveller_id)        
-    return redirect('/guides/'+traveller_id)
+        return redirect('/view_profile/'+traveller_id)        
+    return redirect('/view_profile/'+traveller_id)
 
-def create_trip(request):
-    return render(request, 'travellers/create_trip.html')
+def create_trip(request, traveller_id):
+    traveller_user = get_object_or_404 (Traveller , pk = traveller_id)
+    traveller_user_logged_in = get_object_or_404(Traveller, email=request.user)
+    places=Place.objects.all()
+    place_pattern=''
+    for place in places:
+        place_pattern = place.name+'|'+place_pattern
+    if 'confirm' in request.POST:
+       traveller = traveller_user.email
+       guide =  request.user
+       place = Place.objects.filter(name=request.POST['place']).first()
+       no_of_people = request.POST['no_of_people']
+       no_of_children = request.POST['no_of_children']
+       total_hours = request.POST['travel_hours']
+       total_price = request.POST['cost']
+
+       history= History(traveller=traveller, guide=guide, place=place, no_of_people=no_of_people, no_of_children=no_of_children, total_hours=total_hours, total_price=total_price)
+       history.save()
+       traveller_id = request.POST['traveller_id']
+       return redirect('/view_profile/'+traveller_id)
+    context = {
+                'traveller_user':traveller_user,
+                'logged_in_user':traveller_user_logged_in,
+                'places':places,
+                'place_pattern':place_pattern[:-1],
+            }
+    return render(request, 'travellers/create_trip.html',context)
 
 
 def payment_status(request):

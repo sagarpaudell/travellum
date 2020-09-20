@@ -8,3 +8,5 @@ class HistoryAdmin(admin.ModelAdmin):
 
 
 admin.site.register(History, HistoryAdmin)
+
+

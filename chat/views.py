@@ -79,8 +79,7 @@ def chatRedirect(request):
         return redirect(f"{user.email}")
 
     except:
-        print(chat_list.first())
-        #print(user.email)
+        print(last_message)
         return redirect("index")
 
 

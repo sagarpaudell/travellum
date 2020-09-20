@@ -101,3 +101,6 @@ def create_blog_post(request):
     return render(request, 'blog/createPost.html',context)
 
 
+def edit_blog_post(request):
+    return render(request, 'blog/editPost.html')
+    
