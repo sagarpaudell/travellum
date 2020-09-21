@@ -14,9 +14,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     async def receive(self, text_data):
         info = json.loads(text_data)
+        print('received', end='') 
         print(info)
         count = await self.save_vote(info)
         info['count'] = count
+        print('sent', end='') 
         print(info)
         await self.send(text_data=json.dumps(info))   
         

@@ -671,17 +671,17 @@ Dashboard
 
           <div class="form-group mb-4">
             <label for="pph">Price/hr</label><br>
-            <input type="number" class="form-control" id="pph" step="100" name="pph">
+            <input type="number" class="form-control" id="pph" step="100" name="pph" value = "{{g_user.price}}">
           </div>
 
           <div class="form-group">
             <label for="rep-with">Replies within(hours)</label><br>
-            <input type="number" class="form-control" min="6" id="rep-with" name="rep-with">
+            <input type="number" class="form-control" min="6" id="rep-with" name="rep-with" value="{{g_user.replies_within}}">
           </div>
 
           <div class="form-group md-4">
             <label for="Title">Place</label><br>
-            <input class="form-control" list="places" name="place" pattern="{{place_pattern}}" title='enter a valid place' required>
+            <input class="form-control" list="places" name="place" pattern="{{place_pattern}}" title='enter a valid place' value="{{g_user.get_place}}" required>
             <datalist id="places">
               {% if places %}
               {% for place in places %}
