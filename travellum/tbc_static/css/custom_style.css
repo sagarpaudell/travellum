@@ -522,3 +522,23 @@ textarea.form-control {
     font-size: 1rem;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  #first-step {
+    top: -180px;
+  }
+  #second-step {
+    top: -170px;
+  }
+  #third-step {
+    top: 170px;
+  }
+}
+
+#guide-card {
+  transition: 0.8s;
+}
+
+#guide-card:hover {
+  box-shadow: 4px 4px 4px #dddde1;
+}
