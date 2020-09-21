@@ -23,7 +23,11 @@ def dashboard(request):
   guide_user = Guide.objects.all().filter(email=user).first()
   guide_reviews = Guide_Review.objects.all().filter(guide=user)
   notifications = Notification.objects.all().filter(receiver_email=user)
-  trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user)
+  guide_user = get_object_or_404(Guide, email=user)
+  if guide_user:
+      trip_notifications = Trip_Notification.objects.all().filter(sender_email=user)
+  else:
+      trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user)
   places = Place.objects.all()
   place_pattern=''
   for place in places:
@@ -94,7 +98,8 @@ def dashboard(request):
     
     #for notification
     # if 'request_guide' in request.POST:
-    #   notifications(request) 
+    #   notifi    'tamt':tamt,
+   
       
     # return redirect('dashboard')
   
@@ -139,10 +144,7 @@ def confirm_trip(request):
     tax = 0.05*amount
     service_charge = 0.2*amount
     total_amount=amount+tax+service_charge
-<<<<<<< HEAD
     pid = tn_instance.id*1010
-=======
->>>>>>> 7ae63cbf64e6f16037beae1751bfe111b14f9014
   context = {
                 'traveller_user':traveller_user,
                 'logged_in_user':traveller_user,
@@ -157,32 +159,63 @@ def confirm_trip(request):
   return render(request, 'dashboard/confirm_trip.html',context)
 
 def payment_success(request):
-    temp_oid = int(request.GET.get('oid', ''))
-    oid = temp_oid/1010
-    tamt = request.GET.get('amt', '')
-    refId = request.GET.get('refId', '')
+  temp_oid = int(request.GET.get('oid', ''))
+  oid = temp_oid/1010
+  tamt = request.GET.get('amt', '')
+  refId = request.GET.get('refId', '')
 
-    t_noti = get_object_or_404(Trip_Notification, pk=oid)
-    t_noti.has_accepted = True
-    t_noti.save()
-    
+  t_noti = get_object_or_404(Trip_Notification, pk=oid)
+  t_noti.has_accepted = True
+  t_noti.save()
+  
 
-    paid_by = t_noti.receiver_email
-    paid_to = t_noti.sender_email
-    trans = Transaction(paid_by=paid_by, paid_to=paid_to, pid=oid, tamt=tamt, refId=refId)
-    trans.save()
+  paid_by = t_noti.receiver_email
+  paid_to = t_noti.sender_email
+  trans = Transaction(paid_by=paid_by, paid_to=paid_to, pid=oid, tamt=tamt, refId=refId)
+  trans.save()
 
-    context = {
-      'oid':oid,
-      'tamt':tamt,
-      'refId':refId,
-      't_noti':t_noti,
-      'trans':trans,
+  context = {
+    'oid':oid,
+    'tamt':tamt,
+    'refId':refId,
+    't_noti':t_noti,
+    'trans':trans, 
+    'refId':refId,
+    'trans':trans,
     }
-    return render(request, 'payment/payment_success.html', context)
+  # temp_oid = int(request.GET.get('oid', ''))
+  # oid = temp_oid/1010
+  # tamt = request.GET.get('amt', '')
+  # refId = request.GET.get('refId', '')
+
+  # t_noti = get_object_or_404(Trip_Notification, pk=oid)
+  # t_noti.has_accepted = True
+  # t_noti.save()
+  
+
+  # paid_by = t_noti.receiver_email
+  # paid_to = t_noti.sender_email
+  # trans = Transaction(paid_by=paid_by, paid_to=paid_to, pid=oid, tamt=tamt, refId=refId)
+  # trans.save()
+
+  # context = {
+  #   'oid':oid,
+  #   'tamt':tamt,
+  #   'refId':refId,
+  #   't_noti':t_noti,
+  #   'trans':trans, 
+  #   'refId':refId,
+  #   'trans':trans,
+  # }
+  return render(request, 'payment/payment_success.html', context)
 
 def payment_failure(request):
-    return render(request, 'payment/payment_failure.html')
+  temp_oid = int(request.GET.get('oid', ''))
+  oid = temp_oid/1010
+  context = {
+      'oid':oid,
+    }
+  return render(request, 'payment/payment_failure.html', context)
 
   
     
