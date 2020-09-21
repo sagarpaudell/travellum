@@ -45,6 +45,8 @@
 
 						<li class="nav-item mr-2"><a href="#top-guides" class="nav-link"><span>Top Guides</span></a>
 						</li>
+
+						<li class="nav-item mr-2"><a href="{% url 'about' %}" class="nav-link"><span>About Us</span></a>
 						<li class="nav-item mr-2"><a href="{% url 'explore' %}" class="nav-link"><span>Blog</span></a>
 						</li>
 
@@ -103,51 +105,234 @@
 			</div>
 		</div>
 	</section>
-	<!-- About us section -->
-	<section class="section" id="about-section">
-		<div class="container" data-aos="fade-up" data-aos-duration="1300">
 
-			<div class="col-md-12 col-lg-12 bg-lighten">
-				<div class="py-md-12">
-					<div class="row justify-content-start pb-3">
-						<div class="col-md-12 heading-section text-justify p-3 p-md-5 p-lg-0 ">
-							<span class="subheading text-center">about travellum</span>
-							<h2 class="mb-4">How it works?</h2>
-							<p id="para"><strong>Travellum </strong>provides a platform to connect travelers. It helps
-								you
-								find
-								the perfect person
-								to travel with. Maybe you want a guide who knows everything about the history of the
-								place or maybe you are just searching for a companion to travel with. We’ve got you
-								covered. We have a ton of travel guides you can choose from based on their rating.
-								But
-								instead, if you are thinking of employing yourself as a travel guide, you can do
-								that
-								from travellum. It is as easy as opening a facebook account.</p>
-							<p id="para">We are trying our best to introduce freelancing to the travel industry. If you
-								really
-								think you are capable of being a guide, we don’t ask you for your travel degree, you
-								can
-								simply register to our site. We will help you find the travellers who are looking
-								for
-								guides exactly like you. You can earn a decent amount of money without sacrificing
-								your
-								time in 9-5 job. Work whenever you want and earn the amount you deserve.</p>
-							<p id="para">We know traveling in a new place can be scary and as a human we need someone to
-								accompany us when we are going someplace new. We can help you find the perfect
-								person
-								who can be your best bud while traveling. We know that you love meeting new people
-								and
-								going to new places. So why not choose who you want to travel with? Who knows, your
-								perfect travel buddy could be the one you’ve been searching your whole life for.
+	<!-- How it works section -->
+	<div class="container my-5">
+		<section>
+			<div class="text-center mb-5">
+				<h2 class="display-5" style="font-family: 'Poppins', Arial, sans-serif; font-size: 2rem;"  data-aos="fade-up" data-aos-duration="800">
+					How It <span style="color: #e66b58">Works?</span>
+				</h2>
+			</div>
+
+			<div class="row" style="font-family: 'Poppins', Arial, sans-serif" data-aos="fade-up" data-aos-duration="800">
+				<div
+					class="col-md-5 position-relative d-flex justify-content-end"
+					style="top: -20px"
+				>
+					<img
+						class="d-none d-md-block"
+						style="height: 270px"
+						src="{% static 'svg/first-step.svg' %}"
+						alt=""
+					/>
+				</div>
+				<div class="col-12 col-md-2">
+					<div class="">
+						<div class="px-3 mt-5" style="background: rgb(247, 247, 247)">
+							<div
+								class="font-weight-bold circle text-white rounded-circle d-flex align-items-center justify-content-center mx-auto position-relative border border-white"
+								style="
+									width: 60px;
+									height: 60px;
+									top: -30px;
+									border-width: 4px !important;
+									background-color: #9b5de5;
+								"
+							>
+								1
+							</div>
+							<div
+								class="position-relative text-center display-5"
+								style="top: -20px; font-size: 2rem"
+							>
+								Step
+							</div>
+						</div>
+						<div
+							class="position-relative text-center font-weight-bold"
+							style="top: -15px; font-size: 1.5rem; color: #9b5de5"
+						>
+							<p class="m-0 position-relative" style="color: #c39eef">.</p>
+							<p
+								class="m-0 position-relative"
+								style="top: -25px; color: #af7dea"
+							>
+								.
+							</p>
+							<p class="m-0 position-relative" style="top: -50px">.</p>
+							<p class="m-0 position-relative" style="top: -75px">.</p>
+							<p
+								class="m-0 position-relative"
+								style="top: -100px; color: #c39eef"
+							>
+								.
+							</p>
+							<p
+								class="m-0 position-relative"
+								style="top: -125px; color: #9b5de5"
+							>
+								.
 							</p>
 						</div>
 					</div>
 				</div>
+				<div
+					class="col-md-5 position-relative d-flex justify-content-start flex-column pr-md-5"
+					style="top: 45px"
+				>
+					<h5 class="display-5 text-left" style="font-size: 1.3rem; font-family: 'Poppins', Arial, sans-serif">
+						Make an Inquiry
+					</h5>
+					<h5
+						id="first-step"
+						class="display-5 text-muted text-left position-relative mr-lg-5 pr-lg-5"
+						style="font-size: 1.1rem; font-weight: 500; font-family: 'Poppins', Arial, sans-serif"
+					>
+						<!-- top: -180px -->
+						Search for your destination & make inquiries with our recommended
+						guides
+					</h5>
+				</div>
 			</div>
 
-		</div>
-	</section>
+			<div class="row" data-aos="fade-up" data-aos-duration="800">
+				<div
+					class="order-2 order-md-1 col-md-5 position-relative d-flex align-items-md-end flex-column pl-md-5"
+					style="top: -110px"
+				>
+					<h5 class="d-none d-md-block display-5" style="font-size: 1.3rem; font-family: 'Poppins', Arial, sans-serif">
+						Confirm trip
+					</h5>
+					<h5
+						id="second-step"
+						class="display-5 position-relative text-muted text-md-right mb-4 ml-lg-5 pl-lg-5"
+						style="font-size: 1.1rem; font-weight: 500; font-family: 'Poppins', Arial, sans-serif"
+					>
+						Confirm the trip with a guide of your choice
+					</h5>
+				</div>
+				<div
+					class="order-1 order-md-2 col-12 col-md-2 mx-auto position-relative"
+					style="top: -165px"
+				>
+					<div class="">
+						<div class="px-3 mt-5" style="background: rgb(247, 247, 247)">
+							<div
+								class="font-weight-bold circle text-white rounded-circle d-flex align-items-center justify-content-center mx-auto position-relative border border-white"
+								style="
+									width: 60px;
+									height: 60px;
+									top: -30px;
+									border-width: 4px !important;
+									background-color: #9b5de5;
+								"
+							>
+								2
+							</div>
+							<div
+								class="position-relative text-center display-5"
+								style="top: -20px; font-size: 2rem"
+							>
+								Step
+							</div>
+						</div>
+						<div
+							class="position-relative text-center font-weight-bold"
+							style="top: -15px; font-size: 1.5rem"
+						>
+							<p class="m-0 position-relative">.</p>
+							<p class="m-0 position-relative" style="top: -25px">.</p>
+							<p class="m-0 position-relative" style="top: -50px">.</p>
+							<p class="m-0 position-relative" style="top: -75px">.</p>
+							<p class="m-0 position-relative" style="top: -100px">.</p>
+							<p class="m-0 position-relative" style="top: -125px">.</p>
+						</div>
+					</div>
+				</div>
+				<div
+					class="order-md-3 col-md-5 position-relative d-flex justify-content-start"
+					style="top: -165px"
+				>
+					<img
+						class="d-none d-md-block"
+						style="height: 220px"
+						src="{% static 'svg/first-step.svg' %}"
+						alt=""
+					/>
+				</div>
+			</div>
+
+			<div
+				class="row position-relative"
+				style="top: -165px; margin-bottom: -100px !important"
+				data-aos="fade-up" data-aos-duration="800"
+			>
+				<div
+					class="col-md-5 position-relative d-flex justify-content-end"
+					style="top: -165px; margin-bottom: -380px !important"
+				>
+					<img
+						class="d-none d-md-block"
+						style="height: 220px"
+						src='{% static "svg/third-step.svg" %}'
+						alt=""
+					/>
+				</div>
+				<div
+					class="col-12 col-md-2 mx-auto position-relative"
+					style="top: -165px; margin-bottom: -380px !important"
+				>
+					<div class="">
+						<div class="px-3 mt-5" style="background: rgb(247, 247, 247)">
+							<div
+								class="font-weight-bold circle text-white rounded-circle d-flex align-items-center justify-content-center mx-auto position-relative border border-white"
+								style="
+									width: 60px;
+									height: 60px;
+									top: -30px;
+									border-width: 4px !important;
+									background-color: #9b5de5;
+								"
+							>
+								3
+							</div>
+							<div
+								class="position-relative text-center display-5"
+								style="top: -20px; font-size: 2rem"
+							>
+								Step
+							</div>
+						</div>
+						<div
+							class="position-relative text-center font-weight-bold"
+							style="top: -15px; font-size: 1.5rem"
+						>
+							<p class="m-0 position-relative">.</p>
+							<p class="m-0 position-relative" style="top: -25px">.</p>
+							<p class="m-0 position-relative" style="top: -50px">.</p>
+							<p class="m-0 position-relative" style="top: -75px">.</p>
+						</div>
+					</div>
+				</div>
+				<div
+					class="col-md-5 position-relative d-flex justify-content-start flex-column pr-lg-5"
+					style="top: -100px"
+				>
+					<h5 class="d-none d-md-block display-5 text-left" style="font-size: 1.3rem; font-family: 'Poppins', Arial, sans-serif">
+						Have Fun
+					</h5>
+					<h5
+						id="third-step"
+						class="display-5 text-muted position-relative mr-lg-5 pr-lg-5 text-left"
+						style="font-size: 1.1rem; font-weight: 500; font-family: 'Poppins', Arial, sans-serif"
+					>
+						Witness local places from the perspective of our guides
+					</h5>
+				</div>
+			</div>
+		</section>
+	</div>
 	<!-- Best Places section -->
 	<section class="section" id="destination-section">
 		<div class="container">
@@ -247,10 +432,9 @@
 			justify-content: center;">
 				{% if guides %}
 				{% for guide in guides %}
-				<div class="col-md-4 col-lg-3" data-aos="flip-right" data-aos-duration="800" style="background-color: rgb(248, 248, 248);
-								padding: 10px;
+				<div id="guide-card" class="col-md-4 col-lg-3" data-aos="fade-up" data-aos-duration="1000" style="background-color: rgb(248, 248, 248);
+								padding: 15px;
 								margin:10px;
-								box-shadow: 5px 5px 8px #a2a2a8;
 								border-radius:3%;
 								">
 

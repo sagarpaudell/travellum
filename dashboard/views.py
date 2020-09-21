@@ -140,7 +140,7 @@ def confirm_trip(request):
     service_charge = 0.2*amount
     total_amount=amount+tax+service_charge
     pid = tn_instance.id*1010
-  context = {
+    context = {
                 'traveller_user':traveller_user,
                 'logged_in_user':traveller_user,
                 'tn_instance':tn_instance,
@@ -149,7 +149,7 @@ def confirm_trip(request):
                 'service_charge':service_charge,
                 'total_amount': total_amount,
                 'pid':pid,
-            }
+              }
 
   return render(request, 'dashboard/confirm_trip.html',context)
 

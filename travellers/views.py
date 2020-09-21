@@ -10,6 +10,7 @@ from django.contrib import messages,auth
 from datetime import datetime
 import datetime
 from django.utils.timezone import utc
+import decimal
 
 def view_profile(request, traveller_id):
     user=request.user
@@ -129,12 +130,17 @@ def create_trip(request, traveller_id):
        no_of_people = request.POST['no_of_people']
        no_of_children = request.POST['no_of_children']
        total_hours = request.POST['travel_hours']
-       if ((int(no_of_people)+int(no_of_children)*0.75)<=2):
-           total_price=2*int(total_hours)*guide_user.price
+       nop = float(no_of_people)
+       noc = float(no_of_children)
+       noh = float(total_hours)
+       if ((nop+noc*0.75)<=2):
+           tp=2*noh*float(guide_user.price)
+           tp=int(tp)
        else:
-           total_price=(int(no_of_people)+int(no_of_children)*0.75)*total_hours*guide_user.price
-
-       history= History(traveller=traveller, guide=guide, place=place, no_of_people=no_of_people, no_of_children=no_of_children, total_hours=total_hours, total_price=total_price)
+           tp=(nop+noc*0.75)*noh*float(guide_user.price)
+           tp=int(tp)
+       print(tp)
+       history= History(traveller=traveller, guide=guide, place=place, no_of_people=no_of_people, no_of_children=no_of_children, total_hours=total_hours, total_price=tp)
        history.save()
        trip_notification=Trip_Notification(receiver_email=traveller_user.email, sender_email = request.user, form= history)
        trip_notification.save()
