@@ -46,25 +46,18 @@ def dashboard(request):
                 'bio_first': bio_first,
                 'places' : places,
                 'place_pattern' : place_pattern,
-                'guide_reviews': guide_reviews,
-                'g_user':guide_user1,
+                'guide_reviews': guide_reviews,  
             }
   
 
   if (len(bio)>=5):
     bio_second = bio[5]
-    context = {
-                'traveller_user':traveller_user,
-                'my_profile':True,
-                'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
-                'guide_user' : guide_user,
-                'notifications': notifications,
-                'trip_notifications': trip_notifications,
-                'bio_first': bio_first,
+    context.update({
                 'bio_second': bio_second,
-                'guide_reviews': guide_reviews,
-                'g_user':guide_user1,
-            }
+            })
+  
+  if(traveller_user.is_guide):
+    context.update({'g_user':guide_user1,})
  
   if (request.method == "POST" ):
     root_user = get_object_or_404(User, email=user)
@@ -105,10 +98,14 @@ def dashboard(request):
       t_noti.save()
     
     if 'pub_off' in request.POST:
+      print(request.POST)
       guide_user1.is_published = False
+      guide_user1.save()
     
     if 'pub_on' in request.POST:
+      print(request.POST)
       guide_user1.is_published = True
+      guide_user1.save()
 
     #for notification
     # if 'request_guide' in request.POST:
