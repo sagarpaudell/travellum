@@ -37,4 +37,5 @@ class Review(models.Model):
     place_review = models.TextField(blank=True)
     ratings = models.IntegerField(blank=True)
 
-
+    def __str__(self):
+        return '%s %s' % (self.place_name ,self.Reviewer)

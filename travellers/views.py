@@ -15,7 +15,7 @@ import decimal
 def view_profile(request, traveller_id):
     user=request.user
     if user.is_authenticated:
-        notifications = Notification.objects.all().filter(receiver_email=user)
+        notifications = Notification.objects.all().filter(receiver_email=user).order_by('-reg_date')
         traveller_user_logged_in = get_object_or_404(Traveller, email=user)
         if traveller_user_logged_in.is_guide:
             guide_user = get_object_or_404(Guide, email=user)
@@ -48,7 +48,7 @@ def view_profile(request, traveller_id):
             for history in travel_history:
                 if history.tour_complete:
                     has_travelled_with = True
-        notification_history = Notification.objects.all().filter(receiver_email = profile.email , sender_email = user)
+        notification_history = Notification.objects.all().filter(receiver_email = profile.email , sender_email = user).order_by('-reg_date')
         trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user)
         has_accepted = False
         for noti in notification_history:

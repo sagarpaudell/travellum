@@ -102,7 +102,7 @@ Details
         
         <div class="container" style="padding-bottom: 3%;">
             {% if logged_in_user %}
-            {% if allow_review %}
+            {% if allow_review or edit_review %}
             <div class="row border py-3 mb-5" style="background: white !important;">
               <div class="col-2 col-lg-1 rounded">
                 <img {% if logged_in_user.photo_main %} src="{{logged_in_user.photo_main.url}}" {% else %}
@@ -114,7 +114,8 @@ Details
                 <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Know this place? Give your review
                     here:</h5>
                 <input type="hidden" value="{{ place.id }}" name="plid">
-                <textarea class="form-control" rows="3" name="preview" required></textarea>
+                {% if edit_review %} <input type="hidden" name="edit" value="{{ edit_review.id }}"> {% endif %}
+                <textarea class="form-control" rows="3" name="preview" required>{% if edit_review %}{{ edit_review.place_review }}{% endif %} </textarea>
 
                 <div class="mt-n4" style="display: flex; justify-content: flex-end;">
                   <div class="rating">
@@ -131,7 +132,7 @@ Details
                   </div>
                 </div>
                 <div style="display: flex; justify-content: flex-end;">
-                  <input class="btn btn-danger mt-2" type="submit">
+                  <input class="btn btn-danger mt-2" name="review_add" type="submit">
                 </div>
               </form>
             </div>
@@ -148,7 +149,8 @@ Details
                   </div>
                   <div class="col-10 col-lg-11">
                     <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">
-                      {{ review.Reviewer.first_name }} {{ review.Reviewer.last_name }}</h5>
+                    {{ review.Reviewer.first_name }} {{ review.Reviewer.last_name }} {% if review.Reviewer == logged_in_user and show_bool %}<form action="{% url 'placedetails' place.id %}" method="POST">{% csrf_token %}<input type="hidden" value="{{ review.id }}" name="rev_id"><button type="submit" name="edit_rev">Edit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" name="del_rev">Delete</button></form>{% endif %}</h5>
+
                     <div class="review__rating m-n2">
                       {% if review.ratings == 1 %}
                       <label class="star mr-n2" aria-hidden="true"></label>
