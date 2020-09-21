@@ -161,7 +161,7 @@ def confirm_trip(request):
                 'service_charge':service_charge,
                 'total_amount': total_amount,
                 'pid':pid,
-            }
+              }
 
   return render(request, 'dashboard/confirm_trip.html',context)
 

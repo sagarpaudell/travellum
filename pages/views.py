@@ -17,7 +17,5 @@ def index(request):
         'places':places
     }
     return render(request, 'pages/index.html', context)
-def login(request):
-    return render(request, 'pages/login.html')
-def register(request):
-    return render(request, 'pages/register.html')
+def about(request):
+    return render(request, 'pages/about.html')

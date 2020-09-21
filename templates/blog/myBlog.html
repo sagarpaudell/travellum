@@ -50,10 +50,11 @@ Blog
             <i class="fas fa-edit"></i>
             </a>
             <a 
+              data-toggle="modal"
+              data-target="#delete-blog"
               href="{% url 'delete_blog_post' blog.id %}"
               class="btn btn-danger my-2" 
               style="font-size: 0.8rem;"
-
             >
             <i class="fas fa-trash" ></i>
             </a>
@@ -63,14 +64,33 @@ Blog
        {% endfor %}
        {% endif %}
       </div>
-    </section>
+    </section>  
 
   </div>
   
 </main>
 
 
-
-
+<div class="modal fade" id="delete-blog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          This cannot be undone
+        </h5>
+        <button class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center">
+          Are you sure you want to delete this blog?
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <a href="{% url 'my_blog' %}" class="btn btn-outline-dark text-dark mx-2 my-3">Yes</a>
+          <button class="btn btn-dark mx-2 my-3" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

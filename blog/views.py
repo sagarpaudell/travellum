@@ -25,6 +25,7 @@ def my_blog(request):
 
 def explore(request):
     user=request.user
+    context = dict()
     if user.is_authenticated:
         notifications = Notification.objects.all().filter(receiver_email=user)
         traveller_user = get_object_or_404(Traveller, email=user)
@@ -42,6 +43,7 @@ def explore(request):
 
 def single_blog_post(request,id):
     user=request.user
+    context = dict()
     if user.is_authenticated:
         notifications = Notification.objects.all().filter(receiver_email=user)
         traveller_user = get_object_or_404(Traveller, email=user)
@@ -52,12 +54,15 @@ def single_blog_post(request,id):
     
     blog = Blog.objects.get(id=id)
     comments = Comment.objects.filter(blog_id=id)
-    user_picture = Traveller.objects.get(email=request.user).photo_main 
-    
+    # user_picture = Traveller.objects.get(email=request.user).photo_main 
+    guide = Guide.objects.filter(email = blog.user).first()
+    print(guide)
+    is_guide = False if not guide else guide.is_published
     context.update({
         'blog':blog,
+        'is_guide': is_guide,
         'comments':comments,
-        'user_picture':user_picture
+        # 'user_picture':user_picture,
     })
     
     if request.method=='POST':
