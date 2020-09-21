@@ -60,13 +60,19 @@ Dashboard
                     {% endif %}
                   </div>
                   {% if traveller_user %}
-                  {% if traveller_user.is_guide %}
+                  {% if guide %}
+                  {% if guide.is_published %}
                   <div class="col-md-6 p-0 text-right d-flex flex-column align-items-md-end justify-content-md-center align-items-start">
-                    <h3><span class="display-5 d-inline text-success">Rs.</span>{{traveller_user.price_per_hour}}/hr</h3>
+                    <h3><span class="display-5 d-inline text-success">Rs.</span>{{guide.price}}/hr</h3>
                     <form action="{% url 'notifications' %}" method="POST">
                       {% csrf_token %}
                       <input type="hidden" name="traveller_id" value="{{ traveller_user.id }}">
+                      {% if user.is_authenticated %}
+                      {% if guide.is_published %}
                       <input class="btn btn-success btn-md" type="submit" name="request_guide" value="Make Inquiry">
+                      {% endif %}
+                      {% endif %}
+                      {% endif %}
                     </form>
                   </div>
                   <div>
@@ -102,6 +108,7 @@ Dashboard
       </div>
 
       <div>
+
         <div class="d-flex flex-row text-white align-items-stretch text-center bg-white" id="custom-menu">
           <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#about_me">
             <i class="fa fa-user fa-2x pr-2"></i>
@@ -116,6 +123,18 @@ Dashboard
             <span class="d-none d-md-inline">Traveller</span>
           </div>
         </div>
+
+        <!-- <div class="d-flex flex-row text-white align-items-stretch text-center bg-white" id="custom-menu">
+          <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#about_me">
+            <i class="fa fa-user fa-2x pr-2"></i>
+            <span class="d-none d-md-inline">About Me</span>
+          </div>
+          <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#traveller">
+            <i class="fa fa-suitcase fa-2x pr-2"></i>
+            <span class="d-none d-md-inline">Traveller</span>
+          </div>
+        </div> -->
+
         <!--=========== End of Dashboard Navigation ==========-->
 
 
@@ -250,8 +269,8 @@ Dashboard
           <div class="d-flex">
             <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
               <div class="border-bottom">
-                <h2 style="color: #e2c0bb;">No Guide History</h2>
                 {% if my_profile %}
+                <h2 style="color: #e2c0bb;">No Guide History</h2>
                 {% if guide_user %}
                 {% if guide_user.is_published %}
                 <h1> Guide update form</h1>
@@ -265,7 +284,23 @@ Dashboard
                 {% endif %}
               </div>
 
+              {% if guide.is_published %}
               <div class="container text-left">
+                {% if guide_historys %}
+                  {% for guide_history in guide_historys %}
+                  <div class="mt-5"></div>
+                  <p class="col-12 text-left">
+                    {{traveller_user.first_name}} {{traveller_user.last_name}} travelled with
+                    {{ guide_history.traveller.first_name }} {{ guide_history.traveller.last_name }}
+                    to
+                    <a href="">{{ guide_history.place.name }}</a>
+                    - {{guide_history.end_date|date:'M d,Y'}}
+                  </p>
+                  <div class="mb-5"></div>
+                  {% endfor %}
+                  {% else %}
+                  <h2 style="color: #e2c0bb;">No Guide History</h2>
+                  {% endif %}
                 {% if has_travelled_with %}
                 <div class="row border py-3 mb-5" style="background: white !important;">
                   <div class="col-2 col-lg-1 rounded">
@@ -340,6 +375,9 @@ Dashboard
                 <h2 style="color: #e2c0bb;">No Guide Reviews</h2>
                 {% endif %}
               </div>
+              {% else %}
+              <h2 style="color: #e2c0bb;">The User is not a Guide.</h2>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -360,9 +398,22 @@ Dashboard
                 <div class="mb-5"></div>
               </div>
               {% endif %}
-              <div class="border-bottom">
-                <h2 style="color: #e2c0bb;">No Traveller History</h2>   
-              </div>
+              {% if traveller_historys %}
+                  {% for traveller_history in traveller_historys %}
+                  <div class="mt-5"></div>
+                  <p class="col-12 text-left">
+                    {{traveller_user.first_name}} {{traveller_user.last_name}} travelled with
+                    {{ traveller_history.guide.first_name }} {{ traveller_history.guide.last_name }}
+                    to
+                    <a href="">{{ traveller_history.place.name }}</a>
+                    - {{traveller_history.end_date|date:'M d,Y'}}
+                  </p>
+                  <div class="mb-5"></div>
+                  {% endfor %}
+                  {% else %}
+                  <h2 style="color: #e2c0bb;">No Guide History</h2>
+                  {% endif %}
+                <button class="
               <div class="border-bottom py-5">
                 <h2 style="color: #e2c0bb;">No Traveller Reviews</h2>
               </div>

@@ -24,6 +24,8 @@ def dashboard(request):
   guide_reviews = Guide_Review.objects.all().filter(guide=user)
   notifications = Notification.objects.all().filter(receiver_email=user)
   trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user)
+  guide_historys = History.objects.all().filter(guide=user,tour_complete=True)
+  traveller_historys = History.objects.all().filter(traveller=user,tour_complete=True)
   places = Place.objects.all()
   place_pattern=''
   for place in places:
@@ -41,6 +43,8 @@ def dashboard(request):
                 'places' : places,
                 'place_pattern' : place_pattern,
                 'guide_reviews': guide_reviews,
+                'guide_historys': guide_historys,
+                'traveller_historys': traveller_historys,
             }
   
 
@@ -56,6 +60,8 @@ def dashboard(request):
                 'bio_first': bio_first,
                 'bio_second': bio_second,
                 'guide_reviews': guide_reviews,
+                'guide_historys': guide_historys,
+                'traveller_historys': traveller_historys,
             }
  
   if (request.method == "POST" ):

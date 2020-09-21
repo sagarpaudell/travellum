@@ -22,6 +22,9 @@ def view_profile(request, traveller_id):
     bio = profile.bio.split('.',5)
     bio_first = ". ".join(bio[:5])+(".")
     guide_reviews = Guide_Review.objects.all().filter(guide=profile.email)
+    guide = Guide.objects.filter(email=profile.email).first()
+    guide_historys = History.objects.all().filter(guide=profile.email,tour_complete=True)
+    traveller_historys = History.objects.all().filter(traveller=profile.email,tour_complete=True)
     if request.method == 'POST':
         guide_rating =  request.POST.get('rating')
         guide_review = request.POST['review']
@@ -53,6 +56,9 @@ def view_profile(request, traveller_id):
                 'guide_reviews': guide_reviews,
                 'bio_first': bio_first,
                 'has_accepted': has_accepted,
+                'guide':guide,
+                'guide_historys': guide_historys,
+                'traveller_historys': traveller_historys,
                  }
 
         if (len(bio)>=5):
@@ -67,6 +73,9 @@ def view_profile(request, traveller_id):
                 'bio_first': bio_first,
                 'bio_second': bio_second,
                 'has_accepted':has_accepted,
+                'guide':guide,
+                'guide_historys': guide_historys,
+                'traveller_historys': traveller_historys,
             }
         return render(request, 'travellers/travellers.html',context)
 
@@ -76,6 +85,9 @@ def view_profile(request, traveller_id):
                 'my_profile':False,
                 'guide_reviews': guide_reviews,
                 'bio_first': bio_first,
+                'guide':guide,
+                'guide_historys': guide_historys,
+                'traveller_historys': traveller_historys,
             }
         
         if (len(bio)>=5):
@@ -86,6 +98,9 @@ def view_profile(request, traveller_id):
                 'guide_reviews': guide_reviews,
                 'bio_first': bio_first,
                 'bio_second': bio_second,
+                'guide':guide,
+                'guide_historys': guide_historys,
+                'traveller_historys': traveller_historys,
             }
         return render(request, 'travellers/travellers.html',context)
 
