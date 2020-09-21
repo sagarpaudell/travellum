@@ -191,8 +191,10 @@
             {% if  user.is_authenticated %}
             <div class="dropdown-menu" style="position: absolute; min-width: 80px; background: rgba(255,255,255,0.9);"
               aria-labelledby="navbarDropdownMenuLink">
+              {% if g_user %}
               <a class="dropdown-item" style="cursor: pointer;" data-toggle="modal"
                 data-target="#visibility">Visibility</a>
+              {% endif %}
               <a class="dropdown-item" href="{% url 'my_blog' %}">My Blog</a>
               <a class="dropdown-item" href="/accounts/logout">Log Out</a>
             </div>
@@ -222,15 +224,26 @@
         <button class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
+        
         <div class="text-center">
+          {% if g_user.is_published %}
           You are visible to travellers.
-          <!-- You are not visible to travellers. -->
+          {% else %}
+          You are not visible to travellers.
+          {% endif %}
         </div>
+        <form action="{% url 'dashboard' %}" method="POST" >
+          {% csrf_token %}
         <div class="d-flex justify-content-center align-items-center">
-          <a href="#" class="btn btn-outline-success mx-2 my-3" data-dismiss="modal">Make me Visbile</a>
-          <a href="#" class="btn btn-outline-danger mx-2 my-3" data-dismiss="modal">Make me Invisible</a>
+          {% if g_user.is_published %}
+          <input type="submit" class="btn btn-outline-danger mx-2 my-3" name="pub_off" value="Make me Invisbile" data-dismiss="modal">
+          {% else %}
+          <input type="submit"  class="btn btn-outline-success mx-2 my-3" name="pub_on" value="Make me Visbile" data-dismiss="modal">
+          {% endif %}
         </div>
+        </form>
       </div>
+    
       <div class="modal-footer d-flex justify-content-center">
         <small class="text-muted" style="font-size: .9rem;">You won't be visible if you are inactive for more than 5
           days</small>

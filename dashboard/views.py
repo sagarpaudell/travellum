@@ -24,8 +24,8 @@ def dashboard(request):
   guide_reviews = Guide_Review.objects.all().filter(guide=user)
   notifications = Notification.objects.all().filter(receiver_email=user)
   if traveller_user.is_guide:
-    guide_user = get_object_or_404(Guide, email=user)
-    if guide_user:
+    guide_user1 = get_object_or_404(Guide, email=user)
+    if guide_user1:
         trip_notifications = Trip_Notification.objects.all().filter(sender_email=user)
     
   else:
@@ -47,6 +47,7 @@ def dashboard(request):
                 'places' : places,
                 'place_pattern' : place_pattern,
                 'guide_reviews': guide_reviews,
+                'g_user':guide_user1,
             }
   
 
@@ -62,6 +63,7 @@ def dashboard(request):
                 'bio_first': bio_first,
                 'bio_second': bio_second,
                 'guide_reviews': guide_reviews,
+                'g_user':guide_user1,
             }
  
   if (request.method == "POST" ):
@@ -102,6 +104,12 @@ def dashboard(request):
       t_noti.has_rejected = True
       t_noti.save()
     
+    if 'pub_off' in request.POST:
+      guide_user1.is_published = False
+    
+    if 'pub_on' in request.POST:
+      guide_user1.is_published = True
+
     #for notification
     # if 'request_guide' in request.POST:
     #   notifi    'tamt':tamt,
