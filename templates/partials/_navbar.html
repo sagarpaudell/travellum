@@ -53,7 +53,11 @@
             <div class="nav-item text-center top-head-dropdown">
               {% if  user.is_authenticated%}
               <a type="button" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                <img class="hw-bell" src="{% static 'svg/bell.svg' %}" alt="">
+                {% if notifications %}
+                  <img class="hw-bell" src="{% static 'svg/notification.svg' %}" alt="">
+                {% else %}
+                  <img class="hw-bell" src="{% static 'svg/bell.svg' %}" alt="">
+                {% endif %}
               </a>
               <ul id="droppie" class="dropdown-menu pt-0">
                 <div class="px-3 mx-1 py-1 mt-1 d-flex justify-content-between" style="font-size: .8rem !important;">
@@ -164,7 +168,11 @@
               </ul>
               {% else %}
               <a type="button" class="nav-link dropdown-toggle" href='/accounts/login/'>
-                <img class="hw-bell" src="{% static 'svg/bell.svg' %}" alt="">
+                {% if notifications %}
+                  <img class="hw-bell" src="{% static 'svg/notification.svg' %}" alt="">
+                {% else %}
+                  <img class="hw-bell" src="{% static 'svg/notification.svg' %}" alt="">
+                {% endif %}
               </a>
               {% endif %}
             </div>
@@ -234,12 +242,12 @@
         </div>
         <form action="{% url 'dashboard' %}" method="POST" >
           {% csrf_token %}
-        <div class="d-flex justify-content-center align-items-center">
-          {% if g_user.is_published %}
-          <input type="submit" class="btn btn-outline-danger mx-2 my-3" name="pub_off" value="Make me Invisbile" >
-          {% else %}
-          <input type="submit"  class="btn btn-outline-success mx-2 my-3" name="pub_on" value="Make me Visbile" >
-          {% endif %}
+          <div class="d-flex justify-content-center align-items-center">
+            {% if g_user.is_active %}
+            <input type="submit" class="btn btn-outline-danger mx-2 my-3" name="pub_off" value="Make me Invisbile">
+            {% else %}
+            <input type="submit"  class="btn btn-outline-success mx-2 my-3" name="pub_on" value="Make me Visbile">
+            {% endif %}
         </div>
         </form>
       </div>

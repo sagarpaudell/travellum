@@ -261,33 +261,24 @@ Dashboard
               {% endif %}
 
               <div class="col-md-12 border-bottom">
-                <h2 style="color: #e2c0bb;">No Guide History</h2>
                 {% if guide_user %}
                 {% if guide_user.is_published %}
                 <div class="mx-5 px-5">
+                  {% if guide_historys %}
+                  {% for guide_history in guide_historys %}
                   <div class="mt-5"></div>
                   <p class="col-12 text-left">
                     You travelled with
-                    <a href="">someone</a>
+                    {{ guide_history.traveller.first_name }}{{ guide_history.traveller.last_name }}
                     to
-                    <a href="">somewhere</a>
-                    - 2020/9/18
-                  </p>
-                  <p class="col-12 text-left">
-                    You travelled with
-                    <a href="">someone</a>
-                    to
-                    <a href="">somewhere</a>
-                    - 2020/9/18
-                  </p>
-                  <p class="col-12 text-left">
-                    You travelled with
-                    <a href="">someone</a>
-                    to
-                    <a href="">somewhere</a>
-                    - 2020/9/18
+                    <a href="">{{ guide_history.place.name }}</a>
+                    - {{guide_history.end_date|date:'M d,Y'}}
                   </p>
                   <div class="mb-5"></div>
+                  {% endfor %}
+                  {% else %}
+                  <h2 style="color: #e2c0bb;">No Guide History</h2>
+                  {% endif %}
                 </div>
                 {% else %}
                 <p class="mt-4"> Your request for becoming a guide is being processed...</p>
@@ -359,7 +350,21 @@ Dashboard
           <div class="d-flex">
             <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
               <div class="border-bottom">
-                <h2 style="color: #e2c0bb;">No Traveller History</h2>
+                  {% if traveller_historys %}
+                  {% for traveller_history in traveller_historys %}
+                  <div class="mt-5"></div>
+                  <p class="col-12 text-left">
+                    You travelled with
+                    {{ traveller_history.guide.first_name }} {{ traveller_history.guide.last_name }}
+                    to
+                    <a href="">{{ traveller_history.place.name }}</a>
+                    - {{traveller_history.end_date|date:'M d,Y'}}
+                  </p>
+                  <div class="mb-5"></div>
+                  {% endfor %}
+                  {% else %}
+                  <h2 style="color: #e2c0bb;">No Guide History</h2>
+                  {% endif %}
                 <button class="btn btn-theme-outline px-5 py-3 mt-2 mb-5" id="btn-search-des">Search for
                   Destinations...</button>
               </div>

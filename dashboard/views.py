@@ -23,6 +23,9 @@ def dashboard(request):
   guide_user = Guide.objects.all().filter(email=user).first()
   guide_reviews = Guide_Review.objects.all().filter(guide=user)
   notifications = Notification.objects.all().filter(receiver_email=user)
+  trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user)
+  guide_historys = History.objects.all().filter(guide=user,tour_complete=True)
+  traveller_historys = History.objects.all().filter(traveller=user,tour_complete=True)
   if traveller_user.is_guide:
     guide_user1 = get_object_or_404(Guide, email=user)
     if guide_user1:
@@ -47,24 +50,25 @@ def dashboard(request):
                 'places' : places,
                 'place_pattern' : place_pattern,
                 'guide_reviews': guide_reviews,
-                'g_user':guide_user1,
+                'guide_historys': guide_historys,
+                'traveller_historys': traveller_historys,
+                'g_user':guide_user,
+                'guide_reviews': guide_reviews,  
             }
   
 
   if (len(bio)>=5):
     bio_second = bio[5]
-    context = {
-                'traveller_user':traveller_user,
-                'my_profile':True,
-                'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
-                'guide_user' : guide_user,
-                'notifications': notifications,
-                'trip_notifications': trip_notifications,
-                'bio_first': bio_first,
+    context.update({
                 'bio_second': bio_second,
                 'guide_reviews': guide_reviews,
+                'guide_historys': guide_historys,
+                'traveller_historys': traveller_historys,
                 'g_user':guide_user1,
-            }
+            })
+  
+  if(traveller_user.is_guide):
+    context.update({'g_user':guide_user1,})
  
   if (request.method == "POST" ):
     root_user = get_object_or_404(User, email=user)
@@ -105,10 +109,14 @@ def dashboard(request):
       t_noti.save()
     
     if 'pub_off' in request.POST:
-      guide_user1.is_published = False
+      print(request.POST)
+      guide_user1.is_active = False
+      guide_user1.save()
     
     if 'pub_on' in request.POST:
-      guide_user1.is_published = True
+      print(request.POST)
+      guide_user1.is_active = True
+      guide_user1.save()
 
     #for notification
     # if 'request_guide' in request.POST:
