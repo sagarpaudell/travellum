@@ -139,7 +139,6 @@ def create_trip(request, traveller_id):
        else:
            tp=(nop+noc*0.75)*noh*float(guide_user.price)
            tp=int(tp)
-       print(tp)
        history= History(traveller=traveller, guide=guide, place=place, no_of_people=no_of_people, no_of_children=no_of_children, total_hours=total_hours, total_price=tp)
        history.save()
        trip_notification=Trip_Notification(receiver_email=traveller_user.email, sender_email = request.user, form= history)
