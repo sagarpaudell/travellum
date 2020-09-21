@@ -151,17 +151,17 @@
 						</div>
 						<div
 							class="position-relative text-center font-weight-bold"
-							style="top: -15px; font-size: 1.5rem; color: #9b5de5"
+							style="top: -15px; font-size: 1.5rem;"
 						>
-							<p class="m-0 position-relative" style="color: #c39eef">.</p>
+							<p class="m-0 position-relative" style="color: #8f46e9">.</p>
 							<p
 								class="m-0 position-relative"
-								style="top: -25px; color: #af7dea"
+								style="top: -25px; color:#8f46e9"
 							>
 								.
 							</p>
-							<p class="m-0 position-relative" style="top: -50px">.</p>
-							<p class="m-0 position-relative" style="top: -75px">.</p>
+							<p class="m-0 position-relative" style="top: -50px; color: #9b5de5">.</p>
+							<p class="m-0 position-relative" style="top: -75px;  color: #9b5de5">.</p>
 							<p
 								class="m-0 position-relative"
 								style="top: -100px; color: #c39eef"
@@ -170,7 +170,7 @@
 							</p>
 							<p
 								class="m-0 position-relative"
-								style="top: -125px; color: #9b5de5"
+								style="top: -125px; color: #c39eef"
 							>
 								.
 							</p>
@@ -241,12 +241,12 @@
 							class="position-relative text-center font-weight-bold"
 							style="top: -15px; font-size: 1.5rem"
 						>
-							<p class="m-0 position-relative">.</p>
-							<p class="m-0 position-relative" style="top: -25px">.</p>
-							<p class="m-0 position-relative" style="top: -50px">.</p>
-							<p class="m-0 position-relative" style="top: -75px">.</p>
-							<p class="m-0 position-relative" style="top: -100px">.</p>
-							<p class="m-0 position-relative" style="top: -125px">.</p>
+							<p class="m-0 position-relative" style="color:#8f46e9">.</p>
+							<p class="m-0 position-relative" style="top: -25px; color:#8f46e9">.</p>
+							<p class="m-0 position-relative" style="top: -50px; color: #9b5de5">.</p>
+							<p class="m-0 position-relative" style="top: -75px; color: #9b5de5">.</p>
+							<p class="m-0 position-relative" style="top: -100px; color: #c39eef">.</p>
+							<p class="m-0 position-relative" style="top: -125px; color: #c39eef">.</p>
 						</div>
 					</div>
 				</div>
@@ -308,10 +308,10 @@
 							class="position-relative text-center font-weight-bold"
 							style="top: -15px; font-size: 1.5rem"
 						>
-							<p class="m-0 position-relative">.</p>
-							<p class="m-0 position-relative" style="top: -25px">.</p>
-							<p class="m-0 position-relative" style="top: -50px">.</p>
-							<p class="m-0 position-relative" style="top: -75px">.</p>
+							<p class="m-0 position-relative" style="color:#9b5de5">.</p>
+							<p class="m-0 position-relative" style="top: -25px; color:#9b5de5">.</p>
+							<p class="m-0 position-relative" style="top: -50px; color: #c39eef">.</p>
+							<p class="m-0 position-relative" style="top: -75px; color: #c39eef">.</p>
 						</div>
 					</div>
 				</div>
@@ -346,24 +346,28 @@
 			<div class="row" style="display: flex; justify-content: center;">
 				{% if places %}
 				{% for place in places %}
-				<div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-					<div class="project">
-						<div class="img">
-							<a href="{% url 'placedetails' place.id %}"><img src="{{ place.photo_1.url }}"
-									class="img-fluid" alt="Image" style="height:350px;"></a>
+				<div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800">
+					<div class="">
+						<div class="project">
+							<a href="{% url 'placedetails' place.id %}">
+								<img 
+									src="{{ place.photo_1.url }}"
+									class="img-fluid" 
+									id="places-image"
+									alt="Image" 
+									style="height:320px; width: 320px;"
+								>
+							</a>
 						</div>
-						<div class="text">
-
-							<h3 style="margin-top: 3%;"><a href="{% url 'placedetails' place.id %}">{{ place.name }}</a>
-							</h3>
-						</div>
+							<h3 style="margin-top: -8%;">
+								<a class="text-dark" href="{% url 'placedetails' place.id %}">{{ place.name }}</a>
 					</div>
 				</div>
 				{% endfor %}
 				{% endif %}
 				<div class="container" style="display: flex;
 				justify-content: center; margin-bottom:10%; " data-aos="fade-up" data-aos-duration="800">
-					<a href=" {% url 'places' %}" class="btn btn-primary"
+					<a href=" {% url 'places' %}" class="btn btn-primary mt-5 p-3"
 						style="background-color:#e66b58; font-size:1.2rem; ">View all
 						Places
 						&#8594; </a>

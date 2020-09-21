@@ -542,3 +542,26 @@ textarea.form-control {
 #guide-card:hover {
   box-shadow: 4px 4px 4px #dddde1;
 }
+
+#places-image {
+  position: static;
+}
+
+@media only screen and (max-width: 768px) {
+  #places-image{
+    position: relative;
+    left: 15vw;
+  }
+}
+@media only screen and (max-width: 450px) {
+  #places-image{
+    position: relative;
+    left: 10vw;
+  }
+}
+@media only screen and (max-width: 400px) {
+  #places-image{
+    position: relative;
+    left: 5vw;
+  }
+}
