@@ -23,11 +23,13 @@ def dashboard(request):
   guide_user = Guide.objects.all().filter(email=user).first()
   guide_reviews = Guide_Review.objects.all().filter(guide=user)
   notifications = Notification.objects.all().filter(receiver_email=user)
-  guide_user = get_object_or_404(Guide, email=user)
-  if guide_user:
-      trip_notifications = Trip_Notification.objects.all().filter(sender_email=user)
+  if traveller_user.is_guide:
+    guide_user = get_object_or_404(Guide, email=user)
+    if guide_user:
+        trip_notifications = Trip_Notification.objects.all().filter(sender_email=user)
+    
   else:
-      trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user)
+    trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user)
   places = Place.objects.all()
   place_pattern=''
   for place in places:
@@ -94,14 +96,19 @@ def dashboard(request):
     if 'Guide-Update-Form' in request.POST:
       GuideUpdateView(request)
     
-
+    if 'trip_reject' in request.POST:
+      nid = request.POST['nid']
+      t_noti = get_object_or_404(Trip_Notification, pk=nid)
+      t_noti.has_rejected = True
+      t_noti.save()
     
     #for notification
     # if 'request_guide' in request.POST:
     #   notifi    'tamt':tamt,
    
       
-    # return redirect('dashboard')
+    # return redirect('dashboard')      sender_user = request.user
+
   
  
     if 'accepted' in request.POST:

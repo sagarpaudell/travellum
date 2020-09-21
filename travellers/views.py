@@ -16,11 +16,13 @@ def view_profile(request, traveller_id):
     if user.is_authenticated:
         notifications = Notification.objects.all().filter(receiver_email=user)
         traveller_user_logged_in = get_object_or_404(Traveller, email=user)
+    if traveller_user_logged_in.is_guide:
         guide_user = get_object_or_404(Guide, email=user)
         if guide_user:
             trip_notifications = Trip_Notification.objects.all().filter(sender_email=user)
-        else:
-            trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user)
+        
+    else:
+        trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user)
     profile=get_object_or_404(Traveller, pk=traveller_id)
     bio = profile.bio.split('.',5)
     bio_first = ". ".join(bio[:5])+(".")
@@ -111,7 +113,8 @@ def notifications(request):
     #Check if user has made request already
     if request.user.is_authenticated:
         current_user = request.user
-        has_requested = Notification.objects.all().filter(receiver_email=receiver_user, sender_email=sender_user )
+        has_requested = Notification.objects.all().filter(receiver_email=receiver_user, sender_email=sender_user, completed=False )
+        
         if has_requested:
             messages.error(request, 'You have already made a request to this guide')
             return redirect('/view_profile/'+traveller_id)

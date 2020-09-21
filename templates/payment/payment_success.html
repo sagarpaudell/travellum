@@ -30,8 +30,8 @@ Payment Success
                         <form>
                             <input type=button value="Print" onClick="javascript:window.print()">
                         </form>
-                        <button onclick="{% url 'index' %}" type="submit" class="btn btn-primary" style="margin-top:5%; ">Back to Home</button>
-
+                        <a href="{% url 'index' %}"><button  type="submit" class="btn btn-primary" style="margin-top:5%; ">Back to Home</button>
+                        </a>
                     </div>
 
                 </div>
