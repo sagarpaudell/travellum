@@ -78,9 +78,13 @@ Finalize Trip
                 <input value="http://localhost:8000/dashboard/payment_failure" type="hidden" name="fu">
                 <button type="submit" class="btn btn-primary" name="pay_with_esewa" style="margin-right:6%; ">Pay with E-Sewa</button>
             </form>
-            <div class="col-md-12 col-sm-6">
-                <a href=""><button type="submit" class="btn btn-danger position-relative" style="top:-38px;left:150px;" name="cancel"><i class="fas fa-times"></i> Reject</button></a>
-            </div>
+            <form action="{% url 'dashboard' %}" method="POST">
+                {% csrf_token %}
+                <input value="{{ tn_instance.id }}" name="nid" type="hidden">
+                <div class="col-md-12 col-sm-6">
+                    <a href=""><button type="submit" name="trip_reject" class="btn btn-danger position-relative" style="top:-38px;left:150px;" name="cancel"><i class="fas fa-times"></i> Reject</button></a>
+                </div>
+            </form>
             </div>
         </section>
     </section>

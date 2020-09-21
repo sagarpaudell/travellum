@@ -76,9 +76,19 @@
                         </div>   
                         {% if trip_notifications %}
                           {% for trip_noti in trip_notifications %}
-                            <div class="top-text-heading mb-2" style="font-size: .8rem;">
-                              {{ trip_noti.sender_email.first_name }} has created a trip. You can finalize the trip<form method="POST" action="{% url 'confirm_trip' %}">{% csrf_token %}<input name="tn_id" value="{{ trip_noti.id }}" type="hidden"><button type="submit"><u>here</u></button></form>
-                            </div>
+                            {% if trip_noti.has_accepted %}
+                              <div class="top-text-heading mb-2" style="font-size: .8rem;">
+                                You have confirmed trip with {{ trip_noti.sender_email.first_name }}.
+                              </div>
+                            {% elif trip_noti.has_rejected %}
+                              <div class="top-text-heading mb-2" style="font-size: .8rem;">
+                                You have rejected trip with {{ trip_noti.sender_email.first_name }}.
+                              </div>
+                            {% else %}
+                              <div class="top-text-heading mb-2" style="font-size: .8rem;">
+                                {{ trip_noti.sender_email.first_name }} has created a trip. You can confirm the trip<form method="POST" action="{% url 'confirm_trip' %}">{% csrf_token %}<input name="tn_id" value="{{ trip_noti.id }}" type="hidden"><button type="submit"><u>here</u></button></form>
+                              </div>
+                            {% endif %}
                           {% endfor %}
                         {% endif %}
                   {% else %}
@@ -91,12 +101,28 @@
                   {% endif %}
                 
                 {% elif notification.completed %}
-                  <div
-                      class="d-flex align-items-center justify-content-center m-0" 
-                      style="cursor: default; height: 90%; font-weight: normal;"
-                    >  
-                      No any Notifications
-                  </div>
+                {% if trip_notifications %}
+                    {% for trip_noti in trip_notifications %}
+                      {% if trip_noti.has_accepted %}
+                      <div class="top-text-heading mb-2" style="font-size: .8rem;">
+                        Your trip with {{ trip_noti.receiver_email.first_name }} has been confirmed. Your account is credited.
+                      </div>
+                      {% elif trip_noti.has_rejected %}
+                        <div class="top-text-heading mb-2" style="font-size: .8rem;">
+                          Oops! Your trip with {{ trip_noti.receiver_email.first_name }} have rejected.
+                        </div>
+                      {% else %}
+                        <div
+                        class="d-flex align-items-center justify-content-center m-0" 
+                            style="cursor: default; height: 90%; font-weight: normal;"
+                          >  
+                            No any Notifications
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}  
+                    
+                  
                 {% else %}
                   <li>
                     <a href="#" class="top-text-block">
@@ -165,8 +191,10 @@
             {% if  user.is_authenticated %}
             <div class="dropdown-menu" style="position: absolute; min-width: 80px; background: rgba(255,255,255,0.9);"
               aria-labelledby="navbarDropdownMenuLink">
+              {% if g_user %}
               <a class="dropdown-item" style="cursor: pointer;" data-toggle="modal"
                 data-target="#visibility">Visibility</a>
+              {% endif %}
               <a class="dropdown-item" href="{% url 'my_blog' %}">My Blog</a>
               <a class="dropdown-item" href="/accounts/logout">Log Out</a>
             </div>
@@ -196,15 +224,26 @@
         <button class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
+        
         <div class="text-center">
+          {% if g_user.is_published %}
           You are visible to travellers.
-          <!-- You are not visible to travellers. -->
+          {% else %}
+          You are not visible to travellers.
+          {% endif %}
         </div>
+        <form action="{% url 'dashboard' %}" method="POST" >
+          {% csrf_token %}
         <div class="d-flex justify-content-center align-items-center">
-          <a href="#" class="btn btn-outline-success mx-2 my-3" data-dismiss="modal">Make me Visbile</a>
-          <a href="#" class="btn btn-outline-danger mx-2 my-3" data-dismiss="modal">Make me Invisible</a>
+          {% if g_user.is_published %}
+          <input type="submit" class="btn btn-outline-danger mx-2 my-3" name="pub_off" value="Make me Invisbile" data-dismiss="modal">
+          {% else %}
+          <input type="submit"  class="btn btn-outline-success mx-2 my-3" name="pub_on" value="Make me Visbile" data-dismiss="modal">
+          {% endif %}
         </div>
+        </form>
       </div>
+    
       <div class="modal-footer d-flex justify-content-center">
         <small class="text-muted" style="font-size: .9rem;">You won't be visible if you are inactive for more than 5
           days</small>
