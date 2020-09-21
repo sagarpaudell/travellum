@@ -110,12 +110,12 @@ def dashboard(request):
     
     if 'pub_off' in request.POST:
       print(request.POST)
-      guide_user1.is_published = False
+      guide_user1.is_active = False
       guide_user1.save()
     
     if 'pub_on' in request.POST:
       print(request.POST)
-      guide_user1.is_published = True
+      guide_user1.is_active = True
       guide_user1.save()
 
     #for notification

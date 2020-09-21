@@ -243,7 +243,7 @@
         <form action="{% url 'dashboard' %}" method="POST" >
           {% csrf_token %}
           <div class="d-flex justify-content-center align-items-center">
-            {% if g_user.is_published %}
+            {% if g_user.is_active %}
             <input type="submit" class="btn btn-outline-danger mx-2 my-3" name="pub_off" value="Make me Invisbile">
             {% else %}
             <input type="submit"  class="btn btn-outline-success mx-2 my-3" name="pub_on" value="Make me Visbile">

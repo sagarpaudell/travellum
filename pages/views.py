@@ -6,17 +6,17 @@ from places.models import Place
 from guides.models import Guide
  
 def index(request):
-    published_guides = Guide.objects.all().filter(is_published=True)
+    active_guides = Guide.objects.all().filter(is_active=True)
     x=list()
     context = dict()
-    for guide in published_guides:
+    for guide in active_guides:
         traveller=Traveller.objects.filter(email=guide.email).first()
         time_indays = (timezone.now() - guide.email.last_login).seconds/86400
         if (time_indays<10):
             x.append(traveller)
             print(time_indays)
         else:
-            guide.is_published = False
+            guide.is_active = False
             print(f'{guide.email} hasn\'t logged in since {time_indays} days')
     places = Place.objects.all()[:6]
     context.update({

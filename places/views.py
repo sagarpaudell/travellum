@@ -45,7 +45,7 @@ def placedetails(request, place_id):
     attractions= Major_Attraction.objects.all().filter(place=place)
     tasks= Things_To_Do.objects.all().filter(place=place)
     reviews = Review.objects.all().filter(place_name=place)
-    temp_available_guides = Guide.objects.filter(places=place)
+    temp_available_guides = Guide.objects.filter(places=place, is_active = True)
     available_guides=list()
 
     for i in temp_available_guides:
