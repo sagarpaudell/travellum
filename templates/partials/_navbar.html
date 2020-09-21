@@ -76,9 +76,19 @@
                         </div>   
                         {% if trip_notifications %}
                           {% for trip_noti in trip_notifications %}
-                            <div class="top-text-heading mb-2" style="font-size: .8rem;">
-                              {{ trip_noti.sender_email.first_name }} has created a trip. You can finalize the trip<form method="POST" action="{% url 'confirm_trip' %}">{% csrf_token %}<input name="tn_id" value="{{ trip_noti.id }}" type="hidden"><button type="submit"><u>here</u></button></form>
-                            </div>
+                            {% if trip_noti.has_accepted %}
+                              <div class="top-text-heading mb-2" style="font-size: .8rem;">
+                                You have confirmed trip with {{ trip_noti.sender_email.first_name }}.
+                              </div>
+                            {% elif trip_noti.has_rejected %}
+                              <div class="top-text-heading mb-2" style="font-size: .8rem;">
+                                You have rejected trip with {{ trip_noti.sender_email.first_name }}.
+                              </div>
+                            {% else %}
+                              <div class="top-text-heading mb-2" style="font-size: .8rem;">
+                                {{ trip_noti.sender_email.first_name }} has created a trip. You can confirm the trip<form method="POST" action="{% url 'confirm_trip' %}">{% csrf_token %}<input name="tn_id" value="{{ trip_noti.id }}" type="hidden"><button type="submit"><u>here</u></button></form>
+                              </div>
+                            {% endif %}
                           {% endfor %}
                         {% endif %}
                   {% else %}
@@ -91,12 +101,28 @@
                   {% endif %}
                 
                 {% elif notification.completed %}
-                  <div
-                      class="d-flex align-items-center justify-content-center m-0" 
-                      style="cursor: default; height: 90%; font-weight: normal;"
-                    >  
-                      No any Notifications
-                  </div>
+                {% if trip_notifications %}
+                    {% for trip_noti in trip_notifications %}
+                      {% if trip_noti.has_accepted %}
+                      <div class="top-text-heading mb-2" style="font-size: .8rem;">
+                        Your trip with {{ trip_noti.receiver_email.first_name }} has been confirmed. Your account is credited.
+                      </div>
+                      {% elif trip_noti.has_rejected %}
+                        <div class="top-text-heading mb-2" style="font-size: .8rem;">
+                          Oops! Your trip with {{ trip_noti.receiver_email.first_name }} have rejected.
+                        </div>
+                      {% else %}
+                        <div
+                        class="d-flex align-items-center justify-content-center m-0" 
+                            style="cursor: default; height: 90%; font-weight: normal;"
+                          >  
+                            No any Notifications
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}  
+                    
+                  
                 {% else %}
                   <li>
                     <a href="#" class="top-text-block">

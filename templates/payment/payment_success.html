@@ -24,8 +24,14 @@ Payment Success
                         <p style="margin: 1px;"><strong>Amount: </strong>Rs.{{ tamt }}</p>
                         <p style="margin: 1px;"><strong>Transaction medium: </strong>E-Sewa</p>
                         <p style="margin: 1px;"><strong>Transaction date: </strong>{{ trans.t_date}}</p>
-                        <button type="submit" class="btn btn-primary" style="margin-top:5%; ">Ok,Thanks</button>
-
+                        <br>
+                        <br>
+                        <p>Please, print this page for future use.</p>
+                        <form>
+                            <input type=button value="Print" onClick="javascript:window.print()">
+                        </form>
+                        <a href="{% url 'index' %}"><button  type="submit" class="btn btn-primary" style="margin-top:5%; ">Back to Home</button>
+                        </a>
                     </div>
 
                 </div>

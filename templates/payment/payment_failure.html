@@ -24,8 +24,10 @@ Payment Failed
                             transaction
                             and a good network connection before trying again.)
                         </p>
+                        <form method="POST" action="{% url 'confirm_trip' %}">{% csrf_token %}<input name="tn_id" value="{{ oid }}" type="hidden">
                         <button type="submit" class="btn btn-warning" style="margin-top:5%; ">Try again</button>
-                        <button type="submit" class="btn btn-info" style="margin-top:5%; float:right; "><i
+                        </form>
+                        <button onclick="{% url 'dashboard' %}" type="submit" class="btn btn-info" style="margin-top:5%; float:right; "><i
                                 class="fas fa-angle-double-left"></i> Go back to
                             Dashboard</button>
 
