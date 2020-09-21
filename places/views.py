@@ -28,10 +28,14 @@ def places(request):
 
 
 def placedetails(request, place_id):
+    place = get_object_or_404(Place, pk=place_id)
+    allow_review = True
     current_user=request.user
     if current_user.is_authenticated:
         traveller_user_logged_in= get_object_or_404(Traveller, email=current_user)
         notifications = Notification.objects.all().filter(receiver_email=current_user)
+        if Review.objects.all().filter(place_name=place, Reviewer=traveller_user_logged_in):
+            allow_review = False
     if request.method == 'POST':
         rating =  request.POST.get('rating')
         place_review = request.POST['preview']
@@ -41,10 +45,11 @@ def placedetails(request, place_id):
         rev = Review(place_name=placeReviewed, Reviewer=Reviewer, place_review = place_review, ratings=rating)
         rev.save()
 
-    place = get_object_or_404(Place, pk=place_id)
+   
     attractions= Major_Attraction.objects.all().filter(place=place)
     tasks= Things_To_Do.objects.all().filter(place=place)
     reviews = Review.objects.all().filter(place_name=place)
+   
     temp_available_guides = Guide.objects.filter(places=place, is_active = True)
     available_guides=list()
 
@@ -62,6 +67,7 @@ def placedetails(request, place_id):
             'tasks':tasks,
             'reviews':reviews,
             'notifications': notifications,
+            'allow_review':allow_review,
             'logged_in_user': traveller_user_logged_in,   #logged_in_user is for avatar in navbar
         }
     else:
