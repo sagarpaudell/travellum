@@ -17,7 +17,7 @@ Single Blogpost
   <div class="container my-5 bg-light">
 
     <div class="row bg-theme py-3">
-      <div id="blog-nav" class="col-md-4 col-6 d-flex align-items-center">
+      <div id="blog-nav m-0" class="col-md-4 col-6 d-flex align-items-center">
         <a class="px-3 text-light blog__nav" href="{% url 'my_blog' %}">My Blog</a>
         <a class="text-light blog__nav active" href="{% url 'explore' %}">Explore</a>
       </div>
@@ -29,13 +29,22 @@ Single Blogpost
       </div>
     </div>
 
-    <div class="px-4 py-5">
-      <h2 class="mb-0">{{blog.title}}</h2>
-      <p class="text-muted" style="font-size: .9rem;">
-      <i class="fas fa-pen"></i><a href="{% url 'view_profile' blog.gettraveller_id %}" class="pl-1 pr-3 text-info blog__nav" >{{blog.blogger}}</a> <i class="fas fa-table"></i> {{blog.get_time}}
-      </p>
-      <div class="mb-5"  style="font-family: Poppins; font-weight: normal;">
-        <i class="fas fa-heart text-muted"> Liked by <span id='like_count'>{{blog.likes_count}}</span> people</i>
+    <div class="p-2 px-md-4 py-5">
+      <h2 class="mb-0">
+        {{blog.title}} 
+      </h2>
+      <div class="border border-info my-4 p-3" style="width: fit-content;">
+        <p class="text-muted m-0" style="font-size: .9rem;">
+        <i class="fas fa-pen"></i>
+        <a href="{% url 'view_profile' blog.gettraveller_id %}">
+          <span class="pl-1 pr-3 text-info mr-n2">{{blog.blogger}}</span>
+          <span class="bg-info text-light px-2" style="width: 85px; border-radius: 2px;">Traveller</span> 
+        </a><br>
+        <i class="fas fa-table"></i> {{blog.get_time}}
+        </p>
+        <div style="font-family: Poppins; font-weight: normal;">
+          <i class="fas fa-heart text-muted"> Liked by <span id='like_count'>{{blog.likes_count}}</span> people</i>
+        </div>
       </div>
       <div class="row">
         <div class="col-12">

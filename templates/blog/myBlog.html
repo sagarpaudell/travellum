@@ -51,7 +51,7 @@ Blog
             </a>
             <a 
               data-toggle="modal"
-              data-target="delete-blog"
+              data-target="#delete-blog"
               href="{% url 'delete_blog_post' blog.id %}"
               class="btn btn-danger my-2" 
               style="font-size: 0.8rem;"
@@ -64,7 +64,7 @@ Blog
        {% endfor %}
        {% endif %}
       </div>
-    </section>
+    </section>  
 
   </div>
   
