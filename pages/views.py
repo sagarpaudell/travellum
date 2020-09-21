@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.shortcuts import render
 from django.http import HttpResponse
 from travellers.models import Traveller
@@ -9,8 +10,12 @@ def index(request):
     x=list()
     for guide in published_guides:
         traveller=Traveller.objects.filter(email=guide.email).first()
-        x.append(traveller)
-        
+        time_indays = (timezone.now() - guide.email.last_login).seconds/86400
+        if (time_indays<0.5):
+            x.append(traveller)
+            print(time_indays)
+        else:
+            print(f'{guide.email} hasn\'t logged in since {time_indays} days')
     places = Place.objects.all()[:6]
     context = {
         'guides':x,
