@@ -302,6 +302,8 @@ Dashboard
                   <h2 style="color: #e2c0bb;">No Guide History</h2>
                   {% endif %}
                 {% if has_travelled_with %}
+                {% if review_exists %}
+                {% else %}
                 <div class="row border py-3 mb-5" style="background: white !important;">
                   <div class="col-2 col-lg-1 rounded">
                     <img {% if logged_in_user.photo_main %} src="{{logged_in_user.photo_main.url}}" {% else %}
@@ -332,6 +334,7 @@ Dashboard
                     </div>
                   </form>
                 </div>
+                {% endif %}
                 {% endif %}
 
                 {% if guide_reviews %}

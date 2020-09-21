@@ -28,6 +28,11 @@ def view_profile(request, traveller_id):
     bio = profile.bio.split('.',5)
     bio_first = ". ".join(bio[:5])+(".")
     guide_reviews = Guide_Review.objects.all().filter(guide=profile.email)
+    review_exists = False
+    for guide_review in guide_reviews:
+        if (guide_review.guide_reviewer.email==user):
+            review_exists=True
+    print(review_exists)
     guide = Guide.objects.filter(email=profile.email).first()
     guide_historys = History.objects.all().filter(guide=profile.email,tour_complete=True)
     traveller_historys = History.objects.all().filter(traveller=profile.email,tour_complete=True)
@@ -38,6 +43,7 @@ def view_profile(request, traveller_id):
         guide_reviewer = traveller_user_logged_in
         g_review = Guide_Review(guide = guide, guide_reviewer=guide_reviewer, guide_review=guide_review, guide_ratings=guide_rating)
         g_review.save()
+        return redirect ('/view_profile/'+str(traveller_id))
     if profile.email==user:
         return redirect('dashboard')
 
@@ -67,6 +73,7 @@ def view_profile(request, traveller_id):
                 'guide':guide,
                 'guide_historys': guide_historys,
                 'traveller_historys': traveller_historys,
+                'review_exists':review_exists,
                  }
 
         if (len(bio)>=5):
@@ -85,6 +92,7 @@ def view_profile(request, traveller_id):
                 'guide':guide,
                 'guide_historys': guide_historys,
                 'traveller_historys': traveller_historys,
+                'review_exists':review_exists,
             }
         return render(request, 'travellers/travellers.html',context)
 
@@ -97,6 +105,7 @@ def view_profile(request, traveller_id):
                 'guide':guide,
                 'guide_historys': guide_historys,
                 'traveller_historys': traveller_historys,
+                'review_exists':review_exists,
             }
         
         if (len(bio)>=5):
@@ -110,6 +119,7 @@ def view_profile(request, traveller_id):
                 'guide':guide,
                 'guide_historys': guide_historys,
                 'traveller_historys': traveller_historys,
+                'review_exists':review_exists,
             }
         return render(request, 'travellers/travellers.html',context)
 
