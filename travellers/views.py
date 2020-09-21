@@ -117,7 +117,7 @@ def notifications(request):
 def create_trip(request, traveller_id):
     traveller_user = get_object_or_404 (Traveller , pk = traveller_id)
     traveller_user_logged_in = get_object_or_404(Traveller, email=request.user)
-    guide = get_object_or_404(Guide , email=traveller_user_logged_in .email)
+    guide_user = get_object_or_404(Guide , email=request.user)
     places=Place.objects.all()
     place_pattern=''
     for place in places:
@@ -129,10 +129,10 @@ def create_trip(request, traveller_id):
        no_of_people = request.POST['no_of_people']
        no_of_children = request.POST['no_of_children']
        total_hours = request.POST['travel_hours']
-       if ((int(no_of_people)+int(no_of_children))<=2):
-           total_price=2*int(total_hours)*guide.price
+       if ((int(no_of_people)+int(no_of_children)*0.75)<=2):
+           total_price=2*int(total_hours)*guide_user.price
        else:
-           total_price=(int(no_of_people)+int(no_of_children))*total_hours*guide.price
+           total_price=(int(no_of_people)+int(no_of_children)*0.75)*total_hours*guide_user.price
 
        history= History(traveller=traveller, guide=guide, place=place, no_of_people=no_of_people, no_of_children=no_of_children, total_hours=total_hours, total_price=total_price)
        history.save()
