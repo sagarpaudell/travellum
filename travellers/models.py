@@ -26,3 +26,9 @@ class Traveller(models.Model):
     price_per_hour= models.DecimalField(max_digits=5,default=0,decimal_places = 0)
     def __str__(self):
         return self.first_name
+
+
+class Traveller_Review(models.Model):
+    traveller = models.ForeignKey(Traveller, on_delete= models.CASCADE, related_name="review_of_traveller")
+    traveller_reviewer = models.ForeignKey(Traveller, on_delete= models.CASCADE, related_name="traveller_reviewer")
+    traveller_review = models.TextField(blank=True)

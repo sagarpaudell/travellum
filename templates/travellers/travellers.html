@@ -310,8 +310,8 @@ Dashboard
                   {% else %}
                   <h2 style="color: #e2c0bb;">No Guide History</h2>
                   {% endif %}
-                {% if has_travelled_with %}
-                {% if review_exists %}
+                {% if guide_has_travelled_with %}
+                {% if guide_review_exists %}
                 {% else %}
                 <div class="row border py-3 mb-5" style="background: white !important;">
                   <div class="col-2 col-lg-1 rounded">
@@ -339,7 +339,7 @@ Dashboard
                       </div>
                     </div>
                     <div style="display: flex; justify-content: flex-end;">
-                      <input class="btn btn-danger mt-2" type="submit">
+                      <input class="btn btn-danger mt-2" type="submit" name="guide_review">
                     </div>
                   </form>
                 </div>
@@ -410,24 +410,64 @@ Dashboard
                 <div class="mb-5"></div>
               </div>
               {% endif %}
-              {% if traveller_historys %}
-                  {% for traveller_history in traveller_historys %}
-                  <div class="mt-5"></div>
-                  <p class="col-12 text-left">
-                    {{traveller_user.first_name}} {{traveller_user.last_name}} travelled with
-                    {{ traveller_history.guide.first_name }} {{ traveller_history.guide.last_name }}
-                    to
-                    <a href="">{{ traveller_history.place.name }}</a>
-                    - {{traveller_history.end_date|date:'M d,Y'}}
-                  </p>
-                  <div class="mb-5"></div>
-                  {% endfor %}
-                  {% else %}
-                  <h2 style="color: #e2c0bb;">No Guide History</h2>
-                  {% endif %}
-                <button class="
-              <div class="border-bottom py-5">
-                <h2 style="color: #e2c0bb;">No Traveller Reviews</h2>
+              <div>
+                {% if traveller_historys %}
+                {% for traveller_history in traveller_historys %}
+                <div class="mt-5"></div>
+                <p class="col-12 text-left">
+                  {{traveller_user.first_name}} {{traveller_user.last_name}} travelled with
+                  {{ traveller_history.guide.first_name }} {{ traveller_history.guide.last_name }}
+                  to
+                  <a href="">{{ traveller_history.place.name }}</a>
+                  - {{traveller_history.end_date|date:'M d,Y'}}
+                </p>
+                <div class="mb-5"></div>
+                {% endfor %}
+                {% else %}
+                <h2 style="color: #e2c0bb;">No Travel History</h2>
+                {% endif %}
+              </div>
+
+              <div class="container text-left">
+                {% if traveller_has_travelled_with %}
+                {% if traveller_review_exists %}
+                {% else %}
+                <div class="row border py-3 mb-5" style="background: white !important;">
+                  <div class="col-2 col-lg-1 rounded">
+                    <img {% if logged_in_user.photo_main %} src="{{logged_in_user.photo_main.url}}" {% else %} src="{% static 'images/default.png' %}" {% endif %}
+                    style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
+                  </div>
+                  <form method="POST" class="col-10 col-lg-11">
+                    {% csrf_token %}
+                    <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Review this Traveller</h5>
+                    <textarea class="form-control" rows="3" name="tra_review" required></textarea>
+                    <div style="display: flex; justify-content: flex-end;">
+                      <input class="btn btn-danger mt-2" type="submit" name="traveller_review">
+                    </div>
+                  </form>
+                </div>
+                {% endif %}
+                {% endif %}
+
+                {% if traveller_reviews %}
+                {% for traveller_review in traveller_reviews %}
+                <div class="row border py-3 my-3" style="background: white !important;">
+                  <div class="col-2 col-lg-1">
+                    <img src={{traveller_review.traveller_reviewer.photo_main.url}}
+                      style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
+                  </div>
+                  <div class="col-10 col-lg-11">
+                    <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">
+                      {{ traveller_review.traveller_reviewer.first_name }} {{ traveller_review.traveller_reviewer.last_name }}</h5>
+                    
+                    <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">{{traveller_review.traveller_review}}</p>
+                  </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <h2 style="color: #e2c0bb;" class="mt-5 text-center">No Traveller Reviews</h2>
+                <div class="border-bottom my-5"></div>
+                {% endif %}
               </div>
             </div>
           </div>
