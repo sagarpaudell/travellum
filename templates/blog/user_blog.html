@@ -15,24 +15,23 @@ Single Blogpost
 <main>
   <div class="container my-5 bg-light">
     <div class="row bg-theme py-3">
-      <div class="col-md-4 col-6 d-flex align-items-center">
-      {% if user.is_authenticated %}
+      <div id="blog-nav" class="col-md-4 col-6 d-flex align-items-center">
+        {% if user.is_authenticated %}
         <a class="px-3 text-light blog__nav" href="{% url 'my_blog' %}">My Blog</a>
-      {% endif %}
+        {% endif %}
         <a class="text-light blog__nav active" href="{% url 'explore' %}">Explore</a>
       </div>
-    {% if user.is_authenticated %}
+      {% if user.is_authenticated %}
       <div class="col-md-8 col-6 text-right">
         <a class="btn btn-danger mr-3" href="{% url 'create_blog_post' %}">
           <i class="fas fa-pen"></i> 
           Create Blog
         </a>
       </div>
-    {% endif %}
+      {% endif %}
     </div>
-
     <section class="main-content px-4 py-5">
-      <h3 class="mb-4">Explore travel blog's of {{place.name}} </h3>
+      <h3 class="mb-4">Blogs by {{ blog_user.first_name }} {{ blog_user.last_name }}</h3>
       <div class="card-columns">
         {% if blogs %}
         {% for blog in blogs %}

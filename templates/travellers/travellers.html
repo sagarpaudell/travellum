@@ -248,12 +248,14 @@ Dashboard
             <!-- End of Profile Description Section -->
 
             <!--============= Blogs Section ============-->
+            {% if traveller_user.has_blogs %}
             <div class="col-md-12 border-bottom my-5">
-              <h4 style="color: #e2c0bb;">View Blogs by "yeta haal hai manche ko naam"</h4>
+              <h4 style="color: #e2c0bb;">View Blogs by {{traveller_user.first_name}} {{traveller_user.last_name}}</h4>
               <p class="mt-4 mb-2"></p>
-              <button class="btn btn-theme mt-2"><a href="" class='text-light'> Go to Travellum Blogs >></a></button>
+              <button class="btn btn-theme mt-2"><a href="{% url 'blogs_byuser' traveller_user.id %}" class='text-light'> Go to Travellum Blogs >></a></button>
               <div class="mb-5"></div>
             </div>
+            {% endif %}
             <!-- End of Blogs Section -->
 
             <!--============= Languages Section ============-->

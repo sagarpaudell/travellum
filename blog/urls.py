@@ -6,6 +6,7 @@ urlpatterns=[
     path('', views.my_blog, name='my_blog'),
     path('explore/', views.explore, name='explore'),
     path('blogs_byplace/<int:id>', views.blogs_byplace, name='blogs_byplace'),
+    path('blogs_byuser/<int:id>', views.blogs_byuser, name='blogs_byuser'),
     path('single_blog_post/<int:id>', views.single_blog_post, name='single_blog_post'),
     path('create_blog_post/', views.create_blog_post, name='create_blog_post'),
     path('edit_blog_post/<int:blog_id>', views.edit_blog_post, name='edit_blog_post'),
