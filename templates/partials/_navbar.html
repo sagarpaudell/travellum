@@ -18,7 +18,7 @@
           <div class="navbar-nav mt-n1">
             <form action="{% url 'search' %}" class="form-inline ">
               <a href="{% url 'index' %}" id="search">
-                <i style="font-size: 1.1rem; padding-top: 5px;" class="fa fa-search text-light"></i>
+                <i id="searchDesIcon" style="font-size: 1.1rem; padding-top: 5px;" class="fa fa-search text-light"></i>
               </a>
               <!-- <input class="form-control form-control-lg mr-1 w-200"
             style=" border:3px solid coral; border-radius:50px;" type="text"
@@ -203,6 +203,7 @@
               <a class="dropdown-item" style="cursor: pointer;" data-toggle="modal"
                 data-target="#visibility">Visibility</a>
               {% endif %}
+              <a  class="dropdown-item" href="{% url 'dashboard' %}">Dash</a>
               <a class="dropdown-item" href="{% url 'my_blog' %}">My Blog</a>
               <a class="dropdown-item" href="/accounts/logout">Log Out</a>
             </div>
@@ -215,6 +216,23 @@
           <div role="button" class="pl-3 dropdown-toggle text-center" data-toggle="dropdown">
             <i class="fas fa-bars" style="color: white; font-size: 1.4rem;"></i>
           </div>
+          <span class="dropdown-menu" style="min-width: 100px !important;">
+            <div class="m-2"></div>
+            <a href="{% url 'dashboard' %}" class="text-dark pl-3">Dash</a>
+            <div class="m-2"></div>
+            <a href="{% url 'my_blog' %}" class="text-dark pl-3">My Blog</a>
+            <div class="m-2"></div>
+            {% if  user.is_authenticated %}
+              {% if g_user %}
+                <a style="cursor: pointer;" data-toggle="modal"
+                data-target="#visibility" class="text-dark pl-3">Visibility</a>
+              {% endif %}
+            {% endif %}
+            <div class="m-2"></div>
+            <a href="{% url 'places' %}" class="text-dark pl-3">Places</a>
+            <div class="m-2"></div>
+            <a href="/accounts/logout" class="text-dark pl-3">Logout</a>
+          </span>
 
         </div>
         <!-- a -->
