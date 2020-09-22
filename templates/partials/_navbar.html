@@ -125,10 +125,10 @@
                       {% elif trip_noti.has_rejected %}
                         <a href="#" class="top-text-block">
                           <div class="top-text-heading mb-2" style="font-size: .8rem;">
-                            Oops! Your trip with {{ trip_noti.receiver_email.first_name }} have rejected.
+                            Oops! Your trip with {{ trip_noti.receiver_email.first_name }} have been rejected.
                           </div>
                           <div class="top-text-light">{{ trip_noti.whenpublished }}</div>
-                        </a>{{ notification.whenpublished }}
+                        </a>
                       {% else %}
                         <div
                           class="d-flex align-items-center justify-content-center m-0" 

@@ -1,6 +1,6 @@
 from django.core.mail import send_mail
 from django.conf import settings
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Guide
 from travellers.models import Traveller
 from accounts.models import User
@@ -54,6 +54,7 @@ def GuideUpdateView(request):
     guide_user.price = request.POST['pph']
     guide_user.replies_within = request.POST['rep-with']
     guide_user.save()
+    return redirect('dashboard')
         
     
 

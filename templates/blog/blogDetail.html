@@ -18,15 +18,19 @@ Single Blogpost
 
     <div class="row bg-theme py-3">
       <div id="blog-nav m-0" class="col-md-4 col-6 d-flex align-items-center">
+      {% if user.is_authenticated %}
         <a class="px-3 text-light blog__nav" href="{% url 'my_blog' %}">My Blog</a>
+      {% endif %}
         <a class="text-light blog__nav active" href="{% url 'explore' %}">Explore</a>
       </div>
+    {% if user.is_authenticated %}
       <div class="col-md-8 col-6 text-right">
         <a class="btn btn-danger" href="{% url 'create_blog_post' %}">
           <i class="fas fa-pen"></i> 
           Create Blog
         </a>
       </div>
+    {% endif %}
     </div>
 
     <div class="p-2 px-md-4 py-5">
@@ -119,29 +123,28 @@ Single Blogpost
             <img src="{{comment.get_profile_pic.url}}" style="object-fit: contain; width: 100%; border-radius: 50%"
             alt="prof_pic">
           </div>
-          
           <div class="col-8 col-lg-10">
-            <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">{{comment.commenter }} &nbsp; 
-              <span class="d-block d-md-inline">
-                <span id="vote_countof{{comment.id}}">{{comment.vote_count}}</span> &nbsp;
-                <span style="font-size: 1.5rem; top: 3px;" class="position-relative">
-                  
-                  {% if user in comment.upvote_users.all %}
-                  <i type="button" class="fas fa-angle-up caret-active" id="caret-up{{comment.id}}" onclick="handleCaretUp('{{comment.id}}')"></i> 
-                  <i type="button" class="fas fa-angle-down" id="caret-down{{comment.id}}" onclick="handleCaretDown('{{comment.id}}')"></i> 
-                  
-                  {% elif user in comment.downvote_users.all %}
-                  <i type="button" class="fas fa-angle-up" id="caret-up{{comment.id}}" onclick="handleCaretUp('{{comment.id}}')"></i> 
-                  <i type="button" class="fas fa-angle-down caret-active" id="caret-down{{comment.id}}" onclick="handleCaretDown('{{comment.id}}')"></i> 
-                  
-                  {% else %}
-                  <i type="button" class="fas fa-angle-up" id="caret-up{{comment.id}}" onclick="handleCaretUp('{{comment.id}}')"></i> 
-                  <i type="button" class="fas fa-angle-down" id="caret-down{{comment.id}}" onclick="handleCaretDown('{{comment.id}}')"></i> 
-                  
-                  {% endif %}
+            <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">{{comment.commenter }} &nbsp; <span id="vote_countof{{comment.id}}">{{comment.vote_count}}</span> &nbsp;
+            {% if user.is_authenticated %}
+              <span style="font-size: 1.5rem;">
+                
+                {% if user in comment.upvote_users.all %}
+                <i type="button" class="fas fa-angle-up caret-active" id="caret-up{{comment.id}}" onclick="handleCaretUp('{{comment.id}}')"></i> 
+                <i type="button" class="fas fa-angle-down" id="caret-down{{comment.id}}" onclick="handleCaretDown('{{comment.id}}')"></i> 
+                
+                {% elif user in comment.downvote_users.all %}
+                <i type="button" class="fas fa-angle-up" id="caret-up{{comment.id}}" onclick="handleCaretUp('{{comment.id}}')"></i> 
+                <i type="button" class="fas fa-angle-down caret-active" id="caret-down{{comment.id}}" onclick="handleCaretDown('{{comment.id}}')"></i> 
+                
+                {% else %}
+                <i type="button" class="fas fa-angle-up" id="caret-up{{comment.id}}" onclick="handleCaretUp('{{comment.id}}')"></i> 
+                <i type="button" class="fas fa-angle-down" id="caret-down{{comment.id}}" onclick="handleCaretDown('{{comment.id}}')"></i> 
+                
+                {% endif %}
 
                 </span>
               </span>
+            {% endif %}
             </h5>
             <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">{{comment.comment}}</p>
           </div>

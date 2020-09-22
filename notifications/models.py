@@ -19,7 +19,7 @@ class Notification(models.Model):
 
 
     def __str__(self):
-        return self.title
+        return '%s %s' %(self.receiver_email.first_name, self.sender_email)
 
 
     def whenpublished(self):
@@ -53,7 +53,7 @@ class Notification(models.Model):
             hours= math.floor(diff.seconds/3600)
 
             if hours == 1:
-                return str(hours) + "         print(traveller_id)hour ago"
+                return str(hours) + "hour ago"
 
             else:
                 return str(hours) + " hours ago"
@@ -131,7 +131,7 @@ class Trip_Notification(models.Model):
             hours= math.floor(diff.seconds/3600)
 
             if hours == 1:
-                return str(hours) + "         print(traveller_id)hour ago"
+                return str(hours) + " hour ago"
 
             else:
                 return str(hours) + " hours ago"
