@@ -20,27 +20,28 @@ Create Trip
                             <input type="hidden" name="traveller_id" value="{{ traveller_user.id }}">
                             <div class="form-group">
                                 <label>Traveller's name:</label>
-                                <input class="form-control" id=" " name="traveller_name" value="{{traveller_user.first_name}} {{traveller_user.last_name}}" disabled>
+                                <input class="form-control" id=" " name="traveller_name"
+                                    value="{{traveller_user.first_name}} {{traveller_user.last_name}}" disabled>
                             </div>
                         </div>
                         <div class="col-md-10 col-sm-12">
                             <div class="form-group">
                                 <label>Traveller's email address:</label>
-                                <input class="form-control" id=" " name="traveller_email" value="{{traveller_user.email}}" disabled>
+                                <input class="form-control" id=" " name="traveller_email"
+                                    value="{{traveller_user.email}}" disabled>
                             </div>
                         </div>
                         <div class="col-md-10 col-sm-12">
                             <div class="form-group">
                                 <label for="Title">Destination</label>
-                                <input class="form-control" list="places" name="place"
-                                pattern="{{place_pattern}}"
-                                title='enter a valid place' required>
+                                <input class="form-control" list="places" name="place" pattern="{{place_pattern}}"
+                                    title='enter a valid place' required>
                                 <datalist id="places">
                                     {% if places %}
                                     {% for place in places %}
                                     <option value="{{ place.name }}">
-                                    {% endfor %}
-                                    {% endif%}
+                                        {% endfor %}
+                                        {% endif%}
                                 </datalist>
                             </div>
                         </div>
@@ -68,14 +69,18 @@ Create Trip
                                 <input class="form-control" id=" " name="cost" disabled>
                             </div>
                         </div>
-                        <div class="col-md-12 col-sm-6">
-                            <button type="submit" class="btn btn-primary" name="confirm" style="margin-right:6%; ">Confirm</button>
+                        <div class="col-12 col-lg-3">
+                            <button type="submit" class="btn btn-primary" name="confirm"
+                                style="margin-bottom:5%; ">Confirm</button>
+                        </div>
+                        <div class="col-12 col-lg-3">
+                            <a href="{% url 'view_profile' traveller_user.id %}"><button type="submit"
+                                    class="btn btn-danger position-relative" name="cancel"><i class="fas fa-times"></i>
+                                    Cancel</button></a>
                         </div>
                     </div>
                 </form>
-                <div class="col-md-12 col-sm-6">
-                    <a href="{% url 'view_profile' traveller_user.id %}"><button type="submit" class="btn btn-danger position-relative" style="top:-38px;left:90px;" name="cancel"><i class="fas fa-times"></i> Cancel</button></a>
-                </div>
+
             </div>
         </section>
     </section>
