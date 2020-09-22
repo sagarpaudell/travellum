@@ -3,7 +3,8 @@
 {% load static %}
 
 {% block style %} 
-<link rel="stylesheet" href="{% static 'css/aos.css' %}">
+<link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
+
 {% endblock %}
 
 {% block title %} About Us {% endblock %}
@@ -60,7 +61,7 @@
       <h2 class="subheading text-left pt-3 my-5">Meet<span style="color:#e66b58"> The Team</span></h2>
 
       <div class="row gallery">
-        <div class="col-lg-4 col-md-6 col-sm-12" >
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-3" data-aos="fade-right" data-aos-duration="1000">
           <img class="img-fluid" src="{% static 'images/samesh.jpg' %}" alt="Samesh">
           <h5 
             class="ml-n4 mt-3 mb-1" 
@@ -71,7 +72,7 @@
          <p class="font-italic">Front End Developer</p>
         </div>
 
-        <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="col-lg-4 col-md-6 col-sm-12" data-aos="fade-up" data-aos-duration="1000">
           <img class="img-fluid" src="{% static 'images/bikesh.jpg' %}" alt="Bikesh">
           <h5 
             class="ml-n4 mt-3 mb-1" 
@@ -82,7 +83,7 @@
          <p class="font-italic">Front End Developer</p>
         </div>
 
-        <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="col-lg-4 col-md-6 col-sm-12" data-aos="fade-left" data-aos-duration="1000">
           <img class="img-fluid" src="{% static 'images/sagar.jpg' %}" alt="Sagar">
           <h5 
             class="ml-n4 mt-3 mb-1" 
@@ -93,7 +94,7 @@
          <p class="font-italic">Back End Developer</p>
         </div>
 
-        <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="col-lg-4 col-md-6 col-sm-12" data-aos="fade-right" data-aos-duration="1000">
           <img class="img-fluid" src="{% static 'images/buddha.jpg' %}" alt="Buddha">
           <h5 
             class="ml-n4 mt-3 mb-1" 
@@ -104,13 +105,13 @@
          <p class="font-italic">Back End Developer</p>
         </div>
 
-        <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="col-lg-4 col-md-6 col-sm-12" data-aos="fade-up" data-aos-duration="1000">
           <img class="img-fluid" src="{% static 'images/bikesh.jpg' %}" alt="Biraj">
           <h5 
             class="ml-n4 mt-3 mb-1" 
             style="font-weight: 600; -webkit-transform: scaleX(0.88); transform: scaleX(0.88);"
           >
-            Bikesh Bimali
+            Biraj Adhikari
           </h5>
          <p class="font-italic">Back End Developer</p>
         </div>
@@ -121,7 +122,7 @@
 {% endblock %}
 
 {% block script %}
-<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
 <script>
   AOS.init();
 </script>
