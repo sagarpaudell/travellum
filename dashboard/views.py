@@ -13,6 +13,8 @@ from django import template
 import datetime
 from django.utils.timesince import timesince
 from django.utils.timezone import utc
+from django.utils import timezone
+from django.contrib import messages
 
 # Create your views here.
 def dashboard(request):
@@ -24,22 +26,41 @@ def dashboard(request):
   guide_user = Guide.objects.all().filter(email=user).first()
   guide_reviews = Guide_Review.objects.all().filter(guide=user)
   notifications = Notification.objects.all().filter(receiver_email=user).order_by('-reg_date')
-  trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user)
+  trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user).order_by('-noti_date')
   guide_historys = History.objects.all().filter(guide=user,tour_complete=True)
   traveller_historys = History.objects.all().filter(traveller=user,tour_complete=True)
   if traveller_user.is_guide:
     guide_user1 = get_object_or_404(Guide, email=user)
     if guide_user1:
-        trip_notifications = Trip_Notification.objects.all().filter(sender_email=user)
+        trip_notifications = Trip_Notification.objects.all().filter(sender_email=user).order_by('-noti_date')
     
   else:
-    trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user)
+    trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user).order_by('-noti_date')
   places = Place.objects.all()
   place_pattern=''
   for place in places:
       place_pattern = place.name+'|'+place_pattern
-  
-  
+  if notifications:
+    new_noti = notifications.last().reg_date
+    if notifications.count()>1:
+      last_noti = notifications[1].reg_date
+      new_noti_check = (last_noti<new_noti)
+      if (new_noti_check):
+        messages.info(request, 'You have new notifications.')
+      else:
+        messages.info(request, 'You have no new notifications')
+  if trip_notifications:
+    new_tnoti = trip_notifications.last().noti_date
+    if trip_notifications.count()>1:
+      last_noti = trip_notifications[1].noti_date
+      new_noti_check = (last_noti<new_noti)
+      if (new_noti_check):
+        messages.info(request, 'You have new notifications.')
+      else:
+        messages.info(request, 'You have no new notifications')
+    elif trip_notifications.count()==1:
+      messages.info(request, 'You have new notifications.')
+
   context = {
                 'traveller_user':traveller_user,
                 'my_profile':True,
