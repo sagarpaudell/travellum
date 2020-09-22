@@ -82,9 +82,11 @@
                             </div>
                           </a>
                         {% else %}
-                          <div class="top-text-heading mb-2" style="font-size: .8rem;">
-                            {{ trip_noti.sender_email.first_name }} has created a trip. You can confirm the trip<form method="POST" action="{% url 'confirm_trip' %}">{% csrf_token %}<input name="tn_id" value="{{ trip_noti.id }}" type="hidden"><button type="submit"><u>here</u></button></form>
-                          </div>
+                          <a href="#" class="top-text-block">
+                            <div class="top-text-heading mb-2" style="font-size: .8rem;">
+                              {{ trip_noti.sender_email.first_name }} has created a trip. You can confirm the trip<form method="POST" action="{% url 'confirm_trip' %}">{% csrf_token %}<input name="tn_id" value="{{ trip_noti.id }}" type="hidden"><a type="submit">here</a></form>
+                            </div>
+                          </a>
                         {% endif %}
                       {% endfor %}
                     {% endif %}
