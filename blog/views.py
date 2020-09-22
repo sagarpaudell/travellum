@@ -109,7 +109,8 @@ def create_blog_post(request):
         place_pattern = place.name+'|'+place_pattern
     context.update({
         'places':places,
-         'place_pattern':place_pattern[:-1]
+         'place_pattern':place_pattern[:-1],
+         'logged_in_user':traveller_user, 
     })
 
     return render(request, 'blog/createPost.html',context)
@@ -153,7 +154,8 @@ def edit_blog_post(request, blog_id):
     context.update({
         'blog': blog,
         'places':places,
-        'place_pattern':place_pattern[:-1]
+        'place_pattern':place_pattern[:-1],
+        'logged_in_user':traveller_user, 
     })
     return render(request, 'blog/editPost.html', context)
 
@@ -170,5 +172,11 @@ def blogs_byplace(request, id):
     print(place)
     blogs = Blog.objects.filter(place = place)
     print(blogs)
-    return render(request, 'blog/place_blog.html', {'blogs':blogs})
+    if request.user.is_authenticated:
+        traveller_user = get_object_or_404(Traveller, email=request.user)
+    context={
+                    'blogs':blogs,
+                    'logged_in_user':traveller_user,
+                }
+    return render(request, 'blog/place_blog.html', context)
 
