@@ -17,15 +17,28 @@ class Guide(models.Model):
     citizenship_front = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     citizenship_back= models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     citizenship_number = models.CharField(max_length=20,blank=True)
-    price = models.DecimalField(max_digits=10, decimal_places=3, blank=True, null=True)
+    price = models.IntegerField(blank=True)
     places = models.ManyToManyField(Place, blank=True)
     replies_within = models.IntegerField(default=1)
+    average_rating = models.DecimalField(max_digits=10, decimal_places=1, blank=True, default=0)
 
     def __str__(self):
         return self.email.email
 
     def get_place(self):
         return self.places.first()
+
+    def get_pic(self):
+        traveller = Traveller.objects.get(email=self.email)
+        return traveller.photo_main
+
+    def get_traveller_id(self):
+        traveller = Traveller.objects.get(email=self.email)
+        return traveller.id
+
+    def get_address(self):
+        traveller = Traveller.objects.get(email=self.email)
+        return traveller.address
 
 class Guide_Review(models.Model):
     guide = models.ForeignKey(User, on_delete= models.CASCADE)

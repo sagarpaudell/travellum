@@ -44,23 +44,34 @@ def view_profile(request, traveller_id):
         guide_rating =  request.POST.get('rating')
         guide_review = request.POST['review']
         guide = get_object_or_404(User, email=profile.email)
+        guide_user = get_object_or_404(Guide, email=profile.email)
         guide_reviewer = traveller_user_logged_in
         g_review = Guide_Review(guide = guide, guide_reviewer=guide_reviewer, guide_review=guide_review, guide_ratings=guide_rating)
         g_review.save()
+        guide_user.average_rating = ((float(guide_user.average_rating)*guide_reviews.count())+(float(guide_rating)))/(float(guide_reviews.count()+1))
+        guide_user.save()
         return redirect ('/view_profile/'+str(traveller_id))
 
     if 'edit_guide_review' in request.POST:
         guide_review_id=request.POST['guide_review_id']
         eg_review = get_object_or_404(Guide_Review, pk=guide_review_id)
+        old_rating = eg_review.guide_ratings
         eg_review.guide_review = request.POST['new_guide_review']
         eg_review.guide_ratings = request.POST['new_rating']
         eg_review.save()
+        guide_user = get_object_or_404(Guide, email=profile.email)
+        guide_user.average_rating = ((float(guide_user.average_rating)*(guide_reviews.count())+float(eg_review.guide_ratings)-float(old_rating)))/float(guide_reviews.count())
+        guide_user.save()
         return redirect ('/view_profile/'+str(traveller_id))
 
     if 'delete_guide_review' in request.POST:
         guide_review_id=request.POST['guide_review_id']
         dg_review = get_object_or_404(Guide_Review, pk=guide_review_id)
+        old_rating = dg_review.guide_ratings
         dg_review.delete()
+        guide_user = get_object_or_404(Guide, email=profile.email)
+        guide_user.average_rating = ((float(guide_user.average_rating)*guide_reviews.count())-float(old_rating))/(guide_reviews.count()-1)
+        guide_user.save()
         return redirect ('/view_profile/'+str(traveller_id))
 
     if 'traveller_review' in request.POST:
