@@ -8,6 +8,7 @@ class Guide(models.Model):
     email = models.OneToOneField(User,on_delete= models.CASCADE, unique=True)
     reg_date = models.DateTimeField(default=datetime.now, blank=True)
     is_published = models.BooleanField(default=False)
+    is_active = models.BooleanField(default = False)
     tours_count = models.IntegerField(default=0)
     driverlicense_front = models.ImageField(upload_to='photos/%Y%/%d/', blank=True)
     driverlicense_back = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
@@ -21,6 +22,9 @@ class Guide(models.Model):
 
     def __str__(self):
         return self.email.email
+
+    def get_place(self):
+        return self.places.first()
 
 class Guide_Review(models.Model):
     guide = models.ForeignKey(User, on_delete= models.CASCADE)

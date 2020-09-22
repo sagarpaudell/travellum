@@ -22,7 +22,7 @@ def dashboard(request):
   bio_first = ". ".join(bio[:5])+(".")
   guide_user = Guide.objects.all().filter(email=user).first()
   guide_reviews = Guide_Review.objects.all().filter(guide=user)
-  notifications = Notification.objects.all().filter(receiver_email=user)
+  notifications = Notification.objects.all().filter(receiver_email=user).order_by('-reg_date')
   trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user)
   guide_historys = History.objects.all().filter(guide=user,tour_complete=True)
   traveller_historys = History.objects.all().filter(traveller=user,tour_complete=True)
@@ -110,12 +110,12 @@ def dashboard(request):
     
     if 'pub_off' in request.POST:
       print(request.POST)
-      guide_user1.is_published = False
+      guide_user1.is_active = False
       guide_user1.save()
     
     if 'pub_on' in request.POST:
       print(request.POST)
-      guide_user1.is_published = True
+      guide_user1.is_active = True
       guide_user1.save()
 
     #for notification
