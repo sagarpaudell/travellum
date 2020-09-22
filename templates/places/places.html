@@ -5,25 +5,28 @@
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/custom_style.css' %}">
 <style>
-  ::-webkit-input-placeholder {
-    color: #fff !important; 
-    font-size: 1rem !important;
-  }
-  ::-moz-placeholder {
-    color: #fff !important; 
-    font-size: 1rem !important;
+    ::-webkit-input-placeholder {
+        color: #fff !important;
+        font-size: 1rem !important;
+    }
 
-  }
-  ::-ms-input-placeholder {
-    color: #fff !important; 
-    font-size: 1rem !important;
+    ::-moz-placeholder {
+        color: #fff !important;
+        font-size: 1rem !important;
 
-  }
-  ::-moz-placeholder {
-    color: #fff !important; 
-    font-size: 1rem !important;
+    }
 
-  }
+    ::-ms-input-placeholder {
+        color: #fff !important;
+        font-size: 1rem !important;
+
+    }
+
+    ::-moz-placeholder {
+        color: #fff !important;
+        font-size: 1rem !important;
+
+    }
 </style>
 {% endblock %}
 
@@ -43,25 +46,24 @@ Places
     <div class="row">
         {% if places %}
         {% for place in places %}
-        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-            <div class="project">
-                <div class="img">
-                    <a href="{% url 'placedetails' place.id %}"><img src="{{ place.photo_1.url }}" class="img-fluid"
-                            alt="Image" style="height:315px; width:max-content; "></a>
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800">
+            <div class="">
+                <div class="project">
+                    <a href="{% url 'placedetails' place.id %}">
+                        <img src="{{ place.photo_1.url }}" class="img-fluid" id="places-image" alt="Image"
+                            style="height:320px; width: 320px;">
+                    </a>
                 </div>
-                <div class="text">
-
-                    <h3 style="text-align: center; margin-top: 3%;"><a
-                            href="{% url 'placedetails' place.id %}">{{ place.name }}</a></h3>
-                </div>
+                <h3 style="margin-top: -8%;">
+                    <a class="text-dark" href="{% url 'placedetails' place.id %}">{{ place.name }}</a>
             </div>
         </div>
         {% endfor %}
         {% else %}
-            <div>
-                <h2> Sorry, the search results couldn't be found. Try again with specific keywords</h2> 
-                <a href="{% url 'index' %}"><u>Back to Home </u></a>
-            </div>
+        <div>
+            <h2> Sorry, the search results couldn't be found. Try again with specific keywords</h2>
+            <a href="{% url 'index' %}"><u>Back to Home </u></a>
+        </div>
         {% endif %}
     </div>
 
