@@ -49,6 +49,20 @@ def view_profile(request, traveller_id):
         g_review.save()
         return redirect ('/view_profile/'+str(traveller_id))
 
+    if 'edit_guide_review' in request.POST:
+        guide_review_id=request.POST['guide_review_id']
+        eg_review = get_object_or_404(Guide_Review, pk=guide_review_id)
+        eg_review.guide_review = request.POST['new_guide_review']
+        eg_review.guide_ratings = request.POST['new_rating']
+        eg_review.save()
+        return redirect ('/view_profile/'+str(traveller_id))
+
+    if 'delete_guide_review' in request.POST:
+        guide_review_id=request.POST['guide_review_id']
+        dg_review = get_object_or_404(Guide_Review, pk=guide_review_id)
+        dg_review.delete()
+        return redirect ('/view_profile/'+str(traveller_id))
+
     if 'traveller_review' in request.POST:
         traveller_review = request.POST['tra_review']
         traveller = get_object_or_404(Traveller, email=profile.email)
@@ -56,6 +70,20 @@ def view_profile(request, traveller_id):
         t_review = Traveller_Review(traveller = traveller, traveller_reviewer=traveller_reviewer, traveller_review=traveller_review)
         t_review.save()
         return redirect ('/view_profile/'+str(traveller_id))
+
+    if 'edit_traveller_review' in request.POST:
+        traveller_review_id=request.POST['traveller_review_id']
+        et_review = get_object_or_404(Traveller_Review, pk=traveller_review_id)
+        et_review.traveller_review = request.POST['new_traveller_review']
+        et_review.save()
+        return redirect ('/view_profile/'+str(traveller_id))
+
+    if 'delete_traveller_review' in request.POST:
+        traveller_review_id=request.POST['traveller_review_id']
+        dt_review = get_object_or_404(Traveller_Review, pk=traveller_review_id)
+        dt_review.delete()
+        return redirect ('/view_profile/'+str(traveller_id))
+
     if profile.email==user:
         return redirect('dashboard')
 

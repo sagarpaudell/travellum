@@ -1,7 +1,7 @@
 from places.models import Place
 from travellers.models import Traveller
 from guides.models import Guide
-from notifications.models import Notification
+from notifications.models import Notification, Trip_Notification
 from .models import Blog, Comment
 from urllib.parse import urlparse
 
@@ -28,11 +28,20 @@ def explore(request):
     user=request.user
     context = dict()
     if user.is_authenticated:
-        notifications = Notification.objects.all().filter(receiver_email=user)
         traveller_user = get_object_or_404(Traveller, email=user)
+        notifications = Notification.objects.all().filter(receiver_email=request.user).order_by('-reg_date')
+        trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
+        if traveller_user.is_guide:
+            guide_user1 = get_object_or_404(Guide, email=request.user)
+            if guide_user1:
+                trip_notifications = Trip_Notification.objects.all().filter(sender_email=request.user)
+        else:
+            trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
+        
         context = {
                 'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
                 'notifications': notifications,
+                'trip_notifications': trip_notifications,
             }
     
     places = Place.objects.all()
@@ -46,11 +55,19 @@ def single_blog_post(request,id):
     user=request.user
     context = dict()
     if user.is_authenticated:
-        notifications = Notification.objects.all().filter(receiver_email=user)
         traveller_user = get_object_or_404(Traveller, email=user)
+        notifications = Notification.objects.all().filter(receiver_email=request.user).order_by('-reg_date')
+        trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
+        if traveller_user.is_guide:
+            guide_user1 = get_object_or_404(Guide, email=request.user)
+            if guide_user1:
+                trip_notifications = Trip_Notification.objects.all().filter(sender_email=request.user)
+        else:
+            trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
         context = {
                 'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
                 'notifications': notifications,
+                'trip_notifications':trip_notifications
             }
     
     blog = Blog.objects.get(id=id)
@@ -78,11 +95,19 @@ def single_blog_post(request,id):
 def create_blog_post(request):
     user=request.user
     if user.is_authenticated:
-        notifications = Notification.objects.all().filter(receiver_email=user)
         traveller_user = get_object_or_404(Traveller, email=user)
+        notifications = Notification.objects.all().filter(receiver_email=request.user).order_by('-reg_date')
+        trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
+        if traveller_user.is_guide:
+            guide_user1 = get_object_or_404(Guide, email=request.user)
+            if guide_user1:
+                trip_notifications = Trip_Notification.objects.all().filter(sender_email=request.user)
+        else:
+            trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
         context = {
                 'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
                 'notifications': notifications,
+                'trip_notifications':trip_notifications,
             }
     
     if request.method == 'POST':
@@ -109,7 +134,8 @@ def create_blog_post(request):
         place_pattern = place.name+'|'+place_pattern
     context.update({
         'places':places,
-         'place_pattern':place_pattern[:-1]
+         'place_pattern':place_pattern[:-1],
+         'logged_in_user':traveller_user, 
     })
 
     return render(request, 'blog/createPost.html',context)
@@ -118,11 +144,19 @@ def create_blog_post(request):
 def edit_blog_post(request, blog_id):
     user=request.user
     if user.is_authenticated:
-        notifications = Notification.objects.all().filter(receiver_email=user)
         traveller_user = get_object_or_404(Traveller, email=user)
+        notifications = Notification.objects.all().filter(receiver_email=request.user).order_by('-reg_date')
+        trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
+        if traveller_user.is_guide:
+            guide_user1 = get_object_or_404(Guide, email=request.user)
+            if guide_user1:
+                trip_notifications = Trip_Notification.objects.all().filter(sender_email=request.user)
+        else:
+            trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
         context = {
                 'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
                 'notifications': notifications,
+                'trip_notifications':trip_notifications,
             }
 
     if request.method == 'POST':
@@ -153,7 +187,8 @@ def edit_blog_post(request, blog_id):
     context.update({
         'blog': blog,
         'places':places,
-        'place_pattern':place_pattern[:-1]
+        'place_pattern':place_pattern[:-1],
+        'logged_in_user':traveller_user, 
     })
     return render(request, 'blog/editPost.html', context)
 
@@ -176,5 +211,24 @@ def blogs_byuser(request, id):
     user = Traveller.objects.get(id = id).email
     blogs = user.blogs.all()
     print(blogs)
-    return render(request, 'blog/user_blog.html', {'blogs':blogs, 'blog_user':user})
+    
+    if request.user.is_authenticated:
+        traveller_user = get_object_or_404(Traveller, email=request.user)
+        notifications = Notification.objects.all().filter(receiver_email=request.user).order_by('-reg_date')
+        trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
+        if traveller_user.is_guide:
+            guide_user1 = get_object_or_404(Guide, email=request.user)
+            if guide_user1:
+                trip_notifications = Trip_Notification.objects.all().filter(sender_email=request.user)
+        else:
+            trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
+        context={
+                'blogs':blogs,
+                'logged_in_user':traveller_user,
+                'notifications': notifications,
+                'trip_notifications':trip_notifications,
+
+                    }
+        return render(request, 'blog/place_blog.html', context)
+    return render(request, 'blog/place_blog.html')
 

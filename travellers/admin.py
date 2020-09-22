@@ -15,3 +15,4 @@ class Traveller_ReviewAdmin(admin.ModelAdmin):
     list_display_links = ('traveller','traveller_reviewer')
 
 admin.site.register(Traveller_Review, Traveller_ReviewAdmin)
+

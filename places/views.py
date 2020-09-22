@@ -5,18 +5,26 @@ from django.shortcuts import get_object_or_404, render, redirect
 from .models import Place, Major_Attraction, Things_To_Do, Review
 from guides.models import Guide
 from travellers.models import Traveller
-from notifications.models import Notification
+from notifications.models import Notification, Trip_Notification
 from accounts.models import User
 
 def places(request):
     current_user=request.user
     if current_user.is_authenticated:
         traveller_user_logged_in= get_object_or_404(Traveller, email=current_user)
-        notifications = Notification.objects.all().filter(receiver_email=current_user)
+        notifications = Notification.objects.all().filter(receiver_email=request.user).order_by('-reg_date')
+        trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
+        if traveller_user_logged_in.is_guide:
+            guide_user1 = get_object_or_404(Guide, email=request.user)
+            if guide_user1:
+                trip_notifications = Trip_Notification.objects.all().filter(sender_email=request.user)
+        else:
+            trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
         places = Place.objects.all()
         context = {
             'places':places,
             'notifications': notifications,
+            'trip_notifications': trip_notifications,
             'logged_in_user': traveller_user_logged_in,   #logged_in_user is for avatar in navbar
         }
     else:
@@ -35,7 +43,15 @@ def placedetails(request, place_id):
     current_user=request.user
     if current_user.is_authenticated:
         traveller_user_logged_in= get_object_or_404(Traveller, email=current_user)
-        notifications = Notification.objects.all().filter(receiver_email=current_user)
+        notifications = Notification.objects.all().filter(receiver_email=request.user).order_by('-reg_date')
+        trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
+        if traveller_user_logged_in.is_guide:
+            guide_user1 = get_object_or_404(Guide, email=request.user)
+            if guide_user1:
+                trip_notifications = Trip_Notification.objects.all().filter(sender_email=request.user)
+        else:
+            trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
+        
 
     if request.method == 'POST':
         if 'review_add' in request.POST:
@@ -90,7 +106,8 @@ def placedetails(request, place_id):
             'attractions':attractions,
             'tasks':tasks,
             'reviews':reviews,
-            'notifications':notifications,
+            'notifications': notifications,
+            'trip_notifications': trip_notifications,
             'allow_review':allow_review,
             'show_bool':show_bool,
             'logged_in_user': traveller_user_logged_in,   #logged_in_user is for avatar in navbar

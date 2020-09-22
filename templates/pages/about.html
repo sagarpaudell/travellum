@@ -3,14 +3,13 @@
 {% load static %}
 
 {% block style %} 
-<link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
-
+<link rel="stylesheet" href="{% static 'css/aos.css' %}">
 {% endblock %}
 
 {% block title %} About Us {% endblock %}
 
 {% block content %}
-<div class="my-4 bg-white px-4 py-5">
+<div class="my-4 bg-white px-md-4 py-5">
 
   <section class="section" id="about-section">
     <div class="container">
@@ -72,7 +71,7 @@
          <p class="font-italic">Front End Developer</p>
         </div>
 
-        <div class="col-lg-4 col-md-6 col-sm-12" data-aos="fade-up" data-aos-duration="1000">
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-3" data-aos="fade-up" data-aos-duration="1000">
           <img class="img-fluid" src="{% static 'images/bikesh.jpg' %}" alt="Bikesh">
           <h5 
             class="ml-n4 mt-3 mb-1" 
@@ -83,7 +82,7 @@
          <p class="font-italic">Front End Developer</p>
         </div>
 
-        <div class="col-lg-4 col-md-6 col-sm-12" data-aos="fade-left" data-aos-duration="1000">
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-3" data-aos="fade-left" data-aos-duration="1000">
           <img class="img-fluid" src="{% static 'images/sagar.jpg' %}" alt="Sagar">
           <h5 
             class="ml-n4 mt-3 mb-1" 
@@ -94,7 +93,7 @@
          <p class="font-italic">Back End Developer</p>
         </div>
 
-        <div class="col-lg-4 col-md-6 col-sm-12" data-aos="fade-right" data-aos-duration="1000">
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-3" data-aos="fade-right" data-aos-duration="1000">
           <img class="img-fluid" src="{% static 'images/buddha.jpg' %}" alt="Buddha">
           <h5 
             class="ml-n4 mt-3 mb-1" 
@@ -105,7 +104,7 @@
          <p class="font-italic">Back End Developer</p>
         </div>
 
-        <div class="col-lg-4 col-md-6 col-sm-12" data-aos="fade-up" data-aos-duration="1000">
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-3" data-aos="fade-up" data-aos-duration="1000">
           <img class="img-fluid" src="{% static 'images/biraj.jpg' %}" alt="Biraj">
           <h5 
             class="ml-n4 mt-3 mb-1" 
@@ -122,7 +121,7 @@
 {% endblock %}
 
 {% block script %}
-<script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+<script src="{% static 'js/aos.js' %}"></script>
 <script>
   AOS.init();
 </script>

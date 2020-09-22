@@ -61,8 +61,8 @@ def chat(request, email):
         'chat_friend':User.objects.get(id=friend_userid) ,
         'chat_list':chat_list.order_by('message_time'),
         'traveller_currentuser':Traveller.objects.filter(email=current_user.id).first(),
-        'traveller_chatuser':Traveller.objects.filter(email=friend_user.id).first()
-        
+        'traveller_chatuser':Traveller.objects.filter(email=friend_user.id).first(),
+        'logged_in_user': Traveller.objects.filter(email=current_user.id).first(),
     }
     
     # print(context['traveller_currentuser'].photo_main)

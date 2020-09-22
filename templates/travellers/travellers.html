@@ -259,15 +259,17 @@ Dashboard
             <!-- End of Blogs Section -->
 
             <!--============= Languages Section ============-->
-            <h4 class="px-3 py-3" style="color: #e2c0bb;">Languages</h4>
-            <p class="p-3 border-bottom">
+            <h4 class="px-3" style="color: #e2c0bb;">Languages</h4>
+            <p class="p-3">
               {% if traveller_user %}{{traveller_user.languages}}{% endif %}
             </p>
+            <div class="mt-4 mb-5 border-bottom"></div>
             <!-- End of Languages Section -->
 
             <!--============= Interests Section ==============-->
             <h4 class="px-3" style="color: #e2c0bb;">Interests</h4>
-            <p class="p-3 border-bottom">Travelling</p>
+            <p class="p-3">Travelling</p>
+            <div class="mt-4 mb-5 border-bottom"></div>
             <!-- End of Interests Section -->
           </div>
         </div>
@@ -281,7 +283,6 @@ Dashboard
             <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
               <div class="border-bottom">
                 {% if my_profile %}
-                <h2 style="color: #e2c0bb;">No Guide History</h2>
                 {% if guide_user %}
                 {% if guide_user.is_published %}
                 <h1> Guide update form</h1>
@@ -298,6 +299,7 @@ Dashboard
               {% if guide.is_published %}
               <div class="container text-left">
                 {% if guide_historys %}
+                  <h2 class="text-center" style="color: #e2c0bb;">Guide History</h2>
                   {% for guide_history in guide_historys %}
                   <div class="mt-5"></div>
                   <p class="col-12 text-left">
@@ -307,10 +309,11 @@ Dashboard
                     <a href="">{{ guide_history.place.name }}</a>
                     - {{guide_history.end_date|date:'M d,Y'}}
                   </p>
-                  <div class="mb-5"></div>
+                  <div class="my-5 border-bottom"></div>
                   {% endfor %}
                   {% else %}
-                  <h2 style="color: #e2c0bb;">No Guide History</h2>
+                  <h2 class="d-none d-md-block" style="color: #e2c0bb;">No Guide History</h2>
+                  <div class="mb-5"></div>
                   {% endif %}
                 {% if guide_has_travelled_with %}
                 {% if guide_review_exists %}
@@ -349,13 +352,16 @@ Dashboard
                 {% endif %}
 
                 {% if guide_reviews %}
+                <div class="mt-5"></div>
+                <h2 class="text-center" style="color: #e2c0bb;">Guide Reviews</h2>
+                <div class="mb-5"></div>
                 {% for guide_review in guide_reviews %}
                 <div class="row border py-3 my-3" style="background: white !important;">
                   <div class="col-2 col-lg-1">
                     <img src={{guide_review.guide_reviewer.photo_main.url}}
                       style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
                   </div>
-                  <div class="col-10 col-lg-11">
+                  <div class="col-9 col-lg-10">
                     <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">
                       {{ guide_review.guide_reviewer.first_name }} {{ guide_review.guide_reviewer.last_name }}</h5>
                     <div class="review__rating m-n2">
@@ -383,10 +389,23 @@ Dashboard
                     </div>
                     <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">{{guide_review.guide_review}}</p>
                   </div>
+                  <div class="col-1 col-lg-1">
+                    <div class="row">
+                      {% if guide_review.guide_reviewer == logged_in_user %}
+                      <button title="Edit Review" class="btn btn-sm" data-toggle="modal" data-target="#edit-review">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button title="Delete Review" class="btn btn-sm" data-toggle="modal" data-target="#delete-review">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                      {% endif %}
+                    </div>
+                  </div>
                 </div>
+                <div class="border-bottom my-5"></div>
                 {% endfor %}
                 {% else %}
-                <h2 style="color: #e2c0bb;">No Guide Reviews</h2>
+                <h2 class="text-center" style="color: #e2c0bb;">No Guide Reviews</h2>
                 {% endif %}
               </div>
               {% else %}
@@ -404,16 +423,17 @@ Dashboard
           <div class="d-flex">
             <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
               {% if has_accepted %}
-              <div class="col-md-12 border-bottom mb-5">
+              <div class="col-md-12">
                 <h2 style="color: #e2c0bb;">Create a Trip</h2>
                 <p class="mt-4 mb-2"> To create a trip with your traveller :</p>
                 <a href="{% url 'create_trip' traveller_user.id%}"><button class="btn btn-theme mt-2">Click
                     Here <i class="fas fa-angle-double-right"></i></button></a>
-                <div class="mb-5"></div>
+                <div class="my-5 border-bottom"></div>
               </div>
               {% endif %}
-              <div>
+              <div class="w-100">
                 {% if traveller_historys %}
+                <h2 style="color: #e2c0bb;">History</h2>
                 {% for traveller_history in traveller_historys %}
                 <div class="mt-5"></div>
                 <p class="col-12 text-left">
@@ -423,10 +443,11 @@ Dashboard
                   <a href="">{{ traveller_history.place.name }}</a>
                   - {{traveller_history.end_date|date:'M d,Y'}}
                 </p>
-                <div class="mb-5"></div>
+                <div class="my-5 border-bottom"></div>
                 {% endfor %}
                 {% else %}
-                <h2 style="color: #e2c0bb;">No Travel History</h2>
+                <h2 style="color: #e2c0bb;">No Traveller History</h2>
+                <div class="border-bottom my-5"></div>
                 {% endif %}
               </div>
 
@@ -458,16 +479,28 @@ Dashboard
                     <img src={{traveller_review.traveller_reviewer.photo_main.url}}
                       style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
                   </div>
-                  <div class="col-10 col-lg-11">
+                  <div class="col-9 col-lg-10">
                     <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">
                       {{ traveller_review.traveller_reviewer.first_name }} {{ traveller_review.traveller_reviewer.last_name }}</h5>
                     
                     <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">{{traveller_review.traveller_review}}</p>
                   </div>
+                  <div class="col-1 col-lg-1">
+                    <div class="row">
+                      {% if traveller_review.traveller_reviewer == logged_in_user %}
+                      <button title="Edit Review" class="btn btn-sm" data-toggle="modal" data-target="#edit-t-review">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button title="Delete Review" class="btn btn-sm" data-toggle="modal" data-target="#delete-t-review">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                      {% endif %}
+                    </div>
+                  </div>
                 </div>
                 {% endfor %}
                 {% else %}
-                <h2 style="color: #e2c0bb;" class="mt-5 text-center">No Traveller Reviews</h2>
+                <h2 style="color: #e2c0bb;" class="text-center">No Traveller Reviews</h2>
                 <div class="border-bottom my-5"></div>
                 {% endif %}
               </div>
@@ -482,232 +515,168 @@ Dashboard
 
 
 <!--========================= Modals =====================-->
-
-
-<!--================= Edit Profile Modal =================-->
-<div class="modal" id="edit_profile_modal">
-  <div class="modal-dialog modal-lg">
+<div class="modal fade" id="edit-review">
+  <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">
-          Edit Profile
+          Edit your Review
         </h5>
-        <button class="close" data-dismiss="modal">
-          &times;
-        </button>
+        <button class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <form action="{% url 'dashboard' %}" method="POST" enctype="multipart/form-data">
-          {% csrf_token %}
+        <form method="POST">
+        {% csrf_token %}
+          <div class="text-center">
 
-          <!-- Choose Image Overlay -->
-          <!-- Source: https://codepen.io/JohanDelValle/pen/mZwKrx?editors=1100 -->
-          <div class=" d-flex justify-content-around">
-            <span>
-              <label for="profile_pic">
-                {% if traveller_user %}
-                {% if traveller_user.photo_main %}
-                <div class="profile-pic" style="background-image: url('{{ traveller.photo_main.url }}')">
-                  <span class="fa fa-camera"></span>
-                  <span>Change Image</span>
+            <div class="col-2 col-lg-1 rounded">
+              <img {% if logged_in_user.photo_main %} src="{{logged_in_user.photo_main.url}}" {% else %}
+                src="{% static 'images/default.png' %}" {% endif %}
+                style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
+            </div>
+            <div class="col-10 col-lg-11">
+              {% if guide_reviews %}
+              {% for guide_review in guide_reviews %}
+              {% if guide_review.guide_reviewer == logged_in_user %}
+              <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Review this Guide</h5>
+              <textarea class="form-control" rows="3" name="new_guide_review" required>{{guide_review.guide_review}}</textarea>
+              <input type="hidden" name="guide_review_id" value={{guide_review.id}}>
+
+              <div class="mt-n4" style="display: flex; justify-content: flex-end;">
+                <div class="rating">
+                  <input type="radio" id="star5" name="new_rating" value="5" />
+                  <label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
+                  <input type="radio" id="star4" name="new_rating" value="4" />
+                  <label class="star" for="star4" title="Great" aria-hidden="true"></label>
+                  <input type="radio" id="star3" name="new_rating" value="3" />
+                  <label class="star" for="star3" title="Very good" aria-hidden="true"></label>
+                  <input type="radio" id="star2" name="new_rating" value="2" />
+                  <label class="star" for="star2" title="Good" aria-hidden="true"></label>
+                  <input type="radio" id="star1" name="new_rating" value="1" />
+                  <label class="star" for="star1" title="Bad" aria-hidden="true"></label>
                 </div>
-                {% else %}
-                <div class="profile-pic">
-                  <span class="fa fa-camera"></span>
-                  <span>Change Image</span>
-                </div>
-                {% endif %}
-                {% endif %}
-              </label>
-              <input type="File" name="photo_main" id="profile_pic">
-            </span>
-          </div>
-          <!-- End of Choose Image Overlay -->
-
-          <!--============ Edit Profile Inputs ==================-->
-          <div class="form-group">
-            <label for="location">First Name</label>
-            <input type="text" class="form-control" name="first_name" {% if traveller_user %}
-              value="{{traveller_user.first_name}}" {% endif %}>
-          </div>
-          <div class="form-group">
-            <label for="location">Last Name</label>
-            <input type="text" class="form-control" name="last_name"
-              {% if traveller_user %}value="{{traveller_user.last_name}}" {% endif %}>
-          </div>
-
-          <div class="form-group">
-            <label for="location">Location</label>
-            <input type="text" class="form-control" name="address" {% if traveller_user %}
-              value="{{traveller_user.address}}" {% endif %}>
-          </div>
-
-          <div class="form-group">
-            <label for="slogan">Slogan</label>
-            <input type="text" class="form-control" name="slogan" {% if traveller_user %}
-              value="{{traveller_user.slogan}}" {% endif %}>
-          </div>
-
-          <div class="form-group">
-            <label for="about_me">About Me</label>
-            <textarea class="form-control" rows="3"
-              name="bio">{% if traveller_user %}{{traveller_user.bio}}{% endif %}</textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="Languages">Languages</label><br>
-            <input type="text" class="form-control" name="languages" {% if traveller_user %}
-              value="{{traveller_user.languages}}" {% endif %}>
-          </div>
-
-          {% if traveller_user %}
-          {% if traveller_user.is_guide %}
-          <div class="form-group">
-            <label for="pph">Price/hr</label><br>
-            <input type="number" class="form-control" name="pph">
-          </div>
-          {% endif %}
-          {% endif %}
-
-          <div class="form-group">
-            <label for="gender">Gender</label>
-            <select class="form-control" name="gender">
-              {% if traveller_user %}
-              {% ifnotequal traveller_user.gender "" %}<option selected>{{traveller_user.gender}}</option>
-              {% endifnotequal %}
-
-              {% ifequal traveller_user.gender "Male" %}
-              <option>Female</option>
-              <option>Other</option>
-              {% endifequal %}
-
-              {% ifequal traveller_user.gender "Female" %}
-              <option>Male</option>
-              <option>Other</option>
-              {% endifequal %}
-
-              {% ifequal traveller_user.gender "Other" %}
-              <option>Female</option>
-              <option>Male</option>
-              {% endifequal %}
-
-              {% ifequal traveller_user.gender "" %}
-              <option>Female</option>
-              <option>Male</option>
-              <option>Other</option>
-              {% endifequal %}
+              </div>
               {% endif %}
-            </select>
-          </div>
+              {% endfor %}
+              {% endif %}
+            </div>
 
-          <div class="form-group">
-            <label>Interests</label><br>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="English" value="option1">
-              <label class="form-check-label" for="English"> Exploration & Sightseeing</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="English" value="option1">
-              <label class="form-check-label" for="English"> Food & Restaurants</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="English" value="option1">
-              <label class="form-check-label" for="English"> Driving Tours</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="English" value="option1">
-              <label class="form-check-label" for="English"> Sports & Recreation</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="English" value="option1">
-              <label class="form-check-label" for="English"> Art & Museums</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="English" value="option1">
-              <label class="form-check-label" for="English"> History & Culture</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="English" value="option1">
-              <label class="form-check-label" for="English"> Nightlife & Bars</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="English" value="option1">
-              <label class="form-check-label" for="English"> Shopping</label>
-            </div>
           </div>
-          <!-- End of Edit Profile Inputs -->
-
-
-          <div class="modal-footer">
-            <input type="submit" value="Save Changes" name="Update Profile" class="btn btn-success">
+          <div class="d-flex justify-content-end align-items-center">
+            <button class="btn btn-outline-dark text-dark mx-2 my-3" type="submit" name="edit_guide_review">Save</button>
+            <button class="btn btn-dark mx-2 my-3" data-dismiss="modal">Cancel</button>
           </div>
+        </form>
       </div>
-      </form>
     </div>
   </div>
 </div>
-<!-- End of Edit Profile Modal -->
 
-<!--====guide form====-->
-<div class="modal" id="guide_form_modal">
-  <div class="modal-dialog ">
+<div class="modal fade" id="edit-t-review">
+  <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">
-          Guide-Form Fillup
+          Edit your Review
         </h5>
-
-        <button class="close" data-dismiss="modal">
-          &times;
-        </button>
+        <button class="close" data-dismiss="modal">&times;</button>
       </div>
-      <form action="{% url 'dashboard' %}" method="POST" enctype="multipart/form-data">
+      <div class="modal-body">
+        <form method="POST">
         {% csrf_token %}
-        <div class="modal-body">
+          <div class="text-center">
 
-          <div class="form-group mb-4">
-            <label for="Document Type">Document Type</label><br>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="docType" id="ctzn" value="ctzn" required>
-              <label class="form-check-label" for="ctzn">Citizenship</label>
+            <div class="col-2 col-lg-1 rounded">
+              <img
+                {% if logged_in_user.photo_main %} src="{{logged_in_user.photo_main.url}}" {% else %}
+                src="{% static 'images/default.png' %}"{% endif %}
+                style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic"
+              >
             </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="docType" id="license" value="license" required>
-              <label class="form-check-label" for="license">Driving License</label>
+            <div class="col-10 col-lg-11">
+              {% if traveller_reviews %}
+              {% for traveller_review in traveller_reviews %}
+              {% if traveller_review.traveller_reviewer == logged_in_user %}
+              <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Review this Traveller</h5>
+              <textarea class="form-control" rows="3" name="new_traveller_review" required></textarea>
+              <input type="hidden" name="traveller_review_id" value={{traveller_review.id}}>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
             </div>
+
           </div>
-
-          <div class="form-group mb-4">
-            <p>Document Front</p>
-            <div class="custom-file">
-              <input class="custom-file-input" type="File" name="doc-front" id="ctzn-front" required>
-              <label class="custom-file-label" for="ctzn-front">Choose file</label>
-            </div>
+          <div class="d-flex justify-content-end align-items-center">
+            <button class="btn btn-outline-dark text-dark mx-2 my-3" type="submit" name="edit_traveller_review">Save</button>
+            <button class="btn btn-dark mx-2 my-3" data-dismiss="modal">Cancel</button>
           </div>
-
-          <div class="form-group mb-4">
-            <p>Document Back</p>
-            <div class="custom-file">
-              <input class="custom-file-input" type="File" name="doc-back" id="ctzn-back" required>
-              <label class="custom-file-label" for="ctzn-back">Choose file</label>
-            </div>
-          </div>
-
-          <div class="form-group mb-4">
-            <p>Document Number</p>
-            <input type="text" class="form-control" name="doc-number" required>
-          </div>
-
-        </div>
-
-        <div class="modal-footer">
-          <input type="submit" value="Be a Guide" name="Guide-Form" class="btn btn-success">
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="delete-review">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Delete this Review
+        </h5>
+        <button class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this Review?
+        <div class="d-flex justify-content-center align-items-center">
+          <form method="POST">
+          {% csrf_token %}
+            {% if guide_reviews %}
+            {% for guide_review in guide_reviews %}
+            {% if guide_review.guide_reviewer == logged_in_user %}
+            <input type="hidden" name="guide_review_id" value={{guide_review.id}}>
+            <button class="btn btn-outline-dark text-dark mx-2 my-3" type ="submit" name="delete_guide_review">Yes</button>
+            <button class="btn btn-dark mx-2 my-3" data-dismiss="modal">Cancel</button>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<div class="modal fade" id="delete-t-review">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Delete this Review
+        </h5>
+        <button class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this Review?
+        <div class="d-flex justify-content-center align-items-center">
+          <form method="POST">
+            {% csrf_token %}
+              {% if traveller_reviews %}
+              {% for traveller_review in traveller_reviews %}
+              {% if traveller_review.traveller_reviewer == logged_in_user %}
+              <input type="hidden" name="traveller_review_id" value={{traveller_review.id}}>
+              <button class="btn btn-outline-dark text-dark mx-2 my-3" type ="submit" name="delete_traveller_review">Yes</button>
+              <button class="btn btn-dark mx-2 my-3" data-dismiss="modal">Cancel</button>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <!-- End of Modals -->
 
 {% endblock %}
