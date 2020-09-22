@@ -70,6 +70,20 @@ def view_profile(request, traveller_id):
         t_review = Traveller_Review(traveller = traveller, traveller_reviewer=traveller_reviewer, traveller_review=traveller_review)
         t_review.save()
         return redirect ('/view_profile/'+str(traveller_id))
+
+    if 'edit_traveller_review' in request.POST:
+        traveller_review_id=request.POST['traveller_review_id']
+        et_review = get_object_or_404(Traveller_Review, pk=traveller_review_id)
+        et_review.traveller_review = request.POST['new_traveller_review']
+        et_review.save()
+        return redirect ('/view_profile/'+str(traveller_id))
+
+    if 'delete_traveller_review' in request.POST:
+        traveller_review_id=request.POST['traveller_review_id']
+        dt_review = get_object_or_404(Traveller_Review, pk=traveller_review_id)
+        dt_review.delete()
+        return redirect ('/view_profile/'+str(traveller_id))
+
     if profile.email==user:
         return redirect('dashboard')
 
