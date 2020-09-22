@@ -203,13 +203,15 @@ Dashboard
 
             <!--======= Profile Description Section ==========-->
             <h2 class="px-3" style="color: #e2c0bb;">Hi there! Nice to meet you</h2>
-            <p class="p-3 text-justify">
+            <p class="mt-3 px-3 text-justify">
               {% if traveller_user %}{{bio_first}}{% endif %}
             </p>
             <br>
-            <p class="px-3 pb-3 text-justify collapse" id="collapse-btn-1">
-              {{bio_second}}
-            </p>
+            {% if bio_second %}
+              <p class="px-3 pb-3 text-justify collapse" id="collapse-btn-1">
+                {{bio_second}}
+              </p>
+            {% endif %}
             <div class="container">
               <div class="row">
                 <div class="col-md-10"></div>
@@ -251,7 +253,7 @@ Dashboard
               {% if guide_user.is_published %}
               <div class="col-md-12 border-bottom mb-5">
                 <h2 style="color: #e2c0bb;">Edit Guide Details</h2>
-                <p class="mt-4 mb-2">Edit your price and document </p>
+                <p class="mt-4 mb-2">Edit your price and place </p>
                 <button class="btn btn-theme mt-2" data-toggle="modal" data-target="#edit-guide-details">Edit Guide
                   Details</button>
                 <div class="mb-5"></div>
@@ -259,11 +261,12 @@ Dashboard
               {% endif %}
               {% endif %}
 
-              <div class="col-md-12 border-bottom">
+              <div class="col-md-12 border-bottom mb-5">
                 {% if guide_user %}
                 {% if guide_user.is_published %}
-                <div class="mx-5 px-5">
+                <div class="mb-5">
                   {% if guide_historys %}
+                  <h2 style="color: #e2c0bb;">Guide History</h2>
                   {% for guide_history in guide_historys %}
                   <div class="mt-5"></div>
                   <p class="col-12 text-left">
@@ -276,7 +279,7 @@ Dashboard
                   <div class="mb-5"></div>
                   {% endfor %}
                   {% else %}
-                  <h2 style="color: #e2c0bb;">No Guide History</h2>
+                  <h2 class="display-none display-md-block mb-5" style="color: #e2c0bb;">No Guide History</h2>
                   {% endif %}
                 </div>
                 {% else %}
@@ -284,8 +287,10 @@ Dashboard
                 <p class="pb-3 mb-5">You will be notified soon.</p>
                 {% endif %}
                 {% else %}
-                <button class="btn btn-theme-outline px-5 py-3 mt-2 mb-5" data-toggle="modal"
+                <h2 class="display-none display-md-block mb-5" style="color: #e2c0bb;">No Guide History</h2>
+                  <button class="btn btn-theme-outline px-5 py-3" data-toggle="modal"
                   data-target="#guide_form_modal">Become a Guide</button>
+                  <div class="my-5"></div>
                 {% endif %}
               </div>
               
@@ -295,6 +300,9 @@ Dashboard
                 <div class="container text-left">
                 {% if guide_user.is_published %}
                 {% if guide_reviews %}
+                <div class="mt-5"></div>
+                <h2 class="text-center" style="color: #e2c0bb;">Guide Reviews</h2>
+                <div class="mb-5"></div>
                 {% for guide_review in guide_reviews %}
                 <div class="row border py-3 my-3" style="background: white !important;">
                   <div class="col-2 col-lg-1">
@@ -331,10 +339,10 @@ Dashboard
                   </div>
                 </div>
                 {% endfor %}
+                {% endif %}
                 {% else %}
                 <h2 style="color: #e2c0bb;" class="mt-5 text-center">No Guide Reviews</h2>
                 <div class="border-bottom my-5"></div>
-                {% endif %}
                 {% endif %}
                 </div>
             </div>
@@ -348,9 +356,10 @@ Dashboard
         <div class="collapse" id="traveller">
           <div class="d-flex">
             <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
-              <div class="border-bottom">
-                  {% if traveller_historys %}
-                  {% for traveller_history in traveller_historys %}
+              <div class="w-100">
+                {% if traveller_historys %}
+                  <h2 class="" style="color: #e2c0bb;">Traveller History</h2>
+                {% for traveller_history in traveller_historys %}
                   <div class="mt-5"></div>
                   <p class="col-12 text-left">
                     You travelled with
@@ -359,13 +368,14 @@ Dashboard
                     <a href="">{{ traveller_history.place.name }}</a>
                     - {{traveller_history.end_date|date:'M d,Y'}}
                   </p>
-                  <div class="mb-5"></div>
-                  {% endfor %}
-                  {% else %}
-                  <h2 style="color: #e2c0bb;">No Guide History</h2>
-                  {% endif %}
-                <button class="btn btn-theme-outline px-5 py-3 mt-2 mb-5" id="btn-search-des">Search for
-                  Destinations...</button>
+                  <div class="border-bottom my-5"></div>
+                {% endfor %}
+                {% else %}
+                  <h2 class="mb-5" style="color: #e2c0bb;">No Traveller History</h2>
+                  <button class="btn btn-theme-outline px-5 py-3" id="btn-search-des">Search for
+                    Destinations...</button>
+                  <div class="my-5 border-bottom"></div>
+                {% endif %}
               </div>
 
 
@@ -388,8 +398,8 @@ Dashboard
                 </div>
                 {% endfor %}
                 {% else %}
-                <h2 style="color: #e2c0bb;" class="mt-5 text-center">No Traveller Reviews</h2>
-                <div class="border-bottom my-5"></div>
+                <h2 style="color: #e2c0bb;" class="text-center">No Traveller Reviews</h2>
+                <div class="border-bottom w-100 my-5"></div>
                 {% endif %}
               </div>
 
@@ -659,7 +669,7 @@ Dashboard
           </div>
 
           <div class="form-group md-4">
-            <label for="Title">Place</label><br>
+            <label for="Title">Place you want to guide of</label><br>
             <input class="form-control" list="places" name="place" pattern="{{place_pattern}}" title='enter a valid place' value="{{g_user.get_place}}" required>
             <datalist id="places">
               {% if places %}

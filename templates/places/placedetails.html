@@ -149,7 +149,15 @@ Details
                   </div>
                   <div class="col-10 col-lg-11">
                     <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">
-                    {{ review.Reviewer.first_name }} {{ review.Reviewer.last_name }} {% if review.Reviewer == logged_in_user and show_bool %}<form action="{% url 'placedetails' place.id %}" method="POST">{% csrf_token %}<input type="hidden" value="{{ review.id }}" name="rev_id"><button type="submit" name="edit_rev">Edit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" name="del_rev">Delete</button></form>{% endif %}</h5>
+                        {{ review.Reviewer.first_name }} {{ review.Reviewer.last_name }} {% if review.Reviewer == logged_in_user and show_bool %}
+                        <form action="{% url 'placedetails' place.id %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{ review.id }}" name="rev_id">
+                            <button type="submit" name="edit_rev">Edit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="submit" name="del_rev">Delete</button>
+                        </form>
+                        {% endif %}
+                    </h5>
 
                     <div class="review__rating m-n2">
                       {% if review.ratings == 1 %}

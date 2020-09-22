@@ -1,9 +1,10 @@
 from django.utils import timezone
-from django.shortcuts import render
 from django.http import HttpResponse
 from travellers.models import Traveller
 from places.models import Place
 from guides.models import Guide
+from accounts.models import User
+from django.shortcuts import render, redirect, get_object_or_404
  
 def index(request):
     active_guides = Guide.objects.all().filter(is_active=True)
@@ -25,4 +26,9 @@ def index(request):
     })
     return render(request, 'pages/index.html', context)
 def about(request):
-    return render(request, 'pages/about.html')
+    if request.user.is_authenticated:
+        traveller_user = get_object_or_404(Traveller, email=request.user)
+    context={
+                    'logged_in_user':traveller_user,
+            }
+    return render(request, 'pages/about.html',context)
