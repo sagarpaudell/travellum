@@ -353,7 +353,7 @@ Dashboard
                     <img src={{guide_review.guide_reviewer.photo_main.url}}
                       style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
                   </div>
-                  <div class="col-10 col-lg-11">
+                  <div class="col-10 col-lg-10">
                     <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">
                       {{ guide_review.guide_reviewer.first_name }} {{ guide_review.guide_reviewer.last_name }}</h5>
                     <div class="review__rating m-n2">
@@ -380,6 +380,16 @@ Dashboard
                       {% endif %}
                     </div>
                     <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">{{guide_review.guide_review}}</p>
+                  </div>
+                  <div class="col-lg-1">
+                    <div class="row">
+                      <button title="Edit Review" class="btn btn-sm" data-toggle="modal" data-target="#edit-review">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button title="Delete Review" class="btn btn-sm" data-toggle="modal" data-target="#delete-review">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
                 {% endfor %}
@@ -480,232 +490,74 @@ Dashboard
 
 
 <!--========================= Modals =====================-->
-
-
-<!--================= Edit Profile Modal =================-->
-<div class="modal" id="edit_profile_modal">
-  <div class="modal-dialog modal-lg">
+<div class="modal fade" id="edit-review">
+  <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">
-          Edit Profile
+          Edit your Review
         </h5>
-        <button class="close" data-dismiss="modal">
-          &times;
-        </button>
+        <button class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <form action="{% url 'dashboard' %}" method="POST" enctype="multipart/form-data">
-          {% csrf_token %}
+        <div class="text-center">
 
-          <!-- Choose Image Overlay -->
-          <!-- Source: https://codepen.io/JohanDelValle/pen/mZwKrx?editors=1100 -->
-          <div class=" d-flex justify-content-around">
-            <span>
-              <label for="profile_pic">
-                {% if traveller_user %}
-                {% if traveller_user.photo_main %}
-                <div class="profile-pic" style="background-image: url('{{ traveller.photo_main.url }}')">
-                  <span class="fa fa-camera"></span>
-                  <span>Change Image</span>
-                </div>
-                {% else %}
-                <div class="profile-pic">
-                  <span class="fa fa-camera"></span>
-                  <span>Change Image</span>
-                </div>
-                {% endif %}
-                {% endif %}
-              </label>
-              <input type="File" name="photo_main" id="profile_pic">
-            </span>
+          <div class="col-2 col-lg-1 rounded">
+            <img {% if logged_in_user.photo_main %} src="{{logged_in_user.photo_main.url}}" {% else %}
+              src="{% static 'images/default.png' %}" {% endif %}
+              style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
           </div>
-          <!-- End of Choose Image Overlay -->
+          <form method="POST" class="col-10 col-lg-11">
+            {% csrf_token %}
+            <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Review this Guide</h5>
+            <textarea class="form-control" rows="3" name="review" required></textarea>
 
-          <!--============ Edit Profile Inputs ==================-->
-          <div class="form-group">
-            <label for="location">First Name</label>
-            <input type="text" class="form-control" name="first_name" {% if traveller_user %}
-              value="{{traveller_user.first_name}}" {% endif %}>
-          </div>
-          <div class="form-group">
-            <label for="location">Last Name</label>
-            <input type="text" class="form-control" name="last_name"
-              {% if traveller_user %}value="{{traveller_user.last_name}}" {% endif %}>
-          </div>
-
-          <div class="form-group">
-            <label for="location">Location</label>
-            <input type="text" class="form-control" name="address" {% if traveller_user %}
-              value="{{traveller_user.address}}" {% endif %}>
-          </div>
-
-          <div class="form-group">
-            <label for="slogan">Slogan</label>
-            <input type="text" class="form-control" name="slogan" {% if traveller_user %}
-              value="{{traveller_user.slogan}}" {% endif %}>
-          </div>
-
-          <div class="form-group">
-            <label for="about_me">About Me</label>
-            <textarea class="form-control" rows="3"
-              name="bio">{% if traveller_user %}{{traveller_user.bio}}{% endif %}</textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="Languages">Languages</label><br>
-            <input type="text" class="form-control" name="languages" {% if traveller_user %}
-              value="{{traveller_user.languages}}" {% endif %}>
-          </div>
-
-          {% if traveller_user %}
-          {% if traveller_user.is_guide %}
-          <div class="form-group">
-            <label for="pph">Price/hr</label><br>
-            <input type="number" class="form-control" name="pph">
-          </div>
-          {% endif %}
-          {% endif %}
-
-          <div class="form-group">
-            <label for="gender">Gender</label>
-            <select class="form-control" name="gender">
-              {% if traveller_user %}
-              {% ifnotequal traveller_user.gender "" %}<option selected>{{traveller_user.gender}}</option>
-              {% endifnotequal %}
-
-              {% ifequal traveller_user.gender "Male" %}
-              <option>Female</option>
-              <option>Other</option>
-              {% endifequal %}
-
-              {% ifequal traveller_user.gender "Female" %}
-              <option>Male</option>
-              <option>Other</option>
-              {% endifequal %}
-
-              {% ifequal traveller_user.gender "Other" %}
-              <option>Female</option>
-              <option>Male</option>
-              {% endifequal %}
-
-              {% ifequal traveller_user.gender "" %}
-              <option>Female</option>
-              <option>Male</option>
-              <option>Other</option>
-              {% endifequal %}
-              {% endif %}
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Interests</label><br>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="English" value="option1">
-              <label class="form-check-label" for="English"> Exploration & Sightseeing</label>
+            <div class="mt-n4" style="display: flex; justify-content: flex-end;">
+              <div class="rating">
+                <input type="radio" id="star5" name="rating" value="5" />
+                <label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
+                <input type="radio" id="star4" name="rating" value="4" />
+                <label class="star" for="star4" title="Great" aria-hidden="true"></label>
+                <input type="radio" id="star3" name="rating" value="3" />
+                <label class="star" for="star3" title="Very good" aria-hidden="true"></label>
+                <input type="radio" id="star2" name="rating" value="2" />
+                <label class="star" for="star2" title="Good" aria-hidden="true"></label>
+                <input type="radio" id="star1" name="rating" value="1" />
+                <label class="star" for="star1" title="Bad" aria-hidden="true"></label>
+              </div>
             </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="English" value="option1">
-              <label class="form-check-label" for="English"> Food & Restaurants</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="English" value="option1">
-              <label class="form-check-label" for="English"> Driving Tours</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="English" value="option1">
-              <label class="form-check-label" for="English"> Sports & Recreation</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="English" value="option1">
-              <label class="form-check-label" for="English"> Art & Museums</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="English" value="option1">
-              <label class="form-check-label" for="English"> History & Culture</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="English" value="option1">
-              <label class="form-check-label" for="English"> Nightlife & Bars</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="English" value="option1">
-              <label class="form-check-label" for="English"> Shopping</label>
-            </div>
-          </div>
-          <!-- End of Edit Profile Inputs -->
+          </form>
 
-
-          <div class="modal-footer">
-            <input type="submit" value="Save Changes" name="Update Profile" class="btn btn-success">
-          </div>
+        </div>
+        <div class="d-flex justify-content-end align-items-center">
+          <a href="{% url 'my_blog' %}" class="btn btn-outline-dark text-dark mx-2 my-3">Save</a>
+          <button class="btn btn-dark mx-2 my-3" data-dismiss="modal">Cancel</button>
+        </div>
       </div>
-      </form>
     </div>
   </div>
 </div>
-<!-- End of Edit Profile Modal -->
 
-<!--====guide form====-->
-<div class="modal" id="guide_form_modal">
-  <div class="modal-dialog ">
+<div class="modal fade" id="delete-review">
+  <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">
-          Guide-Form Fillup
+          Delete this Review
         </h5>
-
-        <button class="close" data-dismiss="modal">
-          &times;
-        </button>
+        <button class="close" data-dismiss="modal">&times;</button>
       </div>
-      <form action="{% url 'dashboard' %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="modal-body">
-
-          <div class="form-group mb-4">
-            <label for="Document Type">Document Type</label><br>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="docType" id="ctzn" value="ctzn" required>
-              <label class="form-check-label" for="ctzn">Citizenship</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="docType" id="license" value="license" required>
-              <label class="form-check-label" for="license">Driving License</label>
-            </div>
-          </div>
-
-          <div class="form-group mb-4">
-            <p>Document Front</p>
-            <div class="custom-file">
-              <input class="custom-file-input" type="File" name="doc-front" id="ctzn-front" required>
-              <label class="custom-file-label" for="ctzn-front">Choose file</label>
-            </div>
-          </div>
-
-          <div class="form-group mb-4">
-            <p>Document Back</p>
-            <div class="custom-file">
-              <input class="custom-file-input" type="File" name="doc-back" id="ctzn-back" required>
-              <label class="custom-file-label" for="ctzn-back">Choose file</label>
-            </div>
-          </div>
-
-          <div class="form-group mb-4">
-            <p>Document Number</p>
-            <input type="text" class="form-control" name="doc-number" required>
-          </div>
-
+      <div class="modal-body">
+        Are you sure you want to delete this Review?
+        <div class="d-flex justify-content-center align-items-center">
+          <a href="{% url 'my_blog' %}" class="btn btn-outline-dark text-dark mx-2 my-3">Yes</a>
+          <button class="btn btn-dark mx-2 my-3" data-dismiss="modal">Cancel</button>
         </div>
-
-        <div class="modal-footer">
-          <input type="submit" value="Be a Guide" name="Guide-Form" class="btn btn-success">
-        </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>
-</div>
+
 <!-- End of Modals -->
 
 {% endblock %}

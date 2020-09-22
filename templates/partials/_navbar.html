@@ -84,7 +84,11 @@
                         {% else %}
                           <a href="#" class="top-text-block">
                             <div class="top-text-heading mb-2" style="font-size: .8rem;">
-                              {{ trip_noti.sender_email.first_name }} has created a trip. You can confirm the trip<form method="POST" action="{% url 'confirm_trip' %}">{% csrf_token %}<input name="tn_id" value="{{ trip_noti.id }}" type="hidden"><a type="submit">here</a></form>
+                              {{ trip_noti.sender_email.first_name }} has created a trip. You can confirm the trip
+                              <form method="POST" action="{% url 'confirm_trip' %}">
+                                {% csrf_token %}
+                                <input name="tn_id" value="{{ trip_noti.id }}" type="hidden">
+                                <a type="submit">here</a></form>
                             </div>
                           </a>
                         {% endif %}
@@ -198,12 +202,12 @@
             {% if  user.is_authenticated %}
             <div class="dropdown-menu" style="position: absolute; min-width: 80px; background: rgba(255,255,255,0.9);"
               aria-labelledby="navbarDropdownMenuLink">
+              <a  class="dropdown-item" href="{% url 'dashboard' %}">Dash</a>
+              <a class="dropdown-item" href="{% url 'my_blog' %}">My Blog</a>
               {% if g_user %}
               <a class="dropdown-item" style="cursor: pointer;" data-toggle="modal"
                 data-target="#visibility">Visibility</a>
               {% endif %}
-              <a  class="dropdown-item" href="{% url 'dashboard' %}">Dash</a>
-              <a class="dropdown-item" href="{% url 'my_blog' %}">My Blog</a>
               <a class="dropdown-item" href="/accounts/logout">Log Out</a>
             </div>
             {% endif %}
