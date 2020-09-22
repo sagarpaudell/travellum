@@ -1,3 +1,4 @@
+from django.contrib import messages
 from accounts.models import User
 from chat.models import Chat
 from travellers.models import Traveller
@@ -58,7 +59,7 @@ def chat(request, email):
     context={ 
         'chat_details':user_name_chat,
         'chat_friend':User.objects.get(id=friend_userid) ,
-        'chat_list':chat_list,
+        'chat_list':chat_list.order_by('message_time'),
         'traveller_currentuser':Traveller.objects.filter(email=current_user.id).first(),
         'traveller_chatuser':Traveller.objects.filter(email=friend_user.id).first(),
         'logged_in_user': Traveller.objects.filter(email=current_user.id).first(),
@@ -79,8 +80,9 @@ def chatRedirect(request):
         return redirect(f"{user.email}")
 
     except:
-        print(last_message)
-        return redirect("index")
+        messages.info(request,'You haven\'t talked with anyone yet.')
+        print (request.META)
+        return redirect(request.META['HTTP_REFERER'])
 
 
 

@@ -39,7 +39,7 @@ class Blog(models.Model):
 
 
 class Comment(models.Model):
-    blog_id=models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='ofblog')
+    blog_id=models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
     comment = models.TextField()
     upvote_users = models.ManyToManyField(User, related_name='upvotedcomments')

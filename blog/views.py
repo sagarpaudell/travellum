@@ -50,7 +50,7 @@ def my_blog(request):
                 'notifications': notifications,
                 'trip_notifications':trip_notifications,
             }
-    blogs = Blog.objects.filter(user=request.user)
+    blogs = request.user.blogs.all()
     context.update({'blogs': blogs})
     return render(request, 'blog/myBlog.html', context)
 
@@ -145,7 +145,7 @@ def single_blog_post(request,id):
             }
     
     blog = Blog.objects.get(id=id)
-    comments = Comment.objects.filter(blog_id=id).order_by('-comment_time')
+    comments = blog.comments.all().order_by('-comment_time')
     # user_picture = Traveller.objects.get(email=request.user).photo_main 
     guide = Guide.objects.filter(email = blog.user).first()
     print(guide)
@@ -322,6 +322,13 @@ def blogs_byplace(request, id):
     print(place)
     blogs = Blog.objects.filter(place = place)
     print(blogs)
+    return render(request, 'blog/place_blog.html', {'blogs':blogs, 'place':place})
+
+def blogs_byuser(request, id):
+    user = Traveller.objects.get(id = id).email
+    blogs = user.blogs.all()
+    print(blogs)
+    
     if request.user.is_authenticated:
         traveller_user = get_object_or_404(Traveller, email=request.user)
         notifications = Notification.objects.all().filter(receiver_email=request.user).order_by('-reg_date')

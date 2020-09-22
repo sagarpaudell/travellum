@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.signals import post_save
 from datetime import datetime
 from travellers.models import Traveller
 from accounts.models import User
@@ -33,7 +34,6 @@ class Guide_Review(models.Model):
     guide_ratings = models.IntegerField(blank=True)
 
 
-
 class Transaction(models.Model):
     paid_by = models.ForeignKey(User, on_delete= models.DO_NOTHING, blank=True, related_name="payer")
     paid_to = models.ForeignKey(User, on_delete= models.DO_NOTHING, blank=True, related_name="earner")
@@ -44,3 +44,21 @@ class Transaction(models.Model):
 
     def __str__(self):
         return self.refId
+
+
+
+def change_is_guide(sender, instance, **kwargs):
+    """ function to receive signal from guide save"""
+    t = Traveller.objects.get(email = instance.email)
+    if instance.is_published :
+        t.is_guide = True
+        t.save()
+        print('a guide entry was changed')
+    else:
+        t.is_guide = False
+        t.save()
+        print('a guide entry was changed')
+
+
+#sends signal to change_is_guide when a new entry is saved in guide model
+post_save.connect(change_is_guide, sender=Guide) 
