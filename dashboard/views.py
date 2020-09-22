@@ -170,7 +170,7 @@ def confirm_trip(request):
     tax = 0.05*amount
     service_charge = 0.2*amount
     total_amount=amount+tax+service_charge
-    pid = tn_instance.id*1010
+    pid = tn_instance.id*2010
   context = {
                 'traveller_user':traveller_user,
                 'logged_in_user':traveller_user,
@@ -186,7 +186,7 @@ def confirm_trip(request):
 
 def payment_success(request):
   temp_oid = int(request.GET.get('oid', ''))
-  oid = temp_oid/1010
+  oid = temp_oid/2010
   tamt = request.GET.get('amt', '')
   refId = request.GET.get('refId', '')
 
@@ -237,7 +237,7 @@ def payment_success(request):
 
 def payment_failure(request):
   temp_oid = int(request.GET.get('oid', ''))
-  oid = temp_oid/1010
+  oid = temp_oid/2010
   context = {
       'oid':oid,
     }
