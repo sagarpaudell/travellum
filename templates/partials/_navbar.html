@@ -11,24 +11,18 @@
           <div class="text-center" style="padding-top: 8px;">
             <a class="navbar-brand text-light navbar-brand-sm " href="{%url 'index'%}" style="font-size: 1.5rem;">T</a>
           </div>
-          <!-- a -->
         </div>
 
         <div class="col-lg-7 col-md-5 col-3" id="search-bar-on-nav">
           <div class="navbar-nav mt-n1">
             <form action="{% url 'search' %}" class="form-inline ">
               <a href="{% url 'index' %}" id="search">
-                <i id="searchDesIcon" style="font-size: 1.1rem; padding-top: 5px;" class="fa fa-search text-light"></i>
+                <i id="searchDesIcon" style="font-size: 1.1rem; padding-top: 5px;" class="fa fa-search text-light mr-1"></i>
               </a>
-              <!-- <input class="form-control form-control-lg mr-1 w-200"
-            style=" border:3px solid coral; border-radius:50px;" type="text"
-            placeholder="Search Destinations here" aria-label="SearchPlaces" name="search_places"
-            id="search_places"> -->
-              <input type="text" class="bg-transparent border-0" id="searchDesInput" name="search_places"
+              <input type="text" class="bg-transparent border-0 text-light" id="searchDesInput" name="search_places"
                 placeholder=" Search Locations...">
             </form>
           </div>
-          <!-- a -->
         </div>
 
         <div class="col-lg-1 col-md-2 collapse-on-phones">
@@ -37,16 +31,7 @@
               <a href="{% url 'places' %}" class="nav-link text-light"> Places</a>
             </span>
           </div>
-          <!-- a -->
         </div>
-
-        <!-- <div class="col-lg-1 col-md-1 col-3 text-center">
-        <div class="navbar-nav">
-          <span class="nav-item text-center">
-            <a href="" class="nav-link"><img class="hw-bell" src="{% static 'svg/bell.svg' %}" alt=""></a>
-          </span>
-        </div>
-      </div> -->
 
         <div class="col-lg-1 col-md-1 col-3 text-center">
           <div class="navbar-nav">
@@ -71,30 +56,38 @@
                 {% for notification in notifications %}
                 {% if  notification.is_ignored or notification.is_accepted %}
                   {% if notification.is_ignored %}
-                        <div class="top-text-heading mb-2" style="font-size: .8rem;">
-                          {{ notification.sender_name }} is unavailable for this trip.
-                        </div>
+                    <a href="#" class="top-text-block">
+                      <div class="top-text-heading mb-2" style="font-size: .8rem;">
+                        {{ notification.sender_name }} is unavailable for this trip.
+                      </div>
+                    </a>
                   {% elif  notification.is_accepted %}
-                        <div class="top-text-heading mb-2" style="font-size: .8rem;">
-                          {{ notification.sender_name }} is available for this trip. You can chat with him now
-                        </div>   
-                        {% if trip_notifications %}
-                          {% for trip_noti in trip_notifications %}
-                            {% if trip_noti.has_accepted %}
-                              <div class="top-text-heading mb-2" style="font-size: .8rem;">
-                                You have confirmed trip with {{ trip_noti.sender_email.first_name }}.
-                              </div>
-                            {% elif trip_noti.has_rejected %}
-                              <div class="top-text-heading mb-2" style="font-size: .8rem;">
-                                You have rejected trip with {{ trip_noti.sender_email.first_name }}.
-                              </div>
-                            {% else %}
-                              <div class="top-text-heading mb-2" style="font-size: .8rem;">
-                                {{ trip_noti.sender_email.first_name }} has created a trip. You can confirm the trip<form method="POST" action="{% url 'confirm_trip' %}">{% csrf_token %}<input name="tn_id" value="{{ trip_noti.id }}" type="hidden"><button type="submit"><u>here</u></button></form>
-                              </div>
-                            {% endif %}
-                          {% endfor %}
+                    <a href="#" class="top-text-block">
+                      <div class="top-text-heading mb-2" style="font-size: .8rem;">
+                        {{ notification.sender_name }} is available for this trip. You can chat with him now
+                      </div>
+                    </a>   
+                    {% if trip_notifications %}
+                      {% for trip_noti in trip_notifications %}
+                        {% if trip_noti.has_accepted %}
+                          <a href="#" class="top-text-block">
+                            <div class="top-text-heading mb-2" style="font-size: .8rem;">
+                              You have confirmed trip with {{ trip_noti.sender_email.first_name }}.
+                            </div>
+                          </a>
+                        {% elif trip_noti.has_rejected %}
+                          <a href="#" class="top-text-block">
+                            <div class="top-text-heading mb-2" style="font-size: .8rem;">
+                              You have rejected trip with {{ trip_noti.sender_email.first_name }}.
+                            </div>
+                          </a>
+                        {% else %}
+                          <div class="top-text-heading mb-2" style="font-size: .8rem;">
+                            {{ trip_noti.sender_email.first_name }} has created a trip. You can confirm the trip<form method="POST" action="{% url 'confirm_trip' %}">{% csrf_token %}<input name="tn_id" value="{{ trip_noti.id }}" type="hidden"><button type="submit"><u>here</u></button></form>
+                          </div>
                         {% endif %}
+                      {% endfor %}
+                    {% endif %}
                   {% else %}
                     <div
                       class="d-flex align-items-center justify-content-center m-0" 
@@ -108,18 +101,22 @@
                 {% if trip_notifications %}
                     {% for trip_noti in trip_notifications %}
                       {% if trip_noti.has_accepted %}
-                      <div class="top-text-heading mb-2" style="font-size: .8rem;">
-                        Your trip with {{ trip_noti.receiver_email.first_name }} has been confirmed. Your account is credited.
-                      </div>
+                        <a href="#" class="top-text-block">
+                          <div class="top-text-heading mb-2" style="font-size: .8rem;">
+                            Your trip with {{ trip_noti.receiver_email.first_name }} has been confirmed. Your account is credited.
+                          </div>
+                        </a>
                       {% elif trip_noti.has_rejected %}
-                        <div class="top-text-heading mb-2" style="font-size: .8rem;">
-                          Oops! Your trip with {{ trip_noti.receiver_email.first_name }} have rejected.
-                        </div>
+                        <a href="#" class="top-text-block">
+                          <div class="top-text-heading mb-2" style="font-size: .8rem;">
+                            Oops! Your trip with {{ trip_noti.receiver_email.first_name }} have rejected.
+                          </div>
+                        </a>
                       {% else %}
                         <div
-                        class="d-flex align-items-center justify-content-center m-0" 
-                            style="cursor: default; height: 90%; font-weight: normal;"
-                          >  
+                          class="d-flex align-items-center justify-content-center m-0" 
+                          style="cursor: default; height: 90%; font-weight: normal;"
+                        >  
                             No any Notifications
                         </div>
                       {% endif %}
@@ -141,7 +138,7 @@
                             <input type="hidden" value="{{ notification.id}}" name="noti_id">
                             <input type="hidden" value="{{ notification.sender_email }}" name="receiver_email">
                             <input type="submit" value = "Accept" name = "accepted" class="btn btn-sm btn-success p-0" style="font-size: .75rem; padding: 2px !important;">
-                              
+                            
                             
                             &nbsp;
                             <input type="submit" value="Ignore" name="ignored" class="btn btn-sm btn-danger p-0" style="font-size: .75rem; padding: 2px !important;">
