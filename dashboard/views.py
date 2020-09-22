@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from accounts.models import User
 from chat.models import Chat
-from travellers.models import Traveller
+from travellers.models import Traveller, Traveller_Review
 from guides.views import GuideView, GuideUpdateView
 from guides.models import Guide, Guide_Review, Transaction
 from guides.views import GuideView
@@ -20,6 +20,7 @@ def dashboard(request):
   traveller_user=get_object_or_404(Traveller, email=user)
   bio = traveller_user.bio.split('.',5)
   bio_first = ". ".join(bio[:5])+(".")
+  traveller_reviews = Traveller_Review.objects.all().filter(traveller=traveller_user)
   guide_user = Guide.objects.all().filter(email=user).first()
   guide_reviews = Guide_Review.objects.all().filter(guide=user)
   notifications = Notification.objects.all().filter(receiver_email=user).order_by('-reg_date')
@@ -53,7 +54,8 @@ def dashboard(request):
                 'guide_historys': guide_historys,
                 'traveller_historys': traveller_historys,
                 'g_user':guide_user,
-                'guide_reviews': guide_reviews,  
+                'guide_reviews': guide_reviews,
+                'traveller_reviews': traveller_reviews,  
             }
   
 
@@ -65,6 +67,7 @@ def dashboard(request):
                 'guide_historys': guide_historys,
                 'traveller_historys': traveller_historys,
                 'g_user':guide_user1,
+                'traveller_reviews': traveller_reviews,  
             })
   
   if(traveller_user.is_guide):
