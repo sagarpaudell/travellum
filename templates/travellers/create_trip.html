@@ -8,9 +8,9 @@ Create Trip
 
 {% block content %}
 
-<section class="container-fluid">
-    <section class="row justify-content-center">
-        <section style="width:60%;  ">
+<div class="container" style="width:60%;">
+    <section class=" row justify-content-center">
+        <section>
             <div style="background:#fff; padding:30px; border-radius:10px; box-shadow:0px 0px 10px 0px;">
                 <form method="POST">
                     {% csrf_token %}
@@ -84,6 +84,6 @@ Create Trip
             </div>
         </section>
     </section>
-</section>
+</div>
 
 {% endblock %}

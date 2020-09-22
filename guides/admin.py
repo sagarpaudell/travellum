@@ -11,7 +11,7 @@ class GuideAdmin(admin.ModelAdmin):
 admin.site.register(Guide, GuideAdmin)
 
 class Guide_ReviewAdmin(admin.ModelAdmin):
-    list_display = ('guide','guide_reviewer', 'guide_ratings')
+    list_display = ('id','guide','guide_reviewer', 'guide_ratings')
     list_display_links = ('guide','guide_reviewer')
 
 admin.site.register(Guide_Review, Guide_ReviewAdmin)

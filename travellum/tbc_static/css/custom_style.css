@@ -533,6 +533,9 @@ textarea.form-control {
   #third-step {
     top: 180px;
   }
+  #hide-pipe {
+    display: none !important;
+  }
 }
 
 #guide-card {

@@ -7,7 +7,7 @@ from .models import User
 from .forms import UserRegisterForm
 from travellers.models import Traveller
 from django.conf import settings
-
+from urllib.parse import urlparse
 
 # Create your views here.
 
@@ -33,7 +33,7 @@ def register(request):
             user.save()
             traveller=Traveller(first_name=first_name,last_name=last_name,email=User.objects.get(email = email))
             traveller.save()
-            send_verificationmail(email)            
+            send_verificationmail(request, email)            
             messages.info(request, 'verification link has been sent to your account')
             return redirect('login')
 
@@ -55,7 +55,7 @@ def login_view(request):
                     return redirect('dashboard')
             else:
                 messages.warning(request, 'verification link has been sent to your account. You need to verify your account 1st to login')
-                send_verificationmail(email)
+                send_verificationmail(request, email)
                 return redirect('login')
         else:
             messages.warning(request, 'invalid credentials')
@@ -76,15 +76,20 @@ def reset_view(request):
     if request.method == 'POST':
         email = request.POST['email']
         user = User.objects.filter(email = email)
+        x = request.build_absolute_uri()
+        url = urlparse(x)
+        absolute_url = f'{url.scheme}://{url.netloc}'
+        print(absolute_url)
         if user.exists() :
             token = default_token_generator.make_token(user.first())
             subject = f'password reset'
             message = f'follow this link to reset your password\
-                http://127.0.0.1:8000/accounts/change_pw/{email}/{token}/'
+                {absolute_url}/accounts/change_pw/{email}/{token}/'
+            print(message)
             email_from = settings.EMAIL_HOST_USER
             recipient_list = [email]
             send_mail( subject, message, email_from, recipient_list)
-            messages.info(request, 'password reset link has been sent to your accounts')
+            messages.info(request, 'password reset link has been sent to your email')
     return render(request, 'accounts/reset.html')
 
 
@@ -125,13 +130,16 @@ def change_pw_view(request):
 
 
 
-def send_verificationmail(email):
+def send_verificationmail(request,email):
     """ sends verification mail"""
     user =  User.objects.get(email = email)
     token = default_token_generator.make_token(user)
+    x = request.build_absolute_uri()
+    url = urlparse(x)
+    absolute_url = f'{url.scheme}://{url.netloc}'
     subject = f'email verification link'
     message = f'follow this link to verify your account\
-        http://127.0.0.1:8000/accounts/verify_mail/{user.email}/{token}/'
+        {absolute_url}/accounts/verify_mail/{user.email}/{token}/'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [email]
     send_mail( subject, message, email_from, recipient_list )    

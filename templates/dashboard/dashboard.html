@@ -203,14 +203,15 @@ Dashboard
 
             <!--======= Profile Description Section ==========-->
             <h2 class="px-3" style="color: #e2c0bb;">Hi there! Nice to meet you</h2>
-            <p class="p-3 text-justify">
+            <p class="mt-3 px-3 text-justify">
               {% if traveller_user %}{{bio_first}}{% endif %}
             </p>
             <br>
-
-            <p class="px-3 pb-3 text-justify collapse" id="collapse-btn-1">
-              {{bio_second}}
-            </p>
+            {% if bio_second %}
+              <p class="px-3 pb-3 text-justify collapse" id="collapse-btn-1">
+                {{bio_second}}
+              </p>
+            {% endif %}
             <div class="container">
               <div class="row">
                 <div class="col-md-10"></div>
@@ -262,8 +263,9 @@ Dashboard
 
               <div class="col-md-12 border-bottom">
                 {% if guide_user %}
+                <h2 style="color: #e2c0bb;">Guide History</h2>
                 {% if guide_user.is_published %}
-                <div class="mx-5 px-5">
+                <div class="mb-5">
                   {% if guide_historys %}
                   {% for guide_history in guide_historys %}
                   <div class="mt-5"></div>
@@ -277,7 +279,7 @@ Dashboard
                   <div class="mb-5"></div>
                   {% endfor %}
                   {% else %}
-                  <h2 style="color: #e2c0bb;">No Guide History</h2>
+                  <h2 class="display-none display-md-block mb-5" style="color: #e2c0bb;">No Guide History</h2>
                   {% endif %}
                 </div>
                 {% else %}
@@ -285,8 +287,10 @@ Dashboard
                 <p class="pb-3 mb-5">You will be notified soon.</p>
                 {% endif %}
                 {% else %}
-                <button class="btn btn-theme-outline px-5 py-3 mt-2 mb-5" data-toggle="modal"
+                <h2 class="display-none display-md-block mb-5" style="color: #e2c0bb;">No Guide History</h2>
+                  <button class="btn btn-theme-outline px-5 py-3" data-toggle="modal"
                   data-target="#guide_form_modal">Become a Guide</button>
+                  <div class="my-5"></div>
                 {% endif %}
               </div>
               
@@ -296,6 +300,9 @@ Dashboard
                 <div class="container text-left">
                 {% if guide_user.is_published %}
                 {% if guide_reviews %}
+                <div class="mt-5"></div>
+                <h2 class="text-center" style="color: #e2c0bb;">Guide Reviews</h2>
+                <div class="mb-5"></div>
                 {% for guide_review in guide_reviews %}
                 <div class="row border py-3 my-3" style="background: white !important;">
                   <div class="col-2 col-lg-1">
@@ -332,10 +339,10 @@ Dashboard
                   </div>
                 </div>
                 {% endfor %}
+                {% endif %}
                 {% else %}
                 <h2 style="color: #e2c0bb;" class="mt-5 text-center">No Guide Reviews</h2>
                 <div class="border-bottom my-5"></div>
-                {% endif %}
                 {% endif %}
                 </div>
             </div>
@@ -349,9 +356,10 @@ Dashboard
         <div class="collapse" id="traveller">
           <div class="d-flex">
             <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
-              <div class="border-bottom">
-                  {% if traveller_historys %}
-                  {% for traveller_history in traveller_historys %}
+              <div class="w-100">
+                {% if traveller_historys %}
+                  <h2 class="" style="color: #e2c0bb;">Travller History</h2>
+                {% for traveller_history in traveller_historys %}
                   <div class="mt-5"></div>
                   <p class="col-12 text-left">
                     You travelled with
@@ -361,62 +369,43 @@ Dashboard
                     - {{traveller_history.end_date|date:'M d,Y'}}
                   </p>
                   <div class="mb-5"></div>
-                  {% endfor %}
-                  {% else %}
-                  <h2 style="color: #e2c0bb;">No Guide History</h2>
-                  {% endif %}
-                <button class="btn btn-theme-outline px-5 py-3 mt-2 mb-5" id="btn-search-des">Search for
-                  Destinations...</button>
+                {% endfor %}
+                {% else %}
+                  <h2 class="mb-5" style="color: #e2c0bb;">No Traveller History</h2>
+                  <button class="btn btn-theme-outline px-5 py-3" id="btn-search-des">Search for
+                    Destinations...</button>
+                  <div class="my-5 border-bottom"></div>
+                {% endif %}
               </div>
-              <div class="border-bottom py-5">
-                <h2 style="color: #e2c0bb;" class="mb-5">No Traveller Reviews</h2>
 
 
 
-                <div class="container text-left">
-                  <div class="row border py-3 mb-5" style="background: white !important;">
-                    <div class="col-2 col-lg-1 rounded">
-                      <img src="https://source.unsplash.com/random/200x200"
-                        style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
-                    </div>
-                    <form class="col-10 col-lg-11">
-                      <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Review this Traveller</h5>
-                      <textarea class="form-control" rows="3"></textarea>
-                      <div style="display: flex; justify-content: flex-end;">
-                        <input class="btn btn-danger mt-2" type="submit">
-                      </div>
-                    </form>
+              <div class="container text-left">
+
+                {% if traveller_reviews %}
+                {% for traveller_review in traveller_reviews %}
+                <div class="row border py-3 my-3" style="background: white !important;">
+                  <div class="col-2 col-lg-1">
+                    <img src={{traveller_review.traveller_reviewer.photo_main.url}}
+                      style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
                   </div>
-
-                  <div class="row border py-3 my-3" style="background: white !important;">
-                    <div class="col-2 col-lg-1">
-                      <img src="https://source.unsplash.com/random/200x200"
-                        style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
-                    </div>
-                    <div class="col-10 col-lg-11">
-                      <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Samesh Bajracharya</h5>
-                      <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">Lorem ipsum dolor sit amet,
-                        consectetur adipisicing elit. Quaerat incidunt odit, doloremque eveniet cupiditate autem laborum
-                        ea praesentium. Reprehenderit, doloribus?</p>
-                    </div>
-                  </div>
-                  <div class="row border py-3 my-3" style="background: white !important;">
-                    <div class="col-2 col-lg-1">
-                      <img src="https://source.unsplash.com/random/200x200"
-                        style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
-                    </div>
-                    <div class="col-10 col-lg-11">
-                      <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Samesh Bajracharya</h5>
-                      <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">Lorem ipsum dolor sit amet,
-                        consectetur adipisicing elit. Quaerat incidunt odit, doloremque eveniet cupiditate autem laborum
-                        ea praesentium. Reprehenderit, doloribus?</p>
-                    </div>
+                  <div class="col-10 col-lg-11">
+                    <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">
+                      {{ traveller_review.traveller_reviewer.first_name }} {{ traveller_review.traveller_reviewer.last_name }}</h5>
+                    
+                    <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">{{traveller_review.traveller_review}}</p>
                   </div>
                 </div>
-
-
-
+                {% endfor %}
+                {% else %}
+                <h2 style="color: #e2c0bb;" class="text-center">No Traveller Reviews</h2>
+                <div class="border-bottom w-100 my-5"></div>
+                {% endif %}
               </div>
+
+
+
+              
             </div>
           </div>
         </div>
@@ -671,17 +660,17 @@ Dashboard
 
           <div class="form-group mb-4">
             <label for="pph">Price/hr</label><br>
-            <input type="number" class="form-control" id="pph" step="100" name="pph">
+            <input type="number" class="form-control" id="pph" step="100" name="pph" value = "{{g_user.price}}">
           </div>
 
           <div class="form-group">
             <label for="rep-with">Replies within(hours)</label><br>
-            <input type="number" class="form-control" min="6" id="rep-with" name="rep-with">
+            <input type="number" class="form-control" min="6" id="rep-with" name="rep-with" value="{{g_user.replies_within}}">
           </div>
 
           <div class="form-group md-4">
             <label for="Title">Place</label><br>
-            <input class="form-control" list="places" name="place" pattern="{{place_pattern}}" title='enter a valid place' required>
+            <input class="form-control" list="places" name="place" pattern="{{place_pattern}}" title='enter a valid place' value="{{g_user.get_place}}" required>
             <datalist id="places">
               {% if places %}
               {% for place in places %}

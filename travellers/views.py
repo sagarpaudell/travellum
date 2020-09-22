@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from accounts.models import User
-from travellers.models import Traveller
+from travellers.models import Traveller, Traveller_Review
 from places.models import Place
 from history.models import History
 from guides.models import Guide, Guide_Review
@@ -15,7 +15,7 @@ import decimal
 def view_profile(request, traveller_id):
     user=request.user
     if user.is_authenticated:
-        notifications = Notification.objects.all().filter(receiver_email=user)
+        notifications = Notification.objects.all().filter(receiver_email=user).order_by('-reg_date')
         traveller_user_logged_in = get_object_or_404(Traveller, email=user)
         if traveller_user_logged_in.is_guide:
             guide_user = get_object_or_404(Guide, email=user)
@@ -28,27 +28,65 @@ def view_profile(request, traveller_id):
     bio = profile.bio.split('.',5)
     bio_first = ". ".join(bio[:5])+(".")
     guide_reviews = Guide_Review.objects.all().filter(guide=profile.email)
+    guide_review_exists = False
+    for guide_review in guide_reviews:
+        if (guide_review.guide_reviewer.email==user):
+            guide_review_exists=True
+    traveller_reviews = Traveller_Review.objects.all().filter(traveller=profile)
+    traveller_review_exists = False
+    for traveller_review in traveller_reviews:
+        if (traveller_review.traveller_reviewer.email==user):
+            traveller_review_exists=True
     guide = Guide.objects.filter(email=profile.email).first()
     guide_historys = History.objects.all().filter(guide=profile.email,tour_complete=True)
     traveller_historys = History.objects.all().filter(traveller=profile.email,tour_complete=True)
-    if request.method == 'POST':
+    if 'guide_review' in request.POST:
         guide_rating =  request.POST.get('rating')
         guide_review = request.POST['review']
         guide = get_object_or_404(User, email=profile.email)
         guide_reviewer = traveller_user_logged_in
         g_review = Guide_Review(guide = guide, guide_reviewer=guide_reviewer, guide_review=guide_review, guide_ratings=guide_rating)
         g_review.save()
+        return redirect ('/view_profile/'+str(traveller_id))
+
+    if 'edit_guide_review' in request.POST:
+        guide_review_id=request.POST['guide_review_id']
+        eg_review = get_object_or_404(Guide_Review, pk=guide_review_id)
+        eg_review.guide_review = request.POST['new_guide_review']
+        eg_review.guide_ratings = request.POST['new_rating']
+        eg_review.save()
+        return redirect ('/view_profile/'+str(traveller_id))
+
+    if 'delete_guide_review' in request.POST:
+        guide_review_id=request.POST['guide_review_id']
+        dg_review = get_object_or_404(Guide_Review, pk=guide_review_id)
+        dg_review.delete()
+        return redirect ('/view_profile/'+str(traveller_id))
+
+    if 'traveller_review' in request.POST:
+        traveller_review = request.POST['tra_review']
+        traveller = get_object_or_404(Traveller, email=profile.email)
+        traveller_reviewer = traveller_user_logged_in
+        t_review = Traveller_Review(traveller = traveller, traveller_reviewer=traveller_reviewer, traveller_review=traveller_review)
+        t_review.save()
+        return redirect ('/view_profile/'+str(traveller_id))
     if profile.email==user:
         return redirect('dashboard')
 
     elif user.is_authenticated:
-        travel_history = History.objects.all().filter(traveller = user , guide = profile.email)
-        has_travelled_with = False
-        if travel_history:
-            for history in travel_history:
+        guide_travel_history = History.objects.all().filter(traveller = user , guide = profile.email)
+        guide_has_travelled_with = False
+        if guide_travel_history:
+            for history in guide_travel_history:
                 if history.tour_complete:
-                    has_travelled_with = True
-        notification_history = Notification.objects.all().filter(receiver_email = profile.email , sender_email = user)
+                    guide_has_travelled_with = True
+        traveller_travel_history = History.objects.all().filter(traveller = profile.email , guide = user)
+        traveller_has_travelled_with = False
+        if traveller_travel_history:
+            for history in traveller_travel_history:
+                if history.tour_complete:
+                    traveller_has_travelled_with = True
+        notification_history = Notification.objects.all().filter(receiver_email = profile.email , sender_email = user).order_by('-reg_date')
         trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user)
         has_accepted = False
         for noti in notification_history:
@@ -60,13 +98,17 @@ def view_profile(request, traveller_id):
                 'my_profile':False,
                 'notifications': notifications,
                 'trip_notifications': trip_notifications,
-                'has_travelled_with': has_travelled_with,
+                'guide_has_travelled_with': guide_has_travelled_with,
                 'guide_reviews': guide_reviews,
                 'bio_first': bio_first,
                 'has_accepted': has_accepted,
                 'guide':guide,
                 'guide_historys': guide_historys,
                 'traveller_historys': traveller_historys,
+                'guide_review_exists':guide_review_exists,
+                'traveller_reviews': traveller_reviews,
+                'traveller_review_exists': traveller_review_exists,
+                'traveller_has_travelled_with': traveller_has_travelled_with,
                  }
 
         if (len(bio)>=5):
@@ -77,7 +119,7 @@ def view_profile(request, traveller_id):
                 'my_profile':False,
                 'notifications': notifications,
                 'trip_notifications': trip_notifications,
-                'has_travelled_with': has_travelled_with,
+                'guide_has_travelled_with': guide_has_travelled_with,
                 'guide_reviews': guide_reviews,
                 'bio_first': bio_first,
                 'bio_second': bio_second,
@@ -85,6 +127,10 @@ def view_profile(request, traveller_id):
                 'guide':guide,
                 'guide_historys': guide_historys,
                 'traveller_historys': traveller_historys,
+                'guide_review_exists':guide_review_exists,
+                'traveller_reviews': traveller_reviews,
+                'traveller_review_exists': traveller_review_exists,
+                'traveller_has_travelled_with': traveller_has_travelled_with,
             }
         return render(request, 'travellers/travellers.html',context)
 
@@ -97,6 +143,9 @@ def view_profile(request, traveller_id):
                 'guide':guide,
                 'guide_historys': guide_historys,
                 'traveller_historys': traveller_historys,
+                'guide_review_exists':guide_review_exists,
+                'traveller_reviews': traveller_reviews,
+                'traveller_review_exists': traveller_review_exists,
             }
         
         if (len(bio)>=5):
@@ -110,6 +159,9 @@ def view_profile(request, traveller_id):
                 'guide':guide,
                 'guide_historys': guide_historys,
                 'traveller_historys': traveller_historys,
+                'guide_review_exists':guide_review_exists,
+                'traveller_reviews': traveller_reviews,
+                'traveller_review_exists': traveller_review_exists,
             }
         return render(request, 'travellers/travellers.html',context)
 

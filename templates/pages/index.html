@@ -45,16 +45,15 @@
 
 						<li class="nav-item mr-2"><a href="#top-guides" class="nav-link"><span>Top Guides</span></a>
 						</li>
-
+						<li class="nav-item ml-n4 mr-n2" id="hide-pipe"><a href="#" class="nav-link"><span>|</span></a>
+						</li>
 						<li class="nav-item mr-2"><a href="{% url 'about' %}" class="nav-link"><span>About Us</span></a>
 						<li class="nav-item mr-2"><a href="{% url 'explore' %}" class="nav-link"><span>Blog</span></a>
 						</li>
 
 						{% if  user.is_authenticated%}
 						<li class="nav-item mr-2"><a href="{% url 'dashboard' %}"
-								class="nav-link"><span>Dashboard</span></a>
-						</li>
-						<li class="nav-item mr-2"><a href="{% url 'logout' %}" class="nav-link"><span>Log out</span></a>
+								class="nav-link"><span>Dash</span></a>
 						</li>
 						{% else %}
 						<li class="nav-item mr-2"><a href="{% url 'login' %}" class="nav-link"><span>Log In</span></a>
@@ -76,11 +75,13 @@
 			justify-content:center;">
 				<img src="{% static 'images/bgDarken.jpg' %}" class="image" alt="background-image">
 
-				<div class="container mb-lg-n5" style="display: flex;
-					justify-content: center; position:absolute;" data-aos="zoom-in" data-aos-duration="1300">
+				<div class="container mb-lg-n5 flex-column" style="display: flex;
+					align-items: center; position:absolute;" data-aos="zoom-in" data-aos-duration="1300">
+					<h2 class="d-none d-md-block mb-4 text-light display-5 mb-5 pb-5" style="font-family: Poppins;">Your Travel Companion for Nepal</h2>
+					<h5 class="d-block d-md-none mb-4 text-light  mb-5 pb-5" style="font-family: Poppins;">Your Travel Companion for Nepal</h5>
 					<form action="{% url 'search' %}" class="form-inline ">
-						<div class="input-group span">
-							<input class="form-control form-control-lg mr-1 w-200"
+						<div class="input-group span position-relative" style="bottom: 70px;">
+							<input id="id-for-placeholder" class="form-control form-control-lg mr-1 w-200"
 								style=" border:3px solid coral; border-radius:50px;" type="text"
 								placeholder="Search Destinations here . . ." aria-label="SearchPlaces"
 								name="search_places" id="search_places">
@@ -94,14 +95,14 @@
 					</form>
 				</div>
 
-				<div class="container"
+				<!-- <div class="container"
 					style="display: flex; justify-content: center;  position:absolute; margin-top:23%;"
 					data-aos="zoom-in" data-aos-duration="1300">
 					{% if  user.is_authenticated%}
 					{% else %}
-					<a href=" {% url 'register' %}" id="btn2" class="ml-n4 mt-md-n5">Join now </a>
+					<a href=" {% url 'register' %}" id="btn2" class="ml-n5 mt-md-n5">Sign Up</a>
 					{% endif %}
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</section>
@@ -257,7 +258,7 @@
 					<img
 						class="d-none d-md-block"
 						style="height: 220px"
-						src="{% static 'svg/first-step.svg' %}"
+						src="{% static 'svg/second-step.svg' %}"
 						alt=""
 					/>
 				</div>
