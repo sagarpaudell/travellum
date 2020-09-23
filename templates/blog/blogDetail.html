@@ -124,7 +124,7 @@ Single Blogpost
             alt="prof_pic">
           </div>
           <div class="col-8 col-lg-10">
-            <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">{{comment.commenter }} &nbsp; <span id="vote_countof{{comment.id}}">{{comment.vote_count}}</span> &nbsp;
+            <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">{{comment.commenter}} &nbsp; <span id="vote_countof{{comment.id}}">{{comment.vote_count}}</span> &nbsp;
             {% if user.is_authenticated %}
               <span style="font-size: 1.5rem;">
                 
@@ -149,14 +149,14 @@ Single Blogpost
             <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">{{comment.comment}}</p>
           </div>
 
-          <div class="col-2 col-lg-1">
+          <!-- <div class="col-2 col-lg-1">
             <button class="btn btn-transparen btn-sm p-0" data-toggle="modal" data-target="#edit-comment-modal">
               <i class="fas fa-edit"></i>
             </button>
             <button class="btn btn-transparen btn-sm p-0" data-toggle="modal" data-target="#delete-comment-modal">
               <i class="fas fa-trash"></i>
             </button>
-          </div>
+          </div> -->
         </div>
         {% endfor %}
         {% endif %}

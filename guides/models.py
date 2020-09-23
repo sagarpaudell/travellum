@@ -17,7 +17,7 @@ class Guide(models.Model):
     citizenship_front = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     citizenship_back= models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     citizenship_number = models.CharField(max_length=20,blank=True)
-    price = models.IntegerField(blank=True)
+    price = models.IntegerField(blank=True, null=True)
     places = models.ManyToManyField(Place, blank=True)
     replies_within = models.IntegerField(default=1)
     average_rating = models.DecimalField(max_digits=10, decimal_places=1, blank=True, default=0)
