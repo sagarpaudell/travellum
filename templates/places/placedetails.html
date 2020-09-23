@@ -122,7 +122,7 @@ Details
                     <input type="hidden" value="{{ place.id }}" name="plid">
                     {% if edit_review %} <input type="hidden" name="edit" value="{{ edit_review.id }}"> {% endif %}
                     <div {% if edit_review %} id="autoscroll" {% endif %}>
-                    <textarea class="form-control" rows="3"  name="preview" required>{% if edit_review %}{{ edit_review.place_review }}{% endif %} </textarea>
+                    <textarea class="form-control" rows="3" id="autofocuscursor" autofocus="autofocus" name="preview" required>{% if edit_review %}{{ edit_review.place_review }}{% endif %} </textarea>
                     </div>
                     <div class="mt-n4" style="display: flex; justify-content: flex-end;" >
                     <div class="rating">
@@ -438,5 +438,15 @@ Details
     var elmnt = document.getElementById("autoscroll");
     elmnt.scrollIntoView();
     
+</script>
+<script>
+    $(document).ready(function() {
+  
+        var input = $("#autofocuscursor");
+        var len = input.val().length;
+        input[0].focus();
+        input[0].setSelectionRange(len, len);
+    
+    });
 </script>
 {% endblock %}
