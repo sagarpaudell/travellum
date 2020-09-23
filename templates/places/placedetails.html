@@ -152,12 +152,13 @@ Details
                         <div class="d-flex align-items-center">
                             {{ review.Reviewer.first_name }} {{ review.Reviewer.last_name }} {% if review.Reviewer == logged_in_user and show_bool %}
                         </div>
-                        <form class="d-inline ml-2" action="{% url 'placedetails' place.id %}" method="POST">
-                        {% csrf_token %}
-                        <!-- <input type="hidden" value="{{ review.id }}" name="rev_id"> -->
+                        <form class="d-inline ml-2" action="{% url 'placedetails' place.id %}"  method="POST">                        
+                            {% csrf_token %}
+                            <input type="hidden" value="{{ review.id }}" name="rev_id">
                             <button class="btn btn-transparent btn-sm" type="submit" name="edit_rev">
                                 <i class="fas fa-edit"></i>
                             </button>
+                        </form>
                             <button 
                                 class="btn btn-transparent btn-sm" 
                                 data-toggle="modal" 
@@ -167,7 +168,30 @@ Details
                                 name="del_rev" -->
                                 <i class="fas fa-trash"></i>
                             </button>
-                        </form>
+                            <div class="modal fade" id="delete-p-review">
+                            <form action="{% url 'placedetails' place.id %}"  method="POST">
+                                {% csrf_token %}
+                                <div class="modal-dialog modal-md">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title">
+                                        Delete this Review
+                                      </h5>
+                                      <button class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <input type="hidden" value="{{ review.id }}" name="rev_id">
+                                    <div class="modal-body">
+                                      Are you sure you want to delete this Review?
+                                      <div class="d-flex justify-content-center align-items-center">
+                                        <button class="btn btn-outline-dark text-dark mx-2 my-3" type ="submit" name="del_rev">Yes</button>
+                                        <button class="btn btn-dark mx-2 my-3" data-dismiss="modal">Cancel</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                             
+                            </form>
+                            </div>
                         {% endif %}
                     </h5>
 
@@ -383,15 +407,12 @@ Details
           </h5>
           <button class="close" data-dismiss="modal">&times;</button>
         </div>
+        
         <div class="modal-body">
           Are you sure you want to delete this Review?
           <div class="d-flex justify-content-center align-items-center">
-            <form method="POST">
-              {% csrf_token %}
-                <input type="hidden" name="" value="">
-                <button class="btn btn-outline-dark text-dark mx-2 my-3" type ="submit" name="">Yes</button>
-                <button class="btn btn-dark mx-2 my-3" data-dismiss="modal">Cancel</button>
-            </form>
+            <button class="btn btn-outline-dark text-dark mx-2 my-3" form="del_id" type ="submit" name="del_rev">Yes</button>
+            <button class="btn btn-dark mx-2 my-3" data-dismiss="modal">Cancel</button>
           </div>
         </div>
       </div>

@@ -106,10 +106,10 @@ def placedetails(request, place_id):
                 reve_id = request.POST['edit']
                
                 edit_review = get_object_or_404(Review, pk=reve_id)
-                edit_review.place_review = place_review   
+                edit_review.place_review = place_review
+                edit_review.ratings = rating   
                 edit_review.save()
             else:
-                print(rating)
                 re = Review(place_name=placeReviewed, Reviewer=Reviewer, place_review = place_review, ratings=rating)
                 re.save()
         
@@ -118,8 +118,7 @@ def placedetails(request, place_id):
             edit_review = get_object_or_404(Review, pk=rev_id)
             context_bool = True
             show_bool = False
-            print(edit_review)
-
+            
         elif 'del_rev' in request.POST:
             rev_id = request.POST['rev_id']
             del_review = get_object_or_404(Review, pk=rev_id)

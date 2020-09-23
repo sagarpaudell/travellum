@@ -6,6 +6,7 @@ from guides.models import Guide
 from accounts.models import User
 from notifications.models import Notification, Trip_Notification
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
  
 def index(request):
     active_guides = Guide.objects.all().filter(is_active=True)
@@ -39,32 +40,32 @@ def about(request):
             trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user).order_by('-noti_date')
 
         
-    if notifications:
-        new_noti = notifications.last().reg_date
-        if notifications.count()>1:
-            last_noti = notifications[1].reg_date
-            new_noti_check = (last_noti<new_noti)
-            if (new_noti_check):
+        if notifications:
+            new_noti = notifications.last().reg_date
+            if notifications.count()>1:
+                last_noti = notifications[1].reg_date
+                new_noti_check = (last_noti<new_noti)
+                if (new_noti_check):
+                    messages.info(request, 'You have new notifications.')
+                else:
+                    messages.info(request, 'You have no new notifications')
+        if trip_notifications:
+            new_tnoti = trip_notifications.last().noti_date
+            if trip_notifications.count()>1:
+                last_noti = trip_notifications[1].noti_date
+                new_noti_check = (last_noti<new_noti)
+                if (new_noti_check):
+                    messages.info(request, 'You have new notifications.')
+                else:
+                    messages.info(request, 'You have no new notifications')
+            elif trip_notifications.count()==1:
                 messages.info(request, 'You have new notifications.')
-            else:
-                messages.info(request, 'You have no new notifications')
-    if trip_notifications:
-        new_tnoti = trip_notifications.last().noti_date
-        if trip_notifications.count()>1:
-            last_noti = trip_notifications[1].noti_date
-            new_noti_check = (last_noti<new_noti)
-            if (new_noti_check):
-                messages.info(request, 'You have new notifications.')
-            else:
-                messages.info(request, 'You have no new notifications')
-        elif trip_notifications.count()==1:
-            messages.info(request, 'You have new notifications.')
 
-        context={
-                'logged_in_user':traveller_user,
-                'notifications': notifications,
-                'trip_notifications': trip_notifications,
-                }
-        return render(request, 'pages/about.html',context)
+            context={
+                    'logged_in_user':traveller_user,
+                    'notifications': notifications,
+                    'trip_notifications': trip_notifications,
+                    }
+            return render(request, 'pages/about.html',context)
     return render(request, 'pages/about.html')
 
