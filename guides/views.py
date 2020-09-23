@@ -44,6 +44,8 @@ def GuideView(request):
     email_from = settings.EMAIL_HOST_USER
     recipient_list = ['buddhagautam231@gmail.com', 'birajkmc4@gmail.com','s2a6m0@gmail.com']
     send_mail( subject, message, email_from, recipient_list )
+    return redirect('dashboard')
+
 
 
 def GuideUpdateView(request):

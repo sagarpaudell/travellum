@@ -4,6 +4,7 @@ from guides.models import Guide
 from notifications.models import Notification, Trip_Notification
 from .models import Blog, Comment
 from urllib.parse import urlparse
+from django.contrib import messages
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -127,6 +128,7 @@ def create_blog_post(request):
             is_guide    = is_guide
         )
         blog.save()
+        messages.success(request, 'Blog created')
         return redirect('my_blog')
     places=Place.objects.all()
     place_pattern=''
@@ -198,6 +200,7 @@ def delete_blog_post(request, blog_id):
     blog = get_object_or_404(Blog, id = blog_id)
     if request.user == blog.user:
         blog.delete()
+    messages.success('Your blog was deleted')
     return redirect('my_blog')
 
 def blogs_byplace(request, id):

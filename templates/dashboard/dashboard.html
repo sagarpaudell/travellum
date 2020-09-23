@@ -56,7 +56,7 @@ Dashboard
                     {% if traveller_user %}
                     {{traveller_user.address}}<br>
                     <h2>{{ traveller_user.first_name }} {{ traveller_user.last_name }} </h2>
-                    {% if traveller_user.is_guide %}Replies within: 84 hours{% endif %}
+                    {% if traveller_user.is_guide %}Replies within: {{guide_user.replies_within}} hours{% endif %}
                     {% endif %}
                   </div>
                   {% if traveller_user %}
@@ -139,15 +139,14 @@ Dashboard
                   </li>
 
                   <li>
-                    {% if traveller_user %}
-                    {% if traveller_user.photo_main %}
+                    {% if traveller_user.photo_main and not traveller_user.photo_main.url == '/media/default.jpeg' %}
                     <i class="text-success fa fa-check"></i>
                     <small>Add Profile Picture</small>
                     {% else %}
                     <i class="text-danger fa fa-times"></i>
                     <small>Add Profile Picture</small>
                     {% endif %}
-                    {% endif %}
+                    
 
                   </li>
 
