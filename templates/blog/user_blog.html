@@ -32,7 +32,7 @@ Single Blogpost
     </div>
     <section class="main-content px-4 py-5">
       <h3 class="mb-4">Blogs by {{ blog_user.first_name }} {{ blog_user.last_name }}</h3>
-      <div class="card-columns">
+      <div class="blogs">
         {% if blogs %}
         {% for blog in blogs %}
         <div class="card mb-4">

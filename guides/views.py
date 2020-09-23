@@ -52,7 +52,7 @@ def GuideUpdateView(request):
     user = User.objects.get(pk = request.user.pk)
     guide_user = Guide.objects.get(email = user)
     place = request.POST['place']
-    guide_user.place= Place.objects.get(name=place)
+    guide_user.places.add(Place.objects.get(name=place))
     guide_user.price = request.POST['pph']
     guide_user.replies_within = request.POST['rep-with']
     guide_user.save()
