@@ -27,11 +27,9 @@
 <body>
   <!-- NavBar -->
   {% include 'partials/_navbar.html' %}
-  <div class="row" >
-    <div class="col-12">
-      {% include 'partials/_alerts.html' %}
-    </div>
-  </div>
+
+  <!-- Alerts -->
+  {% include 'partials/_alerts.html' %}
 
   <!-- Main Content -->
   {% block content %} {% endblock %}
