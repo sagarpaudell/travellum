@@ -21,7 +21,7 @@ Details
 {% block content %}
 <div class="container">
 
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <div id="carouselExampleIndicators" class="mt-5 carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -50,274 +50,286 @@ Details
             <span class="sr-only">Next</span>
         </a>
     </div>
-    <div class="d-flex flex-row text-white align-items-stretch text-center bg-white" id="custom-menu">
-        <div class="port-item p-4 mx-md-3 sm-12 mx-1 bg-white" data-toggle="collapse" data-target="#description"
-            style="cursor: pointer;">
-            <i class="fas fa-list-alt fa-2x pr-2"></i></i>
-            <span class="d-none d-md-inline">Description</span>
-        </div>
-        <div class="port-item p-4 mx-md-3 sm-12 mx-1 bg-white" data-toggle="collapse" data-target="#majorattractions"
-            style="cursor: pointer;">
-            <i class="fas fa-bullhorn fa-2x pr-2"></i>
-            <span class="d-none d-md-inline">Major attractions</span>
-        </div>
-        <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#thingstodo"
-            style="cursor: pointer;">
-            <i class="fas fa-clipboard-check fa-2x pr-2"></i>
-            <span class="d-none d-md-inline">Things to do</span>
-        </div>
-        <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#availableguides"
-            style="cursor: pointer;">
-            <i class="fas fa-user-alt fa-2x pr-2"></i>
-            <span class="d-none d-md-inline">Available guides</span>
-        </div>
-    </div>
 
-
-    <!-- Description collapse -->
-
-    <div class="collapse show bg-white" id="description"
-        style="border-bottom-left-radius:2%; border-bottom-right-radius:2%;">
-        <h4 class="p-4 pb-2 border-bottom" style="color: #daa198;">About {{place.name}}:</h4>
-        <p class="p-4">{{ place.description }}
-            <div class="p-4 pb-2 border-bottom"></div>
-            <div class="col-md-12 text-center border-bottom my-5">
-                <h2 style="color: #e2c0bb;">View Blogs of {{ place.name }}</h2>
-                <p class="mt-4 mb-2"></p>
-                <button class="btn btn-theme mt-2"><a href="{% url 'blogs_byplace' place.id %}" class='text-light' > Go to Travellum Blogs >></a></button>
-                <div class="mb-5"></div>
-            </div>
-        </p>
-        <br>
-        <br>
-        <!-- Temporary place review section -->
-        <!-- {% if reviews %}
-        {% for review in reviews %}
-        <label>REVIEW BY {{ review.Reviewer.first_name }} ( {{ review.Reviewer }} )</label>
-        <p class="pr-3 pb-5 pl-3 " style="margin-bottom: 10%;">{{ review.place_review }}
-        </p>
-        {% endfor %}
-        {% endif %} -->
-        <!-- End of Temp. Review Section -->
+    <div>
         
-        <div class="container" style="padding-bottom: 3%;">
-            {% if logged_in_user %}
-            {% if allow_review or edit_review %}
-            <div class="row border py-3 mb-5" style="background: white !important;">
-              <div class="col-2 col-lg-1 pl-2 pr-0 px-md-4 px-lg-3">
-                <img {% if logged_in_user.photo_main %} src="{{logged_in_user.photo_main.url}}" {% else %}
-                  src="{% static 'images/default.png' %}" {% endif %}
-                  style="object-fit: contain; width: 100%; border-radius: 50%" alt="prof_pic">
-              </div>
-              <form method="POST" action="{% url 'placedetails' place.id %}" class="col-10 col-lg-11">
-                {% csrf_token %}
-                <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Know this place? Give your review
-                    here:</h5>
-                <input type="hidden" value="{{ place.id }}" name="plid">
-                {% if edit_review %} <input type="hidden" name="edit" value="{{ edit_review.id }}"> {% endif %}
-                <textarea class="form-control" rows="3" name="preview" required>{% if edit_review %}{{ edit_review.place_review }}{% endif %} </textarea>
-
-                <div class="mt-n4" style="display: flex; justify-content: flex-end;">
-                  <div class="rating">
-                    <input type="radio" id="star5" name="rating" value="5" />
-                    <label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
-                    <input type="radio" id="star4" name="rating" value="4" />
-                    <label class="star" for="star4" title="Great" aria-hidden="true"></label>
-                    <input type="radio" id="star3" name="rating" value="3" />
-                    <label class="star" for="star3" title="Very good" aria-hidden="true"></label>
-                    <input type="radio" id="star2" name="rating" value="2" />
-                    <label class="star" for="star2" title="Good" aria-hidden="true"></label>
-                    <input type="radio" id="star1" name="rating" value="1" />
-                    <label class="star" for="star1" title="Bad" aria-hidden="true"></label>
-                  </div>
-                </div>
-                <div style="display: flex; justify-content: flex-end;">
-                  <input class="btn btn-danger mt-2" name="review_add" type="submit">
-                </div>
-              </form>
+        <div class="d-flex justify-content-between text-white text-center bg-white" id="custom-menu">
+            <div class="port-item p-4 mx-md-3 sm-12 mx-1 bg-white" data-toggle="collapse" data-target="#description"
+                style="cursor: pointer;">
+                <i class="fas fa-list-alt fa-2x pr-2"></i></i>
+                <span class="d-none d-lg-inline">Description</span>
             </div>
-            {% endif %}
-            {% endif %}
-            <!-- <h5 class="text-muted mt-n5 mb-n5" style="font-weight: 500; font-size: 1.4rem; margin-right:10%; margin-left:1%;"> -->
-                <!-- Reviews:</h5> -->
-                {% if reviews %}
-                {% for review in reviews %}
-                <div class="row border py-3 my-3" style="background: white !important;">
-                  <div class="col-2 col-lg-1 pl-2 pr-0 px-md-4 px-lg-3">
-                    <img src={{review.Reviewer.photo_main.url}} style="object-fit: contain; width: 100%; border-radius: 50%" alt="prof_pic">
-                  </div>
-                  <div class="col-10 col-lg-11">
-                    <h5 class="text-muted d-flex m-0" style="font-weight: 500; font-size: .8rem;">
-                        <div class="d-flex align-items-center">
-                            {{ review.Reviewer.first_name }} {{ review.Reviewer.last_name }} {% if review.Reviewer == logged_in_user and show_bool %}
-                        </div>
-                        <form class="d-inline ml-2" action="{% url 'placedetails' place.id %}" method="POST">
-                        {% csrf_token %}
-                        <!-- <input type="hidden" value="{{ review.id }}" name="rev_id"> -->
-                            <button class="btn btn-transparent btn-sm" type="submit" name="edit_rev">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button 
-                                class="btn btn-transparent btn-sm" 
-                                data-toggle="modal" 
-                                data-target="#delete-p-review" 
-                                >
-                                <!-- type="submit" 
-                                name="del_rev" -->
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </form>
-                        {% endif %}
-                    </h5>
+            <div class="port-item p-4 mx-md-3 sm-12 mx-1 bg-white" data-toggle="collapse" data-target="#majorattractions"
+                style="cursor: pointer;">
+                <i class="fas fa-bullhorn fa-2x pr-2"></i>
+                <span class="d-none d-lg-inline">Major attractions</span>
+            </div>
+            <!-- <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#thingstodo"
+                style="cursor: pointer;">
+                <i class="fas fa-clipboard-check fa-2x pr-2"></i>
+                <span class="d-none d-md-inline">Things to do</span>
+            </div> -->
+            <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#availableguides"
+                style="cursor: pointer;">
+                <i class="fas fa-user-alt fa-2x pr-2"></i>
+                <span class="d-none d-lg-inline">Available guides</span>
+            </div>
+        </div>
 
-                    <div class="review__rating m-n2">
-                      {% if review.ratings == 1 %}
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                      {% elif review.ratings == 2 %}
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                      {% elif review.ratings == 3 %}
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                      {% elif review.ratings == 4 %}
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                      {% else %}
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                      <label class="star mr-n2" aria-hidden="true"></label><input type="hidden" value="{{ place.id }}" name="plid">
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                      <label class="star mr-n2" aria-hidden="true"></label>
-                      {% endif %}
-                    </div>
-                    <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">{{review.place_review}}</p>
-                  </div>
+
+        <!-- Description collapse -->
+
+        <div class="collapse show bg-white" id="description"
+            style="border-bottom-left-radius:2%; border-bottom-right-radius:2%;">
+            <div class="border-top py-3"></div>
+            <h4 class="px-4 pt-4 pb-1" style="color: #daa198;">About {{place.name}}:</h4>
+            <p class="p-4">{{ place.description }}
+                <div class="p-4 pb-2 border-bottom"></div>
+                <div class="col-md-12 text-center border-bottom my-5">
+                    <h2 class="d-none d-md-block" style="color: #e2c0bb;">View Blogs of {{ place.name }}</h2>
+                    <h5 class="d-block d-md-none" style="color: #e2c0bb;">View Blogs of {{ place.name }}</h5>
+                    <p class="mt-4 mb-2"></p>
+                    <button class="btn btn-theme mt-2"><a href="{% url 'blogs_byplace' place.id %}" class='text-light' > Go to Travellum Blogs >></a></button>
+                    <div class="mb-5"></div>
                 </div>
-                {% endfor %}
-                {% else %}
-                <br>
-                <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;<h2 style="color: #e2c0bb;">No Place Reviews</h2>
-                {% endif %}
-            <!-- <div class="row border py-3 mb-5"
-
-
-                style="background: white !important; margin-top:80px;  margin-right:10%; margin-left:1%; ">
-                <div class="col-2 col-lg-1 rounded">
+            </p>
+            <br>
+            <br>
+            <!-- Temporary place review section -->
+            <!-- {% if reviews %}
+            {% for review in reviews %}
+            <label>REVIEW BY {{ review.Reviewer.first_name }} ( {{ review.Reviewer }} )</label>
+            <p class="pr-3 pb-5 pl-3 " style="margin-bottom: 10%;">{{ review.place_review }}
+            </p>
+            {% endfor %}
+            {% endif %} -->
+            <!-- End of Temp. Review Section -->
+            
+            <div class="container" style="padding-bottom: 3%;">
+                {% if logged_in_user %}
+                {% if allow_review or edit_review %}
+                <div class="row border py-3 mb-5" style="background: white !important;">
+                <div class="col-2 col-lg-1 pl-2 pr-0 px-md-4 px-lg-3">
                     <img {% if logged_in_user.photo_main %} src="{{logged_in_user.photo_main.url}}" {% else %}
-                        src="{% static 'images/default.png' %}" {% endif %}
-                        style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
-
+                    src="{% static 'images/default.png' %}" {% endif %}
+                    style="object-fit: contain; width: 100%; border-radius: 50%" alt="prof_pic">
                 </div>
-                <h5 class="text-muted" style="font-weight: 500; font-size: .<input type="hidden" value="{{ place.id }}" name="plid"></h5>8rem;">
-                    {{ logged_in_user.first_name }} {{ logged_in_user.last_name }}
-                </h5>
-                <form action="{% url 'placedetails' place.id %}" method="POST" class="col-10 col-lg-11">
+                <form method="POST" action="{% url 'placedetails' place.id %}" class="col-10 col-lg-11">
                     {% csrf_token %}
-                    <h5 class="text-muted" style="font-weight: 500; font-size: 1rem;">Know this place? Give your review
-                        here:
-                    </h5>
-                    <textarea class="form-control" rows="3" name="preview" required></textarea>
+                    <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Know this place? Give your review
+                        here:</h5>
                     <input type="hidden" value="{{ place.id }}" name="plid">
+                    {% if edit_review %} <input type="hidden" name="edit" value="{{ edit_review.id }}"> {% endif %}
+                    <textarea class="form-control" rows="3" name="preview" required>{% if edit_review %}{{ edit_review.place_review }}{% endif %} </textarea>
 
-                    <div class="mt-n4" style="display: flex;">
-                        <div class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" />
-                            <label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
-                            <input type="radio" id="star4" name="rating" value="4" />
-                            <label class="star" for="star4" title="Great" aria-hidden="true"></label>
-                            <input type="radio" id="star3" name="rating" value="3" />
-                            <label class="star" for="star3" title="Very good" aria-hidden="true"></label>
-                            <input type="radio" id="star2" name="rating" value="2" />
-                            <label class="star" for="star2" title="Good" aria-hidden="true"></label>
-                            <input type="radio" id="star1" name="rating" value="1" />
-                            <label class="star" for="star1" title="Bad" aria-hidden="true"></label>
-                        </div>
+                    <div class="mt-n4" style="display: flex; justify-content: flex-end;">
+                    <div class="rating">
+                        <input type="radio" id="star5" name="rating" value="5" />
+                        <label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
+                        <input type="radio" id="star4" name="rating" value="4" />
+                        <label class="star" for="star4" title="Great" aria-hidden="true"></label>
+                        <input type="radio" id="star3" name="rating" value="3" />
+                        <label class="star" for="star3" title="Very good" aria-hidden="true"></label>
+                        <input type="radio" id="star2" name="rating" value="2" />
+                        <label class="star" for="star2" title="Good" aria-hidden="true"></label>
+                        <input type="radio" id="star1" name="rating" value="1" />
+                        <label class="star" for="star1" title="Bad" aria-hidden="true"></label>
                     </div>
-                    <div style="display: flex;">
-                        <input class="btn btn-danger mt-2" type="submit">
+                    </div>
+                    <div style="display: flex; justify-content: flex-end;">
+                    <input class="btn btn-danger mt-2" name="review_add" type="submit">
                     </div>
                 </form>
-            </div> -->
-        </div>
-
-    </div>
-    <!-- End of description Collapse -->
-
-    <!-- Major attractions collapse -->
-
-    <div class="collapse bg-white" id="majorattractions"
-        style="border-bottom-left-radius:2%; border-bottom-right-radius:2%;">
-        <div style="padding-bottom: 3%;">
-            <h4 class="p-4 mb-4 border-bottom " style="color: #daa198; ">Some of the major attractions include:</h4>
-            {% for attraction in attractions %}
-            <h4 class="px-3" style="color: #daa198;"><i
-                    class="fa fa-location-arrow pr-2"></i>{{ attraction.attraction_name }}</h4>
-            <p class="pb-4 pl-3 border-bottom ">{{ attraction.description }}
-            </p>
-            {% endfor %}
-        </div>
-
-    </div>
-    <!-- End of description Collapse -->
-
-    <!-- Things to do collapse -->
-
-    <div class="collapse bg-white" id="thingstodo" style="border-bottom-left-radius:2%; border-bottom-right-radius:2%;">
-        <div style="padding-bottom: 3%;">
-            <h4 class="p-4 mb-4 border-bottom " style="color: #daa198; ">Popular things to do in {{ place.name }}:</h4>
-            {% for task in tasks %}
-            <h4 class="px-3" style="color: #daa198;"><i class="fa fa-hand-point-right pr-2"></i>{{ task.task_name }}
-            </h4>
-            <p class="p-1 pb-4 px-3 border-bottom ">{{task.description}}
-            </p>
-            {% endfor %}
-        </div>
-
-    </div>
-    <!-- End of things to do Collapse -->
-
-    <!-- Available guides collapse -->
-
-    <div class="collapse bg-white" id="availableguides"
-        style="border-bottom-left-radius:2%; border-bottom-right-radius:2%;">
-        <div style="padding-bottom: 3%;">
-            <h4 class="p-4 mb-4 border-bottom " style="color: #daa198; ">Guides available in {{place.name}}:</h4>
-            <div class="container">
-                <div class="row">
-                    {% if available_guides %}
-                    {% for guide in available_guides %}
-                    <div class="col-md-6 mb-4">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="{{guide.info.photo_main.url}}" alt="Avatar" class="avatar"
-                                    style="width: 150px; height: 150px; border-radius: 50%; margin-left:8%;">
+                </div>
+                {% endif %}
+                {% endif %}
+                <!-- <h5 class="text-muted mt-n5 mb-n5" style="font-weight: 500; font-size: 1.4rem; margin-right:10%; margin-left:1%;"> -->
+                    <!-- Reviews:</h5> -->
+                    {% if reviews %}
+                    <h2 class="d-none d-md-block mb-4" style="color: #e2c0bb;">Place Reviews</h2>
+                    <h5 class="d-block d-md-none mb-4" style="color: #e2c0bb;">Place Reviews</h5>
+                    {% for review in reviews %}
+                    <div class="row border py-3 my-3" style="background: white !important;">
+                    <div class="col-2 col-lg-1 pl-2 pr-0 px-md-4 px-lg-3">
+                        <img src={{review.Reviewer.photo_main.url}} style="object-fit: contain; width: 100%; border-radius: 50%" alt="prof_pic">
+                    </div>
+                    <div class="col-10 col-lg-11">
+                        <h5 class="text-muted d-flex m-0" style="font-weight: 500; font-size: .8rem;">
+                            <div class="d-flex align-items-center">
+                                {{ review.Reviewer.first_name }} {{ review.Reviewer.last_name }} {% if review.Reviewer == logged_in_user and show_bool %}
                             </div>
-                            <div class="col-md-8" style="opacity: 0.9;">
-                                <strong>Guide's Name:</strong>&nbsp;&nbsp;{{guide.info.first_name}}
-                                {{guide.info.last_name}}
-                                <br>
-                                <strong>Contact No:</strong>: {{guide.info.contact_no}} <br>
-                                <strong>Guide rating:</strong> 4/5 <br>
-                                <a href="{% url 'view_profile' guide.info.id %}" class="btn btn-theme">View Profile</a>
+                            <form class="d-inline ml-2" action="{% url 'placedetails' place.id %}" method="POST">
+                            {% csrf_token %}
+                            <!-- <input type="hidden" value="{{ review.id }}" name="rev_id"> -->
+                                <button class="btn btn-transparent btn-sm" type="submit" name="edit_rev">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button 
+                                    class="ml-n2 btn btn-transparent btn-sm" 
+                                    data-toggle="modal" 
+                                    data-target="#delete-p-review" 
+                                    >
+                                    <!-- type="submit" 
+                                    name="del_rev" -->
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                            {% endif %}
+                        </h5>
 
-                            </div>
+                        <div class="review__rating m-n2">
+                        {% if review.ratings == 1 %}
+                        <label class="star mr-n2" aria-hidden="true"></label>
+                        {% elif review.ratings == 2 %}
+                        <label class="star mr-n2" aria-hidden="true"></label>
+                        <label class="star mr-n2" aria-hidden="true"></label>
+                        {% elif review.ratings == 3 %}
+                        <label class="star mr-n2" aria-hidden="true"></label>
+                        <label class="star mr-n2" aria-hidden="true"></label>
+                        <label class="star mr-n2" aria-hidden="true"></label>
+                        {% elif review.ratings == 4 %}
+                        <label class="star mr-n2" aria-hidden="true"></label>
+                        <label class="star mr-n2" aria-hidden="true"></label>
+                        <label class="star mr-n2" aria-hidden="true"></label>
+                        <label class="star mr-n2" aria-hidden="true"></label>
+                        {% else %}
+                        <label class="star mr-n2" aria-hidden="true"></label>
+                        <label class="star mr-n2" aria-hidden="true"></label><input type="hidden" value="{{ place.id }}" name="plid">
+                        <label class="star mr-n2" aria-hidden="true"></label>
+                        <label class="star mr-n2" aria-hidden="true"></label>
+                        <label class="star mr-n2" aria-hidden="true"></label>
+                        {% endif %}
                         </div>
+                        <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">{{review.place_review}}</p>
+                    </div>
                     </div>
                     {% endfor %}
                     {% else %}
-                    <p class="m-4"> No available guides in your region</p>
+                    <h2 class="d-none d-md-block" style="color: #e2c0bb;">No Place Reviews</h2>
+                    <h5 class="d-block d-md-none" style="color: #e2c0bb;">No Place Reviews</h5>
+                    <div class="border-bottom my-5"></div>
                     {% endif %}
+                <!-- <div class="row border py-3 mb-5"
 
+
+                    style="background: white !important; margin-top:80px;  margin-right:10%; margin-left:1%; ">
+                    <div class="col-2 col-lg-1 rounded">
+                        <img {% if logged_in_user.photo_main %} src="{{logged_in_user.photo_main.url}}" {% else %}
+                            src="{% static 'images/default.png' %}" {% endif %}
+                            style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
+
+                    </div>
+                    <h5 class="text-muted" style="font-weight: 500; font-size: .<input type="hidden" value="{{ place.id }}" name="plid"></h5>8rem;">
+                        {{ logged_in_user.first_name }} {{ logged_in_user.last_name }}
+                    </h5>
+                    <form action="{% url 'placedetails' place.id %}" method="POST" class="col-10 col-lg-11">
+                        {% csrf_token %}
+                        <h5 class="text-muted" style="font-weight: 500; font-size: 1rem;">Know this place? Give your review
+                            here:
+                        </h5>
+                        <textarea class="form-control" rows="3" name="preview" required></textarea>
+                        <input type="hidden" value="{{ place.id }}" name="plid">
+
+                        <div class="mt-n4" style="display: flex;">
+                            <div class="rating">
+                                <input type="radio" id="star5" name="rating" value="5" />
+                                <label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
+                                <input type="radio" id="star4" name="rating" value="4" />
+                                <label class="star" for="star4" title="Great" aria-hidden="true"></label>
+                                <input type="radio" id="star3" name="rating" value="3" />
+                                <label class="star" for="star3" title="Very good" aria-hidden="true"></label>
+                                <input type="radio" id="star2" name="rating" value="2" />
+                                <label class="star" for="star2" title="Good" aria-hidden="true"></label>
+                                <input type="radio" id="star1" name="rating" value="1" />
+                                <label class="star" for="star1" title="Bad" aria-hidden="true"></label>
+                            </div>
+                        </div>
+                        <div style="display: flex;">
+                            <input class="btn btn-danger mt-2" type="submit">
+                        </div>
+                    </form>
+                </div> -->
+            </div>
+
+        </div>
+        <!-- End of description Collapse -->
+
+        <!-- Major attractions collapse -->
+
+        <div class="collapse bg-white" id="majorattractions"
+            style="border-bottom-left-radius:2%; border-bottom-right-radius:2%;">
+            <div class="border-top"></div>
+            <div style="padding-bottom: 3%;">
+                <h4 class="d-none d-md-block p-4 py-5" style="color: #daa198; ">Some of the major attractions include:</h4>
+                <h5 class="d-block d-md-none p-4 mb-4" style="color: #daa198; ">Major Attractions:</h5>
+                {% for attraction in attractions %}
+                <h4 class="px-3" style="color: #daa198;"><i
+                        class="fa fa-location-arrow pr-2"></i>{{ attraction.attraction_name }}</h4>
+                <p class="pb-4 pl-3">{{ attraction.description }}
+                </p>
+                
+                {% endfor %}
+                <div class="border-bottom my-5"></div>
+            </div>
+
+        </div>
+        <!-- End of description Collapse -->
+
+        <!-- Things to do collapse -->
+
+        <div class="collapse bg-white" id="thingstodo" style="border-bottom-left-radius:2%; border-bottom-right-radius:2%;">
+            <div style="padding-bottom: 3%;">
+                <h4 class="p-4 mb-4 border-bottom " style="color: #daa198; ">Popular things to do in {{ place.name }}:</h4>
+                {% for task in tasks %}
+                <h4 class="px-3" style="color: #daa198;"><i class="fa fa-hand-point-right pr-2"></i>{{ task.task_name }}
+                </h4>
+                <p class="p-1 pb-4 px-3 border-bottom ">{{task.description}}
+                </p>
+                {% endfor %}
+            </div>
+
+        </div>
+        <!-- End of things to do Collapse -->
+
+        <!-- Available guides collapse -->
+
+        <div class="collapse bg-white" id="availableguides"
+            style="border-bottom-left-radius:2%; border-bottom-right-radius:2%;">
+            <div style="padding-bottom: 3%;">
+                <h4 class="d-none d-md-block p-4 mb-4 border-bottom" style="color: #daa198; ">Guides available in {{place.name}}:</h4>
+                <h5 class="d-block d-md-none p-4 mb-4 border-bottom" style="color: #daa198; ">Guides available in {{place.name}}:</h5>
+                <div class="container">
+                    <div class="row">
+                        {% if available_guides %}
+                        {% for guide in available_guides %}
+                        <div class="col-lg-6 py-4 border bg-light">
+                            <div class="row">
+                                <div class="col-md-4 d-flex justify-content-md-end">
+                                    <img src="{{guide.info.photo_main.url}}" alt="Avatar" class="avatar mb-3"
+                                        style="width: 100px; height: 100px; border-radius: 50%;">
+                                </div>
+                                <div class="col-md-8" style="opacity: 0.9;">
+                                    {{guide.info.first_name}}
+                                    {{guide.info.last_name}}
+                                    <br>
+                                    <strong>Contact:</strong>: {{guide.info.contact_no}} <br>
+                                    <strong>Rating:</strong> 4/5 <br>
+                                    <a href="{% url 'view_profile' guide.info.id %}" class="mt-2 btn btn-theme">View Profile</a>
+
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <p class="m-4"> No guides for this place at the moment.</p>
+                        {% endif %}
+
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- End of available guides Collapse -->
     </div>
-    <!-- End of available guides Collapse -->
-
 </div>
 
 <!--================ Modals ========================-->
