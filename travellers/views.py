@@ -20,10 +20,10 @@ def view_profile(request, traveller_id):
         if traveller_user_logged_in.is_guide:
             guide_user = get_object_or_404(Guide, email=user)
             if guide_user:
-                trip_notifications = Trip_Notification.objects.all().filter(sender_email=user)
+                trip_notifications = Trip_Notification.objects.all().filter(sender_email=user).order_by('-noti_date')
         
         else:
-            trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user)
+            trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user).order_by('-noti_date')
     profile=get_object_or_404(Traveller, pk=traveller_id)
     bio = profile.bio.split('.',5)
     bio_first = ". ".join(bio[:5])+(".")
@@ -44,23 +44,34 @@ def view_profile(request, traveller_id):
         guide_rating =  request.POST.get('rating')
         guide_review = request.POST['review']
         guide = get_object_or_404(User, email=profile.email)
+        guide_user = get_object_or_404(Guide, email=profile.email)
         guide_reviewer = traveller_user_logged_in
         g_review = Guide_Review(guide = guide, guide_reviewer=guide_reviewer, guide_review=guide_review, guide_ratings=guide_rating)
         g_review.save()
+        guide_user.average_rating = ((float(guide_user.average_rating)*guide_reviews.count())+(float(guide_rating)))/(float(guide_reviews.count()+1))
+        guide_user.save()
         return redirect ('/view_profile/'+str(traveller_id))
 
     if 'edit_guide_review' in request.POST:
         guide_review_id=request.POST['guide_review_id']
         eg_review = get_object_or_404(Guide_Review, pk=guide_review_id)
+        old_rating = eg_review.guide_ratings
         eg_review.guide_review = request.POST['new_guide_review']
         eg_review.guide_ratings = request.POST['new_rating']
         eg_review.save()
+        guide_user = get_object_or_404(Guide, email=profile.email)
+        guide_user.average_rating = ((float(guide_user.average_rating)*(guide_reviews.count())+float(eg_review.guide_ratings)-float(old_rating)))/float(guide_reviews.count())
+        guide_user.save()
         return redirect ('/view_profile/'+str(traveller_id))
 
     if 'delete_guide_review' in request.POST:
         guide_review_id=request.POST['guide_review_id']
         dg_review = get_object_or_404(Guide_Review, pk=guide_review_id)
+        old_rating = dg_review.guide_ratings
         dg_review.delete()
+        guide_user = get_object_or_404(Guide, email=profile.email)
+        guide_user.average_rating = ((float(guide_user.average_rating)*guide_reviews.count())-float(old_rating))/(guide_reviews.count()-1)
+        guide_user.save()
         return redirect ('/view_profile/'+str(traveller_id))
 
     if 'traveller_review' in request.POST:
@@ -101,7 +112,30 @@ def view_profile(request, traveller_id):
                 if history.tour_complete:
                     traveller_has_travelled_with = True
         notification_history = Notification.objects.all().filter(receiver_email = profile.email , sender_email = user).order_by('-reg_date')
-        trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user)
+        trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user).order_by('-noti_date')
+
+        
+        if notifications:
+            new_noti = notifications.last().reg_date
+            if notifications.count()>1:
+                last_noti = notifications[1].reg_date
+                new_noti_check = (last_noti<new_noti)
+                if (new_noti_check):
+                    messages.info(request, 'You have new notifications.')
+                else:
+                    messages.info(request, 'You have no new notifications')
+        if trip_notifications:
+            new_tnoti = trip_notifications.last().noti_date
+            if trip_notifications.count()>1:
+                last_noti = trip_notifications[1].noti_date
+                new_noti_check = (last_noti<new_noti)
+                if (new_noti_check):
+                    messages.info(request, 'You have new notifications.')
+                else:
+                    messages.info(request, 'You have no new notifications')
+            elif trip_notifications.count()==1:
+                messages.info(request, 'You have new notifications.')
+
         has_accepted = False
         for noti in notification_history:
             if noti.is_accepted:

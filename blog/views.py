@@ -8,17 +8,48 @@ from django.contrib import messages
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 @login_required
 def my_blog(request):
     user=request.user
     if user.is_authenticated:
-        notifications = Notification.objects.all().filter(receiver_email=user)
         traveller_user = get_object_or_404(Traveller, email=user)
+        notifications = Notification.objects.all().filter(receiver_email=request.user).order_by('-reg_date')
+        trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user).order_by('-noti_date')
+        if traveller_user.is_guide:
+            guide_user1 = get_object_or_404(Guide, email=request.user)
+            if guide_user1:
+                trip_notifications = Trip_Notification.objects.all().filter(sender_email=request.user).order_by('-noti_date')
+        else:
+            trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user).order_by('-noti_date')
+        
+    if notifications:
+        new_noti = notifications.last().reg_date
+        if notifications.count()>1:
+            last_noti = notifications[1].reg_date
+            new_noti_check = (last_noti<new_noti)
+            if (new_noti_check):
+                messages.info(request, 'You have new notifications.')
+            else:
+                messages.info(request, 'You have no new notifications')
+    if trip_notifications:
+        new_tnoti = trip_notifications.last().noti_date
+        if trip_notifications.count()>1:
+            last_noti = trip_notifications[1].noti_date
+            new_noti_check = (last_noti<new_noti)
+            if (new_noti_check):
+                messages.info(request, 'You have new notifications.')
+            else:
+                messages.info(request, 'You have no new notifications')
+        elif trip_notifications.count()==1:
+            messages.info(request, 'You have new notifications.')
+
         context = {
                 'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
                 'notifications': notifications,
+                'trip_notifications':trip_notifications,
             }
     blogs = request.user.blogs.all()
     context.update({'blogs': blogs})
@@ -31,14 +62,35 @@ def explore(request):
     if user.is_authenticated:
         traveller_user = get_object_or_404(Traveller, email=user)
         notifications = Notification.objects.all().filter(receiver_email=request.user).order_by('-reg_date')
-        trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
+        trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user).order_by('-noti_date')
         if traveller_user.is_guide:
             guide_user1 = get_object_or_404(Guide, email=request.user)
             if guide_user1:
-                trip_notifications = Trip_Notification.objects.all().filter(sender_email=request.user)
+                trip_notifications = Trip_Notification.objects.all().filter(sender_email=request.user).order_by('-noti_date')
         else:
-            trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
-        
+            trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user).order_by('-noti_date')
+    
+    if notifications:
+        new_noti = notifications.last().reg_date
+        if notifications.count()>1:
+            last_noti = notifications[1].reg_date
+            new_noti_check = (last_noti<new_noti)
+            if (new_noti_check):
+                messages.info(request, 'You have new notifications.')
+            else:
+                messages.info(request, 'You have no new notifications')
+    if trip_notifications:
+        new_tnoti = trip_notifications.last().noti_date
+        if trip_notifications.count()>1:
+            last_noti = trip_notifications[1].noti_date
+            new_noti_check = (last_noti<new_noti)
+            if (new_noti_check):
+                messages.info(request, 'You have new notifications.')
+            else:
+                messages.info(request, 'You have no new notifications')
+        elif trip_notifications.count()==1:
+            messages.info(request, 'You have new notifications.')
+
         context = {
                 'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
                 'notifications': notifications,
@@ -58,17 +110,39 @@ def single_blog_post(request,id):
     if user.is_authenticated:
         traveller_user = get_object_or_404(Traveller, email=user)
         notifications = Notification.objects.all().filter(receiver_email=request.user).order_by('-reg_date')
-        trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
+        trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user).order_by('-noti_date')
         if traveller_user.is_guide:
             guide_user1 = get_object_or_404(Guide, email=request.user)
             if guide_user1:
-                trip_notifications = Trip_Notification.objects.all().filter(sender_email=request.user)
+                trip_notifications = Trip_Notification.objects.all().filter(sender_email=request.user).order_by('-noti_date')
         else:
-            trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
+            trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user).order_by('-noti_date')
+    
+    if notifications:
+        new_noti = notifications.last().reg_date
+        if notifications.count()>1:
+            last_noti = notifications[1].reg_date
+            new_noti_check = (last_noti<new_noti)
+            if (new_noti_check):
+                messages.info(request, 'You have new notifications.')
+            else:
+                messages.info(request, 'You have no new notifications')
+    if trip_notifications:
+        new_tnoti = trip_notifications.last().noti_date
+        if trip_notifications.count()>1:
+            last_noti = trip_notifications[1].noti_date
+            new_noti_check = (last_noti<new_noti)
+            if (new_noti_check):
+                messages.info(request, 'You have new notifications.')
+            else:
+                messages.info(request, 'You have no new notifications')
+        elif trip_notifications.count()==1:
+            messages.info(request, 'You have new notifications.')
+
         context = {
                 'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
                 'notifications': notifications,
-                'trip_notifications':trip_notifications
+                'trip_notifications':trip_notifications,
             }
     
     blog = Blog.objects.get(id=id)
@@ -98,13 +172,34 @@ def create_blog_post(request):
     if user.is_authenticated:
         traveller_user = get_object_or_404(Traveller, email=user)
         notifications = Notification.objects.all().filter(receiver_email=request.user).order_by('-reg_date')
-        trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
+        trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user).order_by('-noti_date')
         if traveller_user.is_guide:
             guide_user1 = get_object_or_404(Guide, email=request.user)
             if guide_user1:
-                trip_notifications = Trip_Notification.objects.all().filter(sender_email=request.user)
+                trip_notifications = Trip_Notification.objects.all().filter(sender_email=request.user).order_by('-noti_date')
         else:
-            trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
+            trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user).order_by('-noti_date')
+    if notifications:
+        new_noti = notifications.last().reg_date
+        if notifications.count()>1:
+            last_noti = notifications[1].reg_date
+            new_noti_check = (last_noti<new_noti)
+            if (new_noti_check):
+                messages.info(request, 'You have new notifications.')
+            else:
+                messages.info(request, 'You have no new notifications')
+    if trip_notifications:
+        new_tnoti = trip_notifications.last().noti_date
+        if trip_notifications.count()>1:
+            last_noti = trip_notifications[1].noti_date
+            new_noti_check = (last_noti<new_noti)
+            if (new_noti_check):
+                messages.info(request, 'You have new notifications.')
+            else:
+                messages.info(request, 'You have no new notifications')
+        elif trip_notifications.count()==1:
+            messages.info(request, 'You have new notifications.')
+        
         context = {
                 'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
                 'notifications': notifications,
@@ -148,13 +243,35 @@ def edit_blog_post(request, blog_id):
     if user.is_authenticated:
         traveller_user = get_object_or_404(Traveller, email=user)
         notifications = Notification.objects.all().filter(receiver_email=request.user).order_by('-reg_date')
-        trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
+        trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user).order_by('-noti_date')
         if traveller_user.is_guide:
             guide_user1 = get_object_or_404(Guide, email=request.user)
             if guide_user1:
-                trip_notifications = Trip_Notification.objects.all().filter(sender_email=request.user)
+                trip_notifications = Trip_Notification.objects.all().filter(sender_email=request.user).order_by('-noti_date')
         else:
-            trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
+            trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user).order_by('-noti_date')
+        
+    if notifications:
+        new_noti = notifications.last().reg_date
+        if notifications.count()>1:
+            last_noti = notifications[1].reg_date
+            new_noti_check = (last_noti<new_noti)
+            if (new_noti_check):
+                messages.info(request, 'You have new notifications.')
+            else:
+                messages.info(request, 'You have no new notifications')
+    if trip_notifications:
+        new_tnoti = trip_notifications.last().noti_date
+        if trip_notifications.count()>1:
+            last_noti = trip_notifications[1].noti_date
+            new_noti_check = (last_noti<new_noti)
+            if (new_noti_check):
+                messages.info(request, 'You have new notifications.')
+            else:
+                messages.info(request, 'You have no new notifications')
+        elif trip_notifications.count()==1:
+            messages.info(request, 'You have new notifications.')        
+        
         context = {
                 'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
                 'notifications': notifications,
@@ -218,13 +335,35 @@ def blogs_byuser(request, id):
     if request.user.is_authenticated:
         traveller_user = get_object_or_404(Traveller, email=request.user)
         notifications = Notification.objects.all().filter(receiver_email=request.user).order_by('-reg_date')
-        trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
+        trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user).order_by('-noti_date')
         if traveller_user.is_guide:
             guide_user1 = get_object_or_404(Guide, email=request.user)
             if guide_user1:
-                trip_notifications = Trip_Notification.objects.all().filter(sender_email=request.user)
+                trip_notifications = Trip_Notification.objects.all().filter(sender_email=request.user).order_by('-noti_date')
         else:
-            trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
+            trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user).order_by('-noti_date')
+        
+    if notifications:
+        new_noti = notifications.last().reg_date
+        if notifications.count()>1:
+            last_noti = notifications[1].reg_date
+            new_noti_check = (last_noti<new_noti)
+            if (new_noti_check):
+                messages.info(request, 'You have new notifications.')
+            else:
+                messages.info(request, 'You have no new notifications')
+    if trip_notifications:
+        new_tnoti = trip_notifications.last().noti_date
+        if trip_notifications.count()>1:
+            last_noti = trip_notifications[1].noti_date
+            new_noti_check = (last_noti<new_noti)
+            if (new_noti_check):
+                messages.info(request, 'You have new notifications.')
+            else:
+                messages.info(request, 'You have no new notifications')
+        elif trip_notifications.count()==1:
+            messages.info(request, 'You have new notifications.')        
+        
         context={
                 'blogs':blogs,
                 'logged_in_user':traveller_user,

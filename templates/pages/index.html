@@ -445,26 +445,19 @@
 
 					<div class="img" style="display:flex;
 						justify-content:center;">
-						<a href="{% url 'view_profile' guide.id %}"><img
-								{% if guide.photo_main %}src="{{ guide.photo_main.url }}" {% else %}
+						<a href="{% url 'view_profile' guide.get_traveller_id %}"><img
+								{% if guide.get_pic %}src="{{ guide.get_pic.url }}" {% else %}
 								src="{% static 'images/default.png' %}" {% endif %} class="img-fluid"
 								style="width: 200px; height: 200px; border-radius: 50%; " alt="Image"></a>
 					</div>
 					<div class="text">
-						<h3><a href="{% url 'view_profile' guide.id %}"
-								style="color: rgb(233, 122, 81);">{{ guide.first_name }}
-								{{ guide.last_name }}</a></h3>
-						<div class="star d-flex clearfix">Rating: &nbsp;
-							<div class="mr-auto float-left">
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-							</div>
+						<h3><a href="{% url 'view_profile' guide.get_traveller_id %}"
+								style="color: rgb(233, 122, 81);">{{ guide.email.first_name }}
+								{{ guide.email.last_name }}</a></h3>
+						<div class="star d-flex clearfix">Rating: &nbsp; {{ guide.average_rating}} &nbsp;
 						</div>
 					</div>
-					<p style="margin-bottom: 30%;"><strong>Address:</strong> {{ guide.address }}</p>
+					<p style="margin-bottom: 30%;"><strong>Address:</strong> {{ guide.get_address}}</p>
 
 				</div>
 				{% endfor %}
