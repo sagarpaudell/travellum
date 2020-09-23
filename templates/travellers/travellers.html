@@ -23,7 +23,7 @@ Dashboard
         <div class="col-lg-3 col-md-4">
           {% if traveller_user %}
           {% if traveller_user.photo_main %}
-          <img class="profile-pic" style="height: 275px !important; width: 100% !important; cursor: auto;"
+          <img class="profile-pic" style="width: 100% !important; cursor: auto;"
             src="{{ traveller_user.photo_main.url }}" alt="">
           {% else %}
           <img src="{% static 'images/default.png' %}">
