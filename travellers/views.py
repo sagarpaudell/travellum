@@ -270,12 +270,15 @@ def create_trip(request, traveller_id):
        trip_notification.save()
        traveller_id = request.POST['traveller_id']
        return redirect('/view_profile/'+traveller_id)
+    guide_user = guide_user.places.all().first()
     context = {
                 'traveller_user':traveller_user,
                 'logged_in_user':traveller_user_logged_in,
                 'places':places,
                 'place_pattern':place_pattern[:-1],
+                'guide_user':guide_user,
             }
+    # print(guide_user.place)
     return render(request, 'travellers/create_trip.html',context)
 
 

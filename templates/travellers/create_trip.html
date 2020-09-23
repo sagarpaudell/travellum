@@ -8,10 +8,10 @@ Create Trip
 
 {% block content %}
 
-<div class="container" style="width:60%;">
-    <section class=" row justify-content-center">
+<div class="container">
+    <section class="row justify-content-center">
         <section>
-            <div style="background:#fff; padding:30px; border-radius:10px; box-shadow:0px 0px 10px 0px;">
+            <div class="mt-5" style="background:#fff; padding:30px; border-radius:10px; box-shadow:0px 0px 10px 0px;">
                 <form method="POST">
                     {% csrf_token %}
                     <h2 class=" row justify-content-center margin-bottom:20%;">Create a trip:</h2>
@@ -34,15 +34,7 @@ Create Trip
                         <div class="col-md-10 col-sm-12">
                             <div class="form-group">
                                 <label for="Title">Destination</label>
-                                <input class="form-control" list="places" name="place" pattern="{{place_pattern}}"
-                                    title='enter a valid place' required>
-                                <datalist id="places">
-                                    {% if places %}
-                                    {% for place in places %}
-                                    <option value="{{ place.name }}">
-                                        {% endfor %}
-                                        {% endif%}
-                                </datalist>
+                                <input class="form-control" value="{{ guide_user }}" name="place" title='enter a valid place' required disabled>
                             </div>
                         </div>
                         <div class="col-md-5 col-sm-6">
@@ -59,7 +51,7 @@ Create Trip
                         </div>
                         <div class="col-md-6 col-sm-6">
                             <div class="form-group">
-                                <label>Total no. of travelling days/hours:</label>
+                                <label>Total no. of travelling hours:</label>
                                 <input class="form-control" id=" " name="travel_hours">
                             </div>
                         </div>
