@@ -104,12 +104,12 @@ Details
             {% if logged_in_user %}
             {% if allow_review or edit_review %}
             <div class="row border py-3 mb-5" style="background: white !important;">
-              <div class="col-2 col-lg-1 rounded">
+              <div class="col-2 col-lg-1 pl-2 pr-0 px-md-4 px-lg-3">
                 <img {% if logged_in_user.photo_main %} src="{{logged_in_user.photo_main.url}}" {% else %}
                   src="{% static 'images/default.png' %}" {% endif %}
-                  style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
+                  style="object-fit: contain; width: 100%; border-radius: 50%" alt="prof_pic">
               </div>
-              <form method="POST"  action="{% url 'placedetails' place.id %}" class="col-10 col-lg-11">
+              <form method="POST" action="{% url 'placedetails' place.id %}" class="col-10 col-lg-11">
                 {% csrf_token %}
                 <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Know this place? Give your review
                     here:</h5>
@@ -142,13 +142,12 @@ Details
                 <!-- Reviews:</h5> -->
                 {% if reviews %}
                 {% for review in reviews %}
-                <div class="row border  if Review.objects.all().filter(place_name=place, )py-3 my-3" style="background: white !important;">
-                  <div class="col-2 col-lg-1">
-                    <img src={{review.Reviewer.photo_main.url}}
-                      style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
+                <div class="row border py-3 my-3" style="background: white !important;">
+                  <div class="col-2 col-lg-1 pl-2 pr-0 px-md-4 px-lg-3">
+                    <img src={{review.Reviewer.photo_main.url}} style="object-fit: contain; width: 100%; border-radius: 50%" alt="prof_pic">
                   </div>
                   <div class="col-10 col-lg-11">
-                    <h5 class="text-muted d-flex" style="font-weight: 500; font-size: .8rem;">
+                    <h5 class="text-muted d-flex m-0" style="font-weight: 500; font-size: .8rem;">
                         <div class="d-flex align-items-center">
                             {{ review.Reviewer.first_name }} {{ review.Reviewer.last_name }} {% if review.Reviewer == logged_in_user and show_bool %}
                         </div>

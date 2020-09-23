@@ -52,6 +52,8 @@ class Traveller(models.Model):
             img = img.crop((left, top, right, bottom))
             img.thumbnail(final_size)
             img.save(self.photo_main.path)
+        
+    
 
 
 class Traveller_Review(models.Model):

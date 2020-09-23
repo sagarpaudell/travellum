@@ -102,8 +102,8 @@ Single Blogpost
       {% if user.is_authenticated %}
       <div class="container">
         <div class="row border py-3 mb-5"  style="background: white !important;">
-          <div class="col-2 col-lg-1 rounded">
-            <img src="{{logged_in_user.photo_main.url}}" style="height: 62px; width: 62px; border-radius: 50%;" alt="prof_pic">
+          <div class="col-2 col-lg-1 pl-2 pr-0 px-md-4 px-lg-3">
+            <img src="{{logged_in_user.photo_main.url}}" style="object-fit: contain; width: 100%; border-radius: 50%;" alt="prof_pic">
           </div>
           <form class="col-10 col-lg-11" action='#' method='POST'>
             {% csrf_token %}
@@ -119,10 +119,11 @@ Single Blogpost
         {% for comment in comments %}
         <div class="row border py-3 my-3" style="background: white !important;">
           
-          <div class="col-2 col-lg-1">
-            <img src="{{comment.get_profile_pic.url}}" style="height: 62px; width: 62px; border-radius: 50%;" alt="prof_pic">
+          <div class='col-2 col-lg-1 pl-2 pr-0 px-md-4 px-lg-3'>
+            <img src="{{comment.get_profile_pic.url}}" style="object-fit: contain; width: 100%; border-radius: 50%"
+            alt="prof_pic">
           </div>
-          <div class="col-10 col-lg-11">
+          <div class="col-8 col-lg-10">
             <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">{{comment.commenter }} &nbsp; <span id="vote_countof{{comment.id}}">{{comment.vote_count}}</span> &nbsp;
             {% if user.is_authenticated %}
               <span style="font-size: 1.5rem;">
@@ -141,10 +142,20 @@ Single Blogpost
                 
                 {% endif %}
 
+                </span>
               </span>
             {% endif %}
             </h5>
             <p class="m-0" style="font-family: Arial, Helvetica, sans-serif;">{{comment.comment}}</p>
+          </div>
+
+          <div class="col-2 col-lg-1">
+            <button class="btn btn-transparen btn-sm p-0" data-toggle="modal" data-target="#edit-comment-modal">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="btn btn-transparen btn-sm p-0" data-toggle="modal" data-target="#delete-comment-modal">
+              <i class="fas fa-trash"></i>
+            </button>
           </div>
         </div>
         {% endfor %}
@@ -157,6 +168,60 @@ Single Blogpost
   </div>
 </main>
 
+
+<!--========== Modals ==========-->
+<!--========== Edit Comment Modal ==========-->
+<div class="modal fade" id="edit-comment-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Edit Comment
+        </h5>
+        <button class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center">
+          <form class="col-12" action='#' method='POST'>
+            {% csrf_token %}
+            <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">Edit your comment...</h5>
+            <textarea class="form-control" rows="3" name="comment"></textarea>
+            <div style="display: flex; justify-content: flex-end;">
+              <input class="btn btn-danger mt-2" type="submit">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End of Edit Comment Modal -->
+
+<!--========== Delete Comment Modal ==========-->
+<div class="modal fade" id="delete-comment-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Delete
+        </h5>
+        <button class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center">
+          Delete your comment?
+        </div>
+        <form>
+          <div class="d-flex justify-content-center align-items-center">
+            <a href="{% url 'create_blog_post' %}" class="btn btn-outline-dark text-dark mx-2 my-3">Yes</a>
+            <button class="btn btn-dark mx-2 my-3" data-dismiss="modal">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End of Delete Comment Modal -->
 {% endblock %}
 
 {% block script %}

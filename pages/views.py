@@ -9,14 +9,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
  
 def index(request):
-    active_guides = Guide.objects.all().filter(is_active=True)
+    active_guides = Guide.objects.all().filter(is_active=True).order_by('-average_rating')[:4]
     x=list()
     context = dict()
     for guide in active_guides:
         traveller=Traveller.objects.filter(email=guide.email).first()
         time_indays = (timezone.now() - guide.email.last_login).seconds/86400
         if (time_indays<10):
-            x.append(traveller)
+            x.append(guide)
             print(time_indays)
         else:
             guide.is_active = False
@@ -24,7 +24,7 @@ def index(request):
     places = Place.objects.all()[:6]
     context.update({
         'guides':x,
-        'places':places
+        'places':places,
     })
     return render(request, 'pages/index.html', context)
 def about(request):
