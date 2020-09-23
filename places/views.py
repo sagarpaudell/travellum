@@ -22,26 +22,26 @@ def places(request):
         else:
             trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
         places = Place.objects.all()
-    if notifications:
-        new_noti = notifications.last().reg_date
-        if notifications.count()>1:
-            last_noti = notifications[1].reg_date
-            new_noti_check = (last_noti<new_noti)
-            if (new_noti_check):
-                messages.info(request, 'You have new notifications.')
-            else:
-                messages.info(request, 'You have no new notifications')
-    if trip_notifications:
-        new_tnoti = trip_notifications.last().noti_date
-        if trip_notifications.count()>1:
-            last_noti = trip_notifications[1].noti_date
-            new_noti_check = (last_noti<new_noti)
-            if (new_noti_check):
-                messages.info(request, 'You have new notifications.')
-            else:
-                messages.info(request, 'You have no new notifications')
-        elif trip_notifications.count()==1:
-            messages.info(request, 'You have new notifications.')  
+        if notifications:
+            new_noti = notifications.last().reg_date
+            if notifications.count()>1:
+                last_noti = notifications[1].reg_date
+                new_noti_check = (last_noti<new_noti)
+                if (new_noti_check):
+                    messages.info(request, 'You have new notifications.')
+                else:
+                    messages.info(request, 'You have no new notifications')
+        if trip_notifications:
+            new_tnoti = trip_notifications.last().noti_date
+            if trip_notifications.count()>1:
+                last_noti = trip_notifications[1].noti_date
+                new_noti_check = (last_noti<new_noti)
+                if (new_noti_check):
+                    messages.info(request, 'You have new notifications.')
+                else:
+                    messages.info(request, 'You have no new notifications')
+            elif trip_notifications.count()==1:
+                messages.info(request, 'You have new notifications.')  
 
         context = {
             'places':places,
@@ -74,26 +74,26 @@ def placedetails(request, place_id):
         else:
             trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user)
         
-    if notifications:
-        new_noti = notifications.last().reg_date
-        if notifications.count()>1:
-            last_noti = notifications[1].reg_date
-            new_noti_check = (last_noti<new_noti)
-            if (new_noti_check):
+        if notifications:
+            new_noti = notifications.last().reg_date
+            if notifications.count()>1:
+                last_noti = notifications[1].reg_date
+                new_noti_check = (last_noti<new_noti)
+                if (new_noti_check):
+                    messages.info(request, 'You have new notifications.')
+                else:
+                    messages.info(request, 'You have no new notifications')
+        if trip_notifications:
+            new_tnoti = trip_notifications.last().noti_date
+            if trip_notifications.count()>1:
+                last_noti = trip_notifications[1].noti_date
+                new_noti_check = (last_noti<new_noti)
+                if (new_noti_check):
+                    messages.info(request, 'You have new notifications.')
+                else:
+                    last_noti = trip_notifications[1].noti_date
+            elif trip_notifications.count()==1:
                 messages.info(request, 'You have new notifications.')
-            else:
-                messages.info(request, 'You have no new notifications')
-    if trip_notifications:
-        new_tnoti = trip_notifications.last().noti_date
-        if trip_notifications.count()>1:
-            last_noti = trip_notifications[1].noti_date
-            new_noti_check = (last_noti<new_noti)
-            if (new_noti_check):
-                messages.info(request, 'You have new notifications.')
-            else:
-                  last_noti = trip_notifications[1].noti_date
-        elif trip_notifications.count()==1:
-            messages.info(request, 'You have new notifications.')
 
     if request.method == 'POST':
         if 'review_add' in request.POST:
