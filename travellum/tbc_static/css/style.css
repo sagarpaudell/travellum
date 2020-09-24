@@ -372,6 +372,9 @@ nav .container .row div:nth-child(2) form {
   #register-container {
     width: 68% !important;
   }
+  #places-container {
+    width: 80% !important;
+  }
 }
 
 @media screen and (max-width: 991px) {
@@ -393,6 +396,9 @@ nav .container .row div:nth-child(2) form {
   }
   #register-container {
     width: 80% !important;
+  }
+  #places-container {
+    width: 100% !important;
   }
 }
 
