@@ -4,6 +4,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from django.contrib.auth import views as auth_views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+# ... the rest of your URLconf goes here ...
+
 
 urlpatterns = [
     path('', include('pages.urls')),
@@ -17,3 +21,5 @@ urlpatterns = [
     path('view_profile/', include('travellers.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += staticfiles_urlpatterns()

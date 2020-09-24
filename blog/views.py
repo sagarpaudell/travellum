@@ -4,6 +4,7 @@ from guides.models import Guide
 from notifications.models import Notification, Trip_Notification
 from .models import Blog, Comment
 from urllib.parse import urlparse
+from django.contrib import messages
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -13,6 +14,7 @@ from django.contrib import messages
 @login_required
 def my_blog(request):
     user=request.user
+    context = dict()
     if user.is_authenticated:
         traveller_user = get_object_or_404(Traveller, email=user)
         notifications = Notification.objects.all().filter(receiver_email=request.user).order_by('-reg_date')
@@ -106,8 +108,10 @@ def explore(request):
 def single_blog_post(request,id):
     user=request.user
     context = dict()
+    
     if user.is_authenticated:
         traveller_user = get_object_or_404(Traveller, email=user)
+        context = {'logged_in_user':traveller_user}
         notifications = Notification.objects.all().filter(receiver_email=request.user).order_by('-reg_date')
         trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user).order_by('-noti_date')
         if traveller_user.is_guide:
@@ -222,9 +226,11 @@ def create_blog_post(request):
             is_guide    = is_guide
         )
         blog.save()
+        messages.success(request, 'Blog created')
         return redirect('my_blog')
     places=Place.objects.all()
     place_pattern=''
+    
     for place in places:
         place_pattern = place.name+'|'+place_pattern
     context.update({
@@ -238,7 +244,9 @@ def create_blog_post(request):
 @login_required
 def edit_blog_post(request, blog_id):
     user=request.user
+    context = dict()
     if user.is_authenticated:
+        context.update({'logged_in_user':traveller_user})
         traveller_user = get_object_or_404(Traveller, email=user)
         notifications = Notification.objects.all().filter(receiver_email=request.user).order_by('-reg_date')
         trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user).order_by('-noti_date')
@@ -271,7 +279,7 @@ def edit_blog_post(request, blog_id):
                 messages.info(request, 'You have new notifications.')        
         
         context = {
-                'logged_in_user':traveller_user,   #logged_in_user is for avatar in navbar
+                 #logged_in_user is for avatar in navbar
                 'notifications': notifications,
                 'trip_notifications':trip_notifications,
             }
@@ -315,7 +323,9 @@ def delete_blog_post(request, blog_id):
     blog = get_object_or_404(Blog, id = blog_id)
     if request.user == blog.user:
         blog.delete()
+    messages.success('Your blog was deleted')
     return redirect('my_blog')
+
 
 def blogs_byplace(request, id):
     place = Place.objects.get(pk= id)
@@ -324,11 +334,14 @@ def blogs_byplace(request, id):
     print(blogs)
     return render(request, 'blog/place_blog.html', {'blogs':blogs, 'place':place})
 
+
 def blogs_byuser(request, id):
     user = Traveller.objects.get(id = id).email
     blogs = user.blogs.all()
-    print(blogs)
-    
+    context={
+            'blogs': blogs,
+            'blog_user': user 
+        }
     if request.user.is_authenticated:
         traveller_user = get_object_or_404(Traveller, email=request.user)
         notifications = Notification.objects.all().filter(receiver_email=request.user).order_by('-reg_date')
@@ -339,7 +352,7 @@ def blogs_byuser(request, id):
                 trip_notifications = Trip_Notification.objects.all().filter(sender_email=request.user).order_by('-noti_date')
         else:
             trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user).order_by('-noti_date')
-            
+        context.update({'logged_in_user':traveller_user})
         if notifications:
             new_noti = notifications.last().reg_date
             if notifications.count()>1:
@@ -361,13 +374,11 @@ def blogs_byuser(request, id):
             elif trip_notifications.count()==1:
                 messages.info(request, 'You have new notifications.')        
         
-        context={
-                'blogs':blogs,
-                'logged_in_user':traveller_user,
-                'notifications': notifications,
-                'trip_notifications':trip_notifications,
-
-                    }
-        return render(request, 'blog/user_blog.html', context)
-    return render(request, 'blog/user_blog.html')
+            context.update({
+                    'notifications': notifications,
+                    'trip_notifications':trip_notifications,
+                })
+            return render(request, 'blog/user_blog.html', context)
+    print(context['blog_user'].first_name) 
+    return render(request, 'blog/user_blog.html', context)
 
