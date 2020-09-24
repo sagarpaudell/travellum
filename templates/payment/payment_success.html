@@ -8,10 +8,10 @@ Payment Success
 
 {% block content %}
 <!-- Successful payment block -->
-<section class="container-fluid" id="payment_successful">
+<section class="container-fluid my-5" id="payment_successful">
     <section class="row justify-content-center">
         <section style="width:600px;  ">
-            <div style="background:#fff; padding:30px; border-radius:10px; box-shadow:0px 0px 10px 0px;">
+            <div class="py-5" style="background:#fff; padding:30px; border-radius:10px; box-shadow:0px 0px 10px 0px;">
                 <h1 class=" row justify-content-center" style="color:#4BB543 ;">Congratulations!!
                 </h1>
                 <p class="row justify-content-center" style="margin-bottom:8%; ">Your payment has been successful</p>
@@ -26,11 +26,11 @@ Payment Success
                         <p style="margin: 1px;"><strong>Transaction date: </strong>{{ trans.t_date}}</p>
                         <br>
                         <br>
-                        <p>Please, print this page for future use.</p>
-                        <form>
-                            <input type=button value="Print" onClick="javascript:window.print()">
+                        <form class="mb-5">
+                            <p class="mb-2">Please, print this page for future use.</p>
+                            <input class="btn btn-sm btn-dark" type=button value="Print" onClick="javascript:window.print()">
                         </form>
-                        <a href="{% url 'index' %}"><button  type="submit" class="btn btn-primary" style="margin-top:5%; ">Back to Home</button>
+                        <a href="{% url 'index' %}"><button type="submit" class="text-info p-0 border-0 bg-transparent" style="margin-top:5%; "><u>Back to Home</u></button>
                         </a>
                     </div>
 

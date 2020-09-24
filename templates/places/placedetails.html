@@ -28,7 +28,7 @@ Details
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
 
-        <div class="carousel-inner" style="height: 60vh; width:100%; margin-left:0%; ">
+        <div class="carousel-inner" style="max-height: 60vh; width:100%; margin-left:0%; ">
             <div class="carousel-item active">
                 <img class="d-block w-100" src="{{ place.photo_1.url }}" alt="First slide">
             </div>
@@ -111,9 +111,11 @@ Details
                 
                 <div class="row border py-3 mb-5"  style="background: white !important;">
                 <div class="col-2 col-lg-1 pl-2 pr-0 px-md-4 px-lg-3">
-                    <img {% if logged_in_user.photo_main %} src="{{logged_in_user.photo_main.url}}" {% else %}
-                    src="{% static 'images/default.png' %}" {% endif %}
-                    style="object-fit: contain; width: 100%; border-radius: 50%" alt="prof_pic">
+                    <img {% if logged_in_user.photo_main %} src="{{logged_in_user.photo_main.url}}" style="object-fit: contain; width: 100%; border-radius: 50% !important"
+                    {% else %}
+                    src="{% static 'images/default.png' %}" 
+                    {% endif %}
+                    alt="prof_pic">
                 </div>
                 <form method="POST" action="{% url 'placedetails' place.id %}" class="col-10 col-lg-11">
                     {% csrf_token %}

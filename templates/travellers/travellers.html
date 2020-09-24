@@ -64,7 +64,7 @@ Dashboard
                   {% if guide.is_published %}
                   <div class="col-md-6 p-0 text-right d-flex flex-column align-items-md-end justify-content-md-center align-items-start">
                     <h3><span class="display-5 d-inline text-success">Rs.</span>{{guide.price}}/hr</h3>
-                    <h4>Average Rating: {{guide.average_rating}}</h4>
+                    <!-- <h4>Average Rating: {{guide.average_rating}}</h4> -->
                     <form action="{% url 'notifications' %}" method="POST">
                       {% csrf_token %}
                       <input type="hidden" name="traveller_id" value="{{ traveller_user.id }}">
@@ -108,7 +108,7 @@ Dashboard
         </div>
       </div>
 
-      <div>
+      <div class="container p-0">
 
         <div class="d-flex flex-row text-white align-items-stretch text-center bg-white" id="custom-menu">
           <div class="port-item p-4 mx-md-3 mx-1 bg-white" data-toggle="collapse" data-target="#about_me">
@@ -313,17 +313,18 @@ Dashboard
                   <div class="my-5 border-bottom"></div>
                   {% endfor %}
                   {% else %}
-                  <h2 class="d-none d-md-block" style="color: #e2c0bb;">No Guide History</h2>
-                  <div class="mb-5"></div>
+                  <h2 class="text-center d-none d-md-block" style="color: #e2c0bb;">No Guide History</h2>
+                  <div class="border-bottom my-5"></div>
                   {% endif %}
                 {% if guide_has_travelled_with %}
                 {% if guide_review_exists %}
                 {% else %}
                 <div class="row border py-3 mb-5" style="background: white !important;">
-                  <div class="col-2 col-lg-1 rounded">
-                    <img {% if logged_in_user.photo_main %} src="{{logged_in_user.photo_main.url}}" {% else %}
+                  <div class="col-2 col-lg-1 pl-2 pr-0 px-md-4 px-lg-3">
+                    <img id="reviews-circle" {% if logged_in_user.photo_main %} src="{{logged_in_user.photo_main.url}}" {% else %}
                       src="{% static 'images/default.png' %}" {% endif %}
-                      style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
+                      class="d-flex"
+                      style="object-fit:contain; max-height: 65px; max-width: 65px;" alt="prof_pic">
                   </div>
                   <form method="POST" class="col-10 col-lg-11">
                     {% csrf_token %}
@@ -358,9 +359,14 @@ Dashboard
                 <div class="mb-5"></div>
                 {% for guide_review in guide_reviews %}
                 <div class="row border py-3 my-3" style="background: white !important;">
-                  <div class="col-2 col-lg-1">
-                    <img src={{guide_review.guide_reviewer.photo_main.url}}
-                      style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
+                  <div class="col-2 col-lg-1 pl-2 pr-0 px-md-4 px-lg-3">
+                    <img id="reviews-circle" {% if logged_in_user.photo_main %} 
+                    src="{{logged_in_user.photo_main.url}}" 
+                    {% else %}
+                    src="{% static 'images/default.png' %}" 
+                    {% endif %}
+                    class="d-flex"
+                    style="object-fit:contain; max-height: 65px; max-width: 65px;" alt="prof_pic">
                   </div>
                   <div class="col-9 col-lg-10">
                     <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">
@@ -407,6 +413,7 @@ Dashboard
                 {% endfor %}
                 {% else %}
                 <h2 class="text-center" style="color: #e2c0bb;">No Guide Reviews</h2>
+                <div class="border-bottom my-5"></div>
                 {% endif %}
               </div>
               {% else %}
@@ -457,9 +464,14 @@ Dashboard
                 {% if traveller_review_exists %}
                 {% else %}
                 <div class="row border py-3 mb-5" style="background: white !important;">
-                  <div class="col-2 col-lg-1 rounded">
-                    <img {% if logged_in_user.photo_main %} src="{{logged_in_user.photo_main.url}}" {% else %} src="{% static 'images/default.png' %}" {% endif %}
-                    style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
+                  <div class="col-2 col-lg-1 pl-2 pr-0 px-md-4 px-lg-3">
+                    <img id="reviews-circle" {% if logged_in_user.photo_main %} 
+                    src="{{logged_in_user.photo_main.url}}" 
+                    {% else %}
+                    src="{% static 'images/default.png' %}" 
+                    {% endif %}
+                    class="d-flex"
+                    style="object-fit:contain; max-height: 65px; max-width: 65px;" alt="prof_pic">
                   </div>
                   <form method="POST" class="col-10 col-lg-11">
                     {% csrf_token %}
@@ -476,11 +488,16 @@ Dashboard
                 {% if traveller_reviews %}
                 {% for traveller_review in traveller_reviews %}
                 <div class="row border py-3 my-3" style="background: white !important;">
-                  <div class="col-2 col-lg-1">
-                    <img src={{traveller_review.traveller_reviewer.photo_main.url}}
-                      style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
+                  <div class="col-2 col-lg-1 pl-2 pr-0 px-md-4 px-lg-3">
+                    <img id="reviews-circle" {% if logged_in_user.photo_main %} 
+                    src="{{logged_in_user.photo_main.url}}" 
+                    {% else %}
+                    src="{% static 'images/default.png' %}" 
+                    {% endif %}
+                    class="d-flex"
+                    style="object-fit:contain; max-height: 65px; max-width: 65px;" alt="prof_pic">
                   </div>
-                  <div class="col-9 col-lg-10">
+                  <div class="col-10 col-lg-11">
                     <h5 class="text-muted" style="font-weight: 500; font-size: .8rem;">
                       {{ traveller_review.traveller_reviewer.first_name }} {{ traveller_review.traveller_reviewer.last_name }}</h5>
                     
@@ -530,10 +547,14 @@ Dashboard
         {% csrf_token %}
           <div class="text-center">
 
-            <div class="col-2 col-lg-1 rounded">
-              <img {% if logged_in_user.photo_main %} src="{{logged_in_user.photo_main.url}}" {% else %}
-                src="{% static 'images/default.png' %}" {% endif %}
-                style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic">
+            <div class="col-2 col-lg-1 pl-2 pr-0 px-md-4 px-lg-3">
+              <img id="reviews-circle" {% if logged_in_user.photo_main %} 
+              src="{{logged_in_user.photo_main.url}}" 
+              {% else %}
+              src="{% static 'images/default.png' %}" 
+              {% endif %}
+              class="d-flex"
+              style="object-fit:contain; max-height: 65px; max-width: 65px;" alt="prof_pic">
             </div>
             <div class="col-10 col-lg-11">
               {% if guide_reviews %}
@@ -587,12 +608,14 @@ Dashboard
         {% csrf_token %}
           <div class="text-center">
 
-            <div class="col-2 col-lg-1 rounded">
-              <img
-                {% if logged_in_user.photo_main %} src="{{logged_in_user.photo_main.url}}" {% else %}
-                src="{% static 'images/default.png' %}"{% endif %}
-                style="height: 62px !important; width: 62px !important; border-radius: 50%;" alt="prof_pic"
-              >
+            <div class="col-2 col-lg-1 pl-2 pr-0 px-md-4 px-lg-3">
+              <img id="reviews-circle" {% if logged_in_user.photo_main %} 
+              src="{{logged_in_user.photo_main.url}}" 
+              {% else %}
+              src="{% static 'images/default.png' %}" 
+              {% endif %}
+              class="d-flex"
+              style="object-fit:contain; max-height: 65px; max-width: 65px;" alt="prof_pic">
             </div>
             <div class="col-10 col-lg-11">
               {% if traveller_reviews %}

@@ -8,13 +8,13 @@ Create Trip
 
 {% block content %}
 
-<div class="container">
-    <section class="row justify-content-center">
+<div id="register-container" class="container">
+    <section class=" row justify-content-center">
         <section>
             <div class="mt-5" style="background:#fff; padding:30px; border-radius:10px; box-shadow:0px 0px 10px 0px;">
                 <form method="POST">
                     {% csrf_token %}
-                    <h2 class=" row justify-content-center margin-bottom:20%;">Create a trip:</h2>
+                    <h2 class=" row justify-content-center mb-5">Create a trip:</h2>
                     <div class="row">
                         <div class="col-md-10 col-sm-12">
                             <input type="hidden" name="traveller_id" value="{{ traveller_user.id }}">
@@ -68,14 +68,16 @@ Create Trip
                                 <input class="form-control" id=" " name="cost" disabled>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-3">
-                            <button type="submit" class="btn btn-primary" name="confirm"
-                                style="margin-bottom:5%; ">Confirm</button>
-                        </div>
-                        <div class="col-12 col-lg-3">
-                            <a href="{% url 'view_profile' traveller_user.id %}"><button type="submit"
-                                    class="btn btn-danger position-relative" name="cancel"><i class="fas fa-times"></i>
-                                    Cancel</button></a>
+                        <div class="row px-4 mt-4">
+                            <div class="">
+                                <button type="submit" class="btn btn-primary mr-3" name="confirm"
+                                    style="margin-bottom:5%; ">Confirm</button>
+                            </div>
+                            <div class="">
+                                <a href="{% url 'view_profile' traveller_user.id %}"><button type="submit"
+                                        class="btn btn-danger" name="cancel"><i class="fas fa-times"></i>
+                                        Cancel</button></a>
+                            </div>
                         </div>
                     </div>
                 </form>

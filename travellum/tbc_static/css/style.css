@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&display=swap');
 
 body {
-  background: url('../images/bgDarken.jpg') !important;
+  background: url('../images/bgDarken_compressed.jpg') !important;
   background-position: center center !important;
   background-repeat: no-repeat !important;
   background-attachment: fixed !important;
@@ -139,15 +139,6 @@ nav .container .row div:nth-child(2) form {
 .navbar-brand-sm {
   font-size: 32px;
   display: none !important;
-}
-
-#social-logins {
-  width: 25% !important;
-}
-
-#accordion-login {
-  width: 36% !important;
-  margin-left: 32% !important;
 }
 
 .collapse-on-phones {
@@ -366,11 +357,8 @@ nav .container .row div:nth-child(2) form {
   .bg-custom .container .row {
     padding: 2rem;
   }
-  #login-container {
-    width: 68% !important;
-  }
-  #register-container {
-    width: 68% !important;
+  #places-container {
+    width: 80% !important;
   }
 }
 
@@ -378,25 +366,18 @@ nav .container .row div:nth-child(2) form {
   .bg-custom .container .row {
     padding: 1rem;
   }
-
-  #social-logins {
-    width: 35% !important;
-  }
-
-  #accordion-login {
-    width: 36% !important;
-    margin-left: 32% !important;
-  }
-
   #login-container {
     width: 80% !important;
   }
   #register-container {
     width: 80% !important;
   }
+  #places-container {
+    width: 100% !important;
+  }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 767.5px) {
   .navbar-brand-sm {
     display: inline !important;
   }
@@ -420,9 +401,7 @@ nav .container .row div:nth-child(2) form {
   #search-bar-on-nav {
     text-align: center;
   }
-  #social-logins {
-    width: 75% !important;
-  }
+
   .collapse-on-phones {
     display: none;
   }
@@ -432,12 +411,6 @@ nav .container .row div:nth-child(2) form {
 
   .bg-custom .row h1 {
     font-size: 2rem;
-  }
-
-  #accordion-login,
-  #accordion-register {
-    width: 75% !important;
-    margin-left: 13% !important;
   }
 
   .reduce-on-phones-1 {
