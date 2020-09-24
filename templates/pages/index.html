@@ -25,6 +25,23 @@
 </head>
 
 <body>
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+    window.fbAsyncInit = function() {
+        FB.init({ xfbml:true, version:'v8.0'});};
+
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    W}(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <!-- Your Chat Plugin code -->
+    <div class="fb-customerchat" attribution=setup_tool page_id="114732793660060"></div>
 	<header>
 		<nav class="navbar navbar-expand-lg custom-navbar-light" id="custom-navbar">
 			<div class="container">
@@ -35,7 +52,7 @@
 
 				</button>
 
-				
+
 				<div class="collapse navbar-collapse" id="navbarHome">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item mr-2"><a href="#home-section" class="nav-link"><span>Home</span></a></li>
@@ -351,11 +368,11 @@
 					<div class="">
 						<div class="project">
 							<a href="{% url 'placedetails' place.id %}">
-								<img 
+								<img
 									src="{{ place.photo_1.url }}"
-									class="img-fluid" 
+									class="img-fluid"
 									id="places-image"
-									alt="Image" 
+									alt="Image"
 									style="height:320px; width: 320px;"
 								>
 							</a>
@@ -544,5 +561,6 @@
 		});
 	});
 </script>
+
 
 </html>
