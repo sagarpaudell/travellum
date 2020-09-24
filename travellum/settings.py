@@ -26,7 +26,7 @@ SECRET_KEY = 'qi3^m_agsbz45g$nysz6-4d0@=q5&g$ik&xy&ax^tmf#$o$k&7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['travellum.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['travellum.herokuapp.com', '127.0.0.1', '0.0.0.0']
 
 
 # Application definition
@@ -85,16 +85,26 @@ AUTH_USER_MODEL = 'accounts.User'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'travellum_db',
+#         'USER': 'postgres',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'localhost'
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'travellum_db',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'https://travellum.herokuapp.com/'
+        'NAME': 'd96b2opl4q65kd',
+        'USER': 'soqgvrqmoxilst',
+        'PASSWORD': 'cab50fc19f675c49f5873e53a8d59f2cd57b85a8529213202be6b566ff19f03e',
+        'HOST': 'ec2-3-214-46-194.compute-1.amazonaws.com',
+        'PORT': 5432
     }
 }
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
