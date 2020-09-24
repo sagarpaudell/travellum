@@ -26,7 +26,7 @@ SECRET_KEY = 'qi3^m_agsbz45g$nysz6-4d0@=q5&g$ik&xy&ax^tmf#$o$k&7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['travellum.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -91,7 +91,7 @@ DATABASES = {
         'NAME': 'travellum_db',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'localhost'
+        'HOST': 'https://travellum.herokuapp.com/'
     }
 }
 
