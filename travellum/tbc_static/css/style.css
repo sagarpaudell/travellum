@@ -402,7 +402,7 @@ nav .container .row div:nth-child(2) form {
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .navbar-brand-sm {
     display: inline !important;
   }
@@ -475,5 +475,9 @@ nav .container .row div:nth-child(2) form {
     right: 0; 
     bottom: 0; 
     border-radius: 50%;
+  }
+
+  #revies-circle {
+    border-radius: 0% !important;
   }
 }

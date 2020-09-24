@@ -3,14 +3,14 @@
 {% load static %}
 
 {% block title %}
-Finalize Trip
+Confirm Trip
 {% endblock %}
 
 {% block content %}
 
-<section class="container-fluid">
+<section class="container my-5" id="register-container">
     <section class="row justify-content-center">
-        <section style="width:60%;  ">
+        <section>
             <div style="background:#fff; padding:30px; border-radius:10px; box-shadow:0px 0px 10px 0px;">
                 <form >
                     {% csrf_token %}
@@ -76,7 +76,7 @@ Finalize Trip
                 <!-- <input value="{{ traveller_user.id }}{{request.user.id}}" name="pid" type="hidden"> -->
                 <input value="http://localhost:8000/dashboard/payment_success" type="hidden" name="su">
                 <input value="http://localhost:8000/dashboard/payment_failure" type="hidden" name="fu">
-                <button type="submit" class="btn btn-primary" name="pay_with_esewa" style="margin-right:6%; ">Pay with E-Sewa</button>
+                <button type="submit" class="mt-4 btn btn-primary" name="pay_with_esewa" style="margin-right:10%; ">Pay with E-Sewa</button>
             </form>
             <form action="{% url 'dashboard' %}" method="POST">
                 {% csrf_token %}
