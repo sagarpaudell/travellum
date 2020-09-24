@@ -379,6 +379,8 @@ def blogs_byuser(request, id):
                     'trip_notifications':trip_notifications,
                 })
             return render(request, 'blog/user_blog.html', context)
+
     print(context['blog_user'].first_name) 
     return render(request, 'blog/user_blog.html', context)
+    
 

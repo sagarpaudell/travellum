@@ -56,7 +56,7 @@ Dashboard
                     {% if traveller_user %}
                     {{traveller_user.address}}<br>
                     <h2>{{ traveller_user.first_name }} {{ traveller_user.last_name }} </h2>
-                    {% if traveller_user.is_guide %}Replies within: 84 hours{% endif %}
+                    {% if traveller_user.is_guide %}Replies within: {{guide.replies_within}} hours{% endif %}
                     {% endif %}
                   </div>
                   {% if traveller_user %}
@@ -64,6 +64,7 @@ Dashboard
                   {% if guide.is_published %}
                   <div class="col-md-6 p-0 text-right d-flex flex-column align-items-md-end justify-content-md-center align-items-start">
                     <h3><span class="display-5 d-inline text-success">Rs.</span>{{guide.price}}/hr</h3>
+                    <h4>Average Rating: {{guide.average_rating}}</h4>
                     <form action="{% url 'notifications' %}" method="POST">
                       {% csrf_token %}
                       <input type="hidden" name="traveller_id" value="{{ traveller_user.id }}">

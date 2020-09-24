@@ -33,8 +33,15 @@ Create Trip
                         </div>
                         <div class="col-md-10 col-sm-12">
                             <div class="form-group">
-                                <label for="Title">Destination</label>
-                                <input class="form-control" value="{{ guide_user }}" name="place" title='enter a valid place' required disabled>
+                                <label for="Title">Place you want to guide of</label><br>
+                                <input class="form-control" list="places" name="place" pattern="{{place_pattern}}" title='enter a valid place' value="{{g_user.get_place}}" autocomplete="off" required>
+                                <datalist id="places">
+                                  {% if places %}
+                                  {% for place in places %}
+                                    <option value="{{ place.name }}">
+                                  {% endfor %}
+                                  {% endif%}
+                                </datalist>
                             </div>
                         </div>
                         <div class="col-md-5 col-sm-6">
