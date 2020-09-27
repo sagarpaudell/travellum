@@ -13,7 +13,6 @@ from django import template
 import datetime
 from django.utils.timesince import timesince
 from django.utils.timezone import utc
-from django.utils import timezone
 from django.contrib import messages
 
 # Create your views here.
@@ -26,41 +25,22 @@ def dashboard(request):
   guide_user = Guide.objects.all().filter(email=user).first()
   guide_reviews = Guide_Review.objects.all().filter(guide=user)
   notifications = Notification.objects.all().filter(receiver_email=user).order_by('-reg_date')
-  trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user).order_by('-noti_date')
+  trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user)
   guide_historys = History.objects.all().filter(guide=user,tour_complete=True)
   traveller_historys = History.objects.all().filter(traveller=user,tour_complete=True)
   if traveller_user.is_guide:
     guide_user1 = get_object_or_404(Guide, email=user)
     if guide_user1:
-        trip_notifications = Trip_Notification.objects.all().filter(sender_email=user).order_by('-noti_date')
+        trip_notifications = Trip_Notification.objects.all().filter(sender_email=user)
     
   else:
-    trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user).order_by('-noti_date')
+    trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user)
   places = Place.objects.all()
   place_pattern=''
   for place in places:
       place_pattern = place.name+'|'+place_pattern
-  if notifications:
-    new_noti = notifications.last().reg_date
-    if notifications.count()>1:
-      last_noti = notifications[1].reg_date
-      new_noti_check = (last_noti<new_noti)
-      if (new_noti_check):
-        messages.info(request, 'You have new notifications.')
-      else:
-        messages.info(request, 'You have no new notifications')
-  if trip_notifications:
-    new_tnoti = trip_notifications.last().noti_date
-    if trip_notifications.count()>1:
-      last_noti = trip_notifications[1].noti_date
-      new_noti_check = (last_noti<new_noti)
-      if (new_noti_check):
-        messages.info(request, 'You have new notifications.')
-      else:
-        messages.info(request, 'You have no new notifications')
-    elif trip_notifications.count()==1:
-      messages.info(request, 'You have new notifications.')
-
+  
+  
   context = {
                 'traveller_user':traveller_user,
                 'my_profile':True,
@@ -163,8 +143,13 @@ def dashboard(request):
       noti.save()
       notification = Notification(receiver_email=receiver_user, sender_email=sender_user, sender_name = sender_name,is_accepted = True, reg_date= reg_date)
       notification.save()
-      chat = Chat(sender = receiver_user, receiver = sender_user, message_text = 'hello')
+      chat = Chat(
+          sender = sender_user, receiver = receiver_user, 
+          message_text = f'Hi, I\'m {sender_user.first_name} {sender_user.last_name}.\
+          Thank you for choosing me to be your guide. I\'d be happy to discuss the details with you'
+        )
       chat.save()
+      messages.info(request, f'you can chat with {receiver_user.email} now')
 
     if 'ignored' in request.POST:
       noti_id = request.POST['noti_id']
@@ -185,7 +170,7 @@ def dashboard(request):
 def confirm_trip(request):
   traveller_user = get_object_or_404 (Traveller , email=request.user)
   if request.method == "POST":
-    trip_noti_id = request.POST['tn_id']
+    trip_noti_id = int(request.POST['tn_id'])
     tn_instance = get_object_or_404(Trip_Notification,pk=trip_noti_id)
     amount = tn_instance.form.total_price
     tax = 0.05*amount
@@ -207,58 +192,80 @@ def confirm_trip(request):
 
 def payment_success(request):
   temp_oid = int(request.GET.get('oid', ''))
-  oid = temp_oid/2010
+  oid = int(temp_oid/2010)
   tamt = request.GET.get('amt', '')
   refId = request.GET.get('refId', '')
+  #transaction verification
+  import requests as req
 
-  t_noti = get_object_or_404(Trip_Notification, pk=oid)
-  t_noti.has_accepted = True
-  t_noti.save()
-  
-
-  paid_by = t_noti.receiver_email
-  paid_to = t_noti.sender_email
-  trans = Transaction(paid_by=paid_by, paid_to=paid_to, pid=oid, tamt=tamt, refId=refId)
-  trans.save()
-
-  context = {
+  url ="https://uat.esewa.com.np/epay/transrec"
+  d = {
+      'amt': tamt,
+      'scd': 'epay_payment',
+      'rid': refId,
+      'pid':request.GET.get('oid', ''),
+  }
+  resp = req.post(url, d)
+  fraud = False
+  if 'failure' in resp.text:
+    fraud = True
+    context = {
     'oid':oid,
-    'tamt':tamt,
-    'refId':refId,
-    't_noti':t_noti,
-    'trans':trans, 
-    'refId':refId,
-    'trans':trans,
+    'fraud': fraud,
     }
-  # temp_oid = int(request.GET.get('oid', ''))
-  # oid = temp_oid/1010
-  # tamt = request.GET.get('amt', '')
-  # refId = request.GET.get('refId', '')
+    return render(request, 'payment/payment_failure.html', context)
+    
+  else:
 
-  # t_noti = get_object_or_404(Trip_Notification, pk=oid)
-  # t_noti.has_accepted = True
-  # t_noti.save()
-  
 
-  # paid_by = t_noti.receiver_email
-  # paid_to = t_noti.sender_email
-  # trans = Transaction(paid_by=paid_by, paid_to=paid_to, pid=oid, tamt=tamt, refId=refId)
-  # trans.save()
+    t_noti = get_object_or_404(Trip_Notification, pk=oid)
+    t_noti.has_accepted = True
+    t_noti.save()
+    
 
-  # context = {
-  #   'oid':oid,
-  #   'tamt':tamt,
-  #   'refId':refId,
-  #   't_noti':t_noti,
-  #   'trans':trans, 
-  #   'refId':refId,
-  #   'trans':trans,
-  # }
-  return render(request, 'payment/payment_success.html', context)
+    paid_by = t_noti.receiver_email
+    paid_to = t_noti.sender_email
+    trans = Transaction(paid_by=paid_by, paid_to=paid_to, pid=oid, tamt=tamt, refId=refId)
+    trans.save()
+
+    context = {
+      'oid':oid,
+      'tamt':tamt,
+      'refId':refId,
+      't_noti':t_noti,
+      'trans':trans, 
+      'refId':refId,
+      'trans':trans,
+      }
+    # temp_oid = int(request.GET.get('oid', ''))
+    # oid = temp_oid/1010
+    # tamt = request.GET.get('amt', '')
+    # refId = request.GET.get('refId', '')
+
+    # t_noti = get_object_or_404(Trip_Notification, pk=oid)
+    # t_noti.has_accepted = True
+    # t_noti.save()
+    
+
+    # paid_by = t_noti.receiver_email
+    # paid_to = t_noti.sender_email
+    # trans = Transaction(paid_by=paid_by, paid_to=paid_to, pid=oid, tamt=tamt, refId=refId)
+    # trans.save()
+
+    # context = {
+    #   'oid':oid,
+    #   'tamt':tamt,
+    #   'refId':refId,
+    #   't_noti':t_noti,
+    #   'trans':trans, 
+    #   'refId':refId,
+    #   'trans':trans,
+    # }
+    return render(request, 'payment/payment_success.html', context)
 
 def payment_failure(request):
   temp_oid = int(request.GET.get('oid', ''))
-  oid = temp_oid/2010
+  oid = int(temp_oid/2010)
   context = {
       'oid':oid,
     }

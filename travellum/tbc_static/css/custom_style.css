@@ -57,6 +57,9 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
     padding-left: 15px;
     padding-right: 15px; 
   } 
+  #hide-pipe {
+    display: none !important;
+  }
 }
 
 .custom-navbar-light .container 
@@ -532,9 +535,6 @@ textarea.form-control {
   }
   #third-step {
     top: 180px;
-  }
-  #hide-pipe {
-    display: none !important;
   }
 }
 

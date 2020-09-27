@@ -3,7 +3,6 @@
 {% load static %}
 
 {% block style %}
-<link rel="stylesheet" href="{% static 'css/custom_style.css' %}">
 <style>
     ::-webkit-input-placeholder {
         color: #fff !important;
@@ -27,6 +26,41 @@
         font-size: 1rem !important;
 
     }
+
+    figure {
+        overflow: hidden;
+    }
+
+    img {
+        -webkit-transition: .4s ease-in-out;
+        transition: .4s ease-in-out;
+    }
+
+    img:hover {
+        -webkit-transform: scale(1.3);
+        transform: scale(1.3);
+    }
+
+    .places {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 20px;
+    }
+    @media (min-width: 768px) {
+    .places {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+    }
+    }
+
+    @media (min-width: 1200px) {
+    .places {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 20px;
+    }
+    }
 </style>
 {% endblock %}
 
@@ -35,234 +69,37 @@ Places
 {% endblock %}
 
 {% block content %}
-<div class="container"
-    style="background-color:#fcfcfc; width:70%; margin-top:1%; margin-bottom:10%; border-radius:1%; padding:2rem;">
-    <div class="row justify-content-center pb-3" data-aos="fade-up" data-aos-duration="800">
+<div class="container bg-light my-5 px-3 px-md-5 py-5" id="places-container">
+    <div class="row justify-content-center pb-3 mt-4 mb-5">
         <div class="col-md-12 heading-section text-center ">
-            <span class="subheading"> Explore local places</span>
-            <h2 class="mb-1">Best Places to Travel in the Country.</h2>
+            <h5 class="d-none d-md-block" style="font-family: Poppins; color: #e19f95;">EXPLORE LOCAL PLACES</h5>
+            <h5 class="d-block d-md-none" style="font-family: Poppins; font-size: 1.2rem; color: #e19f95;">EXPLORE LOCAL PLACES</h5>
+            <h4 class="d-none d-md-block" style="font-family: Poppins;">Best Places to Travel in the Country.</h4>
+            <h5 class="d-block d-md-none" style="font-family: Poppins; font-size: 1rem;">Best Places to Travel in the Country.</h5>
         </div>
     </div>
-    <div class="row">
+    <div class="row justify-content-center">
         {% if places %}
-        {% for place in places %}
-        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800">
-            <div class="">
-                <div class="project">
-                    <a href="{% url 'placedetails' place.id %}">
-                        <img src="{{ place.photo_1.url }}" class="img-fluid" id="places-image" alt="Image"
-                            style="height:320px; width: 320px;">
-                    </a>
-                </div>
-                <h3 style="margin-top: -8%;">
+        <div class="places">
+            {% for place in places %}
+            <div class="mx-2 mb-2 border">
+                <figure>
+                <a href="{% url 'placedetails' place.id %}">
+                    <img src="{{ place.photo_1.url }}" class="img-fluid" id="" alt="place" style="height:320px; width: 320px;">
+                </a>
+                </figure>
+                <h5 class="p-3">
                     <a class="text-dark" href="{% url 'placedetails' place.id %}">{{ place.name }}</a>
+                </h5>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
         {% else %}
-        <div>
-            <h2> Sorry, the search results couldn't be found. Try again with specific keywords</h2>
+        <div class="border w-100 p-3">
+            <p> Sorry, the search results couldn't be found. Try again with specific keywords</p>
             <a href="{% url 'index' %}"><u>Back to Home </u></a>
         </div>
         {% endif %}
     </div>
-
-    <!-- <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-            <div class="project">
-                <div class="img">
-                    <a href="#"><img src="{% static 'images/ilam.jpg' %}" class="img-fluid" alt="Image"
-                            style="height:315px; width:max-content; "></a>
-                </div>
-                <div class="text">
-
-                    <h3 style="text-align: center;"><a href="#">Ilam</a></h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-            <div class="project">
-                <div class="img">
-                    <a href="#"><img src="{% static 'images/janakpur.jpg' %}" class="img-fluid" alt="Image"
-                            style="height:315px; width:max-content; "></a>
-                </div>
-                <div class="text">
-
-                    <h3 style="text-align: center;"><a href="#">Janakpur</a></h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-            <div class="project">
-                <div class="img">
-                    <a href="#"><img src="{% static 'images/person1.jpg' %}" class="img-fluid" alt="Image"
-                            style="height:315px; width:max-content; "></a>
-                </div>
-                <div class="text">
-
-                    <h3 style="text-align: center;"><a href="#">Kathmandu</a></h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-            <div class="project">
-                <div class="img">
-                    <a href="#"><img src="{% static 'images/ilam.jpg' %}" class="img-fluid" alt="Image"
-                            style="height:315px; width:max-content; "></a>
-                </div>
-                <div class="text">
-
-                    <h3 style="text-align: center;"><a href="#">Ilam</a></h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-            <div class="project">
-                <div class="img">
-                    <a href="#"><img src="{% static 'images/janakpur.jpg' %}" class="img-fluid" alt="Image"
-                            style="height:315px; width:max-content; "></a>
-                </div>
-                <div class="text">
-
-                    <h3 style="text-align: center;"><a href="#">Janakpur</a></h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-            <div class="project">
-                <div class="img">
-                    <a href="#"><img src="{% static 'images/ilam.jpg' %}" class="img-fluid" alt="Image"
-                            style="height:315px; width:max-content; "></a>
-                </div>
-                <div class="text">
-
-                    <h3 style="text-align: center;"><a href="#">Ilam</a></h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-            <div class="project">
-                <div class="img">
-                    <a href="#"><img src="{% static 'images/janakpur.jpg' %}" class="img-fluid" alt="Image"
-                            style="height:315px; width:max-content; "></a>
-                </div>
-                <div class="text">
-
-                    <h3 style="text-align: center;"><a href="#">Janakpur</a></h3>
-                </div>
-            </div>
-        < <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-            <div class="project">
-                <div class="img">
-                    <a href="#"><img src="{% static 'images/ilam.jpg' %}" class="img-fluid" alt="Image"
-                            style="height:315px; width:max-content; "></a>
-                </div>
-                <div class="text">
-
-                    <h3 style="text-align: center;"><a href="#">Ilam</a></h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-            <div class="project">
-                <div class="img">
-                    <a href="#"><img src="{% static 'images/janakpur.jpg' %}" class="img-fluid" alt="Image"
-                            style="height:315px; width:max-content; "></a>
-                </div>
-                <div class="text">
-
-                    <h3 style="text-align: center;"><a href="#">Janakpur</a></h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-            <div class="project">
-                <div class="img">
-                    <a href="#"><img src="{% static 'images/person1.jpg' %}" class="img-fluid" alt="Image"
-                            style="height:315px; width:max-content; "></a>
-                </div>
-                <div class="text">
-
-                    <h3 style="text-align: center;"><a href="#">Kathmandu</a></h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-            <div class="project">
-                <div class="img">
-                    <a href="#"><img src="{% static 'images/ilam.jpg' %}" class="img-fluid" alt="Image"
-                            style="height:315px; width:max-content; "></a>
-                </div>
-                <div class="text">
-
-                    <h3 style="text-align: center;"><a href="#">Ilam</a></h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-            <div class="project">
-                <div class="img">
-                    <a href="#"><img src="{% static 'images/janakpur.jpg' %}" class="img-fluid" alt="Image"
-                            style="height:315px; width:max-content; "></a>
-                </div>
-                <div class="text">
-
-                    <h3 style="text-align: center;"><a href="#">Janakpur</a></h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-            <div class="project">
-                <div class="img">
-                    <a href="#"><img src="{% static 'images/ilam.jpg' %}" class="img-fluid" alt="Image"
-                            style="height:315px; width:max-content; "></a>
-                </div>
-                <div class="text">
-
-                    <h3 style="text-align: center;"><a href="#">Ilam</a></h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-            <div class="project">
-                <div class="img">
-                    <a href="#"><img src="{% static 'images/janakpur.jpg' %}" class="img-fluid" alt="Image"
-                            style="height:315px; width:max-content; "></a>
-                </div>
-                <div class="text">
-
-                    <h3 style="text-align: center;"><a href="#">Janakpur</a></h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-            <div class="project">
-                <div class="img">
-                    <a href="#"><img src="{% static 'images/trees.jpg' %}" class="img-fluid" alt="Image"
-                            style="height:315px; width:max-content; "></a>
-                </div>
-                <div class="text">
-
-                    <h3 style="text-align: center;"><a href="#">Ilam</a></h3>
-                </div>
-            </div>
-        </div>
-
-
-    </div>/div>
-        <div class="col-md-6 col-lg-4 " data-aos="fade-up" data-aos-duration="800">
-            <div class="project">
-                <div class="img">
-                    <a href="#"><img src="{% static 'images/trees.jpg' %}" class="img-fluid" alt="Image"
-                            style="height:315px; width:max-content; "></a>
-                </div>
-                <div class="text">
-
-                    <h3 style="text-align: center;"><a href="#">Ilam</a></h3>
-                </div>
-            </div>
-        </div> -->
-
-
-
 </div>
 {% endblock %}

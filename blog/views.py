@@ -246,8 +246,8 @@ def edit_blog_post(request, blog_id):
     user=request.user
     context = dict()
     if user.is_authenticated:
-        context.update({'logged_in_user':traveller_user})
         traveller_user = get_object_or_404(Traveller, email=user)
+        context.update({'logged_in_user':traveller_user})
         notifications = Notification.objects.all().filter(receiver_email=request.user).order_by('-reg_date')
         trip_notifications = Trip_Notification.objects.all().filter(receiver_email=request.user).order_by('-noti_date')
         if traveller_user.is_guide:
@@ -278,11 +278,12 @@ def edit_blog_post(request, blog_id):
             elif trip_notifications.count()==1:
                 messages.info(request, 'You have new notifications.')        
         
-        context = {
+        context.update ({
                  #logged_in_user is for avatar in navbar
                 'notifications': notifications,
                 'trip_notifications':trip_notifications,
-            }
+            })
+
 
     if request.method == 'POST':
         form_data = request.POST
@@ -323,7 +324,7 @@ def delete_blog_post(request, blog_id):
     blog = get_object_or_404(Blog, id = blog_id)
     if request.user == blog.user:
         blog.delete()
-    messages.success('Your blog was deleted')
+    messages.success(request, 'Your blog was deleted')
     return redirect('my_blog')
 
 
@@ -379,6 +380,8 @@ def blogs_byuser(request, id):
                     'trip_notifications':trip_notifications,
                 })
             return render(request, 'blog/user_blog.html', context)
+
     print(context['blog_user'].first_name) 
     return render(request, 'blog/user_blog.html', context)
+    
 

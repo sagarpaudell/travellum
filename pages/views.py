@@ -12,15 +12,16 @@ def index(request):
     active_guides = Guide.objects.all().filter(is_active=True).order_by('-average_rating')[:4]
     x=list()
     context = dict()
-    for guide in active_guides:
-        traveller=Traveller.objects.filter(email=guide.email).first()
-        time_indays = (timezone.now() - guide.email.last_login).seconds/86400
-        if (time_indays<10):
-            x.append(guide)
-            print(time_indays)
-        else:
-            guide.is_active = False
-            print(f'{guide.email} hasn\'t logged in since {time_indays} days')
+    if active_guides:
+        for guide in active_guides:
+            traveller=Traveller.objects.filter(email=guide.email).first()
+            time_indays = (timezone.now() - guide.email.last_login).seconds/86400
+            if (time_indays<10):
+                x.append(guide)
+                print(time_indays)
+            else:
+                guide.is_active = False
+                print(f'{guide.email} hasn\'t logged in since {time_indays} days')
     places = Place.objects.all()[:6]
     context.update({
         'guides':x,

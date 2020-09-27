@@ -26,7 +26,8 @@ SECRET_KEY = 'qi3^m_agsbz45g$nysz6-4d0@=q5&g$ik&xy&ax^tmf#$o$k&7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://travellum.herokuapp.com', '127.0.0.1', '0.0.0.0']
+#ALLOWED_HOSTS = ['https://travellum.herokuapp.com', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -159,7 +160,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = '/home/travellumweb/travellum/static'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'travellum/tbc_static')
@@ -184,16 +185,26 @@ MEDIA_URL = '/media/'
 
 # esewa
 #!/usr/bin/python3
-import requests as req
+# import requests as req
 
-url ="https://uat.esewa.com.np/epay/main"
-d = {'amt': 100,
-    'pdc': 0,
-    'psc': 0,
-    'txAmt': 0,
-    'tAmt': 100,
-    'pid':'ee2c3ca1-696b-4cc5-a6be-2c40d929d453',
-    'scd':'epay_payment',
-    'su': 'http://localhost:8000/dashboard/payment_success',
-    'fu': 'http://localhost:8000/dashboard/payment_failure'}
-resp = req.post(url, d)
+# url ="https://uat.esewa.com.np/epay/main"
+# d = {'amt': 100,
+#     'pdc': 0,
+#     'psc': 0,
+#     'txAmt': 0,
+#     'tAmt': 100,
+#     'pid':'ee2c3ca1-696b-4cc5-a6be-2c40d929d453',
+#     'scd':'epay_payment',
+#     'su': 'http://localhost:8000/dashboard/payment_success',
+#     'fu': 'http://localhost:8000/dashboard/payment_failure'}
+# resp = req.post(url, d)
+
+# url ="https://uat.esewa.com.np/epay/transrec"
+# d = {
+#     'amt': 100,
+#     'scd': 'epay_payment',
+#     'rid': '000AE01',
+#     'pid':'ee2c3ca1-696b-4cc5-a6be-2c40d929d453',
+# }
+# resp = req.post(url, d)
+# print(resp.text)

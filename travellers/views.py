@@ -244,10 +244,6 @@ def create_trip(request, traveller_id):
     traveller_user = get_object_or_404 (Traveller , pk = traveller_id)
     traveller_user_logged_in = get_object_or_404(Traveller, email=request.user)
     guide_user = get_object_or_404(Guide , email=request.user)
-    places=Place.objects.all()
-    place_pattern=''
-    for place in places:
-        place_pattern = place.name+'|'+place_pattern
     if 'confirm' in request.POST:
        traveller = traveller_user.email
        guide =  request.user
@@ -270,12 +266,20 @@ def create_trip(request, traveller_id):
        trip_notification.save()
        traveller_id = request.POST['traveller_id']
        return redirect('/view_profile/'+traveller_id)
+    
+    places = guide_user.places.all()  
+    place_pattern=''
+    for place in places:
+        place_pattern = place.name+'|'+place_pattern
+
     context = {
                 'traveller_user':traveller_user,
                 'logged_in_user':traveller_user_logged_in,
                 'places':places,
                 'place_pattern':place_pattern[:-1],
+                'guide_user':guide_user,
             }
+    # print(guide_user.place)
     return render(request, 'travellers/create_trip.html',context)
 
 
