@@ -28,6 +28,8 @@ def dashboard(request):
   trip_notifications = Trip_Notification.objects.all().filter(receiver_email=user)
   guide_historys = History.objects.all().filter(guide=user,tour_complete=True)
   traveller_historys = History.objects.all().filter(traveller=user,tour_complete=True)
+  ongoing_guide_tours = History.objects.all().filter(guide=user,tour_initiated=True)
+  ongoing_traveller_tours = History.objects.all().filter(traveller=user,tour_initiated=True)
   if traveller_user.is_guide:
     guide_user1 = get_object_or_404(Guide, email=user)
     if guide_user1:
@@ -56,7 +58,9 @@ def dashboard(request):
                 'traveller_historys': traveller_historys,
                 'g_user':guide_user,
                 'guide_reviews': guide_reviews,
-                'traveller_reviews': traveller_reviews,  
+                'traveller_reviews': traveller_reviews, 
+                'ongoing_guide_tours': ongoing_guide_tours,
+                'ongoing_traveller_tours': ongoing_traveller_tours,
             }
   
 
@@ -165,6 +169,26 @@ def dashboard(request):
       notification = Notification(receiver_email=receiver_user, sender_email=sender_user, sender_name = sender_name,is_ignored = True, reg_date= reg_date)
       notification.save()
 
+    if 'trip_complete_by_guide' in request.POST:
+      history_id = request.POST['history_id']
+      history = get_object_or_404(History,pk=history_id)
+      history.confirmed_by_guide=True
+      if history.confirmed_by_traveller:
+        history.tour_complete=True
+        history.end_date = datetime.datetime.utcnow().replace(tzinfo=utc)
+      history.save()
+      return redirect ('dashboard')
+
+    if 'trip_complete_by_traveller' in request.POST:
+      history_id = request.POST['history_id']
+      history = get_object_or_404(History,pk=history_id)
+      history.confirmed_by_traveller=True
+      if history.confirmed_by_guide:
+        history.tour_complete=True
+        history.end_date = datetime.datetime.utcnow().replace(tzinfo=utc)
+      history.save()
+      return redirect ('dashboard')
+
   return render(request, 'dashboard/dashboard.html',context)
 
 def confirm_trip(request):
@@ -227,6 +251,10 @@ def payment_success(request):
     paid_to = t_noti.sender_email
     trans = Transaction(paid_by=paid_by, paid_to=paid_to, pid=oid, tamt=tamt, refId=refId)
     trans.save()
+
+    history = t_noti.form
+    history.tour_initiated=True
+    history.save()
 
     context = {
       'oid':oid,

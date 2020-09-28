@@ -266,6 +266,19 @@ Dashboard
                 {% if guide_user %}
                 {% if guide_user.is_published %}
                 <div class="mb-5">
+                  {%if ongoing_guide_tours%}
+                  {% for tour in ongoing_guide_tours %}
+                  {% if not tour.confirmed_by_guide  %}
+                  <div class="mt-5"></div>
+                    <p class="col-12 text-center">
+                      Did you complete your tour of {{ tour.place.name }} with
+                      {{ tour.traveller.first_name }} {{ tour.traveller.last_name }}?
+                    </p>
+                    <button class="btn btn-theme" data-target="#g-confirm-completion{{tour.id}}" data-toggle="modal">Confirm Completion of Tour</button>
+                  <div class="border-bottom my-5"></div>
+                  {% endif %}
+                  {% endfor %}
+                  {% endif %}
                   {% if guide_historys %}
                   <h2 style="color: #e2c0bb;">Guide History</h2>
                   {% for guide_history in guide_historys %}
@@ -358,6 +371,19 @@ Dashboard
           <div class="d-flex">
             <div class="card card-body bg-white px-3 py-5 text-center align-items-center">
               <div class="w-100">
+                {%if ongoing_traveller_tours%}
+                {% for tour in ongoing_traveller_tours %}
+                {% if not tour.confirmed_by_traveller  %}
+                  <div class="mt-5"></div>
+                    <p class="col-12 text-left">
+                      Did you complete your tour of {{ tour.place.name }} with
+                      {{ tour.guide.first_name }} {{ tour.guide.last_name }}?
+                    </p>
+                    <button class="btn btn-theme" data-target="#t-confirm-completion{{tour.id}}" data-toggle="modal">Confirm Completion of Tour</button>
+                  <div class="border-bottom my-5"></div>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
                 {% if traveller_historys %}
                   <h2 class="" style="color: #e2c0bb;">Traveller History</h2>
                 {% for traveller_history in traveller_historys %}
@@ -766,6 +792,64 @@ Dashboard
 </div>
 </div>
 <!-- End of Edit Guide Details -->
+
+{% if ongoing_guide_tours%}
+{% for tour in ongoing_guide_tours %}
+{% if not tour.confirmed_by_guide  %}
+<div class="modal fade" id="g-confirm-completion{{ tour.id }}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Tour Complete?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Did you complete your tour?</p>
+      </div>
+      <form class="modal-footer" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="history_id" value={{tour.id}}>
+        <button type="submit" class="btn btn-primary" name="trip_complete_by_guide">Yes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+      </form>  
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{%if ongoing_traveller_tours%}
+{% for tour in ongoing_traveller_tours %}
+{% if not tour.confirmed_by_traveller  %}
+<div class="modal fade" id="t-confirm-completion{{ tour.id }}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Tour Complete?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Did you complete your tour?</p>
+      </div>
+      <form class="modal-footer" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="history_id" value={{tour.id}}>
+        <button type="submit" class="btn btn-primary" name="trip_complete_by_traveller">Yes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
 
 <!-- End of Modals -->
 

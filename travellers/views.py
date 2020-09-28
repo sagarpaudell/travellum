@@ -70,7 +70,10 @@ def view_profile(request, traveller_id):
         old_rating = dg_review.guide_ratings
         dg_review.delete()
         guide_user = get_object_or_404(Guide, email=profile.email)
-        guide_user.average_rating = ((float(guide_user.average_rating)*guide_reviews.count())-float(old_rating))/(guide_reviews.count()-1)
+        if not (guide_reviews.count()-1)==0: 
+            guide_user.average_rating = ((float(guide_user.average_rating)*guide_reviews.count())-float(old_rating))/(guide_reviews.count()-1)
+        else:
+            guide_user.average_rating = 0
         guide_user.save()
         return redirect ('/view_profile/'+str(traveller_id))
 
@@ -256,6 +259,9 @@ def create_trip(request, traveller_id):
        noh = float(total_hours)
        if ((nop+noc*0.75)<=2):
            tp=2*noh*float(guide_user.price)
+           tp=int(tp)
+       elif ((nop+noc*0.75)>=8):
+           tp=8*noh*float(guide_user.price)
            tp=int(tp)
        else:
            tp=(nop+noc*0.75)*noh*float(guide_user.price)
