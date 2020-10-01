@@ -85,7 +85,7 @@
                           <a href="#" class="top-text-block">
                             <div class="top-text-heading mb-2" style="font-size: .8rem;">
                               You have rejected trip with {{ trip_noti.sender_email.first_name }}.
-                            </div>
+                              No  </div>
                             <div class="top-text-light">{{ trip_noti.whenpublished }}</div>
                           </a>
                         {% else %}
@@ -103,13 +103,7 @@
                         {% endif %}
                       {% endfor %}
                     {% endif %}
-                  {% else %}
-                    <div
-                      class="d-flex align-items-center justify-content-center m-0" 
-                      style="cursor: default; height: 90%; font-weight: normal;"
-                    >  
-                      No any Notifications
-                    </div>
+
                   {% endif %}
                 
                 {% elif notification.completed %}
@@ -129,13 +123,7 @@
                           </div>
                           <div class="top-text-light">{{ trip_noti.whenpublished }}</div>
                         </a>
-                      {% else %}
-                        <div
-                          class="d-flex align-items-center justify-content-center m-0" 
-                          style="cursor: default; height: 90%; font-weight: normal;"
-                        >  
-                            No any Notifications
-                        </div>
+
                       {% endif %}
                     {% endfor %}
                   {% endif %}  
@@ -170,7 +158,7 @@
                   
                 {% endif %}
                 {% endfor %}
-            
+ 
               {% endif %}
 
                 <!-- <li>
