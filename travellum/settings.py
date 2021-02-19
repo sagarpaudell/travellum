@@ -27,7 +27,7 @@ SECRET_KEY = 'qi3^m_agsbz45g$nysz6-4d0@=q5&g$ik&xy&ax^tmf#$o$k&7'
 DEBUG = True
 
 #ALLOWED_HOSTS = ['https://travellum.herokuapp.com', '127.0.0.1', '0.0.0.0']
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
