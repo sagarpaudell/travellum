@@ -96,7 +96,8 @@
 					align-items: center; position:absolute;" data-aos="zoom-in" data-aos-duration="1300">
 					<h2 class="d-none d-md-block mb-4 text-light display-5 mb-5 pb-5" style="font-family: Poppins;">Your Travel Companion for Nepal</h2>
 					<h5 class="d-block d-md-none mb-4 text-light  mb-5 pb-5" style="font-family: Poppins;">Your Travel Companion for Nepal</h5>
-					<form action="{% url 'search' %}" class="form-inline ">
+					<!-- <form action="{% url 'search' %}" class="form-inline "> -->
+					<form  class="form-inline ">
 						<div class="input-group span position-relative" style="bottom: 70px;">
 							<input id="id-for-placeholder" class="form-control form-control-lg mr-1 w-200"
 								style=" border:3px solid coral; border-radius:50px;" type="text"
@@ -404,8 +405,9 @@
 			</div>
 			<div class="row">
 				<div class="col-md-8">
-					<div class="search-wrap-1  p-4">
-						<form action="{% url 'search' %}" class="search-property-1">
+					<!-- <div class="search-wrap-1  p-4"> -->
+						<!-- <form action="{% url 'search' %}" class="search-property-1"> -->
+						<form action="" class="search-property-1">
 							<div class="row">
 								<div class="col-lg align-items-end">
 									<div class="form-group">
@@ -586,12 +588,12 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-	$(function () {
-		$("#search_places").autocomplete({		//function for autocomplete that takes id of field
-			source: "{% url 'search' %}",
-			minLength: 2
-		});
-	});
+	<!-- $(function () { -->
+	<!-- 	$("#search_places").autocomplete({		//function for autocomplete that takes id of field -->
+	<!-- 		source: "{% url 'search' %}", -->
+	<!-- 		minLength: 2 -->
+	<!-- 	}); -->
+	<!-- }); -->
 </script>
 
 

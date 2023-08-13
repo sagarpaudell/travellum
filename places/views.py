@@ -176,7 +176,7 @@ def search(request):
     searchtag = request.GET['search_places']
     places = Place.objects.all().filter(name__icontains=searchtag) | Place.objects.all().filter(keywords__search=searchtag) | Place.objects.all().filter(city__icontains=searchtag) | Place.objects.all().filter(country__icontains=searchtag )
     context = {
-        'places':places
+        'places': places
     }
     return render(request, 'places/places.html', context)
   
