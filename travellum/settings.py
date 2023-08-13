@@ -171,11 +171,11 @@ STATICFILES_DIRS = [
 #CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'index'
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'travellum7725@gmail.com'
-EMAIL_HOST_PASSWORD = 'hellotheremate'
-EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'travellum7725@gmail.com'
+# EMAIL_HOST_PASSWORD = 'hellotheremate'
+# EMAIL_USE_TLS = True
 
 
 # Media Folder Settings

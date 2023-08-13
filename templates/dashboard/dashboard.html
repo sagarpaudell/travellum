@@ -530,31 +530,33 @@ Dashboard
           <div class="form-group">
             <label for="gender">Gender</label>
             <select class="form-control" name="gender">
-              {% if traveller_user %}
-              {% ifnotequal traveller_user.gender "" %}<option selected>{{traveller_user.gender}}</option>
-              {% endifnotequal %}
 
-              {% ifequal traveller_user.gender "Male" %}
-              <option>Female</option>
-              <option>Other</option>
-              {% endifequal %}
+                {% if traveller_user %}
+                  {% if traveller_user.gender != "" %}
+                    <option selected>{{ traveller_user.gender }}</option>
+                  {% endif %}
 
-              {% ifequal traveller_user.gender "Female" %}
-              <option>Male</option>
-              <option>Other</option>
-              {% endifequal %}
+                  {% if traveller_user.gender == "Male" %}
+                    <option>Female</option>
+                    <option>Other</option>
+                  {% endif %}
 
-              {% ifequal traveller_user.gender "Other" %}
-              <option>Female</option>
-              <option>Male</option>
-              {% endifequal %}
+                  {% if traveller_user.gender == "Female" %}
+                    <option>Male</option>
+                    <option>Other</option>
+                  {% endif %}
 
-              {% ifequal traveller_user.gender "" %}
-              <option>Female</option>
-              <option>Male</option>
-              <option>Other</option>
-              {% endifequal %}
-              {% endif %}
+                  {% if traveller_user.gender == "Other" %}
+                    <option>Female</option>
+                    <option>Male</option>
+                  {% endif %}
+
+                  {% if traveller_user.gender == "" %}
+                    <option>Female</option>
+                    <option>Male</option>
+                    <option>Other</option>
+                  {% endif %}
+                {% endif %}
             </select>
           </div>
 

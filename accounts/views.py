@@ -33,8 +33,8 @@ def register(request):
             user.save()
             traveller=Traveller(first_name=first_name,last_name=last_name,email=User.objects.get(email = email))
             traveller.save()
-            send_verificationmail(request, email)            
-            messages.info(request, 'verification link has been sent to your account')
+            # send_verificationmail(request, email)            
+            # messages.info(request, 'verification link has been sent to your account')
             return redirect('login')
 
     else:
@@ -45,18 +45,11 @@ def login_view(request):
     if request.method == "POST":
         email = request.POST['email']
         password = request.POST['password']
-        
         user = auth.authenticate(email=email, password=password)
         if user is not None:
-            traveller = Traveller.objects.get(email=user)
-            if traveller.is_published:
-                auth.login(request, user)
-                if user.is_authenticated:
-                    return redirect('dashboard')
-            else:
-                messages.warning(request, 'verification link has been sent to your account. You need to verify your account 1st to login')
-                send_verificationmail(request, email)
-                return redirect('login')
+            auth.login(request, user)
+            if user.is_authenticated:
+                return redirect('dashboard')
         else:
             messages.warning(request, 'invalid credentials')
             return redirect('login')
@@ -90,7 +83,8 @@ def reset_view(request):
             recipient_list = [email]
             send_mail( subject, message, email_from, recipient_list)
             messages.info(request, 'password reset link has been sent to your email')
-    return render(request, 'accounts/reset.html')
+    return redirect(request, 'register')
+    # return render(request, 'accounts/reset.html')
 
 
 def v_code_view(request, email=None, token=None):
@@ -126,7 +120,8 @@ def v_code_view(request, email=None, token=None):
 
 
 def change_pw_view(request):
-    return render(request, 'accounts/change.html')
+    return redirect('register')
+    # return render(request, 'accounts/change.html')
 
 
 
