@@ -73,7 +73,7 @@ cryptography==41.0.3
 daphne==4.0.0
 defusedxml==0.7.1
 dill==0.3.7
-Django==4.2.4
+Django==4.2.7
 django-allauth==0.54.0
 gunicorn==21.2.0
 hiredis==2.2.3
