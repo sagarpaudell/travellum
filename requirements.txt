@@ -69,7 +69,7 @@ channels-redis==4.1.0
 chardet==5.2.0
 charset-normalizer==3.2.0
 constantly==15.1.0
-cryptography==41.0.3
+cryptography==41.0.6
 daphne==4.0.0
 defusedxml==0.7.1
 dill==0.3.7
